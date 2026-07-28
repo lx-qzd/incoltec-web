@@ -1,0 +1,115 @@
+---
+import { getImage } from "astro:assets";
+import fondo1 from "../assets/fondo1.jpg";
+import fondo2 from "../assets/fondo2.jpg";
+import fondo3 from "../assets/fondo3.jpg";
+
+const slides = [
+  {
+    image: (await getImage({ src: fondo3, format: 'webp', width: 1920 })).src,
+    title: "Local Flavors",
+    subtitle: "Perfecting Food, Protecting Formulation"
+  },
+  {
+    image: (await getImage({ src: fondo1, format: 'webp', width: 1920 })).src,
+    title: "Global Colors",
+    subtitle: "Bringing the world's colors to every flavor"
+  },
+  {
+    image: (await getImage({ src: fondo2, format: 'webp', width: 1920 })).src,
+    title: "Trusted Quality",
+    subtitle: "We turn formulation into appetite"
+  }
+];
+---
+
+<section class="relative w-full h-screen overflow-hidden bg-black" id="hero-slider">
+  <!-- Slides Container -->
+  <div class="relative w-full h-full slider-wrapper">
+    {slides.map((slide, index) => (
+      <div class={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out slide ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} data-index={index}>
+        <div class="absolute inset-0 bg-cover bg-center slide-bg transform scale-105 transition-transform duration-[10s] ease-out" style={`background-image: url('${slide.image}')`}></div>
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+          <h1 class="script-text text-white drop-shadow-lg text-6xl md:text-8xl lg:text-9xl mb-4 transform translate-y-8 opacity-0 transition-all duration-1000 delay-300 slide-title">{slide.title}</h1>
+          <p class="text-white text-xl md:text-3xl font-light tracking-wide drop-shadow-md transform translate-y-8 opacity-0 transition-all duration-1000 delay-500 slide-subtitle">{slide.subtitle}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button id="prev-slide" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-2 text-white/50 hover:text-white transition-colors" aria-label="Previous slide">
+    <svg class="w-12 h-12 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <button id="next-slide" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-2 text-white/50 hover:text-white transition-colors" aria-label="Next slide">
+    <svg class="w-12 h-12 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"/></svg>
+  </button>
+</section>
+
+<style>
+  .slide.active {
+    opacity: 1;
+    z-index: 10;
+  }
+  .slide.active .slide-bg {
+    transform: scale(1);
+  }
+  .slide.active .slide-title,
+  .slide.active .slide-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prev-slide');
+    const nextBtn = document.getElementById('next-slide');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let autoSlideInterval;
+
+    // Initialize first slide as active explicitly to trigger CSS transitions
+    setTimeout(() => {
+      slides[0].classList.add('active');
+    }, 100);
+
+    const goToSlide = (index) => {
+      slides[currentSlide].classList.remove('active');
+      slides[currentSlide].classList.replace('opacity-100', 'opacity-0');
+      slides[currentSlide].classList.replace('z-10', 'z-0');
+      
+      currentSlide = (index + totalSlides) % totalSlides;
+      
+      slides[currentSlide].classList.replace('opacity-0', 'opacity-100');
+      slides[currentSlide].classList.replace('z-0', 'z-10');
+      slides[currentSlide].classList.add('active');
+    };
+
+    const nextSlide = () => goToSlide(currentSlide + 1);
+    const prevSlide = () => goToSlide(currentSlide - 1);
+
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      resetInterval();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      resetInterval();
+    });
+
+    const startInterval = () => {
+      autoSlideInterval = setInterval(nextSlide, 7000);
+    };
+
+    const resetInterval = () => {
+      clearInterval(autoSlideInterval);
+      startInterval();
+    };
+
+    startInterval();
+  });
+</script>

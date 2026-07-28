@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Política de Privacidad">
+  <Header currentPath="/privacy-policy" />
+  
+  <main class="container mx-auto px-4 py-20 max-w-4xl text-gray-300">
+    <h1 class="text-4xl font-light mb-8 text-white">Política de Privacidad</h1>
+    
+    <div class="prose prose-invert max-w-none font-light leading-relaxed">
+      <p>Última actualización: [Fecha]</p>
+      
+      <h2>1. Introducción</h2>
+      <p>Bienvenido a Incoltec. Respetamos su privacidad y estamos comprometidos a proteger sus datos personales. Esta política de privacidad le informará sobre cómo cuidamos sus datos personales cuando visita nuestro sitio web.</p>
+      
+      <h2>2. Datos que Recopilamos</h2>
+      <p>Podemos recopilar, usar, almacenar y transferir diferentes tipos de datos personales sobre usted, que incluyen:</p>
+      <ul>
+        <li><strong>Datos de Identidad</strong> incluye nombre, apellido o un identificador similar.</li>
+        <li><strong>Datos de Contacto</strong> incluye dirección de correo electrónico y números de teléfono.</li>
+        <li><strong>Datos Técnicos</strong> incluye dirección de protocolo de internet (IP), tipo y versión del navegador, configuración de zona horaria y ubicación.</li>
+      </ul>
+
+      <h2>3. Cómo Usamos Sus Datos</h2>
+      <p>Solo usaremos sus datos personales cuando la ley nos lo permita. Lo más común es que usemos sus datos personales en las siguientes circunstancias:</p>
+      <ul>
+        <li>Cuando necesitemos ejecutar el contrato que estamos a punto de celebrar o hemos celebrado con usted.</li>
+        <li>Cuando sea necesario para nuestros intereses legítimos (o los de un tercero) y sus intereses y derechos fundamentales no prevalezcan sobre esos intereses.</li>
+        <li>Cuando necesitemos cumplir con una obligación legal.</li>
+      </ul>
+
+      <h2>4. Contáctenos</h2>
+      <p>Si tiene alguna pregunta sobre esta política de privacidad o nuestras prácticas de privacidad, contáctenos en info@incoltec.com.</p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  h2 {
+    font-size: 1.8rem;
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
+  ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+</style>

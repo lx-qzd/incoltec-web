@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+---
+
+<Layout title="Our Company">
+  <Header currentPath="/our-company" />
+  
+  <main>
+    <Hero 
+      title="Our Company" 
+      subtitle="Deep understanding of markets and cultures"
+      backgroundImage="/assets/fondo1.jpg" 
+    />
+
+    <section class="content-section container">
+      <div class="content">
+        <h2>Proximity, Local Knowledge, and Adaptation</h2>
+        <p>
+          The chromatic explosion of our formulations symbolizes the diversity of flavors, ingredients, 
+          and traditions that enrich the food industry. At INCOLTEC, we understand that each market 
+          is unique, which is why we adapt our solutions to regional preferences.
+        </p>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3 class="text-magenta">Corporate Solidity</h3>
+            <p>We build long-term relationships based on trust and compliance.</p>
+          </div>
+          <div class="feature-card">
+            <h3 class="text-yellow">Industrial Leadership</h3>
+            <p>We set the standard in the development of advanced chromatic solutions.</p>
+          </div>
+          <div class="feature-card">
+            <h3 class="text-cyan">Continuous Innovation</h3>
+            <p>Our "Vibrant Technology" philosophy drives us to always seek continuous improvement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .content-section {
+    padding: 6rem 2rem;
+  }
+
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .content p {
+    font-size: 1.15rem;
+    color: var(--c-light);
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .feature-card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+
+  .feature-card p {
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 0;
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+import { getImage } from "astro:assets";
+
+interface Props {
+  title: string;
+  bgImage: any;
+  overlay?: string;
+}
+const { title, bgImage, overlay = "bg-black/30" } = Astro.props;
+
+const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgImage, format: 'webp', width: 1920 })).src;
+---
+
+<section class="relative w-full min-h-screen overflow-hidden flex items-center bg-cover bg-center bg-fixed" style={`background-image: url('${bgUrl}')`}>
+  <!-- Base dark overlay -->
+  <div class={`absolute inset-0 ${overlay}`}></div>
+  
+  <!-- Left Side: The 3 Arrows (Yellow, Magenta, Cyan) -->
+  <div class="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col w-[80%] md:w-[45%] lg:w-[450px] gap-2 z-10 reveal-left mix-blend-screen opacity-90">
+    <!-- Arrow 1: Yellow -->
+    <div class="w-full h-20 md:h-28 lg:h-32 bg-[#FFC000] arrow-shape"></div>
+    <!-- Arrow 2: Magenta -->
+    <div class="w-full h-20 md:h-28 lg:h-32 bg-[#E30066] arrow-shape"></div>
+    <!-- Arrow 3: Cyan -->
+    <div class="w-full h-20 md:h-28 lg:h-32 bg-[#008AD8] arrow-shape"></div>
+  </div>
+
+  <div class="container relative z-20 h-full flex flex-col justify-center py-32 md:py-24">
+    <!-- Top Right Title -->
+    <div class="absolute top-8 md:top-16 right-4 md:right-12 z-30 reveal-right text-right">
+      <h2 class="script-text text-white drop-shadow-xl text-5xl md:text-7xl lg:text-[7rem]">{title}</h2>
+    </div>
+
+    <!-- Right Side Content Box -->
+    <div class="w-full md:w-3/4 lg:w-[60%] ml-auto bg-black/60 backdrop-blur-md border border-white/10 p-8 md:p-16 shadow-2xl reveal-scale delay-200 mt-24 md:mt-32">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .arrow-shape {
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  }
+</style>

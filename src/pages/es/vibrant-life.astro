@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<Layout title="Vida Vibrante">
+  <Header currentPath="/vibrant-life" />
+  
+  <main>
+    <Hero 
+      title="Vida Vibrante" 
+      subtitle="Calidad que transforma la formulación en apetito"
+      backgroundImage="/assets/fondo2.jpg" 
+    />
+
+    <section class="content-section container">
+      <div class="content">
+        <h2>Confiabilidad, Respaldo Técnico y Resultados</h2>
+        <p>
+          Comunica la base que sostiene toda la propuesta de valor de la marca: calidad, 
+          consistencia y confianza. Las texturas orgánicas y los tonos profundos proyectan 
+          seguridad, control técnico y excelencia en los procesos.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .content-section {
+    padding: 6rem 2rem;
+  }
+
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .content p {
+    font-size: 1.15rem;
+    color: var(--c-light);
+  }
+</style>

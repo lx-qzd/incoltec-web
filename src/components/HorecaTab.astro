@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+import bolitas from '../assets/bolitas.webp';
+import paellaFull from '../assets/paella full.webp';
+import salmon from '../assets/salmon.webp';
+import chefImg from '../assets/restaurante-en-punta-cana-restaurante-en-cap-cana-restaurante-en-la-romana2.webp';
+import restImg1 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-cana-restaurante-en-la-romana4.webp';
+import restImg2 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-cana-restaurante-en-la-romana6.webp';
+---
+
+<div class="horeca-wrapper w-full bg-white">
+  <!-- Hero Section -->
+  <section class="relative w-full h-[600px] flex items-center justify-center">
+    <Image src={paellaFull} alt="Paella" class="absolute inset-0 w-full h-full object-cover z-0" />
+    <div class="relative z-10 flex flex-col items-center justify-center bg-black/30 p-12 rounded-xl backdrop-blur-sm">
+      <h1 class="text-white text-6xl md:text-8xl font-light tracking-wider drop-shadow-lg mb-4">HORECA</h1>
+      <Image src="/assets/AF_Logo_Incoltrec.svg" alt="Incoltec" width={1007} height={120} class="h-20 w-auto filter brightness-0 invert drop-shadow-lg" />
+    </div>
+  </section>
+
+  <!-- Chef Section & Genialidad Creativa -->
+  <section class="max-w-[1200px] mx-auto py-24 px-4 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-16">
+      
+      <!-- Left: Chef Image -->
+      <div class="md:col-span-4 relative">
+        <Image src={chefImg} alt="Faus Arroyo" class="w-full h-auto object-cover object-center rounded shadow-lg" />
+      </div>
+
+      <!-- Right: Content -->
+      <div class="md:col-span-8 flex flex-col justify-center">
+        <!-- Quote -->
+        <h2 class="text-4xl md:text-6xl font-serif italic mb-12 text-[#1E1E1E] leading-tight text-center md:text-left">
+          "De la cocina de élite <br/> a tus operaciones"
+        </h2>
+
+        <!-- Chef Details -->
+        <div class="flex items-start gap-4 mb-16">
+          <!-- Graphic lines block -->
+          <div class="flex flex-col gap-1 mt-2">
+            <div class="w-12 h-6 bg-[#f7b500] rounded-r-sm"></div>
+            <div class="w-10 h-6 bg-[#e30066] rounded-r-sm"></div>
+            <div class="w-8 h-6 bg-[#005bab] rounded-r-sm"></div>
+          </div>
+          <div>
+            <h3 class="text-3xl font-light text-[#1E1E1E] mb-2">Faus Arroyo <span class="text-xl font-normal text-gray-500 block md:inline mt-1 md:mt-0 md:ml-2">Aliado Estratégico de Incoltec para el sector HORECA</span></h3>
+            <p class="text-gray-500 italic font-serif text-lg">Chef ejecutivo, propietario del exitoso Lolita Restaurante, Punta Cana</p>
+          </div>
+        </div>
+
+        <!-- Images and description -->
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <Image src={restImg1} alt="Restaurant Interior" class="w-full h-56 object-cover rounded shadow-md" />
+          <Image src={restImg2} alt="Paella Cooking" class="w-full h-56 object-cover rounded shadow-md" />
+        </div>
+
+        <p class="text-xl text-gray-700 leading-relaxed mb-6 font-light">
+          Combinamos la "genialidad" creativa de Faus (fórmulas, procesos, sistemas de cocina) con el soporte técnico y logístico de Incoltec (eficiencia operativa, automatización, gestión de materia prima).
+        </p>
+        <p class="text-xl text-gray-700 leading-relaxed">
+          Incoltec, junto a Faus Arroyo, se unen para crear el <strong>"Sistema Operativo de Éxito"</strong> para hoteles y restaurantes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Science Section -->
+  <section class="relative w-full h-[500px] flex items-center justify-center">
+    <Image src={salmon} alt="Science of Flavor" class="absolute inset-0 w-full h-full object-cover z-0" />
+    <div class="absolute inset-0 bg-black/20 z-0"></div>
+    <h2 class="relative z-10 text-white text-5xl md:text-7xl font-serif italic drop-shadow-xl text-center px-4">
+      La ciencia detrás del sabor
+    </h2>
+  </section>
+
+  <!-- Transformation Section -->
+  <section class="relative w-full h-[600px] flex items-center justify-center">
+    <Image src={bolitas} alt="Transform your kitchen" class="absolute inset-0 w-full h-full object-cover z-0" />
+    <div class="absolute inset-0 bg-black/20 z-0"></div>
+    <h2 class="relative z-10 text-white text-4xl md:text-6xl font-serif italic leading-[1.3] drop-shadow-xl text-center px-4">
+      Transformar su cocina <br/>
+      de un "centro de costos" <br/>
+      a un "activo de rentabilidad".
+    </h2>
+  </section>
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+  
+  .font-serif {
+    font-family: 'Playfair Display', serif;
+  }
+</style>

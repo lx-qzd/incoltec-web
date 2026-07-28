@@ -1,0 +1,70 @@
+---
+import PdfSection from "./PdfSection.astro";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  bgImage?: string;
+}
+
+const { 
+  title = "Our Company",
+  subtitle = "Who We Are",
+  description = "We are a dynamic team of innovators and visionaries dedicated to transforming food color solutions into extraordinary experiences globally.",
+  bgImage = "/assets/fondo3.jpg"
+} = Astro.props;
+---
+
+<PdfSection title={title} bgImage={bgImage}>
+  <div class="space-y-8">
+    <div class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/10 border border-white/20">
+      <span class="text-sm font-semibold tracking-widest text-white uppercase">{subtitle}</span>
+    </div>
+    
+    <p class="text-xl md:text-2xl text-gray-200 font-light leading-relaxed mb-12">
+      {description}
+    </p>
+
+    <!-- Stats Grid -->
+    <div class="grid sm:grid-cols-2 gap-6">
+      
+      <!-- Stat 1 -->
+      <div class="bg-white/5 p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
+        <div class="text-4xl font-light text-white mb-2 flex items-baseline">
+          <span>20</span>
+          <span class="text-[#E30066] font-bold ml-1">+</span>
+        </div>
+        <p class="text-gray-300 font-medium">Years of Experience</p>
+      </div>
+
+      <!-- Stat 2 -->
+      <div class="bg-white/5 p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
+        <div class="text-4xl font-light text-white mb-2 flex items-baseline">
+          <span>100</span>
+          <span class="text-[#22C55E] font-bold ml-1">%</span>
+        </div>
+        <p class="text-gray-300 font-medium">Natural Options</p>
+      </div>
+
+      <!-- Stat 3 -->
+      <div class="bg-white/5 p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
+        <div class="text-4xl font-light text-white mb-2 flex items-baseline">
+          <span>50</span>
+          <span class="text-[#FFC000] font-bold ml-1">+</span>
+        </div>
+        <p class="text-gray-300 font-medium">Global Markets</p>
+      </div>
+
+      <!-- Stat 4 -->
+      <div class="bg-white/5 p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
+        <div class="text-4xl font-light text-white mb-2 flex items-baseline">
+          <span>10</span>
+          <span class="text-[#008AD8] font-bold ml-1">K+</span>
+        </div>
+        <p class="text-gray-300 font-medium">Happy Clients</p>
+      </div>
+
+    </div>
+  </div>
+</PdfSection>

@@ -1,0 +1,158 @@
+---
+import { Astronav, MenuItems, MenuIcon, DropdownItems } from "astro-navbar";
+import { Image } from "astro:assets";
+
+const { currentPath = "/" } = Astro.props;
+const urlPath = Astro.url.pathname;
+const isEs = urlPath.startsWith('/es');
+const pathWithoutLang = isEs ? urlPath.replace(/^\/es/, '') || '/' : urlPath;
+const enPath = pathWithoutLang;
+const esPath = `/es${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
+
+
+const enLinks = [
+  { name: "Our Company", url: "/our-company" },
+  { name: "Products", url: "/products" },
+  { name: "Blog", url: "/blog" },
+  { name: "Taste Colors", url: "/taste-colors" },
+  { name: "Perfecting Food", url: "/perfecting-food" },
+  { 
+    name: "Catalogs", 
+    dropdown: [
+      { name: "Horeca (TBA)", url: "/catalogs#horeca" },
+      { name: "Industrial (TBA)", url: "/catalogs#industrial" }
+    ]
+  },
+  { name: "Contact", url: "/contact" },
+];
+
+const esLinks = [
+  { name: "Nuestra Empresa", url: "/es/our-company" },
+  { name: "Productos", url: "/products" },
+  { name: "Blog", url: "/blog" },
+  { name: "Saborea los Colores", url: "/es/taste-colors" },
+  { name: "Perfeccionando Alimentos", url: "/es/perfecting-food" },
+  { 
+    name: "Catálogos", 
+    dropdown: [
+      { name: "Horeca (TBA)", url: "/es/catalogs#horeca" },
+      { name: "Industrial (TBA)", url: "/es/catalogs#industrial" }
+    ]
+  },
+  { name: "Contacto", url: "/es/contact" },
+];
+
+const links = isEs ? esLinks : enLinks;
+---
+
+<header
+  class="bg-white text-[#1E1E1E] sticky top-0 z-[100] shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
+>
+  <div
+    class="lg:flex justify-between items-center py-8 mx-auto max-w-[1400px] px-6 lg:px-12"
+  >
+    <Astronav closeOnClick>
+      <div class="flex w-full lg:w-1/4 justify-between items-center">
+        <a href="/" aria-label="Incoltec Home" class="flex items-center shrink-0">
+          <Image
+            src="/assets/AF_Logo_Incoltrec.svg"
+            alt="Incoltec Logo"
+            width={1007}
+            height={120}
+            class="h-[50px] w-auto block"
+            loading="eager"
+          />
+        </a>
+        <div class="block lg:hidden">
+          <MenuIcon class="w-8 h-8 text-gray-800" />
+        </div>
+      </div>
+
+      <MenuItems class="hidden lg:flex w-full lg:w-3/4 justify-end mt-6 lg:mt-0 items-center">
+        <ul class="flex flex-col lg:flex-row xl:gap-5 lg:gap-3 gap-4 lg:items-center whitespace-nowrap">
+          {
+            links.map((link) => (
+              <li>
+                {link.dropdown ? (
+                  <div class="astronav-dropdown group relative" aria-expanded="false">
+                    <button class={`nav-link font-medium text-[0.85rem] xl:text-[0.9rem] py-2 flex items-center relative transition-colors duration-300 hover:text-[#121212] hover:opacity-100 ${
+                      currentPath.startsWith("/catalogs")
+                        ? "text-[#121212] active-link opacity-100"
+                        : "text-[#1E1E1E]"
+                    }`}>
+                      <span>{link.name}</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        class="w-4 h-4 ml-1 mt-0.5 group-open:rotate-180 transition-transform duration-200">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+                      </svg>
+                    </button>
+                    <DropdownItems class="relative lg:absolute lg:top-full lg:mt-4 w-56 z-50 hidden">
+                      <div class="bg-white/95 backdrop-blur-lg lg:shadow-[0_10px_40px_rgba(0,0,0,0.08)] rounded-xl py-3 border border-gray-100/50">
+                        <ul>
+                          {link.dropdown.map((sublink) => (
+                            <li>
+                              <a href={sublink.url} class="block px-4 py-2 text-[0.85rem] text-gray-600 hover:bg-gray-50/80 hover:text-[#e30066] transition-all duration-200 font-medium">
+                                {sublink.name}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </DropdownItems>
+                  </div>
+                ) : (
+                  <a
+                    href={link.url}
+                    class={`nav-link font-medium text-[0.85rem] xl:text-[0.9rem] py-2 relative transition-colors duration-300 hover:text-[#121212] hover:opacity-100 ${
+                      currentPath === link.url
+                        ? "text-[#121212] active-link opacity-100"
+                        : "text-[#1E1E1E]"
+                    }`}
+                  >
+                    {link.name}
+                  </a>
+                )}
+              </li>
+            ))
+          }
+          <li class="flex items-center gap-2 lg:hidden mt-4 border-t pt-4 border-gray-100">
+            <a href={enPath} class={`text-sm font-medium transition-colors hover:text-[#e30066] ${!isEs ? 'text-[#e30066]' : 'text-gray-400'}`}>EN</a>
+            <span class="text-gray-300 text-xs">|</span>
+            <a href={esPath} class={`text-sm font-medium transition-colors hover:text-[#e30066] ${isEs ? 'text-[#e30066]' : 'text-gray-400'}`}>ES</a>
+          </li>
+          <li class="hidden lg:flex items-center gap-1.5 ml-2 border-l border-gray-200 pl-4">
+            <a href={enPath} class={`text-[0.85rem] font-bold transition-colors hover:text-[#e30066] ${!isEs ? 'text-[#e30066]' : 'text-gray-400'}`}>EN</a>
+            <span class="text-gray-300 text-xs">|</span>
+            <a href={esPath} class={`text-[0.85rem] font-bold transition-colors hover:text-[#e30066] ${isEs ? 'text-[#e30066]' : 'text-gray-400'}`}>ES</a>
+          </li>
+        </ul>
+      </MenuItems>
+    </Astronav>
+  </div>
+</header>
+
+<style>
+  .nav-link.active-link::after,
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--c-magenta, #e30066);
+    transition: width 0.3s ease;
+  }
+</style>

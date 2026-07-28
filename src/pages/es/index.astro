@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import Certifications from '../../components/Certifications.astro';
+import AboutUs from '../../components/AboutUs.astro';
+import ColorComparison from '../../components/ColorComparison.astro';
+import LeadMagnet from '../../components/LeadMagnet.astro';
+---
+
+<Layout title="Fabricante de Colorante Alimentario">
+  <Header currentPath="/" />
+  
+  <main>
+    <Hero />
+
+    <Certifications title="Calidad y Seguridad Certificada" />
+
+    <AboutUs 
+      title="Quiénes Somos. Conoce sobre nosotros"
+      subtitle="Sobre Nosotros"
+      description="Somos un equipo dinámico de innovadores y visionarios dedicados a transformar las soluciones de colorantes alimentarios en experiencias extraordinarias a nivel mundial."
+    />
+
+    <!-- Parallax Comparison Section -->
+    <div class="h-24 md:h-32 bg-transparent reveal"></div>
+    
+    <ColorComparison 
+      title="¿Por qué elegir Colorantes Naturales?"
+      naturalTitle="Colorantes Naturales"
+      artificialTitle="Colorantes Artificiales"
+      naturalPoints={[
+        "Etiqueta limpia (Clean Label) para consumidores conscientes",
+        "Derivados de fuentes naturales (plantas, minerales)",
+        "Sin impacto negativo en el valor nutricional",
+        "Cada vez más exigidos por los reguladores globales"
+      ]}
+      artificialPoints={[
+        "A menudo vinculados a problemas de salud y alergias",
+        "Químicos sintéticos basados en petróleo",
+        "Requieren etiquetas de advertencia estrictas",
+        "Disminución de la confianza del consumidor"
+      ]}
+      bgImage="/assets/food-colors-application.png"
+    />
+
+    <div class="h-24 md:h-32 bg-transparent"></div>
+
+    <LeadMagnet 
+      title="Descarga Nuestro Catálogo Técnico 2024"
+      description="Obtén información completa sobre nuestras aplicaciones de colores naturales, especificaciones y cumplimiento normativo para la industria alimentaria B2B."
+      buttonText="Descargar Catálogo"
+      placeholderName="Tu Nombre"
+      placeholderEmail="Email Corporativo"
+      placeholderCompany="Nombre de Empresa"
+      privacyText="Acepto la Política de Privacidad"
+    />
+  </main>
+
+  <Footer />
+</Layout>

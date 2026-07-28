@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/assets/AF_Logo_Incoltrec.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | INCOLTEC - Shaping the Future of Food Appeal</title>
+        <meta name="description" content="INCOLTEC desarrolla ingredientes, colorantes y soluciones funcionales innovadoras para la industria alimentaria." />
+
+        <!-- Performance optimizations: Preconnect to fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+        <!-- Matomo Analytics Placeholder -->
+        <script type="text/plain" data-cookiecategory="analytics" is:inline>
+            var _paq = window._paq = window._paq || [];
+            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u="https://stats.incoltec.com/";
+                _paq.push(['setTrackerUrl', u+'matomo.php']);
+                _paq.push(['setSiteId', 'PLACEHOLDER_ID']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <!-- End Matomo Code -->
+	</head>
+	<body>
+		<slot />
+        <WhatsAppButton />
+        <CookieConsent />
+
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+                const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.15
+                });
+
+                reveals.forEach(reveal => {
+                    revealObserver.observe(reveal);
+                });
+            });
+        </script>
+	</body>
+</html>

@@ -1,0 +1,243 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<Layout title="Contacto">
+  <Header currentPath="/contact" />
+  
+  <main>
+    <Hero 
+      title="Contacto" 
+      subtitle="Construyamos el futuro juntos"
+      backgroundImage="/assets/fondo1.jpg" 
+    />
+
+    <section class="contact-section container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Ponte en contacto</h2>
+          <p>
+            Estamos aquí para responder tus preguntas y ayudarte a desarrollar la solución 
+            perfecta para tus necesidades.
+          </p>
+          <div class="info-block">
+            <h3>Email</h3>
+            <p>info@incoltec.com</p>
+          </div>
+          <div class="info-block">
+            <h3>Oficinas</h3>
+            <p>Nuestras instalaciones principales se encuentran listas para atender tus requerimientos.</p>
+          </div>
+        </div>
+        
+        <div class="contact-form-container">
+          <form class="contact-form" id="contactForm" action="/api/contact" method="POST">
+            <!-- Anti-spam Honeypot -->
+            <div style="display:none;">
+              <label for="bot_field_es_contact">Deja esto vacío:</label>
+              <input type="text" id="bot_field_es_contact" name="bot_field" />
+            </div>
+
+            <div class="form-group">
+              <label for="name">Nombre</label>
+              <input type="text" id="name" name="name" required placeholder="Tu nombre" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="tu@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="message">Mensaje</label>
+              <textarea id="message" name="message" rows="5" required placeholder="¿En qué podemos ayudarte?"></textarea>
+            </div>
+
+            <div class="form-checkbox">
+              <input type="checkbox" id="privacy" name="privacy" required />
+              <label for="privacy">He leído y acepto la <a href="/es/privacy-policy" class="text-[var(--c-cyan)] hover:underline">Política de Privacidad</a>.</label>
+            </div>
+
+            <div class="form-checkbox">
+              <input type="checkbox" id="commercial" name="commercial" />
+              <label for="commercial">Deseo recibir comunicaciones comerciales sobre productos y servicios de Incoltec.</label>
+            </div>
+
+            <div id="form-feedback" class="hidden my-4 p-3 rounded text-sm font-medium"></div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">Enviar Mensaje</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  const feedback = document.getElementById('form-feedback');
+  const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+      }
+      
+      if (feedback) {
+        feedback.classList.add('hidden');
+        feedback.classList.remove('bg-green-500/20', 'text-green-400', 'bg-red-500/20', 'text-red-400');
+      }
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (feedback) {
+          feedback.classList.remove('hidden');
+          if (response.ok) {
+            feedback.classList.add('bg-green-500/20', 'text-green-400');
+            feedback.textContent = result.message || '¡Mensaje enviado con éxito!';
+            form.reset();
+          } else {
+            feedback.classList.add('bg-red-500/20', 'text-red-400');
+            feedback.textContent = result.error || 'Hubo un problema al enviar tu mensaje.';
+          }
+        }
+      } catch (err) {
+        if (feedback) {
+          feedback.classList.remove('hidden');
+          feedback.classList.add('bg-red-500/20', 'text-red-400');
+          feedback.textContent = 'Ocurrió un error de red. Por favor intenta de nuevo.';
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar Mensaje';
+        }
+      }
+    });
+  }
+</script>
+
+<style>
+  .contact-section {
+    padding: 6rem 2rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .contact-info h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-info p {
+    color: var(--c-light);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .info-block h3 {
+    font-size: 1.2rem;
+    color: var(--c-yellow);
+    margin-bottom: 0.5rem;
+  }
+
+  .info-block p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-form-container {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--c-white);
+    border-radius: 4px;
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--c-cyan);
+  }
+
+  .form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .form-checkbox input[type="checkbox"] {
+    margin-top: 0.3rem;
+    cursor: pointer;
+  }
+
+  .form-checkbox label {
+    font-size: 0.9rem;
+    color: var(--c-light);
+    line-height: 1.4;
+  }
+
+  .submit-btn {
+    background: var(--c-magenta);
+    color: var(--c-white);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+    transition: background 0.3s ease;
+  }
+
+  .submit-btn:hover {
+    background: #c20055;
+  }
+
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

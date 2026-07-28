@@ -1,0 +1,464 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map(product => ({
+    params: { slug: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const { Content } = await render(product);
+---
+
+<Layout title={`${product.data.title} | Technical Specification`}>
+  <div class="product-detail-page bg-[#F8FAFC]">
+  <Header currentPath={`/products/${product.id}`} />
+  
+  <div class="product-header-section bg-white">
+    <div class="container content">
+      <div class="breadcrumbs">
+        <a href="/products">Products</a>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span>{product.data.category}</span>
+      </div>
+      
+      <div class="header-layout">
+        <div class="header-text">
+          <h1>{product.data.title}</h1>
+          <p class="subtitle">{product.data.description}</p>
+        </div>
+        
+        <div class="specs-card">
+          <h3>Technical Profile</h3>
+          <ul>
+            {product.data.color && (
+              <li>
+                <span class="spec-label">Color/Shade</span>
+                <span class="spec-value color-indicator">
+                   <span class="color-dot" style={`background-color: ${
+                     product.data.color.toLowerCase().includes('amarillo') ? '#FBBF24' : 
+                     product.data.color.toLowerCase().includes('rojo') ? '#EF4444' :
+                     product.data.color.toLowerCase().includes('blanco') ? '#FFFFFF' : '#cccccc'
+                   }`}></span>
+                   {product.data.color}
+                </span>
+              </li>
+            )}
+            {product.data.solubility && (
+              <li>
+                <span class="spec-label">Solubility</span>
+                <span class="spec-value">{product.data.solubility}</span>
+              </li>
+            )}
+            {product.data.phRange && (
+              <li>
+                <span class="spec-label">Optimal pH</span>
+                <span class="spec-value">{product.data.phRange}</span>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container content-section main-layout">
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="prose-content">
+        <Content />
+      </div>
+
+      <div class="applications-section">
+         <h3>Suitable Applications</h3>
+         <div class="apps-grid">
+           {product.data.applications.map(app => (
+             <span class="app-badge">{app}</span>
+           ))}
+         </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Form -->
+    <div class="sidebar">
+      <div class="download-card">
+        <div class="download-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h3>Technical Data Sheet</h3>
+        <p>Fill out the form below to receive the complete specifications via email.</p>
+
+        <form class="product-download-form" action="/api/contact" method="POST">
+          <input type="hidden" name="message" value={`TDS Request for: ${product.data.title}`} />
+          <input type="text" name="_honey" class="hidden-field" tabindex="-1" autocomplete="off" />
+
+          <input type="text" name="name" required class="form-input" placeholder="Full Name" />
+          <input type="email" name="email" required class="form-input" placeholder="Corporate Email" />
+          <input type="text" name="company" required class="form-input" placeholder="Company Name" />
+
+          <button type="submit" class="submit-btn group">
+            <span>Request Download</span>
+            <svg class="group-hover" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          </button>
+          <div class="form-feedback hidden"></div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Header Section */
+  .product-header-section {
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 4rem 2rem;
+  }
+  .content {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--c-dark);
+    opacity: 0.6;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+  .breadcrumbs a {
+    transition: color 0.3s ease;
+  }
+  .breadcrumbs a:hover {
+    color: var(--c-magenta);
+  }
+  .breadcrumbs svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.5;
+  }
+
+  .header-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  @media (min-width: 768px) {
+    .header-layout {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+
+  .header-text {
+    flex: 1;
+  }
+  .header-text h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--c-dark);
+    opacity: 0.8;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .specs-card {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border-radius: 0;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .specs-card {
+      width: 320px;
+    }
+  }
+  
+  .specs-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+  .specs-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .specs-card li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+  .spec-label {
+    color: var(--c-dark);
+    opacity: 0.6;
+  }
+  .spec-value {
+    font-weight: 500;
+  }
+  .color-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  /* Main Layout */
+  .content-section {
+    padding: 4rem 2rem 6rem;
+  }
+  .main-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  @media (min-width: 1024px) {
+    .main-layout {
+      flex-direction: row;
+    }
+  }
+
+  .main-content {
+    flex: 1;
+  }
+  
+  .prose-content {
+    color: var(--c-dark);
+    opacity: 0.8;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+  /* Target elements generated by markdown */
+  .prose-content :global(h2) {
+    font-size: 1.8rem;
+    color: var(--c-dark);
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+  .prose-content :global(h3) {
+    font-size: 1.4rem;
+    color: var(--c-dark);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .prose-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+  .prose-content :global(ul) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .prose-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .prose-content :global(strong) {
+    color: var(--c-dark);
+    font-weight: 600;
+  }
+  .prose-content :global(a) {
+    color: var(--c-cyan);
+  }
+  .prose-content :global(a:hover) {
+    text-decoration: underline;
+  }
+
+  .applications-section {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .applications-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .apps-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .app-badge {
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 0;
+    font-weight: 500;
+    color: var(--c-dark);
+    font-size: 0.9rem;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 100%;
+  }
+  @media (min-width: 1024px) {
+    .sidebar {
+      width: 320px;
+    }
+  }
+
+  .download-card {
+    position: sticky;
+    top: 120px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 0;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.03);
+  }
+  
+  .download-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    color: var(--c-magenta);
+  }
+  
+  .download-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .download-card p {
+    color: var(--c-dark);
+    opacity: 0.7;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .product-download-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .hidden-field {
+    display: none;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    color: var(--c-dark);
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  .form-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  .form-input:focus {
+    border-color: var(--c-magenta);
+    background: #ffffff;
+  }
+
+  .submit-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+    background-color: var(--c-magenta);
+    color: var(--c-white);
+    font-weight: 600;
+    padding: 1rem;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+  .submit-btn:hover {
+    background-color: #c40058;
+  }
+  .submit-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+  .submit-btn:hover svg {
+    transform: translateY(3px);
+  }
+
+  .form-feedback {
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+  .form-feedback.success { color: #4ade80; display: block; }
+  .form-feedback.error { color: #f87171; display: block; }
+  .hidden { display: none; }
+</style>
+
+<script>
+  const forms = document.querySelectorAll('.product-download-form');
+  forms.forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formEl = e.target as HTMLFormElement;
+      const btn = formEl.querySelector('.submit-btn') as HTMLButtonElement;
+      const feedback = formEl.querySelector('.form-feedback') as HTMLElement;
+      
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<span class="animate-spin" style="display:inline-block;width:20px;height:20px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;"></span>';
+      btn.disabled = true;
+      feedback.classList.add('hidden');
+      feedback.classList.remove('success', 'error');
+
+      try {
+        const res = await fetch(formEl.action, {
+          method: 'POST',
+          body: new FormData(formEl)
+        });
+        
+        if (res.ok) {
+          formEl.reset();
+          feedback.textContent = 'Success! Check your email for the Technical Data Sheet.';
+          feedback.classList.add('success');
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        feedback.textContent = 'An error occurred. Please try again.';
+        feedback.classList.add('error');
+      } finally {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }
+    });
+  });
+</script>

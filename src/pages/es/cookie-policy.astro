@@ -1,0 +1,57 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Política de Cookies">
+  <Header currentPath="/cookie-policy" />
+  
+  <main class="container mx-auto px-4 py-20 max-w-4xl text-gray-300">
+    <h1 class="text-4xl font-light mb-8 text-white">Política de Cookies</h1>
+    
+    <div class="prose prose-invert max-w-none font-light leading-relaxed">
+      <p>Última actualización: [Fecha]</p>
+      
+      <h2>1. ¿Qué son las cookies?</h2>
+      <p>Las cookies son pequeños archivos de texto que se colocan en su ordenador o dispositivo móvil cuando visita un sitio web. Se utilizan ampliamente para que los sitios web funcionen, o funcionen de manera más eficiente, así como para proporcionar información a los propietarios del sitio.</p>
+      
+      <h2>2. Cómo usamos las cookies</h2>
+      <p>Usamos cookies para:</p>
+      <ul>
+        <li>Comprender y guardar las preferencias del usuario para futuras visitas.</li>
+        <li>Recopilar datos agregados sobre el tráfico del sitio y las interacciones del sitio para ofrecer mejores experiencias y herramientas en el futuro.</li>
+      </ul>
+
+      <h2>3. Tipos de cookies que usamos</h2>
+      <ul>
+        <li><strong>Cookies esenciales:</strong> Son necesarias para el funcionamiento de nuestro sitio web.</li>
+        <li><strong>Cookies analíticas/de rendimiento:</strong> Nos permiten reconocer y contar el número de visitantes y ver cómo se mueven por nuestro sitio web.</li>
+        <li><strong>Cookies de marketing:</strong> Se utilizan para rastrear a los visitantes en los sitios web.</li>
+      </ul>
+
+      <h2>4. Gestión de cookies</h2>
+      <p>Puede gestionar sus preferencias de cookies en cualquier momento utilizando nuestro panel de configuración de cookies.</p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  h2 {
+    font-size: 1.8rem;
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
+  ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+</style>

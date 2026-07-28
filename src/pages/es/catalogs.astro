@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<Layout title="Catálogos">
+  <Header currentPath="/catalogs" />
+  
+  <main>
+    <Hero 
+      title="Catálogos" 
+      subtitle="Explora nuestras soluciones"
+      backgroundImage="/assets/fondo2.jpg" 
+    />
+
+    <section class="catalog-section container mx-auto px-4 py-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- HORECA Catalog -->
+        <div id="horeca" class="catalog-card bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl p-10 text-center flex flex-col items-center justify-center transition-all hover:-translate-y-1 hover:shadow-2xl duration-300">
+          <h2 class="text-4xl font-light mb-4 text-white">HORECA</h2>
+          <p class="text-gray-300 mb-8">Soluciones especializadas para hoteles, restaurantes y catering.</p>
+          <a href="#" download class="inline-block bg-[#e30066] text-white px-8 py-3 rounded hover:bg-[#c20057] transition-colors font-medium">
+            Descargar PDF
+          </a>
+        </div>
+
+        <!-- Industrial Catalog -->
+        <div id="industrial" class="catalog-card bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl p-10 text-center flex flex-col items-center justify-center transition-all hover:-translate-y-1 hover:shadow-2xl duration-300">
+          <h2 class="text-4xl font-light mb-4 text-white">Industrial</h2>
+          <p class="text-gray-300 mb-8">Soluciones escalables para la producción industrial de alimentos.</p>
+          <a href="#" download class="inline-block bg-[#e30066] text-white px-8 py-3 rounded hover:bg-[#c20057] transition-colors font-medium">
+            Descargar PDF
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .catalog-section {
+    padding: 6rem 2rem;
+  }
+</style>

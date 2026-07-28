@@ -1,0 +1,164 @@
+---
+import { Image } from "astro:assets";
+
+const currentYear = new Date().getFullYear();
+const urlPath = Astro.url.pathname;
+const isEs = urlPath.startsWith('/es');
+
+const enLinks = {
+  company: {
+    title: "Company",
+    links: [
+      { name: "Our Company", url: "/our-company" },
+      { name: "Vibrant Life", url: "/vibrant-life" },
+      { name: "Taste Colors", url: "/taste-colors" },
+      { name: "Perfecting Food", url: "/perfecting-food" }
+    ]
+  },
+  resources: {
+    title: "Resources",
+    links: [
+      { name: "Catalogs", url: "/catalogs" },
+      { name: "Contact", url: "/contact" }
+    ]
+  },
+  legal: {
+    title: "Legal",
+    links: [
+      { name: "Legal Notice", url: "/legal-notice" },
+      { name: "Privacy Policy", url: "/privacy-policy" },
+      { name: "Cookie Policy", url: "/cookie-policy" }
+    ]
+  },
+  slogan: "Shaping the future of food appeal"
+};
+
+const esLinks = {
+  company: {
+    title: "Empresa",
+    links: [
+      { name: "Nuestra Empresa", url: "/es/our-company" },
+      { name: "Vida Vibrante", url: "/es/vibrant-life" },
+      { name: "Saborea los Colores", url: "/es/taste-colors" },
+      { name: "Perfeccionando Alimentos", url: "/es/perfecting-food" }
+    ]
+  },
+  resources: {
+    title: "Recursos",
+    links: [
+      { name: "Catálogos", url: "/es/catalogs" },
+      { name: "Contacto", url: "/es/contact" }
+    ]
+  },
+  legal: {
+    title: "Legal",
+    links: [
+      { name: "Aviso Legal", url: "/es/legal-notice" },
+      { name: "Política de Privacidad", url: "/es/privacy-policy" },
+      { name: "Política de Cookies", url: "/es/cookie-policy" }
+    ]
+  },
+  slogan: "Dando forma al futuro del atractivo alimentario"
+};
+
+const content = isEs ? esLinks : enLinks;
+---
+
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-logo">
+      <Image src="/assets/logo-incoltec-blanco.png" alt="Incoltec Logo" width={300} height={70} class="h-[50px] w-auto object-contain" />
+      <p class="slogan">{content.slogan}</p>
+    </div>
+    
+    <div class="footer-links">
+      <div class="link-group">
+        <h3>{content.company.title}</h3>
+        {content.company.links.map(link => (
+          <a href={link.url}>{link.name}</a>
+        ))}
+      </div>
+      <div class="link-group">
+        <h3>{content.resources.title}</h3>
+        {content.resources.links.map(link => (
+          <a href={link.url}>{link.name}</a>
+        ))}
+      </div>
+      <div class="link-group">
+        <h3>{content.legal.title}</h3>
+        {content.legal.links.map(link => (
+          <a href={link.url}>{link.name}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom container">
+    <p>&copy; {currentYear} Incoltec. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--c-dark);
+    padding: 4rem 0 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-logo img {
+    height: 50px;
+    margin-bottom: 1rem;
+  }
+
+  .slogan {
+    font-size: 0.9rem;
+    color: var(--c-light);
+    opacity: 0.8;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 4rem;
+  }
+
+  .link-group h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--c-white);
+  }
+
+  .link-group a {
+    display: block;
+    color: var(--c-light);
+    opacity: 0.7;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .link-group a:hover {
+    opacity: 1;
+    color: var(--c-yellow);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+    }
+  }
+</style>

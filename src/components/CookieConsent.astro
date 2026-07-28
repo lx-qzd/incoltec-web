@@ -1,0 +1,140 @@
+---
+import 'vanilla-cookieconsent/dist/cookieconsent.css';
+const urlPath = Astro.url.pathname;
+const isEs = urlPath.startsWith('/es');
+---
+
+<script>
+  import * as CookieConsent from 'vanilla-cookieconsent';
+  const isEs = window.location.pathname.startsWith('/es');
+
+  CookieConsent.run({
+    guiOptions: {
+      consentModal: {
+        layout: 'box',
+        position: 'bottom right',
+        equalWeightButtons: true,
+        flipButtons: false
+      },
+      preferencesModal: {
+        layout: 'box',
+        position: 'right',
+        equalWeightButtons: true,
+        flipButtons: false
+      }
+    },
+    categories: {
+      necessary: {
+        readOnly: true
+      },
+      analytics: {},
+      marketing: {}
+    },
+    language: {
+      default: isEs ? 'es' : 'en',
+      translations: {
+        en: {
+          consentModal: {
+            title: "We use cookies!",
+            description: "Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.",
+            acceptAllBtn: "Accept all",
+            acceptNecessaryBtn: "Reject all",
+            showPreferencesBtn: "Manage preferences",
+            footer: "<a href=\"/privacy-policy\">Privacy Policy</a>\n<a href=\"/cookie-policy\">Cookie Policy</a>"
+          },
+          preferencesModal: {
+            title: "Cookie Preferences",
+            acceptAllBtn: "Accept all",
+            acceptNecessaryBtn: "Reject all",
+            savePreferencesBtn: "Save preferences",
+            closeIconLabel: "Close modal",
+            sections: [
+              {
+                title: "Cookie Usage",
+                description: "I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want."
+              },
+              {
+                title: "Strictly Necessary Cookies",
+                description: "These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly.",
+                linkedCategory: "necessary"
+              },
+              {
+                title: "Performance and Analytics Cookies",
+                description: "These cookies allow the website to remember the choices you have made in the past.",
+                linkedCategory: "analytics"
+              },
+              {
+                title: "Advertisement and Targeting Cookies",
+                description: "These cookies collect information about how you use the website, which pages you visited and which links you clicked on. All of the data is anonymized and cannot be used to identify you.",
+                linkedCategory: "marketing"
+              },
+              {
+                title: "More information",
+                description: "For any queries in relation to our policy on cookies and your choices, please <a class=\"cc-link\" href=\"/contact\">contact us</a>."
+              }
+            ]
+          }
+        },
+        es: {
+          consentModal: {
+            title: "¡Usamos cookies!",
+            description: "Hola, este sitio web utiliza cookies esenciales para garantizar su correcto funcionamiento y cookies de seguimiento para comprender cómo interactúas con él. Estas últimas se establecerán solo tras su consentimiento.",
+            acceptAllBtn: "Aceptar todas",
+            acceptNecessaryBtn: "Rechazar todas",
+            showPreferencesBtn: "Gestionar preferencias",
+            footer: "<a href=\"/es/privacy-policy\">Política de Privacidad</a>\n<a href=\"/es/cookie-policy\">Política de Cookies</a>"
+          },
+          preferencesModal: {
+            title: "Preferencias de Cookies",
+            acceptAllBtn: "Aceptar todas",
+            acceptNecessaryBtn: "Rechazar todas",
+            savePreferencesBtn: "Guardar preferencias",
+            closeIconLabel: "Cerrar ventana",
+            sections: [
+              {
+                title: "Uso de Cookies",
+                description: "Utilizo cookies para garantizar las funciones básicas del sitio web y mejorar su experiencia online. Puede elegir en cada categoría optar por participar/no participar cuando lo desee."
+              },
+              {
+                title: "Cookies estrictamente necesarias",
+                description: "Estas cookies son esenciales para el correcto funcionamiento de mi sitio web. Sin estas cookies, el sitio web no funcionaría correctamente.",
+                linkedCategory: "necessary"
+              },
+              {
+                title: "Cookies de rendimiento y análisis",
+                description: "Estas cookies permiten que el sitio web recuerde las elecciones que ha hecho en el pasado.",
+                linkedCategory: "analytics"
+              },
+              {
+                title: "Cookies publicitarias y de orientación",
+                description: "Estas cookies recopilan información sobre cómo utiliza el sitio web, qué páginas visitó y en qué enlaces hizo clic. Todos los datos están anonimizados y no pueden usarse para identificarlo.",
+                linkedCategory: "marketing"
+              },
+              {
+                title: "Más información",
+                description: "Para cualquier consulta en relación con nuestra política de cookies y sus opciones, por favor <a class=\"cc-link\" href=\"/es/contact\">contáctenos</a>."
+              }
+            ]
+          }
+        }
+      }
+    }
+  });
+</script>
+
+<style is:global>
+  :root {
+    --cc-primary-color: var(--c-magenta);
+    --cc-bg: var(--c-dark);
+    --cc-text: var(--c-light);
+    --cc-btn-primary-bg: var(--c-magenta);
+    --cc-btn-primary-text: var(--c-white);
+    --cc-btn-primary-hover-bg: #c20055;
+    --cc-btn-secondary-bg: rgba(255, 255, 255, 0.1);
+    --cc-btn-secondary-text: var(--c-light);
+    --cc-btn-secondary-hover-bg: rgba(255, 255, 255, 0.2);
+    --cc-separator-border-color: rgba(255, 255, 255, 0.1);
+    --cc-toggle-on-bg: var(--c-cyan);
+    --cc-toggle-off-bg: rgba(255, 255, 255, 0.2);
+  }
+</style>

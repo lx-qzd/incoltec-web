@@ -1,0 +1,350 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import { getCollection } from 'astro:content';
+
+const allProducts = await getCollection('products');
+
+// Extract unique categories and applications for filters
+const categories = [...new Set(allProducts.map(p => p.data.category))];
+const applications = [...new Set(allProducts.flatMap(p => p.data.applications))];
+---
+
+<Layout title="Product Catalog">
+  <Header currentPath="/products" />
+  
+  <Hero 
+    title="Our Natural Color Solutions" 
+    subtitle="Discover our comprehensive range of high-performance coloring solutions designed specifically for industrial B2B applications."
+    backgroundImage="/assets/fondo1.jpg" 
+  />
+  
+  <main class="bg-[#F8FAFC]">
+    <div class="content-section container">
+      <div class="content">
+      
+      <!-- Search and Filter Bar -->
+      <div class="search-bar-container">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" id="searchInput" placeholder="Search by name, color, or E-number..." class="search-input" />
+        </div>
+        
+        <div class="filter-wrapper">
+          <select id="categoryFilter" class="category-select">
+            <option value="">All Categories</option>
+            {categories.map(cat => (
+              <option value={cat}>{cat}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="productsGrid" class="features-grid" style="margin-top: 3rem;">
+        {allProducts.map(product => (
+          <div class="feature-card product-card" data-title={product.data.title.toLowerCase()} data-category={product.data.category}>
+            <div class="product-header">
+              <span class="product-category">{product.data.category}</span>
+              {product.data.color && (
+                <span class="product-color-indicator">
+                   <span class="color-dot" style={`background-color: ${
+                     product.data.color.toLowerCase().includes('amarillo') ? '#FBBF24' : 
+                     product.data.color.toLowerCase().includes('rojo') ? '#EF4444' :
+                     product.data.color.toLowerCase().includes('blanco') ? '#FFFFFF' : '#cccccc'
+                   }`}></span>
+                   {product.data.color}
+                </span>
+              )}
+            </div>
+            
+            <a href={`/products/${product.id}`}>
+              <h3>{product.data.title}</h3>
+            </a>
+            
+            <p class="product-description">{product.data.description}</p>
+            
+            {product.data.applications && (
+              <div class="product-tags">
+                {product.data.applications.slice(0, 3).map(app => (
+                  <span class="tag">{app}</span>
+                ))}
+                {product.data.applications.length > 3 && (
+                  <span class="tag-more">+{product.data.applications.length - 3}</span>
+                )}
+              </div>
+            )}
+            
+            <a href={`/products/${product.id}`} class="view-btn text-magenta">
+              View Specifications
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div id="noResults" class="no-results hidden">
+        <svg class="w-16 h-16 text-gray-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 64px; height: 64px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3>No products found</h3>
+        <p>Try adjusting your search criteria.</p>
+      </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .content-section {
+    padding: 6rem 2rem;
+  }
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Search Bar */
+  .search-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border-radius: 0;
+  }
+  @media (min-width: 768px) {
+    .search-bar-container {
+      flex-direction: row;
+    }
+  }
+
+  .search-input-wrapper {
+    flex: 1;
+    position: relative;
+  }
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: rgba(0,0,0,0.4);
+  }
+  .search-input, .category-select {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    color: var(--c-dark);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  .category-select {
+    padding: 1rem;
+    cursor: pointer;
+    appearance: none;
+  }
+  .category-select option {
+    background: var(--c-white);
+    color: var(--c-dark);
+  }
+  .search-input:focus, .category-select:focus {
+    border-color: var(--c-magenta);
+  }
+
+  .filter-wrapper {
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .filter-wrapper {
+      width: 33%;
+    }
+  }
+
+  /* Grid and Cards */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    border-radius: 0;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    background: #ffffff;
+    border-color: rgba(227, 0, 102, 0.3);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+  }
+
+  .product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0,0,0,0.05);
+    color: var(--c-dark);
+    border-radius: 0;
+    font-weight: 600;
+  }
+
+  .product-color-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--c-dark);
+  }
+
+  .color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--c-dark);
+    transition: color 0.3s ease;
+  }
+  
+  .feature-card:hover h3 {
+    color: var(--c-magenta);
+  }
+
+  .product-description {
+    color: var(--c-dark);
+    opacity: 0.8;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tag, .tag-more {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .tag {
+    background: rgba(0, 138, 216, 0.15);
+    color: #4db8ff;
+  }
+
+  .tag-more {
+    background: rgba(0,0,0,0.05);
+    color: var(--c-dark);
+  }
+
+  .view-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .view-btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card:hover .view-btn svg {
+    transform: translateX(5px);
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 5rem 0;
+  }
+  
+  .no-results h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .no-results p {
+    color: var(--c-dark);
+    opacity: 0.8;
+  }
+  
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+  const categoryFilter = document.getElementById('categoryFilter') as HTMLSelectElement;
+  const productCards = document.querySelectorAll('.product-card');
+  const noResults = document.getElementById('noResults');
+
+  function filterProducts() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedCategory = categoryFilter.value;
+    let visibleCount = 0;
+
+    productCards.forEach((card) => {
+      const htmlCard = card as HTMLElement;
+      const title = htmlCard.dataset.title || '';
+      const category = htmlCard.dataset.category || '';
+      
+      const matchesSearch = title.includes(searchTerm);
+      const matchesCategory = selectedCategory === '' || category === selectedCategory;
+
+      if (matchesSearch && matchesCategory) {
+        htmlCard.style.display = 'flex';
+        visibleCount++;
+      } else {
+        htmlCard.style.display = 'none';
+      }
+    });
+
+    if (noResults) {
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  }
+
+  if (searchInput && categoryFilter) {
+    searchInput.addEventListener('input', filterProducts);
+    categoryFilter.addEventListener('change', filterProducts);
+  }
+</script>

@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Aviso Legal">
+  <Header currentPath="/legal-notice" />
+  
+  <main class="container mx-auto px-4 py-20 max-w-4xl text-gray-300">
+    <h1 class="text-4xl font-light mb-8 text-white">Aviso Legal</h1>
+    
+    <div class="prose prose-invert max-w-none font-light leading-relaxed">
+      <p>Última actualización: [Fecha]</p>
+      
+      <h2>1. Información General</h2>
+      <p>En cumplimiento con el deber de información, a continuación se reflejan los siguientes datos:</p>
+      <ul>
+        <li><strong>Nombre de la Empresa:</strong> Incoltec</li>
+        <li><strong>Dirección:</strong> [Dirección de la Empresa]</li>
+        <li><strong>Email:</strong> info@incoltec.com</li>
+        <li><strong>Registro:</strong> [Datos de Registro]</li>
+      </ul>
+      
+      <h2>2. Propiedad Intelectual</h2>
+      <p>Los derechos de propiedad intelectual del sitio web y los distintos elementos que contiene son titularidad de Incoltec. Queda expresamente prohibida la reproducción, distribución y comunicación pública de la totalidad o parte de los contenidos de esta página web sin autorización.</p>
+
+      <h2>3. Exclusión de Responsabilidad</h2>
+      <p>Incoltec no se hace responsable, en ningún caso, de los daños y perjuicios de cualquier naturaleza que pudieran ocasionar, a título enunciativo: errores u omisiones en los contenidos, falta de disponibilidad del portal o la transmisión de virus o programas maliciosos o lesivos en los contenidos, a pesar de haber adoptado todas las medidas tecnológicas necesarias para evitarlo.</p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  h2 {
+    font-size: 1.8rem;
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
+  ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+</style>

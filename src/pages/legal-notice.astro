@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Legal Notice">
+  <Header currentPath="/legal-notice" />
+  
+  <main class="container mx-auto px-4 py-20 max-w-4xl text-gray-300">
+    <h1 class="text-4xl font-light mb-8 text-white">Legal Notice</h1>
+    
+    <div class="prose prose-invert max-w-none font-light leading-relaxed">
+      <p>Last updated: [Date]</p>
+      
+      <h2>1. General Information</h2>
+      <p>In compliance with the duty of information, the following data is reflected below:</p>
+      <ul>
+        <li><strong>Company Name:</strong> Incoltec</li>
+        <li><strong>Address:</strong> [Company Address]</li>
+        <li><strong>Email:</strong> info@incoltec.com</li>
+        <li><strong>Registration:</strong> [Registration Data]</li>
+      </ul>
+      
+      <h2>2. Intellectual Property</h2>
+      <p>The intellectual property rights of the website and the different elements contained therein are owned by Incoltec. The reproduction, distribution, and public communication of all or part of the contents of this webpage without authorization is expressly prohibited.</p>
+
+      <h2>3. Exclusion of Liability</h2>
+      <p>Incoltec is not responsible, in any case, for damages of any kind that may cause, by way of example: errors or omissions in the content, lack of availability of the portal or the transmission of viruses or malicious or harmful programs in the content, despite having adopted all the necessary technological measures to avoid it.</p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  h2 {
+    font-size: 1.8rem;
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+  p {
+    margin-bottom: 1rem;
+  }
+  ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+</style>
