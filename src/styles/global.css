@@ -48,7 +48,7 @@ a:hover {
 
 .script-text {
   font-family: var(--font-script);
-  font-size: clamp(3rem, 8vw, 8rem);
+  font-size: clamp(2.5rem, 7vw, 8rem);
   line-height: 1;
 }
 
@@ -56,7 +56,19 @@ a:hover {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
 }
 
 /* Utilities for text colors */

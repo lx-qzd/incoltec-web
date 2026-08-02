@@ -23,23 +23,23 @@ const {
 ---
 
 <PdfSection title="Contact Us" bgImage="/assets/fondo1.jpg">
-  <div class="space-y-10">
+  <div class="space-y-6 sm:space-y-8 md:space-y-10">
     <div class="max-w-xl">
-      <h3 class="text-3xl md:text-4xl font-light text-white mb-4">{title}</h3>
-      <p class="text-gray-300 text-lg md:text-xl font-light leading-relaxed">
+      <h3 class="text-2xl sm:text-3xl md:text-4xl font-light text-white mb-3 sm:mb-4">{title}</h3>
+      <p class="text-gray-300 text-base sm:text-lg md:text-xl font-light leading-relaxed">
         {description}
       </p>
     </div>
 
     <!-- Contact Form -->
-    <form class="space-y-6 max-w-xl" onsubmit="event.preventDefault(); alert('Catalog download started!');">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form class="space-y-4 sm:space-y-6 max-w-xl" onsubmit="event.preventDefault(); alert('Catalog download started!');">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <div class="relative group">
           <input 
             type="text" 
             placeholder={placeholderName}
             required
-            class="w-full bg-white/5 border border-white/20 text-white placeholder-gray-400 px-6 py-4 rounded-xl focus:outline-none focus:border-[#008AD8] focus:bg-white/10 transition-all"
+            class="w-full bg-white/5 border border-white/20 text-white placeholder-gray-400 px-4 sm:px-6 py-3.5 sm:py-4 rounded-xl focus:outline-none focus:border-[#008AD8] focus:bg-white/10 transition-all text-sm sm:text-base"
           />
         </div>
         <div class="relative group">
@@ -47,7 +47,7 @@ const {
             type="email" 
             placeholder={placeholderEmail}
             required
-            class="w-full bg-white/5 border border-white/20 text-white placeholder-gray-400 px-6 py-4 rounded-xl focus:outline-none focus:border-[#E30066] focus:bg-white/10 transition-all"
+            class="w-full bg-white/5 border border-white/20 text-white placeholder-gray-400 px-4 sm:px-6 py-3.5 sm:py-4 rounded-xl focus:outline-none focus:border-[#E30066] focus:bg-white/10 transition-all text-sm sm:text-base"
           />
         </div>
       </div>
@@ -56,7 +56,7 @@ const {
         <input 
           type="text" 
           placeholder={placeholderCompany}
-          class="w-full bg-white/5 border border-white/20 text-white placeholder-gray-400 px-6 py-4 rounded-xl focus:outline-none focus:border-[#FFC000] focus:bg-white/10 transition-all"
+          class="w-full bg-white/5 border border-white/20 text-white placeholder-gray-400 px-4 sm:px-6 py-3.5 sm:py-4 rounded-xl focus:outline-none focus:border-[#FFC000] focus:bg-white/10 transition-all text-sm sm:text-base"
         />
       </div>
 
@@ -65,16 +65,16 @@ const {
           type="checkbox" 
           id="privacy" 
           required
-          class="w-5 h-5 rounded border-white/20 bg-white/5 text-[#E30066] focus:ring-[#E30066] focus:ring-offset-0 transition-colors cursor-pointer"
+          class="w-5 h-5 rounded border-white/20 bg-white/5 text-[#E30066] focus:ring-[#E30066] focus:ring-offset-0 transition-colors cursor-pointer shrink-0"
         />
-        <label for="privacy" class="text-sm text-gray-400 cursor-pointer hover:text-white transition-colors">
+        <label for="privacy" class="text-xs sm:text-sm text-gray-400 cursor-pointer hover:text-white transition-colors">
           {privacyText}
         </label>
       </div>
 
       <button 
         type="submit"
-        class="w-full md:w-auto px-10 py-5 bg-gradient-to-r from-[#FFC000] via-[#E30066] to-[#008AD8] text-white font-bold rounded-xl shadow-[0_0_40px_rgba(227,0,102,0.3)] hover:shadow-[0_0_60px_rgba(227,0,102,0.5)] transform hover:-translate-y-1 transition-all duration-300"
+        class="w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-[#FFC000] via-[#E30066] to-[#008AD8] text-white font-bold rounded-xl shadow-[0_0_40px_rgba(227,0,102,0.3)] hover:shadow-[0_0_60px_rgba(227,0,102,0.5)] transform hover:-translate-y-1 transition-all duration-300 text-sm sm:text-base"
       >
         {buttonText}
       </button>

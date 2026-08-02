@@ -30,43 +30,43 @@ const {
 ---
 
 <PdfSection title={title} bgImage={bgImage}>
-  <div class="space-y-12">
+  <div class="space-y-8 sm:space-y-12">
     <!-- Natural -->
-    <div class="bg-[#008AD8]/10 backdrop-blur-md p-8 border border-[#008AD8]/30 rounded-2xl relative overflow-hidden group">
-      <h3 class="text-2xl font-light text-white mb-6 flex items-center gap-4 relative z-10">
-        <div class="w-8 h-8 bg-[#008AD8]/20 flex items-center justify-center shrink-0 border border-[#008AD8]/30 rounded-full">
-          <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+    <div class="bg-[#008AD8]/10 backdrop-blur-md p-5 sm:p-6 md:p-8 border border-[#008AD8]/30 rounded-2xl relative overflow-hidden group">
+      <h3 class="text-xl sm:text-2xl font-light text-white mb-4 sm:mb-6 flex items-center gap-3 sm:gap-4 relative z-10">
+        <div class="w-7 h-7 sm:w-8 sm:h-8 bg-[#008AD8]/20 flex items-center justify-center shrink-0 border border-[#008AD8]/30 rounded-full">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
         </div>
         {naturalTitle}
       </h3>
-      <ul class="space-y-4 relative z-10">
+      <ul class="space-y-3 sm:space-y-4 relative z-10">
         {naturalPoints.map(point => (
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-[#008AD8] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span class="text-gray-200 text-base font-light leading-relaxed">{point}</span>
+          <li class="flex items-start gap-2.5 sm:gap-3">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#008AD8] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="text-gray-200 text-sm sm:text-base font-light leading-relaxed">{point}</span>
           </li>
         ))}
       </ul>
     </div>
 
     <!-- VS Divider -->
-    <div class="flex justify-center -my-4 relative z-20">
+    <div class="flex justify-center -my-3 sm:-my-4 relative z-20">
       <div class="bg-[#E30066] border border-white/20 px-4 py-2 rounded-full text-xs font-bold text-white shadow-lg">VS</div>
     </div>
 
     <!-- Artificial -->
-    <div class="bg-black/40 backdrop-blur-md p-8 border border-white/5 rounded-2xl relative overflow-hidden group">
-      <h3 class="text-2xl font-light text-gray-300 mb-6 flex items-center gap-4 relative z-10">
-        <div class="w-8 h-8 bg-white/5 flex items-center justify-center shrink-0 border border-white/10 rounded-full">
-          <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    <div class="bg-black/40 backdrop-blur-md p-5 sm:p-6 md:p-8 border border-white/5 rounded-2xl relative overflow-hidden group">
+      <h3 class="text-xl sm:text-2xl font-light text-gray-300 mb-4 sm:mb-6 flex items-center gap-3 sm:gap-4 relative z-10">
+        <div class="w-7 h-7 sm:w-8 sm:h-8 bg-white/5 flex items-center justify-center shrink-0 border border-white/10 rounded-full">
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
         </div>
         {artificialTitle}
       </h3>
-      <ul class="space-y-4 relative z-10">
+      <ul class="space-y-3 sm:space-y-4 relative z-10">
         {artificialPoints.map(point => (
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-gray-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span class="text-gray-400 text-base font-light leading-relaxed">{point}</span>
+          <li class="flex items-start gap-2.5 sm:gap-3">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span class="text-gray-400 text-sm sm:text-base font-light leading-relaxed">{point}</span>
           </li>
         ))}
       </ul>

@@ -49,33 +49,33 @@ const links = isEs ? esLinks : enLinks;
   class="bg-white text-[#1E1E1E] sticky top-0 z-[100] shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
 >
   <div
-    class="lg:flex justify-between items-center py-10 mx-auto max-w-[1400px] px-8 lg:px-16"
+    class="lg:flex justify-between items-center py-4 md:py-6 lg:py-10 mx-auto max-w-[1400px] px-4 sm:px-6 md:px-8 lg:px-16"
   >
     <Astronav closeOnClick>
       <div class="flex w-full lg:w-1/3 justify-between items-center">
-        <a href="/" aria-label="Incoltec Home" class="flex items-center shrink-0">
+        <a href="/" aria-label="Incoltec Home" class="flex items-center shrink-0 ml-1 sm:ml-2 lg:ml-0">
           <Image
             src="/assets/AF_Logo_Incoltrec.svg"
             alt="Incoltec Logo"
             width={1007}
             height={120}
-            class="h-[55px] w-auto block ml-2 lg:ml-0"
+            class="h-[40px] sm:h-[45px] md:h-[50px] lg:h-[55px] w-auto block"
             loading="eager"
           />
         </a>
-        <div class="block lg:hidden mr-2">
-          <MenuIcon class="w-8 h-8 text-gray-800" />
+        <div class="block lg:hidden mr-1 sm:mr-2">
+          <MenuIcon class="w-7 h-7 sm:w-8 sm:h-8 text-gray-800" />
         </div>
       </div>
 
-      <MenuItems class="hidden lg:flex w-full lg:w-2/3 justify-center mt-6 lg:mt-0 items-center">
-        <ul class="flex flex-col lg:flex-row xl:gap-6 lg:gap-4 gap-4 lg:items-center whitespace-nowrap">
+      <MenuItems class="hidden lg:flex w-full lg:w-2/3 justify-center mt-0 lg:mt-0 items-center mobile-menu">
+        <ul class="flex flex-col lg:flex-row xl:gap-6 lg:gap-4 gap-1 lg:items-center whitespace-nowrap px-2 lg:px-0 pb-4 lg:pb-0 pt-4 lg:pt-0">
           {
             links.map((link) => (
               <li>
                 {link.dropdown ? (
                   <div class="astronav-dropdown group relative" aria-expanded="false">
-                    <button class={`nav-link font-medium text-[0.85rem] xl:text-[0.9rem] py-2 flex items-center relative transition-colors duration-300 hover:text-[#121212] hover:opacity-100 ${
+                    <button class={`nav-link font-medium text-base lg:text-[0.85rem] xl:text-[0.9rem] py-3 lg:py-2 flex items-center relative transition-colors duration-300 hover:text-[#121212] hover:opacity-100 w-full lg:w-auto ${
                       currentPath.startsWith("/catalogs")
                         ? "text-[#121212] active-link opacity-100"
                         : "text-[#1E1E1E]"
@@ -94,12 +94,12 @@ const links = isEs ? esLinks : enLinks;
                           d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                       </svg>
                     </button>
-                    <DropdownItems class="relative lg:absolute lg:top-full lg:mt-4 w-56 z-50 hidden">
-                      <div class="bg-white/95 backdrop-blur-lg lg:shadow-[0_10px_40px_rgba(0,0,0,0.08)] rounded-xl py-3 border border-gray-100/50">
+                    <DropdownItems class="relative lg:absolute lg:top-full lg:mt-4 w-full lg:w-56 z-50 hidden">
+                      <div class="bg-white lg:bg-white/95 lg:backdrop-blur-lg lg:shadow-[0_10px_40px_rgba(0,0,0,0.08)] lg:rounded-xl py-2 lg:py-3 lg:border lg:border-gray-100/50 pl-4 lg:pl-0">
                         <ul>
                           {link.dropdown.map((sublink) => (
                             <li>
-                              <a href={sublink.url} class="block px-4 py-2 text-[0.85rem] text-gray-600 hover:bg-gray-50/80 hover:text-[#e30066] transition-all duration-200 font-medium">
+                              <a href={sublink.url} class="block px-4 py-2.5 lg:py-2 text-base lg:text-[0.85rem] text-gray-600 hover:bg-gray-50/80 hover:text-[#e30066] transition-all duration-200 font-medium">
                                 {sublink.name}
                               </a>
                             </li>
@@ -111,7 +111,7 @@ const links = isEs ? esLinks : enLinks;
                 ) : (
                   <a
                     href={link.url}
-                    class={`nav-link font-medium text-[0.85rem] xl:text-[0.9rem] py-2 relative transition-colors duration-300 hover:text-[#121212] hover:opacity-100 ${
+                    class={`nav-link font-medium text-base lg:text-[0.85rem] xl:text-[0.9rem] py-3 lg:py-2 block lg:inline relative transition-colors duration-300 hover:text-[#121212] hover:opacity-100 ${
                       currentPath === link.url
                         ? "text-[#121212] active-link opacity-100"
                         : "text-[#1E1E1E]"
@@ -123,10 +123,10 @@ const links = isEs ? esLinks : enLinks;
               </li>
             ))
           }
-          <li class="flex items-center gap-2 lg:hidden mt-4 border-t pt-4 border-gray-100">
-            <a href={enPath} class={`text-sm font-medium transition-colors hover:text-[#e30066] ${!isEs ? 'text-[#e30066]' : 'text-gray-400'}`}>EN</a>
-            <span class="text-gray-300 text-xs">|</span>
-            <a href={esPath} class={`text-sm font-medium transition-colors hover:text-[#e30066] ${isEs ? 'text-[#e30066]' : 'text-gray-400'}`}>ES</a>
+          <li class="flex items-center gap-3 lg:hidden mt-3 border-t pt-4 border-gray-100">
+            <a href={enPath} class={`text-base font-medium transition-colors hover:text-[#e30066] py-1 ${!isEs ? 'text-[#e30066]' : 'text-gray-400'}`}>EN</a>
+            <span class="text-gray-300 text-sm">|</span>
+            <a href={esPath} class={`text-base font-medium transition-colors hover:text-[#e30066] py-1 ${isEs ? 'text-[#e30066]' : 'text-gray-400'}`}>ES</a>
           </li>
           <li class="hidden lg:flex items-center gap-1.5 ml-2 border-l border-gray-200 pl-4">
             <a href={enPath} class={`text-[0.85rem] font-bold transition-colors hover:text-[#e30066] ${!isEs ? 'text-[#e30066]' : 'text-gray-400'}`}>EN</a>
@@ -154,5 +154,17 @@ const links = isEs ? esLinks : enLinks;
     height: 2px;
     background-color: var(--c-magenta, #e30066);
     transition: width 0.3s ease;
+  }
+
+  /* Mobile menu animation */
+  @media (max-width: 1023px) {
+    .mobile-menu {
+      border-top: 1px solid #f3f4f6;
+      margin-top: 0.75rem;
+    }
+
+    .nav-link::after {
+      display: none;
+    }
   }
 </style>

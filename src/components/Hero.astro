@@ -30,20 +30,20 @@ const slides = [
       <div class={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out slide ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} data-index={index}>
         <div class="absolute inset-0 bg-cover bg-center slide-bg transform scale-105 transition-transform duration-[10s] ease-out" style={`background-image: url('${slide.image}')`}></div>
         <div class="absolute inset-0 bg-black/20"></div>
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <h1 class="script-text text-white drop-shadow-lg text-6xl md:text-8xl lg:text-9xl mb-4 transform translate-y-8 opacity-0 transition-all duration-1000 delay-300 slide-title">{slide.title}</h1>
-          <p class="text-white text-xl md:text-3xl font-light tracking-wide drop-shadow-md transform translate-y-8 opacity-0 transition-all duration-1000 delay-500 slide-subtitle">{slide.subtitle}</p>
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6 sm:px-4">
+          <h1 class="script-text text-white drop-shadow-lg text-4xl sm:text-5xl md:text-8xl lg:text-9xl mb-3 sm:mb-4 transform translate-y-8 opacity-0 transition-all duration-1000 delay-300 slide-title">{slide.title}</h1>
+          <p class="text-white text-lg sm:text-xl md:text-3xl font-light tracking-wide drop-shadow-md transform translate-y-8 opacity-0 transition-all duration-1000 delay-500 slide-subtitle max-w-[90%] sm:max-w-none">{slide.subtitle}</p>
         </div>
       </div>
     ))}
   </div>
 
   <!-- Navigation Arrows -->
-  <button id="prev-slide" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-2 text-white/50 hover:text-white transition-colors" aria-label="Previous slide">
-    <svg class="w-12 h-12 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 19l-7-7 7-7"/></svg>
+  <button id="prev-slide" class="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-1.5 sm:p-2 text-white/50 hover:text-white transition-colors" aria-label="Previous slide">
+    <svg class="w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 19l-7-7 7-7"/></svg>
   </button>
-  <button id="next-slide" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-2 text-white/50 hover:text-white transition-colors" aria-label="Next slide">
-    <svg class="w-12 h-12 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"/></svg>
+  <button id="next-slide" class="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-1.5 sm:p-2 text-white/50 hover:text-white transition-colors" aria-label="Next slide">
+    <svg class="w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"/></svg>
   </button>
 </section>
 

@@ -101,7 +101,7 @@ const content = isEs ? esLinks : enLinks;
 <style>
   .footer {
     background-color: var(--c-dark);
-    padding: 4rem 0 1rem;
+    padding: 3rem 0 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -109,17 +109,17 @@ const content = isEs ? esLinks : enLinks;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 3rem;
-    margin-bottom: 3rem;
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
   }
 
   .footer-logo img {
-    height: 50px;
-    margin-bottom: 1rem;
+    height: 40px;
+    margin-bottom: 0.75rem;
   }
 
   .slogan {
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 500;
     color: var(--c-white);
     opacity: 0.9;
@@ -128,13 +128,14 @@ const content = isEs ? esLinks : enLinks;
   }
 
   .footer-links {
-    display: flex;
-    gap: 4rem;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 2.5rem;
   }
 
   .link-group h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
     color: var(--c-white);
   }
 
@@ -142,8 +143,8 @@ const content = isEs ? esLinks : enLinks;
     display: block;
     color: var(--c-light);
     opacity: 0.7;
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.85rem;
   }
 
   .link-group a:hover {
@@ -153,15 +154,50 @@ const content = isEs ? esLinks : enLinks;
 
   .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 1.5rem;
+    padding-top: 1.25rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     opacity: 0.5;
   }
 
   @media (max-width: 768px) {
+    .footer {
+      padding: 2.5rem 0 1rem;
+    }
+
     .footer-content {
       flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer-logo img {
+      height: 36px;
+    }
+
+    .slogan {
+      font-size: 0.8rem;
+    }
+
+    .footer-links {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 2rem;
+    }
+
+    .link-group h3 {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .link-group a {
+      font-size: 0.8rem;
+      margin-bottom: 0.6rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-links {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem 1.5rem;
     }
   }
 </style>
