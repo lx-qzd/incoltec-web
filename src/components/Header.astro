@@ -49,27 +49,27 @@ const links = isEs ? esLinks : enLinks;
   class="bg-white text-[#1E1E1E] sticky top-0 z-[100] shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
 >
   <div
-    class="lg:flex justify-between items-center py-8 mx-auto max-w-[1400px] px-6 lg:px-12"
+    class="lg:flex justify-between items-center py-10 mx-auto max-w-[1400px] px-8 lg:px-16"
   >
     <Astronav closeOnClick>
-      <div class="flex w-full lg:w-1/4 justify-between items-center">
+      <div class="flex w-full lg:w-1/3 justify-between items-center">
         <a href="/" aria-label="Incoltec Home" class="flex items-center shrink-0">
           <Image
             src="/assets/AF_Logo_Incoltrec.svg"
             alt="Incoltec Logo"
             width={1007}
             height={120}
-            class="h-[50px] w-auto block"
+            class="h-[55px] w-auto block ml-2 lg:ml-0"
             loading="eager"
           />
         </a>
-        <div class="block lg:hidden">
+        <div class="block lg:hidden mr-2">
           <MenuIcon class="w-8 h-8 text-gray-800" />
         </div>
       </div>
 
-      <MenuItems class="hidden lg:flex w-full lg:w-3/4 justify-end mt-6 lg:mt-0 items-center">
-        <ul class="flex flex-col lg:flex-row xl:gap-5 lg:gap-3 gap-4 lg:items-center whitespace-nowrap">
+      <MenuItems class="hidden lg:flex w-full lg:w-2/3 justify-center mt-6 lg:mt-0 items-center">
+        <ul class="flex flex-col lg:flex-row xl:gap-6 lg:gap-4 gap-4 lg:items-center whitespace-nowrap">
           {
             links.map((link) => (
               <li>
