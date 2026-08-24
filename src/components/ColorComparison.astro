@@ -1,75 +1,107 @@
 ---
-import PdfSection from "./PdfSection.astro";
+import { getImage } from "astro:assets";
+
+interface Point {
+  title: string;
+  text: string;
+}
 
 interface Props {
   title?: string;
   naturalTitle?: string;
   artificialTitle?: string;
-  naturalPoints?: string[];
-  artificialPoints?: string[];
+  naturalPoints?: Point[];
+  artificialPoints?: Point[];
   bgImage?: string;
 }
+
 const { 
   title = "Taste Colors",
   naturalTitle = "Natural Colors",
   artificialTitle = "Artificial Colors",
   naturalPoints = [
-    "Clean label appeal for health-conscious consumers",
-    "Derived from natural sources (plants, minerals)",
-    "No negative impact on nutritional value",
-    "Increasingly demanded by global food regulators"
+    { title: "CLEAN LABEL", text: "Clean label appeal for health-conscious consumers" },
+    { title: "100% NATURAL", text: "Derived from natural sources (plants, minerals)" },
+    { title: "NUTRITIOUS", text: "No negative impact on nutritional value" },
+    { title: "COMPLIANT", text: "Increasingly demanded by global food regulators" }
   ],
   artificialPoints = [
-    "Often linked to health concerns and allergies",
-    "Synthetic chemicals and petroleum-based",
-    "Requires strict warning labels in many regions",
-    "Decreasing consumer trust and market share"
+    { title: "HEALTH RISKS", text: "Often linked to health concerns and allergies" },
+    { title: "SYNTHETIC", text: "Synthetic chemicals and petroleum-based" },
+    { title: "WARNING LABELS", text: "Requires strict warning labels in many regions" },
+    { title: "DISTRUST", text: "Decreasing consumer trust and market share" }
   ],
   bgImage = "/assets/fondo2.jpg"
 } = Astro.props;
+
+const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgImage, format: 'webp', width: 960 })).src;
 ---
 
-<PdfSection title={title} bgImage={bgImage}>
-  <div class="space-y-8 sm:space-y-12">
-    <!-- Natural -->
-    <div class="bg-[#008AD8]/10 backdrop-blur-md p-5 sm:p-6 md:p-8 border border-[#008AD8]/30 rounded-2xl relative overflow-hidden group">
-      <h3 class="text-xl sm:text-2xl font-light text-white mb-4 sm:mb-6 flex items-center gap-3 sm:gap-4 relative z-10">
-        <div class="w-7 h-7 sm:w-8 sm:h-8 bg-[#008AD8]/20 flex items-center justify-center shrink-0 border border-[#008AD8]/30 rounded-full">
-          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+<section class="w-full flex flex-col md:flex-row bg-[#FFFDF9] min-h-screen">
+  <!-- Left Side: Content -->
+  <div class="w-full md:w-1/2 flex items-center justify-center p-10 sm:p-16 md:p-20 lg:p-32 order-2 md:order-1">
+    <div class="max-w-2xl text-center flex flex-col items-center w-full">
+      <h2 class="script-text text-[#89385C] text-5xl sm:text-6xl md:text-[5.5rem] lg:text-[6.5rem] mb-6 sm:mb-8 leading-tight">{title}</h2>
+      
+      <div class="w-32 h-[1.5px] bg-[#C6ACB8] mb-8 sm:mb-12"></div>
+      
+      <!-- Content comparison -->
+      <div class="w-full text-left space-y-8 sm:space-y-12 mt-4 relative">
+        
+        <!-- Natural Colors Grid -->
+        <div class="bg-white p-8 sm:p-10 border border-[#89385C]/20 rounded-3xl shadow-sm relative z-10">
+          <h3 class="text-3xl sm:text-4xl font-light text-[#89385C] mb-8 sm:mb-10 text-center">{naturalTitle}</h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+            {naturalPoints.map(point => (
+              <div class="flex flex-col gap-3">
+                <div class="flex items-center gap-4">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 shrink-0 text-[#89385C]">
+                    <svg class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <h4 class="font-bold text-[#89385C] uppercase tracking-wider text-base sm:text-lg leading-none mt-1">{point.title}</h4>
+                </div>
+                <p class="text-[#89385C]/80 text-base font-light leading-relaxed">
+                  {point.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-        {naturalTitle}
-      </h3>
-      <ul class="space-y-3 sm:space-y-4 relative z-10">
-        {naturalPoints.map(point => (
-          <li class="flex items-start gap-2.5 sm:gap-3">
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#008AD8] mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span class="text-gray-200 text-sm sm:text-base font-light leading-relaxed">{point}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
 
-    <!-- VS Divider -->
-    <div class="flex justify-center -my-3 sm:-my-4 relative z-20">
-      <div class="bg-[#E30066] border border-white/20 px-4 py-2 rounded-full text-xs font-bold text-white shadow-lg">VS</div>
-    </div>
-
-    <!-- Artificial -->
-    <div class="bg-black/40 backdrop-blur-md p-5 sm:p-6 md:p-8 border border-white/5 rounded-2xl relative overflow-hidden group">
-      <h3 class="text-xl sm:text-2xl font-light text-gray-300 mb-4 sm:mb-6 flex items-center gap-3 sm:gap-4 relative z-10">
-        <div class="w-7 h-7 sm:w-8 sm:h-8 bg-white/5 flex items-center justify-center shrink-0 border border-white/10 rounded-full">
-          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+        <!-- VS Divider -->
+        <div class="flex justify-center -my-6 sm:-my-8 relative z-20">
+          <div class="bg-[#89385C] border-4 border-[#FFFDF9] px-6 py-3 rounded-full text-sm font-bold text-white shadow-lg">VS</div>
         </div>
-        {artificialTitle}
-      </h3>
-      <ul class="space-y-3 sm:space-y-4 relative z-10">
-        {artificialPoints.map(point => (
-          <li class="flex items-start gap-2.5 sm:gap-3">
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span class="text-gray-400 text-sm sm:text-base font-light leading-relaxed">{point}</span>
-          </li>
-        ))}
-      </ul>
+
+        <!-- Artificial Colors Grid -->
+        <div class="bg-[#89385C]/5 p-8 sm:p-10 border border-[#89385C]/10 rounded-3xl relative z-10">
+          <h3 class="text-3xl sm:text-4xl font-light text-[#89385C]/80 mb-8 sm:mb-10 text-center">{artificialTitle}</h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+            {artificialPoints.map(point => (
+              <div class="flex flex-col gap-3">
+                <div class="flex items-center gap-4">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 shrink-0 text-[#89385C]/60">
+                    <svg class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <h4 class="font-bold text-[#89385C]/80 uppercase tracking-wider text-base sm:text-lg leading-none mt-1">{point.title}</h4>
+                </div>
+                <p class="text-[#89385C]/60 text-base font-light leading-relaxed">
+                  {point.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+      </div>
+
     </div>
   </div>
-</PdfSection>
+
+  <!-- Right Side: Image -->
+  <div class="w-full md:w-1/2 min-h-[400px] md:min-h-screen order-1 md:order-2 relative">
+    <img src={bgUrl} alt={title} class="absolute inset-0 w-full h-full object-cover" />
+  </div>
+</section>

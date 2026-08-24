@@ -14,16 +14,6 @@ const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgI
 <section class="relative w-full min-h-screen overflow-hidden flex items-center bg-cover bg-center bg-fixed" style={`background-image: url('${bgUrl}')`}>
   <!-- Base dark overlay -->
   <div class={`absolute inset-0 ${overlay}`}></div>
-  
-  <!-- Left Side: The 3 Arrows (Yellow, Magenta, Cyan) -->
-  <div class="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col w-[60%] sm:w-[65%] md:w-[45%] lg:w-[450px] gap-1.5 sm:gap-2 z-10 reveal-left mix-blend-screen opacity-90">
-    <!-- Arrow 1: Yellow -->
-    <div class="w-full h-14 sm:h-16 md:h-28 lg:h-32 bg-[#FFC000] arrow-shape"></div>
-    <!-- Arrow 2: Magenta -->
-    <div class="w-full h-14 sm:h-16 md:h-28 lg:h-32 bg-[#E30066] arrow-shape"></div>
-    <!-- Arrow 3: Cyan -->
-    <div class="w-full h-14 sm:h-16 md:h-28 lg:h-32 bg-[#008AD8] arrow-shape"></div>
-  </div>
 
   <div class="container relative z-20 h-full flex flex-col justify-center py-20 sm:py-24 md:py-28 lg:py-32">
     <!-- Top Right Title -->
@@ -32,7 +22,18 @@ const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgI
     </div>
 
     <!-- Right Side Content Box -->
-    <div class="w-full sm:w-[90%] md:w-3/4 lg:w-[60%] ml-auto bg-black/60 backdrop-blur-md border border-white/10 p-5 sm:p-6 md:p-10 lg:p-16 shadow-2xl reveal-scale delay-200 mt-4 sm:mt-16 md:mt-32">
+    <div class="relative w-full sm:w-[90%] md:w-3/4 lg:w-[60%] ml-auto bg-black/60 backdrop-blur-md border border-white/10 p-5 sm:p-6 md:p-10 lg:p-16 shadow-2xl reveal-scale delay-200 mt-4 sm:mt-16 md:mt-32">
+      
+      <!-- The 3 Arrows attached to the black box -->
+      <div class="absolute -left-8 sm:-left-12 md:-left-16 lg:-left-24 top-1/2 -translate-y-1/2 flex flex-col w-12 sm:w-16 md:w-24 lg:w-32 gap-1.5 sm:gap-2 z-30 opacity-90 mix-blend-screen hidden sm:flex">
+        <!-- Arrow 1: Yellow -->
+        <div class="w-full h-8 sm:h-12 md:h-16 lg:h-20 bg-[#FFC000] arrow-shape shadow-lg shadow-[#FFC000]/20"></div>
+        <!-- Arrow 2: Magenta -->
+        <div class="w-full h-8 sm:h-12 md:h-16 lg:h-20 bg-[#E30066] arrow-shape shadow-lg shadow-[#E30066]/20"></div>
+        <!-- Arrow 3: Cyan -->
+        <div class="w-full h-8 sm:h-12 md:h-16 lg:h-20 bg-[#008AD8] arrow-shape shadow-lg shadow-[#008AD8]/20"></div>
+      </div>
+
       <slot />
     </div>
   </div>
