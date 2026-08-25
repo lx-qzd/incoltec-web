@@ -2,11 +2,9 @@
 import { Astronav, MenuItems, MenuIcon, DropdownItems } from "astro-navbar";
 
 const { currentPath = "/" } = Astro.props;
-const urlPath = Astro.url.pathname;
-const isEs = urlPath.startsWith('/es');
-const pathWithoutLang = isEs ? urlPath.replace(/^\/es/, '') || '/' : urlPath;
-const enPath = pathWithoutLang;
-const esPath = `/es${pathWithoutLang === '/' ? '' : pathWithoutLang}`;
+const isEs = Astro.currentLocale === 'es' || Astro.url.pathname.startsWith('/es');
+const enPath = currentPath;
+const esPath = currentPath === '/' ? '/es' : `/es${currentPath}`;
 
 interface Sublink {
   name: string;
@@ -130,7 +128,7 @@ const activeTab: "HORECA" | "INDUSTRIAL" = "HORECA";
                   {link.dropdown ? (
                     <div class="astronav-dropdown group relative">
                       <button class={`incoltec-header__link ${
-                        currentPath.startsWith(link.url) ? "is-active" : ""
+                        currentPath.startsWith(link.url.replace(/^\/es/, '') || '/') ? "is-active" : ""
                       }`}>
                         <span>{link.name}</span>
                         <svg class="incoltec-header__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -155,7 +153,7 @@ const activeTab: "HORECA" | "INDUSTRIAL" = "HORECA";
                     <a
                       href={link.url}
                       class={`incoltec-header__link ${
-                        currentPath === link.url ? "is-active" : ""
+                        currentPath === (link.url.replace(/^\/es/, '') || '/') ? "is-active" : ""
                       }`}
                     >
                       {link.name}
@@ -244,7 +242,7 @@ const activeTab: "HORECA" | "INDUSTRIAL" = "HORECA";
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: clamp(4.5rem, 6vw, 6rem);
+    height: clamp(5.5rem, 7vw, 7rem);
     gap: 2rem;
   }
 
@@ -259,7 +257,7 @@ const activeTab: "HORECA" | "INDUSTRIAL" = "HORECA";
 
   .incoltec-header__logo-img {
     display: block;
-    height: clamp(2.2rem, 4vw, 3.2rem);
+    height: clamp(3rem, 5vw, 4.5rem);
     width: auto;
   }
 
