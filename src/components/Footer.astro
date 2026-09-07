@@ -67,8 +67,7 @@ const content = isEs ? esLinks : enLinks;
 <footer class="footer">
   <div class="container footer-content">
     <div class="footer-logo">
-      <Image src="/assets/logo-incoltec-footer.png" alt="Incoltec Logo" width={600} height={200} class="h-[55px] w-auto object-contain" />
-      <p class="slogan">{content.slogan}</p>
+      <Image src="/assets/logo-incoltec-footer.png" alt="Incoltec Logo" width={600} height={200} class="h-[75px] w-auto object-contain" />
     </div>
     
     <div class="footer-links">
@@ -90,6 +89,23 @@ const content = isEs ? esLinks : enLinks;
           <a href={link.url}>{link.name}</a>
         ))}
       </div>
+      <div class="link-group newsletter-group">
+        <h3>{isEs ? 'Boletín' : 'Newsletter'}</h3>
+        <p class="newsletter-desc">{isEs ? 'Suscríbete para recibir nuestras últimas noticias.' : 'Subscribe to receive our latest news.'}</p>
+        <form class="newsletter-form" action="#" method="POST" onsubmit="event.preventDefault();">
+          <input type="email" placeholder={isEs ? 'Tu correo' : 'Your email'} required />
+          <button type="submit">{isEs ? 'Suscribirse' : 'Subscribe'}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-certifications container">
+    <div class="cert-logos">
+      <!-- Placeholders for certification logos -->
+      <div class="cert-placeholder">Certification Logo Placeholder</div>
+      <div class="cert-placeholder">Certification Logo Placeholder</div>
+      <div class="cert-placeholder">Certification Logo Placeholder</div>
     </div>
   </div>
   
@@ -114,23 +130,78 @@ const content = isEs ? esLinks : enLinks;
   }
 
   .footer-logo img {
-    height: 40px;
+    height: 70px;
     margin-bottom: 0.75rem;
-  }
-
-  .slogan {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--c-white);
-    opacity: 0.9;
-    letter-spacing: 0.5px;
-    margin-top: 0.5rem;
   }
 
   .footer-links {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(4, 1fr);
     gap: 2.5rem;
+    width: 100%;
+  }
+
+  .newsletter-desc {
+    font-size: 0.85rem;
+    color: var(--c-light);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .newsletter-form {
+    display: flex;
+    width: 100%;
+  }
+
+  .newsletter-form input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    color: #333;
+  }
+
+  .newsletter-form button {
+    background: var(--c-magenta);
+    color: white;
+    border: none;
+    padding: 0 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .newsletter-form button:hover {
+    background: #c20055;
+  }
+
+  .footer-certifications {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+    margin-top: 1rem;
+  }
+
+  .cert-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cert-placeholder {
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    color: var(--c-light);
+    font-size: 0.8rem;
+    border-radius: 4px;
+    text-align: center;
   }
 
   .link-group h3 {
@@ -171,16 +242,12 @@ const content = isEs ? esLinks : enLinks;
     }
 
     .footer-logo img {
-      height: 36px;
-    }
-
-    .slogan {
-      font-size: 0.8rem;
+      height: 50px;
     }
 
     .footer-links {
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem 2rem;
+      gap: 2rem;
     }
 
     .link-group h3 {
