@@ -393,14 +393,29 @@ let activeTab: string = "HORECA";
     z-index: 50;
   }
 
-  /* astro-navbar handles show/hide via the 'hidden' attribute removal */
-  .incoltec-header__dropdown:not([hidden]),
-  .incoltec-header__dropdown:not(.hidden),
-  .astronav-dropdown:hover .incoltec-header__dropdown {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+  /* Dropdown interactions: hover for desktop, click for mobile */
+  @media (min-width: 1024px) {
+    .incoltec-header__dropdown {
+      display: block !important; /* override astro-navbar's hidden class */
+    }
+    .astronav-dropdown:hover .incoltec-header__dropdown {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    .astronav-dropdown:hover .incoltec-header__chevron {
+      transform: rotate(180deg);
+    }
+  }
+  @media (max-width: 1023px) {
+    .incoltec-header__dropdown:not([hidden]),
+    .incoltec-header__dropdown:not(.hidden) {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      /* transform is overridden below for mobile */
+    }
   }
 
   .incoltec-header__dropdown-panel {

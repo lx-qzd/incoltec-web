@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import Certifications from "./Certifications.astro";
 
 const currentYear = new Date().getFullYear();
 const urlPath = Astro.url.pathname;
@@ -100,14 +101,7 @@ const content = isEs ? esLinks : enLinks;
     </div>
   </div>
   
-  <div class="footer-certifications container">
-    <div class="cert-logos">
-      <!-- Placeholders for certification logos -->
-      <div class="cert-placeholder">Certification Logo Placeholder</div>
-      <div class="cert-placeholder">Certification Logo Placeholder</div>
-      <div class="cert-placeholder">Certification Logo Placeholder</div>
-    </div>
-  </div>
+  <Certifications variant="dark" title={isEs ? "Calidad y Seguridad Certificada" : "Certified Quality & Safety"} />
   
   <div class="footer-bottom container">
     <p>&copy; {currentYear} Incoltec. All rights reserved.</p>
@@ -180,29 +174,7 @@ const content = isEs ? esLinks : enLinks;
     background: #c20055;
   }
 
-  .footer-certifications {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem 0;
-    margin-top: 1rem;
-  }
 
-  .cert-logos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .cert-placeholder {
-    padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px dashed rgba(255, 255, 255, 0.2);
-    color: var(--c-light);
-    font-size: 0.8rem;
-    border-radius: 4px;
-    text-align: center;
-  }
 
   .link-group h3 {
     font-size: 1rem;
