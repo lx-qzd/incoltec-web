@@ -3,18 +3,20 @@ import { Image } from "astro:assets";
 import bolitas from '../assets/bolitas.webp';
 import paellaFull from '../assets/paella full.webp';
 import salmon from '../assets/salmon.webp';
-import chefImg from '../assets/restaurante-en-punta-cana-restaurante-en-cap-cana-restaurante-en-la-romana2.webp';
+import chefImg from '../assets/faus-arroyo.jpg';
 import restImg1 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-cana-restaurante-en-la-romana4.webp';
-import restImg2 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-cana-restaurante-en-la-romana6.webp';
+import restImg2 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-cana-restaurante-en-la-romana5.webp';
+import restImg3 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-cana-restaurante-en-la-romana6.webp';
 ---
 
 <div class="horeca-wrapper w-full bg-white">
   <!-- Hero Section -->
   <section class="relative w-full h-[600px] flex items-center justify-center">
     <Image src={paellaFull} alt="Paella" class="absolute inset-0 w-full h-full object-cover z-0" />
-    <div class="relative z-10 flex flex-col items-center justify-center bg-black/30 p-12 rounded-xl backdrop-blur-sm">
-      <h1 class="text-white text-6xl md:text-8xl font-light tracking-wider drop-shadow-lg mb-4">HORECA</h1>
-      <Image src="/assets/logo-incoltec-white.png" alt="Incoltec" width={600} height={200} class="h-20 w-auto drop-shadow-lg" />
+    <div class="absolute inset-0 bg-black/30 z-0"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center p-4">
+      <h1 class="text-white text-3xl md:text-5xl font-normal tracking-[0.2em] drop-shadow-lg mb-1 md:mb-2 uppercase">HORECA</h1>
+      <img src="/assets/logo-incoltec-w.png" alt="Incoltec" class="w-[280px] sm:w-[400px] md:w-[600px] h-auto drop-shadow-lg" />
     </div>
   </section>
 
@@ -49,9 +51,10 @@ import restImg2 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-can
         </div>
 
         <!-- Images and description -->
-        <div class="grid grid-cols-2 gap-6 mb-8">
-          <Image src={restImg1} alt="Restaurant Interior" class="w-full h-56 object-cover rounded shadow-md" />
-          <Image src={restImg2} alt="Paella Cooking" class="w-full h-56 object-cover rounded shadow-md" />
+        <div class="grid grid-cols-3 gap-4 mb-8">
+          <Image src={restImg1} alt="Restaurant Interior" class="w-full h-40 object-cover rounded shadow-md" />
+          <Image src={restImg2} alt="Lolita Sign" class="w-full h-40 object-cover rounded shadow-md" />
+          <Image src={restImg3} alt="Paella Cooking" class="w-full h-40 object-cover rounded shadow-md" />
         </div>
 
         <p class="text-xl text-gray-700 leading-relaxed mb-6 font-light">

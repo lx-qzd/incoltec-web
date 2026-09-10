@@ -116,8 +116,8 @@ const esLinks: NavLink[] = [
 
 const links = isEs ? esLinks : enLinks;
 
-// HORECA/INDUSTRIAL tab state (placeholder — not functional yet)
-let activeTab: string = "HORECA";
+// HORECA/INDUSTRIAL tab state
+const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUSTRIAL";
 ---
 
 <header class="incoltec-header" id="site-header" data-scrolled="false">
@@ -248,18 +248,18 @@ let activeTab: string = "HORECA";
   <!-- HORECA / INDUSTRIAL Switch -->
   <div class="incoltec-header__sub-bar">
     <div class="incoltec-header__sub-bar-inner">
-      <button
+      <a
+        href="/horeca"
         class={`incoltec-header__tab ${activeTab === "HORECA" ? "is-active" : ""}`}
-        data-tab="HORECA"
       >
         HORECA
-      </button>
-      <button
+      </a>
+      <a
+        href="/"
         class={`incoltec-header__tab ${activeTab === "INDUSTRIAL" ? "is-active" : ""}`}
-        data-tab="INDUSTRIAL"
       >
         INDUSTRIAL
-      </button>
+      </a>
     </div>
   </div>
 </header>
@@ -680,15 +680,4 @@ let activeTab: string = "HORECA";
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
-
-  // HORECA/INDUSTRIAL tab toggle (visual only — placeholder)
-  document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".incoltec-header__tab");
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        tabs.forEach((t) => t.classList.remove("is-active"));
-        tab.classList.add("is-active");
-      });
-    });
-  });
 </script>
