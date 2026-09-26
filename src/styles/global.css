@@ -31,6 +31,11 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
 body {
   font-family: var(--font-primary);
   background-color: var(--c-white);

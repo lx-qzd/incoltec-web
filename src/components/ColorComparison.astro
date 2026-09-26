@@ -1,4 +1,4 @@
----
+ ---
 import { getImage } from "astro:assets";
 
 interface Point {
@@ -7,6 +7,7 @@ interface Point {
 }
 
 interface Props {
+  id?: string;
   title?: string;
   naturalTitle?: string;
   artificialTitle?: string;
@@ -16,6 +17,7 @@ interface Props {
 }
 
 const { 
+  id = "color-comparison",
   title = "Taste Colors",
   naturalTitle = "Natural Colors",
   artificialTitle = "Artificial Colors",
@@ -37,7 +39,7 @@ const {
 const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgImage, format: 'webp', width: 960 })).src;
 ---
 
-<section class="w-full flex flex-col md:flex-row bg-[#FFFDF9] min-h-screen">
+<section id={id} class="w-full flex flex-col md:flex-row bg-[#FFFDF9] min-h-screen scroll-mt-24">
   <!-- Left Side: Content -->
   <div class="w-full md:w-1/2 flex items-center justify-center p-10 sm:p-16 md:p-20 lg:p-32 order-2 md:order-1">
     <div class="max-w-2xl text-center flex flex-col items-center w-full">
@@ -69,9 +71,11 @@ const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgI
           </div>
         </div>
 
-        <!-- VS Divider -->
-        <div class="flex justify-center -my-6 sm:-my-8 relative z-20">
-          <div class="bg-[#89385C] border-4 border-[#FFFDF9] px-6 py-3 rounded-full text-sm font-bold text-white shadow-lg">VS</div>
+        <!-- VS Divider (3x bigger with generous space between sections) -->
+        <div class="flex justify-center my-8 sm:my-14 relative z-20">
+          <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-[#89385C] border-[6px] border-[#FFFDF9] flex items-center justify-center text-4xl sm:text-5xl font-black text-white shadow-2xl tracking-wider select-none transform hover:scale-105 transition-transform">
+            VS
+          </div>
         </div>
 
         <!-- Artificial Colors Grid -->

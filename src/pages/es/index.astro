@@ -3,50 +3,58 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Hero from '../../components/Hero.astro';
-import Certifications from '../../components/Certifications.astro';
-import AboutUs from '../../components/AboutUs.astro';
-import ColorComparison from '../../components/ColorComparison.astro';
+import OurCompanySection from '../../components/OurCompanySection.astro';
+import ImageBanner from '../../components/ImageBanner.astro';
+import VibrantLifeSection from '../../components/VibrantLifeSection.astro';
+import TasteColorsSection from '../../components/TasteColorsSection.astro';
+import PerfectingFoodSection from '../../components/PerfectingFoodSection.astro';
 import LeadMagnet from '../../components/LeadMagnet.astro';
 ---
 
-<Layout title="Fabricante de Colorante Alimentario">
-  <Header currentPath="/" />
+<Layout title="Incoltec - Fabricante de Colorante Alimentario al por Mayor">
+  <Header currentPath="/es" />
   
   <main>
+    <!-- Hero Slider (Imagen 1) -->
     <Hero />
 
-    <Certifications title="Calidad y Seguridad Certificada" />
+    <!-- Sección 1: Nuestra Empresa (Anclajes: #our-company, #organizacion, #laboratorio) -->
+    <OurCompanySection isEs={true} />
 
-    <AboutUs 
-      title="Quiénes Somos. Conoce sobre nosotros"
-      subtitle="Sobre Nosotros"
-      description="Somos un equipo dinámico de innovadores y visionarios dedicados a transformar las soluciones de colorantes alimentarios en experiencias extraordinarias a nivel mundial."
+    <!-- Separador Visual 1: Entre Nuestra Empresa y Vida Vibrante -->
+    <ImageBanner 
+      image="/assets/fondo1.jpg" 
+      tag="Tecnología Cromática" 
+      title="Formulación Vibrante y Colores Puros" 
+      subtitle="Conectamos la cultura culinaria con la consistencia cromática de nivel mundial." 
     />
 
-    <!-- Parallax Comparison Section -->
-    <div class="h-24 md:h-32 bg-transparent reveal"></div>
-    
-    <ColorComparison 
-      title="¿Por qué elegir Colorantes Naturales?"
-      naturalTitle="Colorantes Naturales"
-      artificialTitle="Colorantes Artificiales"
-      naturalPoints={[
-        "Etiqueta limpia (Clean Label) para consumidores conscientes",
-        "Derivados de fuentes naturales (plantas, minerales)",
-        "Sin impacto negativo en el valor nutricional",
-        "Cada vez más exigidos por los reguladores globales"
-      ]}
-      artificialPoints={[
-        "A menudo vinculados a problemas de salud y alergias",
-        "Químicos sintéticos basados en petróleo",
-        "Requieren etiquetas de advertencia estrictas",
-        "Disminución de la confianza del consumidor"
-      ]}
-      bgImage="/assets/food-colors-application.webp"
+    <!-- Sección 2: Vida Vibrante (Anclajes: #vibrant-life, #compromiso, #calidad) -->
+    <VibrantLifeSection isEs={true} />
+
+    <!-- Separador Visual 2: Entre Vida Vibrante y Saborea los Colores -->
+    <ImageBanner 
+      image="/assets/fondo2.jpg" 
+      tag="Calidad Certificada" 
+      title="Dando Forma al Futuro del Atractivo Alimentario" 
+      subtitle="Garantía de etiqueta limpia y brillo sensorial inigualable en cada aplicación." 
     />
 
-    <div class="h-24 md:h-32 bg-transparent"></div>
+    <!-- Sección 3: Saborea los Colores & Sección VS (Anclajes: #taste-colors, #colorantes-naturales, #alimentos-colorantes, #vitaminas-premixes) -->
+    <TasteColorsSection isEs={true} />
 
+    <!-- Separador Visual 3: Entre Saborea los Colores y Perfeccionando Alimentos -->
+    <ImageBanner 
+      image="/assets/fondo3.jpg" 
+      tag="Ciencia de Alimentos" 
+      title="Innovación Aplicada y Mezclas de Precisión" 
+      subtitle="Soluciones de color personalizadas desarrolladas para escala industrial y máxima estabilidad térmica." 
+    />
+
+    <!-- Sección 4: Perfeccionando Alimentos (Anclajes: #perfecting-food, #soluciones, #innovacion) -->
+    <PerfectingFoodSection isEs={true} />
+
+    <!-- Sección 5: Contacto & Descarga de Catálogo Técnico (Anclaje: #contact) -->
     <LeadMagnet 
       title="Descarga Nuestro Catálogo Técnico 2024"
       description="Obtén información completa sobre nuestras aplicaciones de colores naturales, especificaciones y cumplimiento normativo para la industria alimentaria B2B."

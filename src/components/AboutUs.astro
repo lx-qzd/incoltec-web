@@ -2,6 +2,7 @@
 import { getImage } from "astro:assets";
 
 interface Props {
+  id?: string;
   title?: string;
   subtitle?: string;
   description?: string;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { 
+  id = "our-company",
   title = "Our Company",
   subtitle = "Who We Are",
   description = "We are a dynamic team of innovators and visionaries dedicated to transforming food color solutions into extraordinary experiences globally.",
@@ -18,7 +20,7 @@ const {
 const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgImage, format: 'webp', width: 960 })).src;
 ---
 
-<section class="w-full flex flex-col md:flex-row bg-[#FFFDF9] min-h-screen">
+<section id={id} class="w-full flex flex-col md:flex-row bg-[#FFFDF9] min-h-screen scroll-mt-24">
   <!-- Left Side: Image -->
   <div class="w-full md:w-1/2 min-h-[400px] md:min-h-screen relative order-1 md:order-1">
     <img src={bgUrl} alt={title} class="absolute inset-0 w-full h-full object-cover" />

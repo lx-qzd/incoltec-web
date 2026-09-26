@@ -21,97 +21,97 @@ interface NavLink {
 const enLinks: NavLink[] = [
   {
     name: "Our Company",
-    url: "/our-company",
+    url: "/#our-company",
     dropdown: [
-      { name: "Organización", url: "/our-company" },
-      { name: "Laboratorio", url: "/our-company#laboratorio" },
+      { name: "Organization", url: "/#organizacion" },
+      { name: "Laboratory", url: "/#laboratorio" },
     ],
   },
   {
     name: "Vibrant Life",
-    url: "/vibrant-life",
+    url: "/#vibrant-life",
     dropdown: [
-      { name: "Compromiso", url: "/vibrant-life" },
-      { name: "Calidad", url: "/vibrant-life#calidad" },
+      { name: "Commitment", url: "/#compromiso" },
+      { name: "Quality", url: "/#calidad" },
     ],
   },
   {
     name: "Taste Colors",
-    url: "/taste-colors",
+    url: "/#taste-colors",
     dropdown: [
       {
-        name: "Colorantes Naturales",
-        url: "/taste-colors#colorantes-naturales",
+        name: "Natural Colors",
+        url: "/#colorantes-naturales",
       },
       {
-        name: "Alimentos Colorantes",
-        url: "/taste-colors#alimentos-colorantes",
+        name: "Coloring Foods",
+        url: "/#alimentos-colorantes",
       },
       {
-        name: "Vitaminas & Pre Mixes",
-        url: "/taste-colors#vitaminas-premixes",
+        name: "Vitamins & Pre Mixes",
+        url: "/#vitaminas-premixes",
       },
     ],
   },
   {
     name: "Perfecting Food",
-    url: "/perfecting-food",
+    url: "/#perfecting-food",
     dropdown: [
-      { name: "Soluciones", url: "/perfecting-food" },
-      { name: "Innovación", url: "/perfecting-food#innovacion" },
+      { name: "Solutions", url: "/#soluciones" },
+      { name: "Innovation", url: "/#innovacion" },
     ],
   },
   { name: "Catalogs", url: "/catalogs" },
   { name: "Blog", url: "/blog" },
-  { name: "Contact", url: "/contact" },
+  { name: "Contact", url: "/#contact" },
 ];
 
 const esLinks: NavLink[] = [
   {
     name: "Nuestra Empresa",
-    url: "/es/our-company",
+    url: "/es/#our-company",
     dropdown: [
-      { name: "Organización", url: "/es/our-company" },
-      { name: "Laboratorio", url: "/es/our-company#laboratorio" },
+      { name: "Organización", url: "/es/#organizacion" },
+      { name: "Laboratorio", url: "/es/#laboratorio" },
     ],
   },
   {
     name: "Vida Vibrante",
-    url: "/es/vibrant-life",
+    url: "/es/#vibrant-life",
     dropdown: [
-      { name: "Compromiso", url: "/es/vibrant-life" },
-      { name: "Calidad", url: "/es/vibrant-life#calidad" },
+      { name: "Compromiso", url: "/es/#compromiso" },
+      { name: "Calidad", url: "/es/#calidad" },
     ],
   },
   {
     name: "Saborea los Colores",
-    url: "/es/taste-colors",
+    url: "/es/#taste-colors",
     dropdown: [
       {
         name: "Colorantes Naturales",
-        url: "/es/taste-colors#colorantes-naturales",
+        url: "/es/#colorantes-naturales",
       },
       {
         name: "Alimentos Colorantes",
-        url: "/es/taste-colors#alimentos-colorantes",
+        url: "/es/#alimentos-colorantes",
       },
       {
         name: "Vitaminas & Pre Mixes",
-        url: "/es/taste-colors#vitaminas-premixes",
+        url: "/es/#vitaminas-premixes",
       },
     ],
   },
   {
     name: "Perfeccionando Alimentos",
-    url: "/es/perfecting-food",
+    url: "/es/#perfecting-food",
     dropdown: [
-      { name: "Soluciones", url: "/es/perfecting-food" },
-      { name: "Innovación", url: "/es/perfecting-food#innovacion" },
+      { name: "Soluciones", url: "/es/#soluciones" },
+      { name: "Innovación", url: "/es/#innovacion" },
     ],
   },
   { name: "Catálogos", url: "/es/catalogs" },
   { name: "Blog", url: "/es/blog" },
-  { name: "Contacto", url: "/es/contact" },
+  { name: "Contacto", url: "/es/#contact" },
 ];
 
 const links = isEs ? esLinks : enLinks;
@@ -146,30 +146,33 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
                 <li class="incoltec-header__link-item">
                   {link.dropdown ? (
                     <div class="astronav-dropdown group relative">
-                      <button
-                        class={`incoltec-header__link ${
-                          currentPath.startsWith(
-                            link.url.replace(/^\/es/, "") || "/",
-                          )
-                            ? "is-active"
-                            : ""
-                        }`}
-                      >
-                        <span>{link.name}</span>
-                        <svg
-                          class="incoltec-header__chevron"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
+                      <div class="incoltec-header__link-row flex items-center justify-between">
+                        <a
+                          href={link.url}
+                          class="incoltec-header__link"
                         >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                          />
-                        </svg>
-                      </button>
+                          <span>{link.name}</span>
+                        </a>
+                        <button
+                          type="button"
+                          aria-label={`Toggle ${link.name} submenu`}
+                          class="incoltec-header__chevron-btn p-1 text-[#666] hover:text-[#1e1e1e]"
+                        >
+                          <svg
+                            class="incoltec-header__chevron"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                            />
+                          </svg>
+                        </button>
+                      </div>
                       <DropdownItems class="incoltec-header__dropdown">
                         <div class="incoltec-header__dropdown-panel">
                           <ul class="incoltec-header__dropdown-list">
@@ -191,9 +194,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
                     <a
                       href={link.url}
                       class={`incoltec-header__link ${
-                        currentPath === (link.url.replace(/^\/es/, "") || "/")
-                          ? "is-active"
-                          : ""
+                        link.url.includes("#contact") ? "incoltec-header__link--contact" : ""
                       }`}
                     >
                       {link.name}
@@ -206,6 +207,9 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
 
           <!-- Mobile-only language switcher & actions -->
           <div class="incoltec-header__mobile-actions">
+            <a href={isEs ? "/es/#contact" : "/#contact"} class="incoltec-header__cta w-full text-center mb-4">
+              {isEs ? "Contáctanos" : "Get in Touch"}
+            </a>
             <div class="incoltec-header__mobile-lang">
               <a
                 href={enPath}
@@ -238,7 +242,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
             >ES</a
           >
         </div>
-        <a href="/contact" class="incoltec-header__cta">
+        <a href={isEs ? "/es/#contact" : "/#contact"} class="incoltec-header__cta">
           {isEs ? "Contáctanos" : "Get in Touch"}
         </a>
       </div>
@@ -497,25 +501,42 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.625rem 1.5rem;
+    padding: 0.65rem 1.6rem;
     font-family: var(--font-primary);
     font-size: 0.875rem;
     font-weight: 600;
     line-height: 1;
-    color: #fff;
-    background: var(--c-dark, #1e1e1e);
+    color: #fff !important;
+    background: linear-gradient(135deg, var(--c-magenta, #E30066) 0%, #FF1A75 100%);
+    box-shadow: 0 4px 14px rgba(227, 0, 102, 0.35);
     border-radius: 999px;
     text-decoration: none;
     white-space: nowrap;
     transition:
       background 0.2s ease,
+      box-shadow 0.2s ease,
       transform 0.15s ease;
   }
 
   .incoltec-header__cta:hover {
-    background: #333;
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #c20055 0%, #E30066 100%);
+    box-shadow: 0 6px 20px rgba(227, 0, 102, 0.5);
+    transform: translateY(-2px);
     opacity: 1;
+  }
+
+  .incoltec-header__link--contact {
+    color: var(--c-magenta, #E30066) !important;
+    font-weight: 600 !important;
+  }
+
+  .incoltec-header__chevron-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Mobile hamburger toggle */

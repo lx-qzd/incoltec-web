@@ -10,17 +10,17 @@ const enLinks = {
   company: {
     title: "Company",
     links: [
-      { name: "Our Company", url: "/our-company" },
-      { name: "Vibrant Life", url: "/vibrant-life" },
-      { name: "Taste Colors", url: "/taste-colors" },
-      { name: "Perfecting Food", url: "/perfecting-food" }
+      { name: "Our Company", url: "/#our-company" },
+      { name: "Vibrant Life", url: "/#vibrant-life" },
+      { name: "Taste Colors", url: "/#taste-colors" },
+      { name: "Perfecting Food", url: "/#perfecting-food" }
     ]
   },
   resources: {
     title: "Resources",
     links: [
       { name: "Catalogs", url: "/catalogs" },
-      { name: "Contact", url: "/contact" }
+      { name: "Contact", url: "/#contact" }
     ]
   },
   legal: {
@@ -38,17 +38,17 @@ const esLinks = {
   company: {
     title: "Empresa",
     links: [
-      { name: "Nuestra Empresa", url: "/es/our-company" },
-      { name: "Vida Vibrante", url: "/es/vibrant-life" },
-      { name: "Saborea los Colores", url: "/es/taste-colors" },
-      { name: "Perfeccionando Alimentos", url: "/es/perfecting-food" }
+      { name: "Nuestra Empresa", url: "/es/#our-company" },
+      { name: "Vida Vibrante", url: "/es/#vibrant-life" },
+      { name: "Saborea los Colores", url: "/es/#taste-colors" },
+      { name: "Perfeccionando Alimentos", url: "/es/#perfecting-food" }
     ]
   },
   resources: {
     title: "Recursos",
     links: [
       { name: "Catálogos", url: "/es/catalogs" },
-      { name: "Contacto", url: "/es/contact" }
+      { name: "Contacto", url: "/es/#contact" }
     ]
   },
   legal: {
@@ -104,7 +104,17 @@ const content = isEs ? esLinks : enLinks;
   <Certifications variant="dark" title={isEs ? "Calidad y Seguridad Certificada" : "Certified Quality & Safety"} />
   
   <div class="footer-bottom container">
-    <p>&copy; {currentYear} Incoltec. All rights reserved.</p>
+    <div class="footer-bottom-inner">
+      <p class="footer-copyright">&copy; {currentYear} Incoltec. All rights reserved.</p>
+      <div class="footer-footnote-links">
+        {content.legal.links.map((link, idx) => (
+          <span class="footnote-item">
+            <a href={link.url} class="footnote-link">{link.name}</a>
+            {idx < content.legal.links.length - 1 && <span class="footnote-sep">|</span>}
+          </span>
+        ))}
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -197,10 +207,53 @@ const content = isEs ? esLinks : enLinks;
 
   .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 1.25rem;
-    text-align: center;
+    padding-top: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  .footer-bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-copyright {
+    opacity: 0.6;
+    margin-bottom: 0;
+  }
+
+  .footer-footnote-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .footnote-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .footnote-link {
+    color: var(--c-light);
+    opacity: 0.65;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
+
+  .footnote-link:hover {
+    opacity: 1;
+    color: var(--c-yellow);
+    text-decoration: underline;
+  }
+
+  .footnote-sep {
+    color: rgba(255, 255, 255, 0.25);
     font-size: 0.75rem;
-    opacity: 0.5;
   }
 
   @media (max-width: 768px) {

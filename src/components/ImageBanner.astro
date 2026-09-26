@@ -1,0 +1,47 @@
+---
+interface Props {
+  image: string;
+  tag?: string;
+  title?: string;
+  subtitle?: string;
+  height?: string;
+}
+
+const {
+  image,
+  tag,
+  title,
+  subtitle,
+  height = "h-[380px] sm:h-[460px] md:h-[540px]"
+} = Astro.props;
+---
+
+<section class={`relative w-full ${height} flex items-center justify-center overflow-hidden`}>
+  <img 
+    src={image} 
+    alt={title || "Incoltec food color solutions"} 
+    class="absolute inset-0 w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-[12s] ease-out" 
+    loading="lazy"
+  />
+  <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60 z-10"></div>
+  
+  {(tag || title || subtitle) && (
+    <div class="relative z-20 max-w-4xl mx-auto px-6 text-center text-white">
+      {tag && (
+        <span class="inline-block text-xs sm:text-sm uppercase tracking-[0.3em] font-semibold text-[#FFC000] mb-3 px-4 py-1 rounded-full bg-black/30 backdrop-blur-sm border border-white/10">
+          {tag}
+        </span>
+      )}
+      {title && (
+        <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white drop-shadow-lg mb-3">
+          {title}
+        </h3>
+      )}
+      {subtitle && (
+        <p class="text-base sm:text-lg md:text-xl font-light text-white/90 max-w-2xl mx-auto drop-shadow-md leading-relaxed">
+          {subtitle}
+        </p>
+      )}
+    </div>
+  )}
+</section>

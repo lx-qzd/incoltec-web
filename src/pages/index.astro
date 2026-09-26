@@ -3,22 +3,63 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Hero from "../components/Hero.astro";
-import AboutUs from "../components/AboutUs.astro";
-import ColorComparison from "../components/ColorComparison.astro";
+import OurCompanySection from "../components/OurCompanySection.astro";
+import ImageBanner from "../components/ImageBanner.astro";
+import VibrantLifeSection from "../components/VibrantLifeSection.astro";
+import TasteColorsSection from "../components/TasteColorsSection.astro";
+import PerfectingFoodSection from "../components/PerfectingFoodSection.astro";
 import LeadMagnet from "../components/LeadMagnet.astro";
 ---
 
-<Layout title="Wholesale Food Color Manufacturer">
+<Layout title="Incoltec - Wholesale Food Color Manufacturer">
   <Header currentPath="/" />
 
   <main>
+    <!-- Hero Slider (Image 1) -->
     <Hero />
 
-    <AboutUs />
+    <!-- Section 1: Our Company (Anchors: #our-company, #organizacion, #laboratorio) -->
+    <OurCompanySection isEs={false} />
 
-    <ColorComparison bgImage="/assets/food-colors-application.webp" />
+    <!-- Image Break 1: Separates Our Company and Vibrant Life -->
+    <ImageBanner 
+      image="/assets/fondo1.jpg" 
+      tag="Chromatic Technology" 
+      title="Vibrant Formulation & Pure Colors" 
+      subtitle="Connecting culinary culture with world-class chromatic consistency." 
+    />
 
-    <LeadMagnet />
+    <!-- Section 2: Vibrant Life (Anchors: #vibrant-life, #compromiso, #calidad) -->
+    <VibrantLifeSection isEs={false} />
+
+    <!-- Image Break 2: Separates Vibrant Life and Taste Colors -->
+    <ImageBanner 
+      image="/assets/fondo2.jpg" 
+      tag="Certified Quality" 
+      title="Shaping the Future of Food Appeal" 
+      subtitle="Ensuring clean-label confidence and unmatched sensory brilliance." 
+    />
+
+    <!-- Section 3: Taste Colors & VS Section (Anchors: #taste-colors, #colorantes-naturales, #alimentos-colorantes, #vitaminas-premixes) -->
+    <TasteColorsSection isEs={false} />
+
+    <!-- Image Break 3: Separates Taste Colors and Perfecting Food -->
+    <ImageBanner 
+      image="/assets/fondo3.jpg" 
+      tag="Food Science" 
+      title="Applied Innovation & Precision Blending" 
+      subtitle="Customized color solutions developed for industrial scale and processing stability." 
+    />
+
+    <!-- Section 4: Perfecting Food (Anchors: #perfecting-food, #soluciones, #innovacion) -->
+    <PerfectingFoodSection isEs={false} />
+
+    <!-- Section 5: Contact Us & Catalog Download (Anchor: #contact) -->
+    <LeadMagnet 
+      title="Contact Us"
+      description="Request technical specifications, product catalogs, or tailored formulation samples for your B2B applications."
+      buttonText="Send Request"
+    />
   </main>
 
   <Footer />

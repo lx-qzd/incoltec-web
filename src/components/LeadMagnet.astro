@@ -22,7 +22,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="contact-hero-section relative min-h-screen flex items-center pt-32 pb-20">
+<section id="contact" class="contact-hero-section relative min-h-screen flex items-center pt-32 pb-20 scroll-mt-24">
   <div class="absolute inset-0 z-0">
     <img src="/assets/fondo1.jpg" alt="Background" class="w-full h-full object-cover" />
     <div class="absolute inset-0 bg-black/30"></div>
@@ -193,22 +193,25 @@ const {
   }
 
   .submit-btn {
-    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, var(--c-magenta, #E30066) 0%, #FF1A75 100%);
     color: var(--c-white);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 0.75rem 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0.85rem 2.75rem;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.05em;
     cursor: pointer;
     border-radius: 999px;
+    box-shadow: 0 4px 15px rgba(227, 0, 102, 0.4);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
   }
 
   .submit-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, #c20055 0%, #E30066 100%);
+    border-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 6px 22px rgba(227, 0, 102, 0.6);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 768px) {
