@@ -16,7 +16,11 @@ const { product } = Astro.props;
 const { Content } = await render(product);
 ---
 
-<Layout title={`${product.data.title} | Technical Specification`}>
+<Layout 
+  title={`${product.data.title} | Technical Specification`}
+  description={product.data.description || `${product.data.title} - natural food color solution by INCOLTEC with technical specifications and applications.`}
+>
+
   <div class="product-detail-page bg-[#F8FAFC]">
   <Header currentPath={`/products/${product.id}`} />
   

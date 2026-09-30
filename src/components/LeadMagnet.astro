@@ -1,6 +1,9 @@
 ---
 import PdfSection from "./PdfSection.astro";
 
+import { getImage } from "astro:assets";
+import fondo1Webp from "../assets/fondo1.webp";
+
 interface Props {
   title?: string;
   description?: string;
@@ -20,70 +23,92 @@ const {
   placeholderCompany = "Company Name",
   privacyText = "I agree to the Privacy Policy"
 } = Astro.props;
+
+const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 })).src;
 ---
 
-<section id="contact" class="contact-hero-section relative min-h-screen flex items-center pt-32 pb-20 scroll-mt-24">
+<section id="contact" class="contact-hero-section relative min-h-screen flex items-center pt-28 pb-20 scroll-mt-24 overflow-hidden">
   <div class="absolute inset-0 z-0">
-    <img src="/assets/fondo1.jpg" alt="Background" class="w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-black/30"></div>
+    <img 
+      src={bgSrc} 
+      alt="Background" 
+      class="w-full h-full object-cover" 
+      loading="lazy"
+      decoding="async"
+      width="1920"
+      height="1080"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"></div>
   </div>
   
-  <!-- Decorative Polygons (Left) -->
-  <div class="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-10 w-40 md:w-64">
+  <!-- Decorative Polygons (Left) with subtle glass effect -->
+  <div class="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-10 w-32 md:w-56 opacity-80 pointer-events-none">
     <div class="polygon polygon-yellow"></div>
     <div class="polygon polygon-pink"></div>
     <div class="polygon polygon-blue"></div>
   </div>
 
-  <div class="container relative z-20 flex flex-col gap-8 w-full max-w-5xl mx-auto px-6 pl-24 md:pl-48">
+  <div class="container relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6">
     
-    <div class="w-full text-center md:text-left">
-       <h2 class="font-secondary text-5xl md:text-7xl text-white mb-2 font-bold tracking-wide" style="font-family: 'Great Vibes', cursive;">{title}</h2>
-       {description && <p class="text-white/90 text-lg md:text-xl mt-4 font-light max-w-2xl">{description}</p>}
-    </div>
+    <!-- Frosted Glassmorphism Container Card -->
+    <div class="glass-card-dark rounded-3xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100">
+      
+      <div class="w-full text-center mb-8">
+        <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">
+          Get in Touch
+        </span>
+        <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl text-white font-normal mb-3 leading-tight">
+          {title}
+        </h2>
 
-    <div class="contact-form-container w-full">
-      <form class="contact-form" id="leadMagnetForm" action="#" method="POST" onsubmit="event.preventDefault(); alert('Form submitted!');">
-        <!-- Anti-spam Honeypot -->
-        <div style="display:none;">
-          <label for="bot_field_lead">Leave this empty:</label>
-          <input type="text" id="bot_field_lead" name="bot_field" />
-        </div>
+        {description && <p class="text-white/85 text-base sm:text-lg font-light max-w-2xl mx-auto leading-relaxed">{description}</p>}
+      </div>
 
-        <div class="form-grid">
-          <div class="form-group">
-            <input type="text" id="lm_name" name="name" required placeholder={placeholderName} />
+      <div class="contact-form-container w-full">
+        <form class="contact-form" id="leadMagnetForm" action="#" method="POST" onsubmit="event.preventDefault(); alert('Form submitted!');">
+          <!-- Anti-spam Honeypot -->
+          <div style="display:none;">
+            <label for="bot_field_lead">Leave this empty:</label>
+            <input type="text" id="bot_field_lead" name="bot_field" />
           </div>
-          <div class="form-group">
-            <input type="email" id="lm_email" name="email" required placeholder={placeholderEmail} />
+
+          <div class="form-grid">
+            <div class="form-group">
+              <input type="text" id="lm_name" name="name" required placeholder={placeholderName} />
+            </div>
+            <div class="form-group">
+              <input type="email" id="lm_email" name="email" required placeholder={placeholderEmail} />
+            </div>
           </div>
-        </div>
-        
-        <div class="form-group">
-          <input type="text" id="lm_company" name="company" placeholder={placeholderCompany} />
-        </div>
-        
-        <div class="form-group">
-          <textarea id="lm_message" name="message" rows="5" required placeholder="HOW CAN WE HELP"></textarea>
-        </div>
+          
+          <div class="form-group">
+            <input type="text" id="lm_company" name="company" placeholder={placeholderCompany} />
+          </div>
+          
+          <div class="form-group">
+            <textarea id="lm_message" name="message" rows="4" required placeholder="HOW CAN WE HELP"></textarea>
+          </div>
 
-        <div class="form-checkbox">
-          <input type="checkbox" id="lm_privacy" name="privacy" required />
-          <label for="lm_privacy">{privacyText}</label>
-        </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="lm_privacy" name="privacy" required />
+            <label for="lm_privacy">{privacyText}</label>
+          </div>
 
-        <div class="form-checkbox">
-          <input type="checkbox" id="lm_commercial" name="commercial" />
-          <label for="lm_commercial">I WOULD LIKE TO RECEIVE COMMERCIAL COMMUNICATIONS</label>
-        </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="lm_commercial" name="commercial" />
+            <label for="lm_commercial">I WOULD LIKE TO RECEIVE COMMERCIAL COMMUNICATIONS</label>
+          </div>
 
-        <div class="submit-container flex justify-end mt-6">
-          <button type="submit" class="submit-btn" id="lm_submitBtn">{buttonText}</button>
-        </div>
-      </form>
+          <div class="submit-container flex justify-center sm:justify-end mt-6">
+            <button type="submit" class="submit-btn" id="lm_submitBtn">{buttonText}</button>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </section>
+
 
 <style>
   .contact-hero-section {

@@ -5,33 +5,44 @@ import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 ---
 
-<Layout title="Catalogs">
+<Layout 
+  title="Technical Product Catalogs"
+  description="Download INCOLTEC's technical product catalogs for HORECA culinary solutions and industrial wholesale food manufacturing."
+>
   <Header currentPath="/catalogs" />
   
-  <main>
+  <main class="bg-[#FFFDF9]">
     <Hero 
-      title="Catalogs" 
-      subtitle="Explore our solutions"
+      title="Product Catalogs" 
+      subtitle="Comprehensive technical specifications and application guides"
       backgroundImage="/assets/fondo2.jpg" 
     />
 
-    <section class="catalog-section container mx-auto px-4 py-20">
+    <section class="catalog-section container mx-auto px-4 py-24">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         <!-- HORECA Catalog -->
-        <div id="horeca" class="catalog-card bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl p-10 text-center flex flex-col items-center justify-center transition-all hover:-translate-y-1 hover:shadow-2xl duration-300">
-          <h2 class="text-4xl font-light mb-4 text-white">HORECA</h2>
-          <p class="text-gray-300 mb-8">Specialized solutions for hotels, restaurants, and catering.</p>
-          <a href="#" download class="inline-block bg-[#e30066] text-white px-8 py-3 rounded hover:bg-[#c20057] transition-colors font-medium">
-            Download PDF
+        <div id="horeca" class="bg-white border border-gray-100/90 rounded-3xl p-10 text-center flex flex-col items-center justify-between transition-all hover:-translate-y-1.5 hover:shadow-xl duration-300 shadow-sm reveal-left delay-100">
+          <div>
+            <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">Hospitality & Culinary</span>
+            <h2 class="text-4xl sm:text-5xl font-heading font-normal mb-4 text-[#1E1E1E]">HORECA Catalog</h2>
+            <p class="text-gray-600 font-light leading-relaxed mb-8 max-w-md">Specialized color and functional culinary solutions developed for hotels, restaurants, bakeries, and fine catering.</p>
+          </div>
+          <a href="#" download class="inline-flex items-center gap-2 bg-gradient-to-r from-[#e30066] to-[#ff1a75] text-white px-8 py-3.5 rounded-full hover:shadow-lg hover:shadow-[#e30066]/30 transition-all font-medium text-sm">
+            <span>Download PDF</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           </a>
         </div>
 
         <!-- Industrial Catalog -->
-        <div id="industrial" class="catalog-card bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl p-10 text-center flex flex-col items-center justify-center transition-all hover:-translate-y-1 hover:shadow-2xl duration-300">
-          <h2 class="text-4xl font-light mb-4 text-white">Industrial</h2>
-          <p class="text-gray-300 mb-8">Scalable solutions for industrial food production.</p>
-          <a href="#" download class="inline-block bg-[#e30066] text-white px-8 py-3 rounded hover:bg-[#c20057] transition-colors font-medium">
-            Download PDF
+        <div id="industrial" class="bg-white border border-gray-100/90 rounded-3xl p-10 text-center flex flex-col items-center justify-between transition-all hover:-translate-y-1.5 hover:shadow-xl duration-300 shadow-sm reveal-right delay-200">
+          <div>
+            <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold mb-3">Scale & Precision</span>
+            <h2 class="text-4xl sm:text-5xl font-heading font-normal mb-4 text-[#1E1E1E]">Industrial Catalog</h2>
+            <p class="text-gray-600 font-light leading-relaxed mb-8 max-w-md">Scalable chromatic solutions, stability profiles, and regulatory dossiers for large-scale food & beverage processors.</p>
+          </div>
+          <a href="#" download class="inline-flex items-center gap-2 bg-gradient-to-r from-[#e30066] to-[#ff1a75] text-white px-8 py-3.5 rounded-full hover:shadow-lg hover:shadow-[#e30066]/30 transition-all font-medium text-sm">
+            <span>Download PDF</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           </a>
         </div>
       </div>
@@ -40,6 +51,7 @@ import Hero from '../components/Hero.astro';
 
   <Footer />
 </Layout>
+
 
 <style>
   .catalog-section {

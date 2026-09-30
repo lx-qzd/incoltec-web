@@ -3,9 +3,57 @@
 @font-face {
   font-family: 'Golden Hills';
   src: url('/fonts/GoldenHillsDEMO.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
+}
+
+@font-face {
+  font-family: 'Golden Hills';
+  src: url('/fonts/GoldenHillsDEMO.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Golden Hills';
+  src: url('/fonts/GoldenHillsDEMO.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Golden Hills';
+  src: url('/fonts/GoldenHillsDEMO.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Golden Hills';
+  src: url('/fonts/GoldenHillsDEMO.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Golden Hills DEMO';
+  src: url('/fonts/GoldenHillsDEMO.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-heading: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
+  --font-golden: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
+  --font-script: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
+  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 :root {
@@ -20,15 +68,17 @@
   --c-light: #F5F5F5;
   --c-white: #FFFFFF;
 
-  /* Typography */
-  --font-primary: 'Montserrat', sans-serif;
-  --font-script: 'Golden Hills', 'Great Vibes', cursive;
+  /* Typography Hierarchy */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  --font-primary: var(--font-sans);
+  --font-heading: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
+  --font-script: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
+  --font-golden: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
 }
 
-* {
+*, ::before, ::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
@@ -37,18 +87,38 @@ html {
 }
 
 body {
-  font-family: var(--font-primary);
+  font-family: var(--font-sans);
   background-color: var(--c-white);
   color: var(--c-dark);
-  line-height: 1.6;
+  line-height: 1.65;
+  margin: 0;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
-  margin-bottom: 1rem;
+/* Explicit centering guarantees */
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
+
+/* Headings: Golden Hills Signature Brand Typography */
+h1, h2, h3, h4,
+h1.font-heading, h2.font-heading, h3.font-heading, h4.font-heading,
+.font-heading, .heading-golden, .script-text {
+  font-family: var(--font-heading);
+  font-weight: normal;
+  line-height: 1.25;
+  letter-spacing: normal;
+}
+
+h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: normal;
+  line-height: 1.3;
+}
+
 
 a {
   color: inherit;
@@ -57,29 +127,38 @@ a {
 }
 
 a:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .script-text {
   font-family: var(--font-script);
 }
 
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
 .container {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  max-width: 1240px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 0 1.5rem;
 }
 
 @media (min-width: 640px) {
   .container {
-    padding: 0 1.5rem;
+    padding: 0 2rem;
   }
 }
 
 @media (min-width: 768px) {
   .container {
-    padding: 0 2rem;
+    padding: 0 2.5rem;
   }
 }
 
@@ -94,14 +173,44 @@ a:hover {
   background-clip: text;
 }
 
-/* Scroll Reveal Animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+/* ============================================================
+   GLASSMORPHISM DESIGN UTILITIES
+   ============================================================ */
+.glass-card-dark {
+  background: rgba(18, 18, 18, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.reveal.active {
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================================
+   SCROLL REVEAL MICRO-INTERACTIONS
+   Buttery smooth easing curve: cubic-bezier(0.16, 1, 0.3, 1)
+   ============================================================ */
+.reveal, .reveal-up {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.active, .reveal-up.active {
   opacity: 1;
   transform: translateY(0);
 }
@@ -109,7 +218,8 @@ a:hover {
 .reveal-left {
   opacity: 0;
   transform: translateX(-30px);
-  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .reveal-left.active {
@@ -120,7 +230,8 @@ a:hover {
 .reveal-right {
   opacity: 0;
   transform: translateX(30px);
-  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .reveal-right.active {
@@ -130,8 +241,9 @@ a:hover {
 
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.9);
-  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  transform: scale(0.92);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .reveal-scale.active {
@@ -139,8 +251,13 @@ a:hover {
   transform: scale(1);
 }
 
+.delay-75 { transition-delay: 75ms; }
 .delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
 .delay-200 { transition-delay: 200ms; }
+.delay-250 { transition-delay: 250ms; }
 .delay-300 { transition-delay: 300ms; }
 .delay-400 { transition-delay: 400ms; }
 .delay-500 { transition-delay: 500ms; }
+.delay-600 { transition-delay: 600ms; }
+

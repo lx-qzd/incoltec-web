@@ -5,30 +5,51 @@ import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
 ---
 
-<Layout title="Contact Us">
+<Layout 
+  title="Contact Us & Request Samples"
+  description="Get in touch with INCOLTEC's technical formulation lab. Request product samples, custom shade blending, and regulatory guidance for your food and beverage applications."
+>
   <Header currentPath="/contact" />
   
   <main>
-    <section class="contact-hero-section relative min-h-screen flex items-center pt-32 pb-20">
+    <section class="contact-hero-section relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
       <div class="absolute inset-0 z-0">
-        <img src="/assets/fondo1.jpg" alt="Background" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-black/30"></div>
+        <img 
+          src="/assets/fondo1.jpg" 
+          alt="Background" 
+          class="w-full h-full object-cover" 
+          loading="lazy"
+          decoding="async"
+          width="1920"
+          height="1080"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"></div>
       </div>
       
       <!-- Decorative Polygons (Left) -->
-      <div class="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-10 w-40 md:w-64">
+      <div class="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-10 w-32 md:w-56 opacity-80 pointer-events-none">
         <div class="polygon polygon-yellow"></div>
         <div class="polygon polygon-pink"></div>
         <div class="polygon polygon-blue"></div>
       </div>
 
-      <div class="container relative z-20 flex flex-col gap-8 w-full max-w-5xl mx-auto px-6 pl-24 md:pl-48">
+      <div class="container relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6">
         
-        <div class="w-full text-center md:text-left">
-           <h1 class="font-secondary text-5xl md:text-7xl text-white mb-2 font-bold tracking-wide" style="font-family: 'Great Vibes', cursive;">Contact Us</h1>
-        </div>
+        <!-- Frosted Glass Card Wrapper -->
+        <div class="glass-card-dark rounded-3xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100">
+          <div class="w-full text-center mb-8">
+            <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">
+              Direct Inquiries
+            </span>
+            <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl text-white font-normal mb-3 leading-tight">Contact Us</h1>
 
-        <div class="contact-form-container w-full">
+            <p class="text-white/85 text-base sm:text-lg font-light max-w-xl mx-auto leading-relaxed">
+              Connect with our technical food science team for custom formulations, technical dossiers, or pilot sample requests.
+            </p>
+          </div>
+
+          <div class="contact-form-container w-full">
+
           <form class="contact-form" id="contactForm" action="/api/contact" method="POST">
             <!-- Anti-spam Honeypot -->
             <div style="display:none;">
@@ -71,7 +92,9 @@ import Hero from '../components/Hero.astro';
           </form>
         </div>
       </div>
+    </div>
     </section>
+
   </main>
 
   <Footer />

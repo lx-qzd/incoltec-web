@@ -4,7 +4,35 @@ import fondo1 from "../assets/fondo1.webp";
 import fondo2 from "../assets/fondo2.webp";
 import fondo3 from "../assets/fondo3.webp";
 
-const slides = [
+interface Props {
+  title?: string;
+  subtitle?: string;
+  backgroundImage?: string;
+}
+
+const { title, subtitle, backgroundImage } = Astro.props;
+
+const pathname = Astro.url.pathname;
+const isEs = pathname.startsWith('/es') || Astro.currentLocale === 'es';
+
+// Default 3-slide homepage data
+const defaultSlides = isEs ? [
+  {
+    image: (await getImage({ src: fondo3, format: 'webp', width: 1920 })).src,
+    title: "Sabores Locales",
+    subtitle: "Perfeccionando alimentos, protegiendo formulaciones"
+  },
+  {
+    image: (await getImage({ src: fondo1, format: 'webp', width: 1920 })).src,
+    title: "Colores Globales",
+    subtitle: "Llevando los colores del mundo a cada sabor"
+  },
+  {
+    image: (await getImage({ src: fondo2, format: 'webp', width: 1920 })).src,
+    title: "Calidad Confiable",
+    subtitle: "Transformamos formulación en apetito"
+  }
+] : [
   {
     image: (await getImage({ src: fondo3, format: 'webp', width: 1920 })).src,
     title: "Local Flavors",
@@ -21,31 +49,71 @@ const slides = [
     subtitle: "We turn formulation into appetite"
   }
 ];
+
+const isSingleHero = Boolean(title || backgroundImage);
+
+// Resolve optimized single background if provided
+let singleBgUrl = backgroundImage || (await getImage({ src: fondo1, format: 'webp', width: 1920 })).src;
+if (backgroundImage) {
+  if (backgroundImage.includes("fondo1")) {
+    singleBgUrl = (await getImage({ src: fondo1, format: 'webp', width: 1920 })).src;
+  } else if (backgroundImage.includes("fondo2")) {
+    singleBgUrl = (await getImage({ src: fondo2, format: 'webp', width: 1920 })).src;
+  } else if (backgroundImage.includes("fondo3")) {
+    singleBgUrl = (await getImage({ src: fondo3, format: 'webp', width: 1920 })).src;
+  }
+}
 ---
 
-<section class="relative w-full h-screen overflow-hidden bg-black" id="hero-slider">
-  <!-- Slides Container -->
-  <div class="relative w-full h-full slider-wrapper">
-    {slides.map((slide, index) => (
-      <div class={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out slide ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} data-index={index}>
-        <div class="absolute inset-0 bg-cover bg-center slide-bg transform scale-105 transition-transform duration-[10s] ease-out" style={`background-image: url('${slide.image}')`}></div>
-        <div class="absolute inset-0 bg-black/20"></div>
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6 sm:px-4">
-          <h1 class="script-text text-white drop-shadow-2xl text-[5rem] sm:text-[8rem] md:text-[10rem] lg:text-[13rem] leading-none mb-2 sm:mb-4 transform translate-y-8 opacity-0 transition-all duration-1000 delay-300 slide-title">{slide.title}</h1>
-          <p class="text-white text-xl sm:text-2xl md:text-4xl lg:text-5xl font-light tracking-wide drop-shadow-lg transform translate-y-8 opacity-0 transition-all duration-1000 delay-500 slide-subtitle max-w-[90%] sm:max-w-none">{slide.subtitle}</p>
-        </div>
-      </div>
-    ))}
-  </div>
+{isSingleHero ? (
+  <section class="relative w-full min-h-[480px] md:min-h-[560px] flex items-center justify-center overflow-hidden bg-black py-24 px-4">
+    <div 
+      class="absolute inset-0 bg-cover bg-center slide-bg transform scale-105 transition-transform duration-[10s] ease-out" 
+      style={`background-image: url('${singleBgUrl}')`}
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"></div>
 
-  <!-- Navigation Arrows -->
-  <button id="prev-slide" class="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-1.5 sm:p-2 text-white/50 hover:text-white transition-colors" aria-label="Previous slide">
-    <svg class="w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 19l-7-7 7-7"/></svg>
-  </button>
-  <button id="next-slide" class="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-1.5 sm:p-2 text-white/50 hover:text-white transition-colors" aria-label="Next slide">
-    <svg class="w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"/></svg>
-  </button>
-</section>
+    <div class="relative z-20 max-w-3xl mx-auto w-full text-center px-4 reveal-scale delay-100">
+      <div class="glass-card-dark rounded-3xl p-8 sm:p-12 md:p-14 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl">
+        <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-white mb-4 leading-tight drop-shadow-md">
+          {title}
+        </h1>
+
+        {subtitle && (
+          <p class="text-lg sm:text-xl md:text-2xl font-light text-white/90 max-w-xl mx-auto leading-relaxed">
+            {subtitle}
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+) : (
+  <section class="relative w-full h-screen overflow-hidden bg-black" id="hero-slider">
+
+    <!-- Slides Container -->
+    <div class="relative w-full h-full slider-wrapper">
+      {defaultSlides.map((slide, index) => (
+        <div class={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out slide ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} data-index={index}>
+          <div class="absolute inset-0 bg-cover bg-center slide-bg transform scale-105 transition-transform duration-[10s] ease-out" style={`background-image: url('${slide.image}')`}></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/50 pointer-events-none"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6 sm:px-4 z-10">
+            <h1 class="font-heading script-text text-white drop-shadow-2xl text-[4.5rem] sm:text-[7.5rem] md:text-[9.5rem] lg:text-[12rem] leading-none mb-2 sm:mb-4 transform translate-y-8 opacity-0 transition-all duration-1000 delay-300 slide-title">{slide.title}</h1>
+            <p class="font-sans text-white text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-wide drop-shadow-lg transform translate-y-8 opacity-0 transition-all duration-1000 delay-500 slide-subtitle max-w-[90%] sm:max-w-2xl px-6 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/15">{slide.subtitle}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Navigation Arrows with Frosted Glass styling -->
+    <button id="prev-slide" class="absolute left-3 sm:left-6 md:left-10 top-1/2 -translate-y-1/2 z-20 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 hover:bg-white/25 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all duration-200 hover:scale-105" aria-label="Previous slide">
+      <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button id="next-slide" class="absolute right-3 sm:right-6 md:right-10 top-1/2 -translate-y-1/2 z-20 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 hover:bg-white/25 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all duration-200 hover:scale-105" aria-label="Next slide">
+      <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5l7 7-7 7"/></svg>
+    </button>
+  </section>
+)}
+
 
 <style>
   .slide.active {

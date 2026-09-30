@@ -16,7 +16,12 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} | INCOLTEC Blog`}>
+<Layout 
+  title={`${post.data.title} | INCOLTEC Blog`}
+  description={post.data.description}
+  type="article"
+>
+
   <Header currentPath={`/blog/${post.id}`} />
   
   <article class="article-page bg-[#F8FAFC]">

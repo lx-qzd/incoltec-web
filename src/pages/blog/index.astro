@@ -10,7 +10,11 @@ const allPosts = await getCollection('blog');
 allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title="Technical Blog & News | INCOLTEC">
+<Layout 
+  title="Technical Blog & Industry Insights | INCOLTEC"
+  description="Stay informed with expert insights on natural food coloring innovations, clean label trends, and EFSA/FDA regulatory developments."
+>
+
   <Header currentPath="/blog" />
   
   <Hero 

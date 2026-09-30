@@ -6,41 +6,42 @@ interface Props {
 const { isEs = false } = Astro.props;
 ---
 
-<section id="vibrant-life" class="w-full bg-[#FFFDF9] py-20 md:py-28 scroll-mt-20">
-  <div class="max-w-[1240px] mx-auto px-6 md:px-12">
+<section id="vibrant-life" class="w-full bg-[#FFFDF9] py-24 md:py-32 lg:py-40 scroll-mt-20 overflow-hidden">
+  <div class="w-full max-w-[1240px] mx-auto px-6 sm:px-8 md:px-12 flex flex-col items-stretch">
     
-    <!-- Header -->
-    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-      <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">
+    <!-- Header with Scroll Reveal -->
+    <div class="text-center max-w-3xl mx-auto mb-20 md:mb-28 reveal delay-75 flex flex-col items-center">
+      <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-4">
         {isEs ? "Vida y Color" : "Life & Color"}
       </span>
-      <h2 class="script-text text-5xl sm:text-6xl md:text-7xl text-[#89385C] mb-6 leading-tight">
+      <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#89385C] font-normal mb-6 leading-tight">
         {isEs ? "Vida Vibrante" : "Vibrant Life"}
       </h2>
-      <div class="w-24 h-[1.5px] bg-[#C6ACB8] mx-auto mb-6"></div>
-      <p class="text-lg md:text-xl text-gray-700 font-light leading-relaxed">
+
+      <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-8"></div>
+      <p class="text-lg md:text-xl text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
         {isEs
           ? "Calidad que transforma la formulación en apetito. Comunicamos la base que sostiene toda la propuesta de valor: seguridad alimentaria, control de procesos y confianza inquebrantable."
           : "Quality that transforms formulation into appetite. We communicate the foundation supporting our entire value proposition: food safety, process control, and unwavering trust."}
       </p>
     </div>
 
-    <!-- Sub-anchor: Compromiso -->
-    <div id="compromiso" class="scroll-mt-28 mb-16">
-      <div class="flex items-center gap-3 mb-8">
+    <!-- Sub-anchor: Compromiso with Scroll Reveal -->
+    <div id="compromiso" class="scroll-mt-28 mb-24 md:mb-32">
+      <div class="flex items-center gap-3 mb-10 reveal delay-100">
         <div class="w-8 h-1 bg-[#E30066] rounded-full"></div>
-        <h3 class="text-2xl sm:text-3xl font-serif text-[#1E1E1E]">
+        <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal">
           {isEs ? "Compromiso de Calidad y Seguridad Alimentaria" : "Commitment to Quality & Food Safety"}
         </h3>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-12">
+        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-3xl shadow-sm border border-gray-100/80 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-150">
           <div>
             <div class="w-14 h-14 rounded-2xl bg-[#E30066]/10 text-[#E30066] flex items-center justify-center mb-6">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             </div>
-            <h4 class="text-xl sm:text-2xl font-bold text-[#1E1E1E] mb-4">
+            <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-4">
               {isEs ? "Control Riguroso de Cada Lote" : "Rigorous Batch-to-Batch Control"}
             </h4>
             <p class="text-gray-600 font-light leading-relaxed mb-6">
@@ -49,17 +50,17 @@ const { isEs = false } = Astro.props;
                 : "Every batch is analyzed to guarantee uniformity in tinting strength, microbiological safety, and zero contaminants or heavy metals. We comply with EFSA, FDA, and Codex Alimentarius standards."}
             </p>
           </div>
-          <div class="pt-4 border-t border-gray-100 flex items-center gap-2 text-xs font-semibold text-[#E30066] uppercase tracking-wider">
+          <div class="pt-6 border-t border-gray-100 flex items-center gap-2 text-xs font-semibold text-[#E30066] uppercase tracking-wider font-sans">
             <span>{isEs ? "Certificación Global Garantizada" : "Guaranteed Global Compliance"}</span>
           </div>
         </div>
 
-        <div class="bg-white p-8 sm:p-10 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-3xl shadow-sm border border-gray-100/80 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-250">
           <div>
-            <div class="w-14 h-14 rounded-2xl bg-[#FFC000]/15 text-[#FFC000] flex items-center justify-center mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-[#FFC000]/15 text-[#b58900] flex items-center justify-center mb-6">
               <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
             </div>
-            <h4 class="text-xl sm:text-2xl font-bold text-[#1E1E1E] mb-4">
+            <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-4">
               {isEs ? "Sostenibilidad y Origen Ético" : "Sustainability & Ethical Sourcing"}
             </h4>
             <p class="text-gray-600 font-light leading-relaxed mb-6">
@@ -68,46 +69,46 @@ const { isEs = false } = Astro.props;
                 : "We source our botanicals and minerals from sustainable farms. We support responsible agriculture, ensuring chromatic purity while safeguarding ecological balance."}
             </p>
           </div>
-          <div class="pt-4 border-t border-gray-100 flex items-center gap-2 text-xs font-semibold text-[#FFC000] uppercase tracking-wider">
+          <div class="pt-6 border-t border-gray-100 flex items-center gap-2 text-xs font-semibold text-[#b58900] uppercase tracking-wider font-sans">
             <span>{isEs ? "Materias Primas Trazables" : "100% Traceable Raw Materials"}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Sub-anchor: Calidad -->
-    <div id="calidad" class="scroll-mt-28 bg-[#FAF8F5] p-8 sm:p-12 md:p-16 rounded-3xl border border-[#EDE8E0]">
+    <!-- Sub-anchor: Calidad with Reveal & Glass-like styling -->
+    <div id="calidad" class="scroll-mt-28 bg-[#FAF8F5] p-8 sm:p-12 md:p-16 lg:p-20 rounded-3xl border border-[#EDE8E0] reveal delay-100 w-full">
       <div class="flex items-center gap-3 mb-4">
         <div class="w-8 h-1 bg-[#008AD8] rounded-full"></div>
         <span class="text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
           {isEs ? "Consistencia en Aplicación" : "Application Consistency"}
         </span>
       </div>
-      <h3 class="text-3xl sm:text-4xl font-serif text-[#1E1E1E] mb-6 leading-tight">
+      <h3 class="text-3xl sm:text-4xl md:text-5xl font-heading text-[#1E1E1E] font-normal mb-6 leading-tight">
         {isEs ? "Fiabilidad Técnica y Soporte de Calidad" : "Technical Reliability & Quality Support"}
       </h3>
-      <p class="text-gray-700 text-base sm:text-lg font-light leading-relaxed mb-8 max-w-3xl">
+      <p class="text-gray-700 text-base sm:text-lg font-light leading-relaxed mb-10 max-w-3xl">
         {isEs
           ? "Nuestros especialistas en aplicaciones alimentarias trabajan directamente con su departamento de desarrollo y calidad para optimizar dosis, reducir costos de formulación y asegurar que el color permanezca vibrante a lo largo de toda la vida útil del producto."
           : "Our food application scientists collaborate directly with your R&D and QA teams to optimize dosing, lower formulation costs, and ensure your product's color remains vibrant throughout its entire shelf life."}
       </p>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-          <h5 class="font-bold text-[#89385C] mb-2">{isEs ? "Soporte Técnico Ágil" : "Agile Technical Support"}</h5>
-          <p class="text-gray-600 text-sm font-light">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+        <div class="bg-white p-7 sm:p-8 rounded-2xl border border-gray-200/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 reveal delay-150">
+          <h5 class="font-heading text-2xl text-[#89385C] mb-3">{isEs ? "Soporte Técnico Ágil" : "Agile Technical Support"}</h5>
+          <p class="text-gray-600 text-sm font-light leading-relaxed">
             {isEs ? "Acompañamiento en pruebas de planta y ajuste fino de dosis." : "On-site and remote formulation testing and dosing optimization."}
           </p>
         </div>
-        <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-          <h5 class="font-bold text-[#89385C] mb-2">{isEs ? "Estabilidad Térmica" : "Thermal Stability"}</h5>
-          <p class="text-gray-600 text-sm font-light">
+        <div class="bg-white p-7 sm:p-8 rounded-2xl border border-gray-200/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 reveal delay-250">
+          <h5 class="font-heading text-2xl text-[#89385C] mb-3">{isEs ? "Estabilidad Térmica" : "Thermal Stability"}</h5>
+          <p class="text-gray-600 text-sm font-light leading-relaxed">
             {isEs ? "Formulaciones que resisten pasteurización, UHT y horneado." : "Formulations engineered to withstand pasteurization, UHT, and baking."}
           </p>
         </div>
-        <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-          <h5 class="font-bold text-[#89385C] mb-2">{isEs ? "Clean Label Guarantee" : "Clean Label Guarantee"}</h5>
-          <p class="text-gray-600 text-sm font-light">
+        <div class="bg-white p-7 sm:p-8 rounded-2xl border border-gray-200/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 reveal delay-350">
+          <h5 class="font-heading text-2xl text-[#89385C] mb-3">{isEs ? "Clean Label Guarantee" : "Clean Label Guarantee"}</h5>
+          <p class="text-gray-600 text-sm font-light leading-relaxed">
             {isEs ? "Etiquetado claro y transparente para los consumidores modernos." : "Clear, transparent ingredient declarations for today's conscious shoppers."}
           </p>
         </div>
@@ -116,3 +117,4 @@ const { isEs = false } = Astro.props;
 
   </div>
 </section>
+

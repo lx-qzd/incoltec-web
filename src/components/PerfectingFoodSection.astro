@@ -6,19 +6,20 @@ interface Props {
 const { isEs = false } = Astro.props;
 ---
 
-<section id="perfecting-food" class="w-full bg-[#FFFDF9] py-20 md:py-28 scroll-mt-20">
-  <div class="max-w-[1240px] mx-auto px-6 md:px-12">
+<section id="perfecting-food" class="w-full bg-[#FFFDF9] py-24 md:py-32 lg:py-40 scroll-mt-20 overflow-hidden">
+  <div class="w-full max-w-[1240px] mx-auto px-6 sm:px-8 md:px-12 flex flex-col items-stretch">
     
-    <!-- Header -->
-    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
-      <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold mb-3">
+    <!-- Header with Scroll Reveal -->
+    <div class="text-center max-w-3xl mx-auto mb-20 md:mb-28 reveal delay-75 flex flex-col items-center">
+      <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold mb-4">
         {isEs ? "Ciencia & Aplicación" : "Science & Application"}
       </span>
-      <h2 class="script-text text-5xl sm:text-6xl md:text-7xl text-[#89385C] mb-6 leading-tight">
+      <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#89385C] font-normal mb-6 leading-tight">
         {isEs ? "Perfeccionando Alimentos" : "Perfecting Food"}
       </h2>
-      <div class="w-24 h-[1.5px] bg-[#C6ACB8] mx-auto mb-6"></div>
-      <p class="text-lg md:text-xl text-gray-700 font-light leading-relaxed">
+
+      <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-8"></div>
+      <p class="text-lg md:text-xl text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
         {isEs
           ? "Ciencia aplicada y control de procesos. Nuestro enfoque en ciencia, calidad y confianza nos permite ofrecer atributos esenciales para la industria de alimentos y bebidas más exigente."
           : "Applied science and process control. Our focus on science, quality, and trust allows us to deliver essential chromatic performance for the most demanding food and beverage producers."}
@@ -26,23 +27,23 @@ const { isEs = false } = Astro.props;
     </div>
 
     <!-- Sub-anchor: Soluciones -->
-    <div id="soluciones" class="scroll-mt-28 mb-20">
-      <div class="flex items-center gap-3 mb-8">
+    <div id="soluciones" class="scroll-mt-28 mb-24 md:mb-32">
+      <div class="flex items-center gap-3 mb-10 reveal delay-100">
         <div class="w-8 h-1 bg-[#FFC000] rounded-full"></div>
-        <h3 class="text-2xl sm:text-3xl font-serif text-[#1E1E1E]">
+        <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal">
           {isEs ? "Soluciones de Color por Sector Industrial" : "Tailored Color Solutions by Industry"}
         </h3>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
         
         <!-- Sector 1: Bebidas -->
-        <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-100">
           <div class="text-3xl mb-4">🍹</div>
-          <h4 class="text-xl font-bold text-[#1E1E1E] mb-2">
+          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
             {isEs ? "Bebidas & Refrescos" : "Beverages & Drinks"}
           </h4>
-          <p class="text-gray-600 text-sm font-light leading-relaxed">
+          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
             {isEs
               ? "Soluciones cristalinas o turbias con alta estabilidad lumínica y resistencia a rangos de pH ácidos."
               : "Clear or cloudy solutions engineered for high light fastness and stability across acidic pH ranges."}
@@ -50,12 +51,12 @@ const { isEs = false } = Astro.props;
         </div>
 
         <!-- Sector 2: Lácteos & Helados -->
-        <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-150">
           <div class="text-3xl mb-4">🍦</div>
-          <h4 class="text-xl font-bold text-[#1E1E1E] mb-2">
+          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
             {isEs ? "Lácteos & Heladería" : "Dairy & Ice Cream"}
           </h4>
-          <p class="text-gray-600 text-sm font-light leading-relaxed">
+          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
             {isEs
               ? "Tonos homogéneos que resisten pasteurización, procesos UHT y ciclos de congelación/descongelación."
               : "Homogeneous hues engineered to survive pasteurization, UHT processing, and freeze-thaw cycles."}
@@ -63,12 +64,12 @@ const { isEs = false } = Astro.props;
         </div>
 
         <!-- Sector 3: Confitería -->
-        <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-200">
           <div class="text-3xl mb-4">🍬</div>
-          <h4 class="text-xl font-bold text-[#1E1E1E] mb-2">
+          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
             {isEs ? "Confitería & Chocolates" : "Confectionery & Sweets"}
           </h4>
-          <p class="text-gray-600 text-sm font-light leading-relaxed">
+          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
             {isEs
               ? "Geles, lacas y pastas hidrosolubles o liposolubles de brillo intenso para gomitas, caramelos y coberturas."
               : "Water- and oil-soluble vibrant lakes and pastes providing high gloss for gummies, hard candies, and coatings."}
@@ -76,12 +77,12 @@ const { isEs = false } = Astro.props;
         </div>
 
         <!-- Sector 4: Cárnicos & Salados -->
-        <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-250">
           <div class="text-3xl mb-4">🥩</div>
-          <h4 class="text-xl font-bold text-[#1E1E1E] mb-2">
+          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
             {isEs ? "Cárnicos & Salados" : "Meat & Savory"}
           </h4>
-          <p class="text-gray-600 text-sm font-light leading-relaxed">
+          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
             {isEs
               ? "Colorantes estables en salmuera, cocción y curado para embutidos, análogos vegetales y preparados cárnicos."
               : "Colors stable in brine, cooking, and curing processes for sausages, plant-based meats, and savory meals."}
@@ -89,12 +90,12 @@ const { isEs = false } = Astro.props;
         </div>
 
         <!-- Sector 5: Panadería & Snacks -->
-        <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-300">
           <div class="text-3xl mb-4">🥐</div>
-          <h4 class="text-xl font-bold text-[#1E1E1E] mb-2">
+          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
             {isEs ? "Panadería & Snacks" : "Bakery & Snacks"}
           </h4>
-          <p class="text-gray-600 text-sm font-light leading-relaxed">
+          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
             {isEs
               ? "Polvos y líquidos con excelente retención térmica durante el horneado, extrusión y fritura industrial."
               : "Powders and liquids designed for superior thermal retention during industrial baking, extrusion, and frying."}
@@ -102,12 +103,12 @@ const { isEs = false } = Astro.props;
         </div>
 
         <!-- Sector 6: Salsas & Condimentos -->
-        <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-350">
           <div class="text-3xl mb-4">🥫</div>
-          <h4 class="text-xl font-bold text-[#1E1E1E] mb-2">
+          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
             {isEs ? "Salsas & Condimentos" : "Sauces & Condiments"}
           </h4>
-          <p class="text-gray-600 text-sm font-light leading-relaxed">
+          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
             {isEs
               ? "Dispersión perfecta en emulsiones grasas y bases acuosas sin sedimentación ni separación de fases."
               : "Seamless dispersion in high-fat emulsions and water bases without sedimentation or phase separation."}
@@ -117,9 +118,9 @@ const { isEs = false } = Astro.props;
       </div>
     </div>
 
-    <!-- Sub-anchor: Innovación -->
-    <div id="innovacion" class="scroll-mt-28 bg-[#FAF8F5] p-8 sm:p-12 md:p-16 rounded-3xl border border-[#EDE8E0]">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+    <!-- Sub-anchor: Innovación with Reveal -->
+    <div id="innovacion" class="scroll-mt-28 bg-[#FAF8F5] p-8 sm:p-12 md:p-16 lg:p-20 rounded-3xl border border-[#EDE8E0] reveal delay-150 w-full">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div class="md:col-span-8">
           <div class="flex items-center gap-3 mb-4">
             <div class="w-8 h-1 bg-[#E30066] rounded-full"></div>
@@ -127,10 +128,10 @@ const { isEs = false } = Astro.props;
               {isEs ? "Desarrollo a la Medida" : "Custom Formulation"}
             </span>
           </div>
-          <h3 class="text-3xl sm:text-4xl font-serif text-[#1E1E1E] mb-6 leading-tight">
+          <h3 class="text-3xl sm:text-4xl md:text-5xl font-heading text-[#1E1E1E] font-normal mb-6 leading-tight">
             {isEs ? "Innovación Tecnológica Continua" : "Continuous Technological Innovation"}
           </h3>
-          <p class="text-gray-700 text-base sm:text-lg font-light leading-relaxed mb-6">
+          <p class="text-gray-700 text-base sm:text-lg font-light leading-relaxed mb-8">
             {isEs
               ? "Si su matriz de producto presenta desafíos complejos de estabilidad, migración de color o reemplazo de colorantes artificiales por alternativas naturales, nuestro laboratorio formula el tono exacto que su marca necesita."
               : "If your food formulation faces complex challenges with color bleeding, thermal degradation, or synthetic-to-natural conversion, our specialized food coloring lab formulates the exact chromatic profile your brand needs."}
@@ -138,7 +139,7 @@ const { isEs = false } = Astro.props;
           <div class="flex items-center gap-4">
             <a 
               href={isEs ? "/es/#contact" : "/#contact"} 
-              class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-transform hover:-translate-y-0.5"
+              class="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium text-sm transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
               style="background: linear-gradient(135deg, #E30066 0%, #FF1A75 100%); box-shadow: 0 4px 15px rgba(227, 0, 102, 0.35);"
             >
               <span>{isEs ? "Solicitar Muestra o Formulación" : "Request Sample or Formulation"}</span>
@@ -147,14 +148,14 @@ const { isEs = false } = Astro.props;
           </div>
         </div>
 
-        <div class="md:col-span-4 flex flex-col gap-4">
-          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm text-center">
-            <span class="text-3xl font-light text-[#E30066]">48h</span>
-            <p class="text-xs text-gray-500 uppercase tracking-wider mt-1">{isEs ? "Respuesta Técnica Rápida" : "Rapid Technical Response"}</p>
+        <div class="md:col-span-4 flex flex-col gap-6">
+          <div class="bg-white p-8 rounded-2xl border border-gray-200/80 shadow-sm text-center">
+            <span class="text-3xl sm:text-4xl font-serif font-normal text-[#E30066]">48h</span>
+            <p class="text-xs text-gray-500 uppercase tracking-wider mt-2 font-sans font-medium">{isEs ? "Respuesta Técnica Rápida" : "Rapid Technical Response"}</p>
           </div>
-          <div class="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm text-center">
-            <span class="text-3xl font-light text-[#008AD8]">100%</span>
-            <p class="text-xs text-gray-500 uppercase tracking-wider mt-1">{isEs ? "Ajuste Espectral Exacto" : "Precise Spectral Match"}</p>
+          <div class="bg-white p-8 rounded-2xl border border-gray-200/80 shadow-sm text-center">
+            <span class="text-3xl sm:text-4xl font-serif font-normal text-[#008AD8]">100%</span>
+            <p class="text-xs text-gray-500 uppercase tracking-wider mt-2 font-sans font-medium">{isEs ? "Ajuste Espectral Exacto" : "Precise Spectral Match"}</p>
           </div>
         </div>
       </div>
@@ -162,3 +163,4 @@ const { isEs = false } = Astro.props;
 
   </div>
 </section>
+

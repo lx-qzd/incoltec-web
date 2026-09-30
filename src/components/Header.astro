@@ -2,10 +2,19 @@
 import { Astronav, MenuItems, MenuIcon, DropdownItems } from "astro-navbar";
 
 const { currentPath = "/" } = Astro.props;
-const isEs =
-  Astro.currentLocale === "es" || Astro.url.pathname.startsWith("/es");
-const enPath = currentPath;
-const esPath = currentPath === "/" ? "/es" : `/es${currentPath}`;
+const pathname = Astro.url.pathname;
+const isEs = pathname.startsWith("/es") || Astro.currentLocale === "es";
+
+let enPath = pathname;
+let esPath = pathname;
+if (isEs) {
+  enPath = pathname.replace(/^\/es(\/|$)/, '$1') || '/';
+  esPath = pathname;
+} else {
+  enPath = pathname;
+  esPath = pathname === '/' ? '/es' : `/es${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
+}
+
 
 interface Sublink {
   name: string;
@@ -124,14 +133,18 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
   <div class="incoltec-header__shell">
     <nav class="incoltec-header__nav" aria-label="Primary">
       <!-- Logo -->
-      <a href="/" class="incoltec-header__logo" aria-label="Incoltec Home">
+      <a href={isEs ? "/es" : "/"} class="incoltec-header__logo" aria-label="Incoltec Home">
         <img
           src="/assets/LogoIncoltec.png"
           alt="Incoltec"
           class="incoltec-header__logo-img"
+          width="220"
+          height="50"
           loading="eager"
+          decoding="async"
         />
       </a>
+
 
       <!-- Desktop Navigation Links -->
       <Astronav closeOnClick>

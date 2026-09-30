@@ -5,33 +5,44 @@ import Footer from '../../components/Footer.astro';
 import Hero from '../../components/Hero.astro';
 ---
 
-<Layout title="Catálogos">
-  <Header currentPath="/catalogs" />
+<Layout 
+  title="Catálogos Técnicos de Productos"
+  description="Descarga los catálogos técnicos de INCOLTEC para aplicaciones culinarias HORECA y producción alimentaria industrial a gran escala."
+>
+  <Header currentPath="/es/catalogs" />
   
-  <main>
+  <main class="bg-[#FFFDF9]">
     <Hero 
-      title="Catálogos" 
-      subtitle="Explora nuestras soluciones"
+      title="Catálogos de Productos" 
+      subtitle="Fichas técnicas detalladas y especificaciones de aplicación"
       backgroundImage="/assets/fondo2.jpg" 
     />
 
-    <section class="catalog-section container mx-auto px-4 py-20">
+    <section class="catalog-section container mx-auto px-4 py-24">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         <!-- HORECA Catalog -->
-        <div id="horeca" class="catalog-card bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl p-10 text-center flex flex-col items-center justify-center transition-all hover:-translate-y-1 hover:shadow-2xl duration-300">
-          <h2 class="text-4xl font-light mb-4 text-white">HORECA</h2>
-          <p class="text-gray-300 mb-8">Soluciones especializadas para hoteles, restaurantes y catering.</p>
-          <a href="#" download class="inline-block bg-[#e30066] text-white px-8 py-3 rounded hover:bg-[#c20057] transition-colors font-medium">
-            Descargar PDF
+        <div id="horeca" class="bg-white border border-gray-100/90 rounded-3xl p-10 text-center flex flex-col items-center justify-between transition-all hover:-translate-y-1.5 hover:shadow-xl duration-300 shadow-sm reveal-left delay-100">
+          <div>
+            <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">Hostelería y Gastronomía</span>
+            <h2 class="text-4xl sm:text-5xl font-heading font-normal mb-4 text-[#1E1E1E]">Catálogo HORECA</h2>
+            <p class="text-gray-600 font-light leading-relaxed mb-8 max-w-md">Soluciones de colorantes e ingredientes funcionales diseñadas para hoteles, restaurantes, pastelerías y catering selecto.</p>
+          </div>
+          <a href="#" download class="inline-flex items-center gap-2 bg-gradient-to-r from-[#e30066] to-[#ff1a75] text-white px-8 py-3.5 rounded-full hover:shadow-lg hover:shadow-[#e30066]/30 transition-all font-medium text-sm">
+            <span>Descargar PDF</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           </a>
         </div>
 
         <!-- Industrial Catalog -->
-        <div id="industrial" class="catalog-card bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-xl p-10 text-center flex flex-col items-center justify-center transition-all hover:-translate-y-1 hover:shadow-2xl duration-300">
-          <h2 class="text-4xl font-light mb-4 text-white">Industrial</h2>
-          <p class="text-gray-300 mb-8">Soluciones escalables para la producción industrial de alimentos.</p>
-          <a href="#" download class="inline-block bg-[#e30066] text-white px-8 py-3 rounded hover:bg-[#c20057] transition-colors font-medium">
-            Descargar PDF
+        <div id="industrial" class="bg-white border border-gray-100/90 rounded-3xl p-10 text-center flex flex-col items-center justify-between transition-all hover:-translate-y-1.5 hover:shadow-xl duration-300 shadow-sm reveal-right delay-200">
+          <div>
+            <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold mb-3">Escala y Precisión</span>
+            <h2 class="text-4xl sm:text-5xl font-heading font-normal mb-4 text-[#1E1E1E]">Catálogo Industrial</h2>
+            <p class="text-gray-600 font-light leading-relaxed mb-8 max-w-md">Soluciones cromáticas a granel, perfiles de estabilidad térmica y dosieres regulatorios para procesadores industriales de alimentos y bebidas.</p>
+          </div>
+          <a href="#" download class="inline-flex items-center gap-2 bg-gradient-to-r from-[#e30066] to-[#ff1a75] text-white px-8 py-3.5 rounded-full hover:shadow-lg hover:shadow-[#e30066]/30 transition-all font-medium text-sm">
+            <span>Descargar PDF</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
           </a>
         </div>
       </div>
@@ -40,6 +51,7 @@ import Hero from '../../components/Hero.astro';
 
   <Footer />
 </Layout>
+
 
 <style>
   .catalog-section {

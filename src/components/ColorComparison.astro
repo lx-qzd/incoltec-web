@@ -33,37 +33,51 @@ const {
     { title: "WARNING LABELS", text: "Requires strict warning labels in many regions" },
     { title: "DISTRUST", text: "Decreasing consumer trust and market share" }
   ],
-  bgImage = "/assets/fondo2.jpg"
+  bgImage = "/assets/food-colors-application.webp"
 } = Astro.props;
 
-const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgImage, format: 'webp', width: 960 })).src;
+const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgImage, format: 'webp', width: 1200 })).src;
 ---
 
-<section id={id} class="w-full flex flex-col md:flex-row bg-[#FFFDF9] min-h-screen scroll-mt-24">
-  <!-- Left Side: Content -->
-  <div class="w-full md:w-1/2 flex items-center justify-center p-10 sm:p-16 md:p-20 lg:p-32 order-2 md:order-1">
+<section id={id} class="w-full flex flex-col md:flex-row bg-[#FFFDF9] min-h-screen scroll-mt-24 overflow-hidden">
+  <!-- Left Side: Content & Comparison -->
+  <div class="w-full md:w-1/2 flex items-center justify-center p-8 sm:p-12 md:p-16 lg:p-20 order-2 md:order-1">
     <div class="max-w-2xl text-center flex flex-col items-center w-full">
-      <h2 class="script-text text-[#89385C] text-5xl sm:text-6xl md:text-[5.5rem] lg:text-[6.5rem] mb-6 sm:mb-8 leading-tight">{title}</h2>
+      <div class="reveal-up delay-75 w-full flex flex-col items-center">
+        <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold mb-4">
+          Comparison Analysis
+        </span>
+        <h2 class="font-heading text-[#89385C] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal mb-6 leading-tight">
+          {title}
+        </h2>
+
+        <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-10 sm:mb-12"></div>
+      </div>
       
-      <div class="w-32 h-[1.5px] bg-[#C6ACB8] mb-8 sm:mb-12"></div>
-      
-      <!-- Content comparison -->
-      <div class="w-full text-left space-y-8 sm:space-y-12 mt-4 relative">
+      <!-- Content comparison cards with scroll reveal micro-interactions -->
+      <div class="w-full text-left space-y-8 sm:space-y-10 mt-2 relative">
         
-        <!-- Natural Colors Grid -->
-        <div class="bg-white p-8 sm:p-10 border border-[#89385C]/20 rounded-3xl shadow-sm relative z-10">
-          <h3 class="text-3xl sm:text-4xl font-light text-[#89385C] mb-8 sm:mb-10 text-center">{naturalTitle}</h3>
+        <!-- Natural Colors Card (Glassmorphism Frosted Clean) -->
+        <div class="glass-card-light bg-white/95 backdrop-blur-xl p-8 sm:p-10 md:p-12 border border-emerald-600/20 rounded-3xl shadow-[0_16px_36px_-10px_rgba(16,185,129,0.08)] relative z-10 reveal-left delay-100 hover:border-emerald-600/35 transition-colors">
+          <div class="flex items-center justify-between mb-8 pb-4 border-b border-emerald-600/10">
+            <h3 class="text-3xl sm:text-4xl font-heading text-[#89385C] font-normal m-0">{naturalTitle}</h3>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
+              Clean Label
+            </span>
+          </div>
           
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8">
             {naturalPoints.map(point => (
-              <div class="flex flex-col gap-3">
-                <div class="flex items-center gap-4">
-                  <div class="w-8 h-8 sm:w-10 sm:h-10 shrink-0 text-[#89385C]">
-                    <svg class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-3">
+                  <div class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 text-emerald-600">
+                    <svg class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
                   </div>
-                  <h4 class="font-bold text-[#89385C] uppercase tracking-wider text-base sm:text-lg leading-none mt-1">{point.title}</h4>
+                  <h4 class="font-sans font-bold text-[#89385C] uppercase tracking-wider text-sm sm:text-base leading-none m-0">{point.title}</h4>
                 </div>
-                <p class="text-[#89385C]/80 text-base font-light leading-relaxed">
+                <p class="text-gray-600 text-sm font-light leading-relaxed pl-10">
                   {point.text}
                 </p>
               </div>
@@ -71,27 +85,36 @@ const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgI
           </div>
         </div>
 
-        <!-- VS Divider (3x bigger with generous space between sections) -->
-        <div class="flex justify-center my-8 sm:my-14 relative z-20">
-          <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-[#89385C] border-[6px] border-[#FFFDF9] flex items-center justify-center text-4xl sm:text-5xl font-black text-white shadow-2xl tracking-wider select-none transform hover:scale-105 transition-transform">
-            VS
+        <!-- VS Divider with Glassmorphism Ring -->
+        <div class="flex justify-center my-6 sm:my-10 relative z-20 reveal-scale delay-200">
+          <div class="relative p-1.5 rounded-full bg-white/60 backdrop-blur-md shadow-xl border border-white/80">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-[#89385C] via-[#B8326D] to-[#E30066] flex items-center justify-center text-2xl sm:text-3xl font-heading font-normal text-white shadow-inner tracking-wider select-none transform hover:scale-105 transition-transform">
+              VS
+            </div>
           </div>
         </div>
 
-        <!-- Artificial Colors Grid -->
-        <div class="bg-[#89385C]/5 p-8 sm:p-10 border border-[#89385C]/10 rounded-3xl relative z-10">
-          <h3 class="text-3xl sm:text-4xl font-light text-[#89385C]/80 mb-8 sm:mb-10 text-center">{artificialTitle}</h3>
+        <!-- Artificial Colors Card -->
+        <div class="glass-card-light bg-[#FAF8F6]/90 backdrop-blur-xl p-8 sm:p-10 md:p-12 border border-red-500/15 rounded-3xl relative z-10 reveal-right delay-300">
+          <div class="flex items-center justify-between mb-8 pb-4 border-b border-red-500/10">
+            <h3 class="text-3xl sm:text-4xl font-heading text-gray-700 font-normal m-0">{artificialTitle}</h3>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-red-50 text-red-700 border border-red-200">
+              Synthetic
+            </span>
+          </div>
           
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8">
             {artificialPoints.map(point => (
-              <div class="flex flex-col gap-3">
-                <div class="flex items-center gap-4">
-                  <div class="w-8 h-8 sm:w-10 sm:h-10 shrink-0 text-[#89385C]/60">
-                    <svg class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-3">
+                  <div class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 text-red-500/80">
+                    <svg class="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
                   </div>
-                  <h4 class="font-bold text-[#89385C]/80 uppercase tracking-wider text-base sm:text-lg leading-none mt-1">{point.title}</h4>
+                  <h4 class="font-sans font-bold text-gray-700 uppercase tracking-wider text-sm sm:text-base leading-none m-0">{point.title}</h4>
                 </div>
-                <p class="text-[#89385C]/60 text-base font-light leading-relaxed">
+                <p class="text-gray-500 text-sm font-light leading-relaxed pl-10">
                   {point.text}
                 </p>
               </div>
@@ -100,12 +123,21 @@ const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgI
         </div>
         
       </div>
-
     </div>
   </div>
 
-  <!-- Right Side: Image -->
-  <div class="w-full md:w-1/2 min-h-[400px] md:min-h-screen order-1 md:order-2 relative">
-    <img src={bgUrl} alt={title} class="absolute inset-0 w-full h-full object-cover" />
+  <!-- Right Side: Optimized Visual Image -->
+  <div class="w-full md:w-1/2 min-h-[420px] md:min-h-screen order-1 md:order-2 relative overflow-hidden reveal delay-200">
+    <img 
+      src={bgUrl} 
+      alt={title} 
+      class="absolute inset-0 w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-[10s] ease-out" 
+      loading="lazy"
+      decoding="async"
+      width="1200"
+      height="1200"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none md:bg-gradient-to-r md:from-black/20 md:via-transparent md:to-black/30"></div>
   </div>
 </section>
+

@@ -1,4 +1,9 @@
 ---
+import { getImage } from "astro:assets";
+import fondo1Webp from "../assets/fondo1.webp";
+import fondo2Webp from "../assets/fondo2.webp";
+import fondo3Webp from "../assets/fondo3.webp";
+
 interface Props {
   image: string;
   tag?: string;
@@ -12,36 +17,57 @@ const {
   tag,
   title,
   subtitle,
-  height = "h-[380px] sm:h-[460px] md:h-[540px]"
+  height = "min-h-[420px] sm:min-h-[480px] md:min-h-[560px]"
 } = Astro.props;
+
+// Map string image paths to optimized Astro assets if available
+let optimizedSrc = image;
+if (image.includes("fondo1")) {
+  optimizedSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 })).src;
+} else if (image.includes("fondo2")) {
+  optimizedSrc = (await getImage({ src: fondo2Webp, format: 'webp', width: 1920 })).src;
+} else if (image.includes("fondo3")) {
+  optimizedSrc = (await getImage({ src: fondo3Webp, format: 'webp', width: 1920 })).src;
+}
 ---
 
-<section class={`relative w-full ${height} flex items-center justify-center overflow-hidden`}>
+<section class={`relative w-full ${height} flex items-center justify-center overflow-hidden py-16 px-4`}>
+  <!-- Background Image with smooth zoom on hover -->
   <img 
-    src={image} 
+    src={optimizedSrc} 
     alt={title || "Incoltec food color solutions"} 
     class="absolute inset-0 w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-[12s] ease-out" 
     loading="lazy"
+    decoding="async"
+    width="1920"
+    height="1080"
   />
-  <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60 z-10"></div>
   
+  <!-- Subtle Vignette Layer -->
+  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/60 z-10 pointer-events-none"></div>
+
+  <!-- Frosted Glassmorphism Overlay Card -->
   {(tag || title || subtitle) && (
-    <div class="relative z-20 max-w-4xl mx-auto px-6 text-center text-white">
-      {tag && (
-        <span class="inline-block text-xs sm:text-sm uppercase tracking-[0.3em] font-semibold text-[#FFC000] mb-3 px-4 py-1 rounded-full bg-black/30 backdrop-blur-sm border border-white/10">
-          {tag}
-        </span>
-      )}
-      {title && (
-        <h3 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-wide text-white drop-shadow-lg mb-3">
-          {title}
-        </h3>
-      )}
-      {subtitle && (
-        <p class="text-base sm:text-lg md:text-xl font-light text-white/90 max-w-2xl mx-auto drop-shadow-md leading-relaxed">
-          {subtitle}
-        </p>
-      )}
+    <div class="relative z-20 max-w-4xl mx-auto w-full reveal-scale delay-100">
+      <div class="glass-card-dark rounded-3xl p-8 sm:p-12 md:p-14 text-center border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.65)] ring-1 ring-white/10">
+        {tag && (
+          <span class="inline-block text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold text-[#FFC000] mb-4 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-sm">
+            {tag}
+          </span>
+        )}
+        {title && (
+          <h3 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white mb-4 leading-tight drop-shadow-sm">
+            {title}
+          </h3>
+        )}
+
+        {subtitle && (
+          <p class="text-base sm:text-lg md:text-xl font-light text-white/90 max-w-2xl mx-auto leading-relaxed">
+            {subtitle}
+          </p>
+        )}
+      </div>
     </div>
   )}
 </section>
+

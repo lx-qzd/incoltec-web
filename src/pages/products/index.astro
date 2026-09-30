@@ -12,7 +12,11 @@ const categories = [...new Set(allProducts.map(p => p.data.category))];
 const applications = [...new Set(allProducts.flatMap(p => p.data.applications))];
 ---
 
-<Layout title="Product Catalog">
+<Layout 
+  title="Wholesale Food Color Solutions & Catalog"
+  description="Explore INCOLTEC's full range of natural food colorings, coloring foods, and vitamins with technical data sheets for food manufacturers."
+>
+
   <Header currentPath="/products" />
   
   <Hero 

@@ -4,69 +4,175 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
-	title: string;
-	description?: string;
+  title: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  noindex?: boolean;
 }
 
-const { title, description = "INCOLTEC desarrolla ingredientes, colorantes y soluciones funcionales innovadoras para la industria alimentaria." } = Astro.props;
+const { 
+  title, 
+  description,
+  image,
+  type = "website",
+  noindex = false
+} = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://incoltec.com';
+const pathname = Astro.url.pathname;
+const isEs = pathname.startsWith('/es') || Astro.currentLocale === 'es';
+const lang = isEs ? 'es' : 'en';
+
+// Calculate canonical & alternate i18n URLs
+let enPath = pathname;
+let esPath = pathname;
+if (isEs) {
+  enPath = pathname.replace(/^\/es(\/|$)/, '$1') || '/';
+  esPath = pathname;
+} else {
+  enPath = pathname;
+  esPath = pathname === '/' ? '/es' : `/es${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
+}
+
+const cleanPath = (p: string) => (p.endsWith('/') && p.length > 1 ? p.slice(0, -1) : p);
+const canonicalUrl = `${siteUrl}${cleanPath(pathname)}`;
+const enUrl = `${siteUrl}${cleanPath(enPath)}`;
+const esUrl = `${siteUrl}${cleanPath(esPath)}`;
+const defaultUrl = enUrl;
+
+const defaultDesc = isEs
+  ? "INCOLTEC desarrolla ingredientes, colorantes naturales y soluciones funcionales innovadoras para la industria alimentaria B2B a nivel global."
+  : "INCOLTEC manufactures natural colors, coloring foods, vitamins and functional food ingredients for global food and beverage processors.";
+
+const metaDescription = description || defaultDesc;
+const pageTitle = title.includes("INCOLTEC") ? title : `${title} | INCOLTEC - Shaping the Future of Food Appeal`;
+const ogImage = image || `${siteUrl}/assets/food-colors-application.png`;
+
+// Organization Schema (JSON-LD) for rich snippet
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${siteUrl}/#organization`,
+  "name": "INCOLTEC",
+  "legalName": "Innovaciones Colorantes Técnicos S.L.",
+  "url": siteUrl,
+  "logo": `${siteUrl}/assets/LogoIncoltec.png`,
+  "image": ogImage,
+  "description": "Manufacturer of high-performance natural food colors, coloring foods, vitamins and premixes for food and beverage manufacturers worldwide.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "ES"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "email": "info@incoltec.com",
+      "availableLanguage": ["English", "Spanish"]
+    }
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/company/incoltec"
+  ]
+};
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang} class="scroll-smooth">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" href="/assets/logo-incoltec.png" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} | INCOLTEC - Shaping the Future of Food Appeal</title>
-        <meta name="description" content={description} />
 
-        <!-- Performance optimizations: Preconnect to fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+		<!-- Primary SEO Meta Tags -->
+		<title>{pageTitle}</title>
+		<meta name="title" content={pageTitle} />
+		<meta name="description" content={metaDescription} />
+		{noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow" />}
+		<link rel="canonical" href={canonicalUrl} />
 
-        <!-- Matomo Analytics Placeholder -->
-        <script type="text/plain" data-cookiecategory="analytics" is:inline>
-            var _paq = window._paq = window._paq || [];
-            /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function() {
-                var u="https://stats.incoltec.com/";
-                _paq.push(['setTrackerUrl', u+'matomo.php']);
-                _paq.push(['setSiteId', 'PLACEHOLDER_ID']);
-                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-                g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-            })();
-        </script>
-        <!-- End Matomo Code -->
+		<!-- Internationalization (i18n) Alternate Tags -->
+		<link rel="alternate" hreflang="en" href={enUrl} />
+		<link rel="alternate" hreflang="es" href={esUrl} />
+		<link rel="alternate" hreflang="x-default" href={defaultUrl} />
+
+		<!-- OpenGraph / Facebook / LinkedIn / WhatsApp -->
+		<meta property="og:type" content={type} />
+		<meta property="og:site_name" content="INCOLTEC" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={metaDescription} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={pageTitle} />
+		<meta property="og:locale" content={isEs ? "es_ES" : "en_US"} />
+		<meta property="og:locale:alternate" content={isEs ? "en_US" : "es_ES"} />
+
+		<!-- Twitter Cards -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalUrl} />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={metaDescription} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<!-- Structured Data (JSON-LD Organization Schema) -->
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)} />
+
+		<!-- Typography: Golden Hills (Signature Headings), Playfair Display (Serif), Inter (Body Sans) -->
+		<link rel="preload" href="/fonts/GoldenHillsDEMO.ttf" as="font" type="font/ttf" crossorigin />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+
+		<!-- Matomo Analytics Placeholder -->
+		<script type="text/plain" data-cookiecategory="analytics" is:inline>
+			var _paq = window._paq = window._paq || [];
+			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+			_paq.push(['trackPageView']);
+			_paq.push(['enableLinkTracking']);
+			(function() {
+				var u="https://stats.incoltec.com/";
+				_paq.push(['setTrackerUrl', u+'matomo.php']);
+				_paq.push(['setSiteId', 'PLACEHOLDER_ID']);
+				var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+				g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+			})();
+		</script>
+		<!-- End Matomo Code -->
 	</head>
-	<body>
+	<body class="bg-white text-[#1E1E1E] antialiased selection:bg-[#E30066]/20 selection:text-[#89385C]">
 		<slot />
-        <WhatsAppButton />
-        <CookieConsent />
+		<WhatsAppButton />
+		<CookieConsent />
 
-        <script is:inline>
-            document.addEventListener('DOMContentLoaded', () => {
-                const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-                const revealObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('active');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    root: null,
-                    rootMargin: '0px',
-                    threshold: 0.15
-                });
+		<!-- Scroll-Triggered Micro-Interactions Observer -->
+		<script is:inline>
+			document.addEventListener('DOMContentLoaded', () => {
+				const reveals = document.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale');
+				if (!reveals.length) return;
 
-                reveals.forEach(reveal => {
-                    revealObserver.observe(reveal);
-                });
-            });
-        </script>
+				const revealObserver = new IntersectionObserver((entries, observer) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('active');
+							observer.unobserve(entry.target);
+						}
+					});
+				}, {
+					root: null,
+					rootMargin: '0px 0px -40px 0px',
+					threshold: 0.1
+				});
+
+				reveals.forEach(reveal => {
+					revealObserver.observe(reveal);
+				});
+			});
+		</script>
 	</body>
 </html>
+
