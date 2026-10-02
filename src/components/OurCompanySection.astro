@@ -1,4 +1,6 @@
 ---
+import BrandEIcon from './BrandEIcon.astro';
+
 interface Props {
   isEs?: boolean;
 }
@@ -11,15 +13,19 @@ const { isEs = false } = Astro.props;
     
     <!-- Header with Scroll Reveal -->
     <div class="text-center max-w-3xl mx-auto mb-20 md:mb-28 reveal delay-75 flex flex-col items-center">
-      <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold mb-4">
-        {isEs ? "Sobre Incoltec" : "About Incoltec"}
-      </span>
+      <div class="inline-flex items-center gap-2.5 mb-4">
+        <BrandEIcon class="w-4 h-5 shrink-0" />
+        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">
+          {isEs ? "Sobre Incoltec" : "About Incoltec"}
+        </span>
+      </div>
+
       <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#89385C] font-normal mb-6 leading-tight">
         {isEs ? "Nuestra Empresa" : "Our Company"}
       </h2>
 
       <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-8"></div>
-      <p class="text-lg md:text-xl text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
+      <p class="font-verdana text-base sm:text-lg text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
         {isEs 
           ? "Proximidad, conocimiento local y adaptación. La explosión cromática de nuestras formulaciones simboliza la diversidad de sabores, ingredientes y tradiciones que enriquecen la industria alimentaria mundial."
           : "Proximity, local knowledge, and adaptation. The chromatic explosion of our formulations symbolizes the diversity of flavors, ingredients, and traditions enriching the global food industry."}
@@ -28,8 +34,8 @@ const { isEs = false } = Astro.props;
 
     <!-- Sub-anchor: Organización -->
     <div id="organizacion" class="scroll-mt-28 mb-24 md:mb-32">
-      <div class="flex items-center gap-3 mb-10 reveal delay-100">
-        <div class="w-8 h-1 bg-[#FFC000] rounded-full"></div>
+      <div class="flex items-center gap-3.5 mb-10 reveal delay-100">
+        <BrandEIcon class="w-5 h-6 shrink-0" />
         <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal">
           {isEs ? "Organización y Pilares Estratégicos" : "Organization & Strategic Pillars"}
         </h3>
@@ -37,15 +43,15 @@ const { isEs = false } = Astro.props;
 
       <!-- 3 Pillars Grid with Staggered Scroll-Triggered Micro-Interactions -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-20 md:mb-28">
-        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-3xl shadow-sm border border-gray-100/80 hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-100 flex flex-col justify-between">
+        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100 flex flex-col justify-between">
           <div>
-            <div class="w-12 h-12 rounded-2xl bg-[#E30066]/10 flex items-center justify-center text-[#E30066] mb-6 font-bold text-lg font-sans">
+            <div class="w-12 h-12 rounded-2xl bg-[#E30066]/10 flex items-center justify-center text-[#E30066] mb-6 font-bold text-lg font-verdana">
               01
             </div>
             <h4 class="text-2xl sm:text-3xl font-heading text-[#E30066] mb-4">
               {isEs ? "Solidez Corporativa" : "Corporate Solidity"}
             </h4>
-            <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
               {isEs
                 ? "Construimos relaciones duraderas basadas en la confianza, cumplimiento riguroso de normativas y trazabilidad completa de cada suministro."
                 : "We build long-term relationships based on trust, strict compliance with global food standards, and complete supply traceability."}
@@ -53,15 +59,15 @@ const { isEs = false } = Astro.props;
           </div>
         </div>
 
-        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-3xl shadow-sm border border-gray-100/80 hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-200 flex flex-col justify-between">
+        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200 flex flex-col justify-between">
           <div>
-            <div class="w-12 h-12 rounded-2xl bg-[#FFC000]/15 flex items-center justify-center text-[#FFC000] mb-6 font-bold text-lg font-sans">
+            <div class="w-12 h-12 rounded-2xl bg-[#FFC000]/15 flex items-center justify-center text-[#FFC000] mb-6 font-bold text-lg font-verdana">
               02
             </div>
             <h4 class="text-2xl sm:text-3xl font-heading text-[#b58900] mb-4">
               {isEs ? "Liderazgo Industrial" : "Industrial Leadership"}
             </h4>
-            <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
               {isEs
                 ? "Marcamos la pauta en el desarrollo de soluciones cromáticas avanzadas para productores de alimentos de gran escala y mercados exigentes."
                 : "We set the standard in developing advanced chromatic solutions for large-scale food processors and demanding markets."}
@@ -69,15 +75,15 @@ const { isEs = false } = Astro.props;
           </div>
         </div>
 
-        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-3xl shadow-sm border border-gray-100/80 hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-300 flex flex-col justify-between">
+        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300 flex flex-col justify-between">
           <div>
-            <div class="w-12 h-12 rounded-2xl bg-[#008AD8]/10 flex items-center justify-center text-[#008AD8] mb-6 font-bold text-lg font-sans">
+            <div class="w-12 h-12 rounded-2xl bg-[#008AD8]/10 flex items-center justify-center text-[#008AD8] mb-6 font-bold text-lg font-verdana">
               03
             </div>
             <h4 class="text-2xl sm:text-3xl font-heading text-[#008AD8] mb-4">
               {isEs ? "Innovación Continua" : "Continuous Innovation"}
             </h4>
-            <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
               {isEs
                 ? "Nuestra filosofía 'Vibrant Technology' nos impulsa a buscar siempre la mejora constante en estabilidad, brillo y biodisponibilidad."
                 : "Our 'Vibrant Technology' philosophy drives us to continually enhance color stability, brilliance, and bioavailability."}
@@ -87,12 +93,12 @@ const { isEs = false } = Astro.props;
       </div>
 
       <!-- Stats Bar with Glassy Accent & Reveal -->
-      <div class="bg-white rounded-3xl p-10 sm:p-14 md:p-16 shadow-sm border border-[#89385C]/10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center reveal delay-150 mb-24 md:mb-32">
+      <div class="bg-white rounded-2xl p-10 sm:p-14 md:p-16 shadow-sm border border-[#89385C]/10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center reveal delay-150 mb-24 md:mb-32">
         <div>
           <div class="text-4xl sm:text-5xl font-serif font-normal text-[#89385C] mb-2">
             20<span class="font-bold text-[#FFC000]">+</span>
           </div>
-          <p class="text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-sans font-medium">
+          <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
             {isEs ? "Años de Experiencia" : "Years of Experience"}
           </p>
         </div>
@@ -100,7 +106,7 @@ const { isEs = false } = Astro.props;
           <div class="text-4xl sm:text-5xl font-serif font-normal text-[#89385C] mb-2">
             100<span class="font-bold text-[#E30066]">%</span>
           </div>
-          <p class="text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-sans font-medium">
+          <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
             {isEs ? "Opciones Naturales" : "Natural Options"}
           </p>
         </div>
@@ -108,7 +114,7 @@ const { isEs = false } = Astro.props;
           <div class="text-4xl sm:text-5xl font-serif font-normal text-[#89385C] mb-2">
             50<span class="font-bold text-[#008AD8]">+</span>
           </div>
-          <p class="text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-sans font-medium">
+          <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
             {isEs ? "Mercados Globales" : "Global Markets"}
           </p>
         </div>
@@ -116,7 +122,7 @@ const { isEs = false } = Astro.props;
           <div class="text-4xl sm:text-5xl font-serif font-normal text-[#89385C] mb-2">
             10<span class="font-bold text-[#89385C]">K+</span>
           </div>
-          <p class="text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-sans font-medium">
+          <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
             {isEs ? "Clientes Satisfechos" : "Happy Clients"}
           </p>
         </div>
@@ -124,31 +130,31 @@ const { isEs = false } = Astro.props;
     </div>
 
     <!-- Sub-anchor: Laboratorio with Scroll Reveal & Image Optimization -->
-    <div id="laboratorio" class="scroll-mt-28 bg-[#FAF8F5] p-8 sm:p-12 md:p-16 lg:p-20 rounded-3xl border border-[#EDE8E0] reveal delay-100 w-full">
+    <div id="laboratorio" class="scroll-mt-28 bg-[#FAF8F5] p-8 sm:p-12 md:p-16 lg:p-20 rounded-2xl border border-[#EDE8E0] reveal delay-100 w-full">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div class="md:col-span-7 reveal-left delay-150">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-1 bg-[#008AD8] rounded-full"></div>
-            <span class="text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
+            <BrandEIcon class="w-4 h-5 shrink-0" />
+            <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
               {isEs ? "Investigación & Desarrollo" : "Research & Development"}
             </span>
           </div>
           <h3 class="text-3xl sm:text-4xl md:text-5xl font-heading text-[#1E1E1E] font-normal mb-6 leading-tight">
             {isEs ? "Laboratorio y Producción Avanzada" : "Advanced Laboratory & Production"}
           </h3>
-          <p class="text-gray-700 text-base sm:text-lg font-light leading-relaxed mb-8">
+          <p class="font-verdana text-gray-700 text-sm sm:text-base font-light leading-relaxed mb-8">
             {isEs
               ? "En nuestro centro de I+D formulamos colorantes líquidos, en pasta, en polvo y en gel, adaptados específicamente a la matriz físico-química de su producto final. Evaluamos resistencia a tratamientos térmicos, pH, foto-estabilidad y vida útil."
               : "In our R&D center, we formulate liquid, paste, powder, and gel colorings tailored specifically to the physicochemical matrix of your food product. We test resistance to heat processing, pH variance, photostability, and shelf life."}
           </p>
           <div class="flex flex-wrap gap-3">
-            <span class="px-4 py-2 rounded-full bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-sm">
+            <span class="font-verdana px-4 py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-sm">
               {isEs ? "Colorantes Líquidos & en Pasta" : "Liquid & Paste Colors"}
             </span>
-            <span class="px-4 py-2 rounded-full bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-sm">
+            <span class="font-verdana px-4 py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-sm">
               {isEs ? "Polvo & Geles de Precisión" : "Powder & Precision Gels"}
             </span>
-            <span class="px-4 py-2 rounded-full bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-sm">
+            <span class="font-verdana px-4 py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-sm">
               {isEs ? "Ensayos de Estabilidad a Medida" : "Custom Stability Testing"}
             </span>
           </div>
@@ -166,7 +172,7 @@ const { isEs = false } = Astro.props;
               height="600"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="absolute bottom-4 left-4 right-4 text-white text-sm font-light">
+            <div class="font-verdana absolute bottom-4 left-4 right-4 text-white text-xs sm:text-sm font-light">
               {isEs ? "Control analítico y cromático por espectrofotometría" : "Spectrophotometric chromatic & analytical quality control"}
             </div>
           </div>

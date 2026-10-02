@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import BrandEIcon from "./BrandEIcon.astro";
 import bolitas from '../assets/bolitas.webp';
 import paellaFull from '../assets/paella full.webp';
 import salmon from '../assets/salmon.webp';
@@ -10,43 +11,43 @@ import restImg3 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-can
 ---
 
 <div class="horeca-wrapper w-full bg-white">
-  <!-- 1. Hero Section: Paella (First this) -->
+  <!-- 1. Hero Section: Paella -->
   <section class="relative w-full h-[540px] sm:h-[640px] md:h-[720px] flex items-center justify-center overflow-hidden">
     <Image src={paellaFull} alt="HORECA Incoltec" class="absolute inset-0 w-full h-full object-cover z-0" />
-    <div class="absolute inset-0 bg-black/40 z-0"></div>
-    <div class="relative z-10 flex flex-col items-center justify-center p-6 text-center">
-      <span class="text-white text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase mb-2 md:mb-3 font-semibold text-white/90">DIVISIÓN ESPECIALIZADA</span>
-      <h1 class="text-white text-5xl sm:text-7xl md:text-8xl font-extralight tracking-[0.25em] drop-shadow-xl mb-4 md:mb-6 uppercase">HORECA</h1>
+    <div class="absolute inset-0 bg-black/45 z-0"></div>
+    <div class="relative z-10 flex flex-col items-center justify-center p-6 text-center reveal-scale delay-75">
+      <span class="font-verdana text-white/90 text-xs sm:text-sm md:text-base tracking-[0.3em] uppercase mb-2 md:mb-3 font-semibold">DIVISIÓN ESPECIALIZADA</span>
+      <h1 class="font-heading text-white text-6xl sm:text-8xl md:text-9xl font-normal tracking-wide drop-shadow-2xl mb-4 md:mb-6">HORECA</h1>
       <img src="/assets/logo-incoltec-w.png" alt="Incoltec" class="w-[280px] sm:w-[440px] md:w-[620px] h-auto drop-shadow-2xl" />
-      <span class="text-white text-[10px] sm:text-xs md:text-sm tracking-[0.25em] uppercase mt-3 font-semibold text-white/90">SHAPING THE FUTURE OF FOOD APPEAL</span>
+      <span class="font-verdana text-white/90 text-[10px] sm:text-xs md:text-sm tracking-[0.25em] uppercase mt-4 font-semibold">SHAPING THE FUTURE OF FOOD APPEAL</span>
     </div>
   </section>
 
-  <!-- 2. Quote Section: Chevrons + Text (Then this text) -->
+  <!-- 2. Quote Section: Chevrons + Text (Matching Reference Image 4) -->
   <section class="max-w-[1300px] mx-auto py-16 md:py-24 px-6 md:px-12 bg-white">
     <div class="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16">
       
-      <!-- Left: 3 Brand Chevrons -->
-      <div class="flex flex-col gap-3 sm:gap-4 w-48 sm:w-60 md:w-72 shrink-0">
+      <!-- Left: 3 Brand Chevrons (The 'E' of the logo) -->
+      <div class="flex flex-col gap-3 sm:gap-4 w-48 sm:w-60 md:w-72 shrink-0 reveal-left delay-100">
         <div class="horeca-chevron horeca-chevron--yellow"></div>
         <div class="horeca-chevron horeca-chevron--magenta"></div>
         <div class="horeca-chevron horeca-chevron--blue"></div>
       </div>
 
-      <!-- Right: Main Quote & Attribution -->
-      <div class="flex-1 flex flex-col justify-center text-left">
-        <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading mb-6 sm:mb-8 text-[#1E1E1E] leading-[1.15]">
+      <!-- Right: Main Quote & Attribution in Cursive Script (Image 4) -->
+      <div class="flex-1 flex flex-col justify-center text-left reveal-right delay-150">
+        <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading mb-6 sm:mb-8 text-[#1E1E1E] leading-[1.18]">
           "De la cocina de élite <br class="hidden sm:inline" />a tus operaciones"
         </h2>
 
         <div class="mt-2">
-          <p class="text-xl sm:text-2xl md:text-3xl font-light text-[#1E1E1E] tracking-tight">
-            <span class="font-normal">Faus Arroyo</span>
-            <span class="text-base sm:text-lg md:text-xl font-normal text-gray-600 ml-2 block sm:inline mt-1 sm:mt-0">
-              Aliado Estratégico de Incoltec para el sector HORECA
+          <p class="font-verdana text-lg sm:text-xl md:text-2xl font-light text-[#1E1E1E] tracking-tight">
+            <span class="font-semibold text-gray-900">Faus Arroyo</span>
+            <span class="text-sm sm:text-base md:text-lg font-normal text-gray-600 ml-2 block sm:inline mt-1 sm:mt-0">
+              — Aliado Estratégico de Incoltec para el sector HORECA
             </span>
           </p>
-          <p class="text-gray-500 italic font-serif text-base sm:text-lg mt-1">
+          <p class="font-verdana text-gray-500 text-xs sm:text-sm mt-1.5 font-light">
             Chef ejecutivo, propietario del exitoso Lolita Restaurante, Punta Cana
           </p>
         </div>
@@ -55,52 +56,95 @@ import restImg3 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-can
     </div>
   </section>
 
-  <!-- 3. Fausto Arroyo Section Apart: Dedicated section with portrait, restaurant images & text -->
+  <!-- 3. Alianza Estratégica HORECA Section (Matching Reference Image 5) -->
   <section class="w-full bg-[#FAF8F5] py-20 md:py-28 border-y border-[#EDE8E0]">
     <div class="max-w-[1240px] mx-auto px-6 md:px-12">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
         
-        <!-- Left: Chef Image Card -->
-        <div class="md:col-span-5 relative">
-          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-            <Image src={chefImg} alt="Chef Fausto Arroyo" class="w-full h-auto object-cover object-center" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+        <!-- Left: Chef Image Card (Fausto Arroyo) with Brand 'E' Icon on the left -->
+        <div class="md:col-span-5 relative reveal-left delay-100 flex items-center gap-3.5 sm:gap-5">
+          
+          <!-- Iconic 3-Chevron "E" of the Incoltec Logo on the left of the Chef image -->
+          <div class="flex flex-col gap-2.5 sm:gap-3.5 w-10 sm:w-14 md:w-16 shrink-0" aria-label="Logo Incoltec E">
+            <div class="horeca-chevron-side horeca-chevron--yellow"></div>
+            <div class="horeca-chevron-side horeca-chevron--magenta"></div>
+            <div class="horeca-chevron-side horeca-chevron--blue"></div>
+          </div>
+
+          <!-- Chef Card -->
+          <div class="relative flex-1 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white group">
+            <Image 
+              src={chefImg} 
+              alt="Chef Fausto Arroyo" 
+              class="w-full h-auto object-cover object-center group-hover:scale-102 transition-transform duration-700 ease-out" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+            
+            <!-- Elegant Brand Badge on top-left of image -->
+            <div class="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-20 flex items-center gap-2 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-xl bg-white/95 backdrop-blur-md shadow-md border border-white/80">
+              <BrandEIcon class="w-3.5 h-4.5 sm:w-4 sm:h-5" />
+              <span class="font-verdana text-[9px] sm:text-[10px] tracking-[0.2em] font-bold text-gray-900 uppercase">HORECA</span>
+            </div>
+
             <div class="absolute bottom-6 left-6 right-6 text-white">
-              <span class="text-xs uppercase tracking-[0.2em] font-semibold text-[#FFC000] mb-1 block">Chef Ejecutivo & Aliado Estratégico</span>
-              <h3 class="font-heading text-3xl sm:text-4xl">Fausto Arroyo</h3>
-              <p class="text-sm font-light text-white/85 mt-1">Lolita Restaurante • Punta Cana, República Dominicana</p>
+              <div class="flex items-center gap-2 mb-1.5">
+                <BrandEIcon class="w-3.5 h-4 shrink-0" />
+                <span class="font-verdana text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold text-[#FFC000]">
+                  CHEF EJECUTIVO & ALIADO ESTRATÉGICO
+                </span>
+              </div>
+              <h3 class="font-heading text-3xl sm:text-4xl text-white font-normal mb-1">Fausto Arroyo</h3>
+              <p class="font-verdana text-xs sm:text-sm font-light text-white/90">Lolita Restaurante • Punta Cana, República Dominicana</p>
             </div>
           </div>
         </div>
 
-        <!-- Right: Story, Restaurant Photos & Operational Synergy -->
-        <div class="md:col-span-7 flex flex-col justify-center">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-8 h-1 bg-[#E30066] rounded-full"></div>
-            <span class="text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">Alianza Estratégica HORECA</span>
+        <!-- Right: Story, 3 Restaurant Photos & Operational Synergy (Image 5) -->
+        <div class="md:col-span-7 flex flex-col justify-center reveal-right delay-150">
+          <!-- Tag matching reference Image 5 with Brand E Icon on left -->
+          <div class="flex items-center gap-2.5 mb-4">
+            <BrandEIcon class="w-4 h-5 shrink-0" />
+            <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">
+              ALIANZA ESTRATÉGICA HORECA
+            </span>
           </div>
-          <h3 class="text-3xl md:text-4xl lg:text-5xl font-heading text-[#1E1E1E] mb-6 leading-tight">
+
+          <!-- Title in Cursive Script (Image 5) -->
+          <h3 class="text-3xl sm:text-4xl md:text-5xl font-heading text-[#1E1E1E] mb-6 leading-tight">
             Alta gastronomía aplicada a la rentabilidad de su negocio
           </h3>
 
-          <!-- 3 Restaurant Images -->
-          <div class="grid grid-cols-3 gap-3 sm:gap-4 mb-8">
-            <div class="overflow-hidden rounded-2xl shadow-md group border border-gray-100 bg-white">
-              <Image src={restImg1} alt="Lolita Restaurante Interior" class="w-full h-32 sm:h-44 object-cover group-hover:scale-105 transition-transform duration-500" />
+          <!-- 3 Food / Restaurant Images Side-by-Side (Image 5) -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-4 mb-7">
+            <div class="overflow-hidden rounded-2xl shadow-md border border-gray-100 bg-white group">
+              <Image 
+                src={restImg1} 
+                alt="Alta Gastronomía Paella" 
+                class="w-full h-28 sm:h-36 md:h-40 object-cover group-hover:scale-105 transition-transform duration-500" 
+              />
             </div>
-            <div class="overflow-hidden rounded-2xl shadow-md group border border-gray-100 bg-white">
-              <Image src={restImg2} alt="Lolita Sign Punta Cana" class="w-full h-32 sm:h-44 object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="overflow-hidden rounded-2xl shadow-md border border-gray-100 bg-white group">
+              <Image 
+                src={restImg2} 
+                alt="Langostinos Lolita" 
+                class="w-full h-28 sm:h-36 md:h-40 object-cover group-hover:scale-105 transition-transform duration-500" 
+              />
             </div>
-            <div class="overflow-hidden rounded-2xl shadow-md group border border-gray-100 bg-white">
-              <Image src={restImg3} alt="Elaboración Culinaria de Élite" class="w-full h-32 sm:h-44 object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="overflow-hidden rounded-2xl shadow-md border border-gray-100 bg-white group">
+              <Image 
+                src={restImg3} 
+                alt="Carpaccio de Autor Lolita" 
+                class="w-full h-28 sm:h-36 md:h-40 object-cover group-hover:scale-105 transition-transform duration-500" 
+              />
             </div>
           </div>
 
-          <p class="text-lg md:text-xl text-gray-700 leading-relaxed mb-5 font-light">
-            Combinamos la <strong>"genialidad" creativa</strong> de Faus (fórmulas maestras, procesos reproducibles y sistemas de cocina de alto nivel) con el <strong>soporte técnico y logístico</strong> de Incoltec (eficiencia operativa, formulación clean label y control de costos de materia prima).
+          <!-- Paragraphs in Verdana matching Reference Image 5 -->
+          <p class="font-verdana text-sm sm:text-base text-gray-700 leading-relaxed mb-4 font-light">
+            Combinamos la <strong class="font-semibold text-gray-900">"genialidad" creativa</strong> de Faus (fórmulas maestras, procesos reproducibles y sistemas de cocina de alto nivel) con el <strong class="font-semibold text-gray-900">soporte técnico y logístico</strong> de Incoltec (eficiencia operativa, formulación clean label y control de costos de materia prima).
           </p>
-          <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-light">
-            Incoltec, junto a Faus Arroyo, unen fuerzas para crear el <strong>"Sistema Operativo de Éxito"</strong> para hoteles, resorts y cadenas de restaurantes.
+          <p class="font-verdana text-sm sm:text-base text-gray-700 leading-relaxed font-light">
+            Incoltec, junto a Faus Arroyo, unen fuerzas para crear el <strong class="font-semibold text-gray-900">"Sistema Operativo de Éxito"</strong> para hoteles, resorts y cadenas de restaurantes.
           </p>
         </div>
 
@@ -111,56 +155,59 @@ import restImg3 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-can
   <!-- 4. Image: Science Section Banner -->
   <section class="relative w-full h-[500px] flex items-center justify-center overflow-hidden">
     <Image src={salmon} alt="La ciencia detrás del sabor" class="absolute inset-0 w-full h-full object-cover z-0" />
-    <div class="absolute inset-0 bg-black/35 z-0"></div>
-    <div class="relative z-10 text-center px-6">
+    <div class="absolute inset-0 bg-black/40 z-0"></div>
+    <div class="relative z-10 text-center px-6 reveal-scale delay-100">
       <h2 class="text-white text-5xl md:text-7xl lg:text-8xl font-heading drop-shadow-2xl">
         La ciencia detrás del sabor
       </h2>
-      <p class="text-white/90 text-lg md:text-xl font-light mt-4 tracking-wide max-w-2xl mx-auto drop-shadow-md">
+      <p class="font-verdana text-white/95 text-base sm:text-lg md:text-xl font-light mt-4 tracking-wide max-w-2xl mx-auto drop-shadow-md">
         Tecnología de formulación de élite diseñada para mantener vivacidad, estabilidad térmica y atractivo visual.
       </p>
     </div>
   </section>
 
   <!-- 5. Section: Kitchen Transformation Value Proposition -->
-  <section class="max-w-[1240px] mx-auto py-20 md:py-28 px-6 md:px-12 bg-[#FAF8F5] my-12 rounded-3xl border border-[#EDE8E0]">
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <span class="text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold mb-3 block">Eficiencia & Estandarización</span>
+  <section class="max-w-[1240px] mx-auto py-20 md:py-28 px-6 md:px-12 bg-[#FAF8F5] my-12 rounded-2xl border border-[#EDE8E0]">
+    <div class="text-center max-w-3xl mx-auto mb-16 reveal delay-75">
+      <div class="inline-flex items-center gap-2.5 mb-3">
+        <BrandEIcon class="w-4 h-5 shrink-0" />
+        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">Eficiencia & Estandarización</span>
+      </div>
       <h3 class="text-3xl md:text-5xl lg:text-6xl font-heading text-[#1E1E1E] mb-6">
         El Sistema Operativo de Éxito para su Cocina
       </h3>
-      <p class="text-gray-600 text-lg font-light leading-relaxed">
+      <p class="font-verdana text-gray-600 text-sm sm:text-base font-light leading-relaxed">
         Soluciones integrales concebidas por chefs y científicos de alimentos para responder a los desafíos de los grandes volúmenes y la alta exigencia culinaria.
       </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center reveal delay-100 hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300">
         <div class="w-14 h-14 rounded-2xl bg-[#FFC000]/15 flex items-center justify-center text-[#FFC000] mb-6">
           <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         </div>
         <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">Reducción de Mermas</h4>
-        <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+        <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
           Estandarización de porcionamiento y optimización de rendimientos en línea caliente y preparación previa.
         </p>
       </div>
 
-      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center reveal delay-200 hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300">
         <div class="w-14 h-14 rounded-2xl bg-[#E30066]/15 flex items-center justify-center text-[#E30066] mb-6">
           <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
         </div>
         <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">Consistencia de Plato</h4>
-        <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+        <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
           Garantía de sabor, textura y color invariable en cada servicio, sin depender del turno de cocina.
         </p>
       </div>
 
-      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+      <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center reveal delay-300 hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300">
         <div class="w-14 h-14 rounded-2xl bg-[#008AD8]/15 flex items-center justify-center text-[#008AD8] mb-6">
           <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
         </div>
         <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">Control de Rentabilidad</h4>
-        <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+        <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
           Convierte cada receta en un activo medible, reduciendo costes ocultos y multiplicando el margen bruto.
         </p>
       </div>
@@ -170,8 +217,8 @@ import restImg3 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-can
   <!-- 6. Image: Transformation Section Banner -->
   <section class="relative w-full h-[600px] flex items-center justify-center overflow-hidden">
     <Image src={bolitas} alt="Transform your kitchen" class="absolute inset-0 w-full h-full object-cover z-0" />
-    <div class="absolute inset-0 bg-black/35 z-0"></div>
-    <h2 class="relative z-10 text-white text-4xl md:text-6xl lg:text-7xl font-heading leading-[1.3] drop-shadow-2xl text-center px-6 max-w-4xl">
+    <div class="absolute inset-0 bg-black/40 z-0"></div>
+    <h2 class="relative z-10 text-white text-4xl md:text-6xl lg:text-7xl font-heading leading-[1.3] drop-shadow-2xl text-center px-6 max-w-4xl reveal-scale delay-100">
       Transformar su cocina <br/>
       de un "centro de costos" <br/>
       a un "activo de rentabilidad".
@@ -209,5 +256,20 @@ import restImg3 from '../assets/restaurante-en-punta-cana-restaurante-en-cap-can
 
   .horeca-chevron--blue {
     background: linear-gradient(90deg, #005BAB 0%, #008AD8 100%);
+  }
+
+  /* Side chevrons flanking the chef image */
+  .horeca-chevron-side {
+    height: 48px;
+    width: 100%;
+    clip-path: polygon(0 0, 76% 0, 100% 50%, 76% 100%, 0 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 2px;
+  }
+
+  .horeca-chevron-side:hover {
+    transform: translateX(4px);
+    filter: brightness(1.08);
   }
 </style>

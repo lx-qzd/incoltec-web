@@ -1,4 +1,5 @@
 ---
+import BrandEIcon from './BrandEIcon.astro';
 import ColorComparison from './ColorComparison.astro';
 
 interface Props {
@@ -13,15 +14,19 @@ const { isEs = false } = Astro.props;
     
     <!-- Header with Scroll Reveal -->
     <div class="text-center max-w-3xl mx-auto mb-20 md:mb-28 reveal delay-75 flex flex-col items-center">
-      <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold mb-4">
-        {isEs ? "Gama de Colores & Ingredientes" : "Colors & Ingredient Portfolio"}
-      </span>
+      <div class="inline-flex items-center gap-2.5 mb-4">
+        <BrandEIcon class="w-4 h-5 shrink-0" />
+        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
+          {isEs ? "Gama de Colores & Ingredientes" : "Colors & Ingredient Portfolio"}
+        </span>
+      </div>
+
       <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#89385C] font-normal mb-6 leading-tight">
         {isEs ? "Saborea los Colores" : "Taste Colors"}
       </h2>
 
       <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-8"></div>
-      <p class="text-lg md:text-xl text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
+      <p class="font-verdana text-base sm:text-lg text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
         {isEs
           ? "Naturaleza como inspiración. Las soluciones de INCOLTEC combinan elementos orgánicos con tecnología avanzada para crear una experiencia visual incomparable que despierta emociones y realza el atractivo de los alimentos."
           : "Nature as inspiration. INCOLTEC solutions combine organic botanicals with advanced processing technology to create an unparalleled visual experience that evokes emotion and elevates food appeal."}
@@ -32,7 +37,7 @@ const { isEs = false } = Astro.props;
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-24 md:mb-36">
       
       <!-- Sub-anchor: Colorantes Naturales -->
-      <div id="colorantes-naturales" class="scroll-mt-28 bg-white p-8 sm:p-10 md:p-12 rounded-3xl shadow-sm border border-gray-100/80 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-100">
+      <div id="colorantes-naturales" class="scroll-mt-28 bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100">
         <div>
           <div class="w-12 h-12 rounded-2xl bg-[#FFC000]/15 text-[#b58900] flex items-center justify-center mb-6 font-bold">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
@@ -40,19 +45,19 @@ const { isEs = false } = Astro.props;
           <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal mb-4">
             {isEs ? "Colorantes Naturales" : "Natural Colors"}
           </h3>
-          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed mb-6">
+          <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
             {isEs
               ? "Extractos concentrados y estandarizados derivados directamente de fuentes botánicas y minerales: E-100 Curcumina, E-120 Carmín, E-141 Cu-Clorofilina, E-160b Bixina/Norina y Antocianinas."
               : "Concentrated, standardized extracts derived directly from botanical and mineral sources: E-100 Curcumin, E-120 Carmine, E-141 Cu-Chlorophyllin, E-160b Annatto, and Anthocyanins."}
           </p>
         </div>
-        <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#b58900] uppercase tracking-wider font-sans">
+        <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#b58900] uppercase tracking-wider font-verdana">
           {isEs ? "Alta Concentración & Estabilidad" : "High Concentration & Stability"}
         </div>
       </div>
 
       <!-- Sub-anchor: Alimentos Colorantes -->
-      <div id="alimentos-colorantes" class="scroll-mt-28 bg-white p-8 sm:p-10 md:p-12 rounded-3xl shadow-sm border border-gray-100/80 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-200">
+      <div id="alimentos-colorantes" class="scroll-mt-28 bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200">
         <div>
           <div class="w-12 h-12 rounded-2xl bg-[#E30066]/10 text-[#E30066] flex items-center justify-center mb-6 font-bold">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -60,19 +65,19 @@ const { isEs = false } = Astro.props;
           <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal mb-4">
             {isEs ? "Alimentos Colorantes" : "Coloring Foods"}
           </h3>
-          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed mb-6">
+          <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
             {isEs
               ? "100% Clean Label. Elaborados exclusivamente con materias primas alimentarias comestibles mediante procesos físicos: Azafrán, Concentrados de Espirulina (Blue Genipa), Zanahoria Negra y Remolacha."
               : "100% Clean Label. Crafted strictly from edible agricultural foods through gentle physical processes: Saffron, Spirulina & Genipa Blue, Black Carrot, and Beetroot concentrates."}
           </p>
         </div>
-        <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#E30066] uppercase tracking-wider font-sans">
+        <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#E30066] uppercase tracking-wider font-verdana">
           {isEs ? "Sin Número E • Etiqueta Limpia" : "No E-Numbers • Clean Label"}
         </div>
       </div>
 
       <!-- Sub-anchor: Vitaminas & Pre Mixes -->
-      <div id="vitaminas-premixes" class="scroll-mt-28 bg-white p-8 sm:p-10 md:p-12 rounded-3xl shadow-sm border border-gray-100/80 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-300">
+      <div id="vitaminas-premixes" class="scroll-mt-28 bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300">
         <div>
           <div class="w-12 h-12 rounded-2xl bg-[#008AD8]/10 text-[#008AD8] flex items-center justify-center mb-6 font-bold">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
@@ -80,13 +85,13 @@ const { isEs = false } = Astro.props;
           <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal mb-4">
             {isEs ? "Vitaminas & Premixes" : "Vitamins & Pre Mixes"}
           </h3>
-          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed mb-6">
+          <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
             {isEs
               ? "Premezclas a medida para la fortificación y enriquecimiento nutricional de alimentos y bebidas. Vitaminas A, D, C, complejo B y micronutrientes combinados con soporte cromático homogéneo."
               : "Custom premixes for nutritional fortification and enrichment of foods and beverages. Vitamins A, D, C, B-complex, and micronutrients combined with homogeneous chromatic carriers."}
           </p>
         </div>
-        <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#008AD8] uppercase tracking-wider font-sans">
+        <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#008AD8] uppercase tracking-wider font-verdana">
           {isEs ? "Fortificación Nutracéutica" : "Nutraceutical Fortification"}
         </div>
       </div>

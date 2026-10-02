@@ -1,4 +1,6 @@
 ---
+import BrandEIcon from './BrandEIcon.astro';
+
 interface Props {
   isEs?: boolean;
 }
@@ -11,15 +13,19 @@ const { isEs = false } = Astro.props;
     
     <!-- Header with Scroll Reveal -->
     <div class="text-center max-w-3xl mx-auto mb-20 md:mb-28 reveal delay-75 flex flex-col items-center">
-      <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold mb-4">
-        {isEs ? "Ciencia & Aplicación" : "Science & Application"}
-      </span>
+      <div class="inline-flex items-center gap-2.5 mb-4">
+        <BrandEIcon class="w-4 h-5 shrink-0" />
+        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">
+          {isEs ? "Ciencia & Aplicación" : "Science & Application"}
+        </span>
+      </div>
+
       <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#89385C] font-normal mb-6 leading-tight">
         {isEs ? "Perfeccionando Alimentos" : "Perfecting Food"}
       </h2>
 
       <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-8"></div>
-      <p class="text-lg md:text-xl text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
+      <p class="font-verdana text-base sm:text-lg text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
         {isEs
           ? "Ciencia aplicada y control de procesos. Nuestro enfoque en ciencia, calidad y confianza nos permite ofrecer atributos esenciales para la industria de alimentos y bebidas más exigente."
           : "Applied science and process control. Our focus on science, quality, and trust allows us to deliver essential chromatic performance for the most demanding food and beverage producers."}
@@ -28,8 +34,8 @@ const { isEs = false } = Astro.props;
 
     <!-- Sub-anchor: Soluciones -->
     <div id="soluciones" class="scroll-mt-28 mb-24 md:mb-32">
-      <div class="flex items-center gap-3 mb-10 reveal delay-100">
-        <div class="w-8 h-1 bg-[#FFC000] rounded-full"></div>
+      <div class="flex items-center gap-3.5 mb-10 reveal delay-100">
+        <BrandEIcon class="w-5 h-6 shrink-0" />
         <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal">
           {isEs ? "Soluciones de Color por Sector Industrial" : "Tailored Color Solutions by Industry"}
         </h3>
@@ -38,100 +44,145 @@ const { isEs = false } = Astro.props;
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
         
         <!-- Sector 1: Bebidas -->
-        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-100">
-          <div class="text-3xl mb-4">🍹</div>
-          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
-            {isEs ? "Bebidas & Refrescos" : "Beverages & Drinks"}
-          </h4>
-          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
-            {isEs
-              ? "Soluciones cristalinas o turbias con alta estabilidad lumínica y resistencia a rangos de pH ácidos."
-              : "Clear or cloudy solutions engineered for high light fastness and stability across acidic pH ranges."}
-          </p>
+        <div class="bg-white p-8 sm:p-10 rounded-2xl border border-gray-100/90 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100 flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-[#008AD8]/10 text-[#008AD8] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <!-- Line icon: Beverages / Drink Glass with Straw -->
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 21h10M12 21v-7M6 4h12l-1.8 9.2A2 2 0 0 1 14.2 15H9.8a2 2 0 0 1-1.97-1.8L6 4zM16 2l-2 5"/>
+              </svg>
+            </div>
+            <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
+              {isEs ? "Bebidas & Refrescos" : "Beverages & Drinks"}
+            </h4>
+            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+              {isEs
+                ? "Soluciones cristalinas o turbias con alta estabilidad lumínica y resistencia a rangos de pH ácidos."
+                : "Clear or cloudy solutions engineered for high light fastness and stability across acidic pH ranges."}
+            </p>
+          </div>
         </div>
 
         <!-- Sector 2: Lácteos & Helados -->
-        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-150">
-          <div class="text-3xl mb-4">🍦</div>
-          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
-            {isEs ? "Lácteos & Heladería" : "Dairy & Ice Cream"}
-          </h4>
-          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
-            {isEs
-              ? "Tonos homogéneos que resisten pasteurización, procesos UHT y ciclos de congelación/descongelación."
-              : "Homogeneous hues engineered to survive pasteurization, UHT processing, and freeze-thaw cycles."}
-          </p>
+        <div class="bg-white p-8 sm:p-10 rounded-2xl border border-gray-100/90 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-150 flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-[#FFC000]/15 text-[#b58900] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <!-- Line icon: Dairy & Ice Cream Cone -->
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m7 11 5 11 5-11M6.5 11a5.5 5.5 0 1 1 11 0c0 .4-.3.8-.7.9-1.2.3-2.3 0-3.3-.6-.9.6-2 .9-3.2.6-.9-.2-1.7-.5-2.6-.1-.5.2-.9-.2-1.2-.8z"/>
+              </svg>
+            </div>
+            <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
+              {isEs ? "Lácteos & Heladería" : "Dairy & Ice Cream"}
+            </h4>
+            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+              {isEs
+                ? "Tonos homogéneos que resisten pasteurización, procesos UHT y ciclos de congelación/descongelación."
+                : "Homogeneous hues engineered to survive pasteurization, UHT processing, and freeze-thaw cycles."}
+            </p>
+          </div>
         </div>
 
         <!-- Sector 3: Confitería -->
-        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-200">
-          <div class="text-3xl mb-4">🍬</div>
-          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
-            {isEs ? "Confitería & Chocolates" : "Confectionery & Sweets"}
-          </h4>
-          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
-            {isEs
-              ? "Geles, lacas y pastas hidrosolubles o liposolubles de brillo intenso para gomitas, caramelos y coberturas."
-              : "Water- and oil-soluble vibrant lakes and pastes providing high gloss for gummies, hard candies, and coatings."}
-          </p>
+        <div class="bg-white p-8 sm:p-10 rounded-2xl border border-gray-100/90 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200 flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-[#E30066]/10 text-[#E30066] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <!-- Line icon: Confectionery Candy -->
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M15.5 8.5 20 4M8.5 15.5 4 20M17.5 11.5 22 10M6.5 12.5 2 14M12.5 6.5 14 2M11.5 17.5 10 22"/>
+              </svg>
+            </div>
+            <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
+              {isEs ? "Confitería & Chocolates" : "Confectionery & Sweets"}
+            </h4>
+            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+              {isEs
+                ? "Geles, lacas y pastas hidrosolubles o liposolubles de brillo intenso para gomitas, caramelos y coberturas."
+                : "Water- and oil-soluble vibrant lakes and pastes providing high gloss for gummies, hard candies, and coatings."}
+            </p>
+          </div>
         </div>
 
         <!-- Sector 4: Cárnicos & Salados -->
-        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-250">
-          <div class="text-3xl mb-4">🥩</div>
-          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
-            {isEs ? "Cárnicos & Salados" : "Meat & Savory"}
-          </h4>
-          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
-            {isEs
-              ? "Colorantes estables en salmuera, cocción y curado para embutidos, análogos vegetales y preparados cárnicos."
-              : "Colors stable in brine, cooking, and curing processes for sausages, plant-based meats, and savory meals."}
-          </p>
+        <div class="bg-white p-8 sm:p-10 rounded-2xl border border-gray-100/90 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-250 flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-[#89385C]/10 text-[#89385C] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <!-- Line icon: Meat & Savory Cutlet -->
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 8c-1.5-2.5-4.5-4-8-4a9 9 0 0 0-9 9c0 4.5 3.5 7 7.5 7 4.5 0 8-2.5 9.5-6.5.8-2 .8-3.5 0-5.5z"/>
+                <circle cx="12" cy="12" r="2.5"/>
+              </svg>
+            </div>
+            <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
+              {isEs ? "Cárnicos & Salados" : "Meat & Savory"}
+            </h4>
+            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+              {isEs
+                ? "Colorantes estables en salmuera, cocción y curado para embutidos, análogos vegetales y preparados cárnicos."
+                : "Colors stable in brine, cooking, and curing processes for sausages, plant-based meats, and savory meals."}
+            </p>
+          </div>
         </div>
 
         <!-- Sector 5: Panadería & Snacks -->
-        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-300">
-          <div class="text-3xl mb-4">🥐</div>
-          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
-            {isEs ? "Panadería & Snacks" : "Bakery & Snacks"}
-          </h4>
-          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
-            {isEs
-              ? "Polvos y líquidos con excelente retención térmica durante el horneado, extrusión y fritura industrial."
-              : "Powders and liquids designed for superior thermal retention during industrial baking, extrusion, and frying."}
-          </p>
+        <div class="bg-white p-8 sm:p-10 rounded-2xl border border-gray-100/90 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300 flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-[#FFC000]/15 text-[#b58900] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <!-- Line icon: Bakery & Snacks Bread/Croissant -->
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 13c1.5-3 5-5 9-5s7.5 2 9 5c0 3.5-3.5 6-9 6s-9-2.5-9-6z"/>
+                <path d="M7 11c1-1.5 2.5-2.5 5-2.5s4 1 5 2.5M9 16v2M15 16v2"/>
+              </svg>
+            </div>
+            <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
+              {isEs ? "Panadería & Snacks" : "Bakery & Snacks"}
+            </h4>
+            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+              {isEs
+                ? "Polvos y líquidos con excelente retención térmica durante el horneado, extrusión y fritura industrial."
+                : "Powders and liquids designed for superior thermal retention during industrial baking, extrusion, and frying."}
+            </p>
+          </div>
         </div>
 
         <!-- Sector 6: Salsas & Condimentos -->
-        <div class="bg-white p-8 sm:p-10 rounded-3xl border border-gray-100/80 shadow-sm hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 reveal delay-350">
-          <div class="text-3xl mb-4">🥫</div>
-          <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
-            {isEs ? "Salsas & Condimentos" : "Sauces & Condiments"}
-          </h4>
-          <p class="text-gray-600 text-sm sm:text-base font-light leading-relaxed">
-            {isEs
-              ? "Dispersión perfecta en emulsiones grasas y bases acuosas sin sedimentación ni separación de fases."
-              : "Seamless dispersion in high-fat emulsions and water bases without sedimentation or phase separation."}
-          </p>
+        <div class="bg-white p-8 sm:p-10 rounded-2xl border border-gray-100/90 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-350 flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-[#008AD8]/10 text-[#008AD8] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <!-- Line icon: Sauces & Condiments Dispenser -->
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 2h4M12 2v4M8 6h8l1 3v10a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3V9l1-3zM9 13h6"/>
+              </svg>
+            </div>
+            <h4 class="text-2xl sm:text-3xl font-heading text-[#1E1E1E] mb-3">
+              {isEs ? "Salsas & Condimentos" : "Sauces & Condiments"}
+            </h4>
+            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+              {isEs
+                ? "Dispersión perfecta en emulsiones grasas y bases acuosas sin sedimentación ni separación de fases."
+                : "Seamless dispersion in high-fat emulsions and water bases without sedimentation or phase separation."}
+            </p>
+          </div>
         </div>
 
       </div>
     </div>
 
     <!-- Sub-anchor: Innovación with Reveal -->
-    <div id="innovacion" class="scroll-mt-28 bg-[#FAF8F5] p-8 sm:p-12 md:p-16 lg:p-20 rounded-3xl border border-[#EDE8E0] reveal delay-150 w-full">
+    <div id="innovacion" class="scroll-mt-28 bg-[#FAF8F5] p-8 sm:p-12 md:p-16 lg:p-20 rounded-2xl border border-[#EDE8E0] reveal delay-150 w-full">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
         <div class="md:col-span-8">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-8 h-1 bg-[#E30066] rounded-full"></div>
-            <span class="text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">
+            <BrandEIcon class="w-4 h-5 shrink-0" />
+            <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">
               {isEs ? "Desarrollo a la Medida" : "Custom Formulation"}
             </span>
           </div>
           <h3 class="text-3xl sm:text-4xl md:text-5xl font-heading text-[#1E1E1E] font-normal mb-6 leading-tight">
             {isEs ? "Innovación Tecnológica Continua" : "Continuous Technological Innovation"}
           </h3>
-          <p class="text-gray-700 text-base sm:text-lg font-light leading-relaxed mb-8">
+          <p class="font-verdana text-gray-700 text-sm sm:text-base font-light leading-relaxed mb-8">
             {isEs
               ? "Si su matriz de producto presenta desafíos complejos de estabilidad, migración de color o reemplazo de colorantes artificiales por alternativas naturales, nuestro laboratorio formula el tono exacto que su marca necesita."
               : "If your food formulation faces complex challenges with color bleeding, thermal degradation, or synthetic-to-natural conversion, our specialized food coloring lab formulates the exact chromatic profile your brand needs."}
@@ -139,8 +190,8 @@ const { isEs = false } = Astro.props;
           <div class="flex items-center gap-4">
             <a 
               href={isEs ? "/es/#contact" : "/#contact"} 
-              class="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium text-sm transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
-              style="background: linear-gradient(135deg, #E30066 0%, #FF1A75 100%); box-shadow: 0 4px 15px rgba(227, 0, 102, 0.35);"
+              class="font-verdana inline-flex items-center gap-2.5 px-8 py-3.5 rounded-2xl text-white font-medium text-xs sm:text-sm transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl"
+              style="background: linear-gradient(135deg, #E30066 0%, #FF1A75 100%); box-shadow: 0 6px 18px rgba(227, 0, 102, 0.35);"
             >
               <span>{isEs ? "Solicitar Muestra o Formulación" : "Request Sample or Formulation"}</span>
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -151,11 +202,11 @@ const { isEs = false } = Astro.props;
         <div class="md:col-span-4 flex flex-col gap-6">
           <div class="bg-white p-8 rounded-2xl border border-gray-200/80 shadow-sm text-center">
             <span class="text-3xl sm:text-4xl font-serif font-normal text-[#E30066]">48h</span>
-            <p class="text-xs text-gray-500 uppercase tracking-wider mt-2 font-sans font-medium">{isEs ? "Respuesta Técnica Rápida" : "Rapid Technical Response"}</p>
+            <p class="font-verdana text-xs text-gray-500 uppercase tracking-wider mt-2 font-medium">{isEs ? "Respuesta Técnica Rápida" : "Rapid Technical Response"}</p>
           </div>
           <div class="bg-white p-8 rounded-2xl border border-gray-200/80 shadow-sm text-center">
             <span class="text-3xl sm:text-4xl font-serif font-normal text-[#008AD8]">100%</span>
-            <p class="text-xs text-gray-500 uppercase tracking-wider mt-2 font-sans font-medium">{isEs ? "Ajuste Espectral Exacto" : "Precise Spectral Match"}</p>
+            <p class="font-verdana text-xs text-gray-500 uppercase tracking-wider mt-2 font-medium">{isEs ? "Ajuste Espectral Exacto" : "Precise Spectral Match"}</p>
           </div>
         </div>
       </div>

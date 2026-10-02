@@ -1,4 +1,5 @@
 ---
+import BrandEIcon from "./BrandEIcon.astro";
 import PdfSection from "./PdfSection.astro";
 
 import { getImage } from "astro:assets";
@@ -51,17 +52,20 @@ const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 }))
   <div class="container relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6">
     
     <!-- Frosted Glassmorphism Container Card -->
-    <div class="glass-card-dark rounded-3xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100">
+    <div class="glass-card-dark rounded-2xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100">
       
       <div class="w-full text-center mb-8">
-        <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">
-          Get in Touch
-        </span>
+        <div class="inline-flex items-center gap-2.5 mb-3">
+          <BrandEIcon class="w-4 h-5 shrink-0" />
+          <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold">
+            Get in Touch
+          </span>
+        </div>
         <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl text-white font-normal mb-3 leading-tight">
           {title}
         </h2>
 
-        {description && <p class="text-white/85 text-base sm:text-lg font-light max-w-2xl mx-auto leading-relaxed">{description}</p>}
+        {description && <p class="font-verdana text-white/90 text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed">{description}</p>}
       </div>
 
       <div class="contact-form-container w-full">
@@ -226,7 +230,7 @@ const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 }))
     font-weight: 600;
     letter-spacing: 0.05em;
     cursor: pointer;
-    border-radius: 999px;
+    border-radius: 0.85rem;
     box-shadow: 0 4px 15px rgba(227, 0, 102, 0.4);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;

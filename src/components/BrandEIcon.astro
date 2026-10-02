@@ -1,0 +1,64 @@
+---
+interface Props {
+  class?: string;
+  size?: number | string;
+}
+
+const { 
+  class: className = "w-5 h-6",
+  size
+} = Astro.props;
+
+const style = size ? `width: ${typeof size === 'number' ? `${size}px` : size}; height: auto;` : undefined;
+---
+
+<svg 
+  viewBox="883 17 62 76" 
+  class={className}
+  style={style}
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <defs>
+    <!-- Cyan / Blue Gradient (Bottom Bar) -->
+    <linearGradient id="e-brand-cyan" x1="883.8" y1="81.9" x2="944.44" y2="81.9" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2b3990"/>
+      <stop offset="0.15" stop-color="#274297"/>
+      <stop offset="0.4" stop-color="#1e5bac"/>
+      <stop offset="0.72" stop-color="#0f84cd"/>
+      <stop offset="1" stop-color="#00aeef"/>
+    </linearGradient>
+
+    <!-- Magenta Gradient (Middle Bar) -->
+    <linearGradient id="e-brand-magenta" x1="883.8" y1="54.83" x2="944.27" y2="54.83" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ee4488"/>
+      <stop offset="0.24" stop-color="#ec4284"/>
+      <stop offset="0.44" stop-color="#e63e7a"/>
+      <stop offset="0.63" stop-color="#dd3769"/>
+      <stop offset="0.81" stop-color="#d02c50"/>
+      <stop offset="0.98" stop-color="#c01f31"/>
+      <stop offset="1" stop-color="#be1e2d"/>
+    </linearGradient>
+
+    <!-- Yellow Gradient (Top Bar) -->
+    <linearGradient id="e-brand-yellow" x1="883.8" y1="27.77" x2="944.52" y2="27.77" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f78c1f"/>
+      <stop offset="0.14" stop-color="#f7901f"/>
+      <stop offset="0.29" stop-color="#f79c22"/>
+      <stop offset="0.43" stop-color="#f7b026"/>
+      <stop offset="0.58" stop-color="#f8cc2b"/>
+      <stop offset="0.71" stop-color="#f9ed32"/>
+      <stop offset="1" stop-color="#f9ed32"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Top Yellow Bar -->
+  <path fill="url(#e-brand-yellow)" d="M921.17,17.31h-36.07c-.72,0-1.31.59-1.31,1.31v18.31c0,.72.59,1.31,1.31,1.31h59.16c.09,0,.17-.03.25-.05l-23.34-20.87Z"/>
+
+  <!-- Middle Magenta Bar -->
+  <path fill="url(#e-brand-magenta)" d="M920.81,44.37h-35.71c-.72,0-1.31.59-1.31,1.31v18.31c0,.72.59,1.31,1.31,1.31h59.16s0,0,0,0l-23.46-20.92Z"/>
+
+  <!-- Bottom Blue Bar -->
+  <path fill="url(#e-brand-cyan)" d="M920.95,71.44h-35.84c-.72,0-1.31.59-1.31,1.31v18.31c0,.72.59,1.31,1.31,1.31h59.16c.06,0,.11-.03.17-.03l-23.49-20.89Z"/>
+</svg>

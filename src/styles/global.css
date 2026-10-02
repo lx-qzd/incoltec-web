@@ -54,6 +54,7 @@
   --font-script: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
   --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-verdana: 'Verdana', Geneva, Tahoma, sans-serif;
 }
 
 :root {
@@ -71,6 +72,7 @@
   /* Typography Hierarchy */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  --font-verdana: 'Verdana', Geneva, Tahoma, sans-serif;
   --font-primary: var(--font-sans);
   --font-heading: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
   --font-script: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
@@ -142,6 +144,10 @@ a:hover {
   font-family: var(--font-sans);
 }
 
+.font-verdana, .subtitle-verdana {
+  font-family: var(--font-verdana), Verdana, Geneva, Tahoma, sans-serif !important;
+}
+
 .container {
   width: 100%;
   max-width: 1240px;
@@ -177,78 +183,78 @@ a:hover {
    GLASSMORPHISM DESIGN UTILITIES
    ============================================================ */
 .glass-card-dark {
-  background: rgba(18, 18, 18, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(18, 18, 18, 0.52);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .glass-card-light {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .glass-pill {
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 /* ============================================================
    SCROLL REVEAL MICRO-INTERACTIONS
-   Buttery smooth easing curve: cubic-bezier(0.16, 1, 0.3, 1)
+   Enhanced kinetic feel with expressively dynamic bezier easing
    ============================================================ */
 .reveal, .reveal-up {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(40px) scale(0.975);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal.active, .reveal-up.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .reveal-left {
   opacity: 0;
-  transform: translateX(-30px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-45px) translateY(12px);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal-left.active {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) translateY(0);
 }
 
 .reveal-right {
   opacity: 0;
-  transform: translateX(30px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(45px) translateY(12px);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal-right.active {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) translateY(0);
 }
 
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.88) translateY(28px);
+  transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal-scale.active {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1) translateY(0);
 }
 
 .delay-75 { transition-delay: 75ms; }

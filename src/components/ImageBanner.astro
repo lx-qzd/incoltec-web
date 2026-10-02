@@ -1,5 +1,6 @@
 ---
 import { getImage } from "astro:assets";
+import BrandEIcon from "./BrandEIcon.astro";
 import fondo1Webp from "../assets/fondo1.webp";
 import fondo2Webp from "../assets/fondo2.webp";
 import fondo3Webp from "../assets/fondo3.webp";
@@ -44,25 +45,28 @@ if (image.includes("fondo1")) {
   />
   
   <!-- Subtle Vignette Layer -->
-  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/60 z-10 pointer-events-none"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/65 z-10 pointer-events-none"></div>
 
-  <!-- Frosted Glassmorphism Overlay Card -->
+  <!-- Frosted Glassmorphism Overlay Card with Soft Corners -->
   {(tag || title || subtitle) && (
     <div class="relative z-20 max-w-4xl mx-auto w-full reveal-scale delay-100">
-      <div class="glass-card-dark rounded-3xl p-8 sm:p-12 md:p-14 text-center border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.65)] ring-1 ring-white/10">
+      <div class="glass-card-dark rounded-2xl p-8 sm:p-12 md:p-14 text-center border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.65)] ring-1 ring-white/10">
         {tag && (
-          <span class="inline-block text-xs sm:text-sm uppercase tracking-[0.25em] font-semibold text-[#FFC000] mb-4 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-sm">
-            {tag}
-          </span>
+          <div class="inline-flex items-center gap-2.5 mb-4 px-4 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-sm">
+            <BrandEIcon class="w-3.5 h-4.5 shrink-0" />
+            <span class="font-verdana text-xs sm:text-sm uppercase tracking-[0.2em] font-semibold text-[#FFC000]">
+              {tag}
+            </span>
+          </div>
         )}
         {title && (
-          <h3 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white mb-4 leading-tight drop-shadow-sm">
+          <h3 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white mb-4 leading-tight drop-shadow-md">
             {title}
           </h3>
         )}
 
         {subtitle && (
-          <p class="text-base sm:text-lg md:text-xl font-light text-white/90 max-w-2xl mx-auto leading-relaxed">
+          <p class="font-verdana text-base sm:text-lg md:text-xl font-light text-white/95 max-w-2xl mx-auto leading-relaxed">
             {subtitle}
           </p>
         )}

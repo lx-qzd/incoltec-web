@@ -29,14 +29,6 @@ interface NavLink {
 
 const enLinks: NavLink[] = [
   {
-    name: "Our Company",
-    url: "/#our-company",
-    dropdown: [
-      { name: "Organization", url: "/#organizacion" },
-      { name: "Laboratory", url: "/#laboratorio" },
-    ],
-  },
-  {
     name: "Vibrant Life",
     url: "/#vibrant-life",
     dropdown: [
@@ -70,20 +62,20 @@ const enLinks: NavLink[] = [
       { name: "Innovation", url: "/#innovacion" },
     ],
   },
+  {
+    name: "Our Company",
+    url: "/#our-company",
+    dropdown: [
+      { name: "Organization", url: "/#organizacion" },
+      { name: "Laboratory", url: "/#laboratorio" },
+    ],
+  },
   { name: "Catalogs", url: "/catalogs" },
   { name: "Blog", url: "/blog" },
   { name: "Contact", url: "/#contact" },
 ];
 
 const esLinks: NavLink[] = [
-  {
-    name: "Nuestra Empresa",
-    url: "/es/#our-company",
-    dropdown: [
-      { name: "Organización", url: "/es/#organizacion" },
-      { name: "Laboratorio", url: "/es/#laboratorio" },
-    ],
-  },
   {
     name: "Vida Vibrante",
     url: "/es/#vibrant-life",
@@ -116,6 +108,14 @@ const esLinks: NavLink[] = [
     dropdown: [
       { name: "Soluciones", url: "/es/#soluciones" },
       { name: "Innovación", url: "/es/#innovacion" },
+    ],
+  },
+  {
+    name: "Nuestra Empresa",
+    url: "/es/#our-company",
+    dropdown: [
+      { name: "Organización", url: "/es/#organizacion" },
+      { name: "Laboratorio", url: "/es/#laboratorio" },
     ],
   },
   { name: "Catálogos", url: "/es/catalogs" },
@@ -522,7 +522,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
     color: #fff !important;
     background: linear-gradient(135deg, var(--c-magenta, #E30066) 0%, #FF1A75 100%);
     box-shadow: 0 4px 14px rgba(227, 0, 102, 0.35);
-    border-radius: 999px;
+    border-radius: 0.85rem;
     text-decoration: none;
     white-space: nowrap;
     transition:
