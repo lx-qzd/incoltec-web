@@ -18,7 +18,7 @@ const {
   tag,
   title,
   subtitle,
-  height = "min-h-[420px] sm:min-h-[480px] md:min-h-[560px]"
+  height = "min-h-[clamp(22rem,45dvh,35rem)]"
 } = Astro.props;
 
 // Map string image paths to optimized Astro assets if available
@@ -32,7 +32,7 @@ if (image.includes("fondo1")) {
 }
 ---
 
-<section class={`relative w-full ${height} flex items-center justify-center overflow-hidden py-16 px-4`}>
+<section class={`relative w-full ${height} flex items-center justify-center overflow-hidden py-16 px-4 @container`}>
   <!-- Background Image with smooth zoom on hover -->
   <img 
     src={optimizedSrc} 
@@ -47,30 +47,26 @@ if (image.includes("fondo1")) {
   <!-- Subtle Vignette Layer -->
   <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/40 to-black/65 z-10 pointer-events-none"></div>
 
-  <!-- Frosted Glassmorphism Overlay Card with Soft Corners -->
+  <!-- Clean Overlay Content without Card or Capsule Surrounds -->
   {(tag || title || subtitle) && (
-    <div class="relative z-20 max-w-4xl mx-auto w-full reveal-scale delay-100">
-      <div class="glass-card-dark rounded-2xl p-8 sm:p-12 md:p-14 text-center border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.65)] ring-1 ring-white/10">
-        {tag && (
-          <div class="inline-flex items-center gap-2.5 mb-4 px-4 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-sm">
-            <BrandEIcon class="w-3.5 h-4.5 shrink-0" />
-            <span class="font-verdana text-xs sm:text-sm uppercase tracking-[0.2em] font-semibold text-[#FFC000]">
-              {tag}
-            </span>
-          </div>
-        )}
-        {title && (
-          <h3 class="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-white mb-4 leading-tight drop-shadow-md">
-            {title}
-          </h3>
-        )}
+    <div class="relative z-20 max-w-4xl mx-auto w-full text-center px-6 sm:px-8 py-8 reveal-scale delay-100 @container">
+      {tag && (
+        <div class="inline-flex items-center gap-2.5 mb-5 drop-shadow-md">
+          <BrandEIcon class="w-3.5 h-4.5 shrink-0" />
+          <span class="font-verdana text-xs sm:text-sm uppercase tracking-[0.25em] font-bold text-[#FFC000]">
+            {tag}
+          </span>
+        </div>
+      )}
+      {title && (
+        <h3 class="font-heading fluid-h1 font-normal text-white mb-6 leading-[1.2] sm:leading-[1.25] drop-shadow-[0_4px_16px_rgba(0,0,0,0.7)] flowy-text tracking-wide" set:html={title.replace('Shaping the Future of Food Appeal', 'Shaping the Future<br class="hidden sm:inline" /> of Food Appeal').replace(' & ', ' and ')} />
+      )}
 
-        {subtitle && (
-          <p class="font-verdana text-base sm:text-lg md:text-xl font-light text-white/95 max-w-2xl mx-auto leading-relaxed">
-            {subtitle}
-          </p>
-        )}
-      </div>
+      {subtitle && (
+        <p class="font-verdana fluid-body font-light text-white/95 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
+          {subtitle}
+        </p>
+      )}
     </div>
   )}
 </section>

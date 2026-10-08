@@ -6,7 +6,7 @@ const productsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    category: z.enum(['Linicol CF', 'Extractos Naturales', 'Premixes']),
+    category: z.string(),
     applications: z.array(z.string()),
     color: z.string().optional(),
     solubility: z.string().optional(),

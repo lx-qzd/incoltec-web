@@ -28,7 +28,7 @@ const {
 const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 })).src;
 ---
 
-<section id="contact" class="contact-hero-section relative min-h-screen flex items-center pt-28 pb-20 scroll-mt-24 overflow-hidden">
+<section id="contact" class="contact-hero-section relative min-h-[100dvh] flex items-center pt-24 sm:pt-28 pb-16 sm:pb-20 scroll-mt-24 overflow-hidden @container">
   <div class="absolute inset-0 z-0">
     <img 
       src={bgSrc} 
@@ -52,7 +52,7 @@ const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 }))
   <div class="container relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6">
     
     <!-- Frosted Glassmorphism Container Card -->
-    <div class="glass-card-dark rounded-2xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100">
+    <div class="glass-card-dark rounded-2xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100 @container">
       
       <div class="w-full text-center mb-8">
         <div class="inline-flex items-center gap-2.5 mb-3">
@@ -61,7 +61,7 @@ const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 }))
             Get in Touch
           </span>
         </div>
-        <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl text-white font-normal mb-3 leading-tight">
+        <h2 class="font-heading fluid-h1 text-white font-normal mb-3 leading-tight">
           {title}
         </h2>
 
@@ -119,6 +119,10 @@ const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 }))
     overflow: hidden;
   }
 
+  .contact-form-container {
+    container-type: inline-size;
+  }
+
   /* Polygons styling */
   .polygon {
     height: 90px;
@@ -141,8 +145,8 @@ const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 }))
 
   .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 1.25rem;
     margin-bottom: 1.5rem;
   }
 
@@ -244,11 +248,8 @@ const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 }))
   }
 
   @media (max-width: 768px) {
-    .form-grid {
-      grid-template-columns: 1fr;
-    }
     .contact-hero-section {
-      padding-top: 8rem;
+      padding-top: 7rem;
     }
   }
 </style>

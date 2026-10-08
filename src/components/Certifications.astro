@@ -3,7 +3,7 @@ interface Props {
   title?: string;
   variant?: "light" | "dark";
 }
-const { title = "Certified Quality & Safety", variant = "light" } = Astro.props;
+const { title = "Certified Quality and Safety", variant = "light" } = Astro.props;
 
 const isDark = variant === "dark";
 const sectionClass = isDark 
@@ -92,5 +92,14 @@ const textClass = isDark
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-33.333333%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      white-space: normal;
+    }
   }
 </style>

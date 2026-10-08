@@ -13,7 +13,7 @@ const applications = [...new Set(allProducts.flatMap(p => p.data.applications))]
 ---
 
 <Layout 
-  title="Wholesale Food Color Solutions & Catalog"
+  title="Wholesale Food Color Solutions and Catalog"
   description="Explore INCOLTEC's full range of natural food colorings, coloring foods, and vitamins with technical data sheets for food manufacturers."
 >
 
@@ -104,31 +104,26 @@ const applications = [...new Set(allProducts.flatMap(p => p.data.applications))]
 
 <style>
   .content-section {
-    padding: 6rem 2rem;
+    padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 3vw, 2rem);
   }
   .content {
     max-width: 1200px;
     margin: 0 auto;
   }
 
-  /* Search Bar */
+  /* Search Bar - Intrinsic Flexbox */
   .search-bar-container {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1.25rem;
     background: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 1.5rem;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
     border-radius: 0;
-  }
-  @media (min-width: 768px) {
-    .search-bar-container {
-      flex-direction: row;
-    }
   }
 
   .search-input-wrapper {
-    flex: 1;
+    flex: 1 1 280px;
     position: relative;
   }
   .search-icon {
@@ -142,7 +137,8 @@ const applications = [...new Set(allProducts.flatMap(p => p.data.applications))]
   }
   .search-input, .category-select {
     width: 100%;
-    padding: 1rem 1rem 1rem 3rem;
+    min-height: 48px;
+    padding: 0.875rem 1rem 0.875rem 3rem;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 0;
@@ -152,7 +148,7 @@ const applications = [...new Set(allProducts.flatMap(p => p.data.applications))]
     transition: border-color 0.3s ease;
   }
   .category-select {
-    padding: 1rem;
+    padding: 0.875rem 1rem;
     cursor: pointer;
     appearance: none;
   }
@@ -165,25 +161,22 @@ const applications = [...new Set(allProducts.flatMap(p => p.data.applications))]
   }
 
   .filter-wrapper {
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    .filter-wrapper {
-      width: 33%;
-    }
+    flex: 1 1 200px;
+    max-width: 100%;
   }
 
-  /* Grid and Cards */
+  /* Grid and Cards - 2026 Intrinsic Container System */
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(1.25rem, 2.5vw, 2rem);
   }
 
   .feature-card {
+    container-type: inline-size;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 2rem;
+    padding: clamp(1.25rem, 3vw, 2rem);
     border-radius: 0;
     transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     display: flex;

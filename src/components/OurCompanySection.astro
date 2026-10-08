@@ -1,5 +1,6 @@
 ---
 import BrandEIcon from './BrandEIcon.astro';
+import Organigram from './Organigram.astro';
 
 interface Props {
   isEs?: boolean;
@@ -8,42 +9,84 @@ interface Props {
 const { isEs = false } = Astro.props;
 ---
 
-<section id="our-company" class="w-full bg-[#FFFDF9] py-24 md:py-32 lg:py-40 scroll-mt-20 overflow-hidden">
-  <div class="w-full max-w-[1240px] mx-auto px-6 sm:px-8 md:px-12 flex flex-col items-stretch">
+<section id="our-company" class="w-full bg-[#FFFDF9] py-16 sm:py-24 md:py-32 scroll-mt-20 overflow-hidden @container">
+  <div class="w-full max-w-[1240px] mx-auto px-4 sm:px-8 md:px-12 flex flex-col items-stretch">
     
     <!-- Header with Scroll Reveal -->
-    <div class="text-center max-w-3xl mx-auto mb-20 md:mb-28 reveal delay-75 flex flex-col items-center">
-      <div class="inline-flex items-center gap-2.5 mb-4">
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24 reveal delay-75 flex flex-col items-center">
+      <div class="inline-flex items-center gap-2.5 mb-4 drop-shadow-xs">
         <BrandEIcon class="w-4 h-5 shrink-0" />
         <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">
           {isEs ? "Sobre Incoltec" : "About Incoltec"}
         </span>
       </div>
 
-      <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#89385C] font-normal mb-6 leading-tight">
+      <h2 class="font-heading fluid-h1 text-[#89385C] font-normal mb-6 leading-tight flowy-text">
         {isEs ? "Nuestra Empresa" : "Our Company"}
       </h2>
 
       <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-8"></div>
-      <p class="font-verdana text-base sm:text-lg text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
+      <p class="font-verdana fluid-body text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
         {isEs 
           ? "Proximidad, conocimiento local y adaptación. La explosión cromática de nuestras formulaciones simboliza la diversidad de sabores, ingredientes y tradiciones que enriquecen la industria alimentaria mundial."
           : "Proximity, local knowledge, and adaptation. The chromatic explosion of our formulations symbolizes the diversity of flavors, ingredients, and traditions enriching the global food industry."}
       </p>
     </div>
 
-    <!-- Sub-anchor: Organización -->
-    <div id="organizacion" class="scroll-mt-28 mb-24 md:mb-32">
-      <div class="flex items-center gap-3.5 mb-10 reveal delay-100">
+    <!-- 1. Authentic Company Foundations (From about-incoltec) -->
+    <div class="mb-20 md:mb-28 reveal delay-100 bg-white rounded-3xl p-8 sm:p-12 border border-gray-100 shadow-sm">
+      <div class="max-w-3xl mb-10">
+        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold block mb-2">
+          {isEs ? "Desde el Laboratorio hasta el Cliente Final" : "From the Laboratory to the Final Client"}
+        </span>
+        <h3 class="fluid-h2 font-heading text-[#1E1E1E] font-normal m-0 mb-4">
+          {isEs ? "Ciencia, Tecnología e Innovación al Servicio del Color" : "Science, Technology and Innovation for Food Colour"}
+        </h3>
+        <p class="font-verdana text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+          {isEs
+            ? "Incoltec es un proveedor global de colorantes alimentarios naturales. Desarrollamos soluciones innovadoras a partir de materias primas seleccionadas con rigurosa investigación científica. Aseguramos una producción fiable y constante bajo los más estrictos estándares internacionales en los cinco continentes."
+            : "Incoltec is a global provider of natural food colouring. We develop innovative colour solutions derived from natural sources through rigorous scientific research, ensuring reliable and constant production under strict international standards on every continent."}
+        </p>
+      </div>
+
+      <!-- Solutions by Sectors (Sectores Industriales Atendidos) -->
+      <div class="pt-8 border-t border-gray-100">
+        <h4 class="font-verdana text-xs font-bold uppercase tracking-wider text-gray-400 mb-6">
+          {isEs ? "Soluciones Cromáticas por Sector Alimentario" : "Chromatic Solutions by Food Sector"}
+        </h4>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 font-verdana text-xs sm:text-sm">
+          {[
+            { en: "Dairy Products", es: "Lácteos y Postres" },
+            { en: "Meat Products", es: "Cárnicos y Embutidos" },
+            { en: "Beverages & Drinks", es: "Bebidas y Refrescos" },
+            { en: "Bakery & Cereals", es: "Panadería y Cereales" },
+            { en: "Confectionery & Sweets", es: "Confitería y Golosinas" },
+            { en: "Snacks & Appetizers", es: "Snacks y Aperitivos" },
+            { en: "Fruit & Veg Preps", es: "Preparados de Fruta" },
+            { en: "Sauces & Condiments", es: "Salsas y Aderezos" },
+            { en: "Pasta & Noodles", es: "Pastas y Harinas" },
+            { en: "Creams & Fillings", es: "Cremas y Rellenos" }
+          ].map(sector => (
+            <div class="bg-[#FAF8F5] p-3.5 rounded-xl border border-gray-100/80 flex items-center gap-2.5 text-gray-700 font-medium hover:bg-white hover:shadow-xs transition-colors">
+              <span class="w-2 h-2 rounded-full bg-[#E30066]"></span>
+              <span>{isEs ? sector.es : sector.en}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Strategic Pillars & Experience Stats -->
+    <div class="mb-20 md:mb-28">
+      <div class="flex items-center gap-3.5 mb-8 sm:mb-10 reveal delay-100">
         <BrandEIcon class="w-5 h-6 shrink-0" />
-        <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal">
-          {isEs ? "Organización y Pilares Estratégicos" : "Organization & Strategic Pillars"}
+        <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal">
+          {isEs ? "Pilares Estratégicos de Calidad" : "Strategic Quality Pillars"}
         </h3>
       </div>
 
-      <!-- 3 Pillars Grid with Staggered Scroll-Triggered Micro-Interactions -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-20 md:mb-28">
-        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100 flex flex-col justify-between">
+      <div class="grid gap-6 sm:gap-8 mb-16 md:mb-24 @container" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));">
+        <div class="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-2xl bg-[#E30066]/10 flex items-center justify-center text-[#E30066] mb-6 font-bold text-lg font-verdana">
               01
@@ -59,7 +102,7 @@ const { isEs = false } = Astro.props;
           </div>
         </div>
 
-        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200 flex flex-col justify-between">
+        <div class="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-2xl bg-[#FFC000]/15 flex items-center justify-center text-[#FFC000] mb-6 font-bold text-lg font-verdana">
               02
@@ -75,7 +118,7 @@ const { isEs = false } = Astro.props;
           </div>
         </div>
 
-        <div class="bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300 flex flex-col justify-between">
+        <div class="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300 flex flex-col justify-between">
           <div>
             <div class="w-12 h-12 rounded-2xl bg-[#008AD8]/10 flex items-center justify-center text-[#008AD8] mb-6 font-bold text-lg font-verdana">
               03
@@ -85,17 +128,17 @@ const { isEs = false } = Astro.props;
             </h4>
             <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
               {isEs
-                ? "Nuestra filosofía 'Vibrant Technology' nos impulsa a buscar siempre la mejora constante en estabilidad, brillo y biodisponibilidad."
-                : "Our 'Vibrant Technology' philosophy drives us to continually enhance color stability, brilliance, and bioavailability."}
+                ? "Nuestra filosofía nos impulsa a buscar siempre la mejora constante en estabilidad, brillo y biodisponibilidad."
+                : "Our philosophy drives us to continually enhance color stability, brilliance, and bioavailability."}
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Stats Bar with Glassy Accent & Reveal -->
-      <div class="bg-white rounded-2xl p-10 sm:p-14 md:p-16 shadow-sm border border-[#89385C]/10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center reveal delay-150 mb-24 md:mb-32">
+      <!-- Stats Bar with Intrinsic Auto-Fit Grid -->
+      <div class="bg-white rounded-2xl p-6 sm:p-10 md:p-12 shadow-sm border border-[#89385C]/10 grid gap-6 sm:gap-8 text-center reveal delay-150 mb-16 md:mb-24 @container" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));">
         <div>
-          <div class="text-4xl sm:text-5xl font-serif font-normal text-[#89385C] mb-2">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#89385C] mb-2">
             20<span class="font-bold text-[#FFC000]">+</span>
           </div>
           <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
@@ -103,7 +146,7 @@ const { isEs = false } = Astro.props;
           </p>
         </div>
         <div>
-          <div class="text-4xl sm:text-5xl font-serif font-normal text-[#89385C] mb-2">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#89385C] mb-2">
             100<span class="font-bold text-[#E30066]">%</span>
           </div>
           <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
@@ -111,7 +154,7 @@ const { isEs = false } = Astro.props;
           </p>
         </div>
         <div>
-          <div class="text-4xl sm:text-5xl font-serif font-normal text-[#89385C] mb-2">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#89385C] mb-2">
             50<span class="font-bold text-[#008AD8]">+</span>
           </div>
           <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
@@ -119,7 +162,7 @@ const { isEs = false } = Astro.props;
           </p>
         </div>
         <div>
-          <div class="text-4xl sm:text-5xl font-serif font-normal text-[#89385C] mb-2">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#89385C] mb-2">
             10<span class="font-bold text-[#89385C]">K+</span>
           </div>
           <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
@@ -129,33 +172,46 @@ const { isEs = false } = Astro.props;
       </div>
     </div>
 
-    <!-- Sub-anchor: Laboratorio with Scroll Reveal & Image Optimization -->
-    <div id="laboratorio" class="scroll-mt-28 bg-[#FAF8F5] p-8 sm:p-12 md:p-16 lg:p-20 rounded-2xl border border-[#EDE8E0] reveal delay-100 w-full">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
+    <!-- 3. Sub-anchor: Organización (Official Corporate Organigram) -->
+    <div id="organizacion" class="scroll-mt-28 mb-20 md:mb-28">
+      <Organigram isEs={isEs} />
+    </div>
+
+    <!-- 4. Sub-anchor: Laboratorio & Producción (From laboratory-and-production) -->
+    <div id="laboratorio" class="scroll-mt-28 bg-[#FAF8F5] p-6 sm:p-10 md:p-14 lg:p-16 rounded-3xl border border-[#EDE8E0] reveal delay-100 w-full mb-20 md:mb-28 @container">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-14 items-center mb-12">
         <div class="md:col-span-7 reveal-left delay-150">
           <div class="flex items-center gap-3 mb-4">
             <BrandEIcon class="w-4 h-5 shrink-0" />
             <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
-              {isEs ? "Investigación & Desarrollo" : "Research & Development"}
+              {isEs ? "Investigación y Desarrollo" : "Research and Development"}
             </span>
           </div>
-          <h3 class="text-3xl sm:text-4xl md:text-5xl font-heading text-[#1E1E1E] font-normal mb-6 leading-tight">
-            {isEs ? "Laboratorio y Producción Avanzada" : "Advanced Laboratory & Production"}
+          <h3 class="fluid-h2 font-heading text-[#1E1E1E] font-normal mb-6 leading-tight">
+            {isEs ? "Laboratorio y Planta Piloto de Aplicación" : "Advanced Laboratory and Application Pilot Plant"}
           </h3>
+          <p class="font-verdana text-gray-700 text-sm sm:text-base font-light leading-relaxed mb-6">
+            {isEs
+              ? "Disponemos de modernos laboratorios y planta piloto para aplicaciones en cárnicos, lácteos, bebidas y panadería. Priorizando la calidad, manipulamos cuidadosamente las materias primas y aseguramos el valor nutricional y sensorial de cada formulación."
+              : "We operate modern application laboratories and a pilot plant for meat, dairy, beverage, and bakery products. Prioritizing quality production, we handle raw materials meticulously and uphold our commitment to producers, guaranteeing the stability and sensory value of every product."}
+          </p>
           <p class="font-verdana text-gray-700 text-sm sm:text-base font-light leading-relaxed mb-8">
             {isEs
-              ? "En nuestro centro de I+D formulamos colorantes líquidos, en pasta, en polvo y en gel, adaptados específicamente a la matriz físico-química de su producto final. Evaluamos resistencia a tratamientos térmicos, pH, foto-estabilidad y vida útil."
-              : "In our R&D center, we formulate liquid, paste, powder, and gel colorings tailored specifically to the physicochemical matrix of your food product. We test resistance to heat processing, pH variance, photostability, and shelf life."}
+              ? "Formulamos soluciones líquidas, en pasta, en polvo y en gel, adaptadas a la matriz físico-química de su producto final, evaluando resistencia térmica, pH, foto-estabilidad y vida útil."
+              : "We formulate liquid, paste, powder, and gel solutions tailored specifically to the physicochemical matrix of your food product, evaluating thermal stability, pH variance, photostability, and shelf life."}
           </p>
-          <div class="flex flex-wrap gap-3">
-            <span class="font-verdana px-4 py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-sm">
-              {isEs ? "Colorantes Líquidos & en Pasta" : "Liquid & Paste Colors"}
+          <div class="flex flex-wrap gap-2.5 sm:gap-3">
+            <span class="font-verdana px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-xs">
+              {isEs ? "Colorantes Líquidos y en Pasta" : "Liquid and Paste Colors"}
             </span>
-            <span class="font-verdana px-4 py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-sm">
-              {isEs ? "Polvo & Geles de Precisión" : "Powder & Precision Gels"}
+            <span class="font-verdana px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-xs">
+              {isEs ? "Polvo y Geles de Precisión" : "Powder and Precision Gels"}
             </span>
-            <span class="font-verdana px-4 py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-sm">
+            <span class="font-verdana px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-xs">
               {isEs ? "Ensayos de Estabilidad a Medida" : "Custom Stability Testing"}
+            </span>
+            <span class="font-verdana px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-xs">
+              {isEs ? "Stock Fiable y Garantizado" : "Consistently Reliable Stock"}
             </span>
           </div>
         </div>
@@ -165,7 +221,8 @@ const { isEs = false } = Astro.props;
             <img 
               src="/assets/food-colors-application.webp" 
               alt={isEs ? "Laboratorio Incoltec" : "Incoltec Laboratory"} 
-              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+              sizes="(min-width: 768px) 40vw, 100vw"
+              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" 
               loading="lazy"
               decoding="async"
               width="800"
@@ -173,13 +230,108 @@ const { isEs = false } = Astro.props;
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             <div class="font-verdana absolute bottom-4 left-4 right-4 text-white text-xs sm:text-sm font-light">
-              {isEs ? "Control analítico y cromático por espectrofotometría" : "Spectrophotometric chromatic & analytical quality control"}
+              {isEs ? "Control analítico y cromático por espectrofotometría" : "Spectrophotometric chromatic and analytical quality control"}
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Specialized Lab Equipment (Equipamiento Técnico Oficial) -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/80">
+        <h4 class="font-verdana text-xs font-bold uppercase tracking-wider text-[#008AD8] mb-4">
+          {isEs ? "Tecnología e Instrumental de Laboratorio" : "Specialized Laboratory Equipment & Capabilities"}
+        </h4>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 font-verdana text-xs text-gray-600">
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Espectrofotómetros</span>
+          </div>
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Colorímetros</span>
+          </div>
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Texturómetros</span>
+          </div>
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Refractómetros</span>
+          </div>
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Densitómetros</span>
+          </div>
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Básculas de Precisión</span>
+          </div>
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Medidores de pH</span>
+          </div>
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Agitadores y Turbinas</span>
+          </div>
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Emulsionadores</span>
+          </div>
+          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
+            <span>Mezcladores de Polvo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Quality Commitment, Mission & Vision (From quality-commitment) -->
+    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-100 shadow-sm reveal delay-150">
+      <div class="max-w-3xl mb-10">
+        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold block mb-2">
+          {isEs ? "Compromiso de Calidad y Seguridad" : "Quality Commitment and Safety"}
+        </span>
+        <h3 class="fluid-h2 font-heading text-[#1E1E1E] font-normal m-0 mb-4">
+          {isEs ? "Misión, Visión y Valores Corporativos" : "Mission, Vision and Corporate Values"}
+        </h3>
+        <p class="font-verdana text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+          {isEs
+            ? "Nuestros laboratorios y procesos productivos están respaldados por las normativas internacionales de calidad (normas ISO, FSSC 22000, Halal y Kosher). La misión de Incoltec es garantizar la salubridad, calidad y atractivo sensorial de los alimentos en todo el mundo."
+            : "Our laboratories and production procedures are endorsed according to international ISO requirements, FSSC 22000, Halal, and Kosher certifications. Incoltec's mission is to guarantee food sanitation, safety, and sensory appeal across the global food sector."}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-gray-100">
+        <div class="bg-[#FAF8F5] p-6 sm:p-8 rounded-2xl border border-gray-100">
+          <div class="w-10 h-10 rounded-xl bg-[#008AD8]/15 text-[#008AD8] flex items-center justify-center font-bold mb-4 font-verdana text-sm">
+            M
+          </div>
+          <h4 class="font-heading text-2xl text-[#1E1E1E] font-normal mb-3">
+            {isEs ? "Nuestra Misión" : "Our Mission"}
+          </h4>
+          <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed m-0">
+            {isEs
+              ? "Gestión basada en la inversión continua en tecnología e investigación, cultivando capacidades y soluciones sostenibles en la industria alimentaria con responsabilidad social y excelencia humana."
+              : "Management rooted in continual investment in technology and research, cultivating sustainable capabilities and solutions in the food industry with social responsibility and human quality."}
+          </p>
+        </div>
+
+        <div class="bg-[#FAF8F5] p-6 sm:p-8 rounded-2xl border border-gray-100">
+          <div class="w-10 h-10 rounded-xl bg-[#E30066]/15 text-[#E30066] flex items-center justify-center font-bold mb-4 font-verdana text-sm">
+            V
+          </div>
+          <h4 class="font-heading text-2xl text-[#1E1E1E] font-normal mb-3">
+            {isEs ? "Nuestra Visión" : "Our Vision"}
+          </h4>
+          <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed m-0">
+            {isEs
+              ? "Consolidarnos como fabricante y proveedor global de referencia en colorantes naturales y soluciones de color, potenciando el valor de cada producto en todas sus dimensiones sensoriales."
+              : "Establish ourselves as a leading global manufacturer and reference supplier of natural food colourings, enhancing value in every dimension of the food sector."}
+          </p>
         </div>
       </div>
     </div>
 
   </div>
 </section>
-

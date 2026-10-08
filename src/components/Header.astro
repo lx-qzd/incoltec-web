@@ -29,6 +29,16 @@ interface NavLink {
 
 const enLinks: NavLink[] = [
   {
+    name: "Products",
+    url: "/products",
+    dropdown: [
+      { name: "All Products", url: "/products" },
+      { name: "Natural Colors", url: "/#colorantes-naturales" },
+      { name: "Coloring Foods", url: "/#alimentos-colorantes" },
+      { name: "Vitamins and Pre Mixes", url: "/#vitaminas-premixes" },
+    ],
+  },
+  {
     name: "Vibrant Life",
     url: "/#vibrant-life",
     dropdown: [
@@ -49,7 +59,7 @@ const enLinks: NavLink[] = [
         url: "/#alimentos-colorantes",
       },
       {
-        name: "Vitamins & Pre Mixes",
+        name: "Vitamins and Pre Mixes",
         url: "/#vitaminas-premixes",
       },
     ],
@@ -72,10 +82,19 @@ const enLinks: NavLink[] = [
   },
   { name: "Catalogs", url: "/catalogs" },
   { name: "Blog", url: "/blog" },
-  { name: "Contact", url: "/#contact" },
 ];
 
 const esLinks: NavLink[] = [
+  {
+    name: "Productos",
+    url: "/es/products",
+    dropdown: [
+      { name: "Todos los Productos", url: "/es/products" },
+      { name: "Colorantes Naturales", url: "/es/#colorantes-naturales" },
+      { name: "Alimentos Colorantes", url: "/es/#alimentos-colorantes" },
+      { name: "Vitaminas y Pre Mixes", url: "/es/#vitaminas-premixes" },
+    ],
+  },
   {
     name: "Vida Vibrante",
     url: "/es/#vibrant-life",
@@ -97,7 +116,7 @@ const esLinks: NavLink[] = [
         url: "/es/#alimentos-colorantes",
       },
       {
-        name: "Vitaminas & Pre Mixes",
+        name: "Vitaminas y Pre Mixes",
         url: "/es/#vitaminas-premixes",
       },
     ],
@@ -120,7 +139,6 @@ const esLinks: NavLink[] = [
   },
   { name: "Catálogos", url: "/es/catalogs" },
   { name: "Blog", url: "/es/blog" },
-  { name: "Contacto", url: "/es/#contact" },
 ];
 
 const links = isEs ? esLinks : enLinks;
@@ -146,13 +164,13 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
       </a>
 
 
-      <!-- Desktop Navigation Links -->
+      <!-- Navigation Links -->
       <Astronav closeOnClick>
         <div class="incoltec-header__mobile-toggle">
           <MenuIcon class="incoltec-header__hamburger-svg" />
         </div>
 
-        <MenuItems class="incoltec-header__links-wrap">
+        <MenuItems class="hidden lg:flex incoltec-header__links-wrap">
           <ul class="incoltec-header__links">
             {
               links.map((link) => (
@@ -272,7 +290,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
         HORECA
       </a>
       <a
-        href="/"
+        href={isEs ? "/es" : "/"}
         class={`incoltec-header__tab ${activeTab === "INDUSTRIAL" ? "is-active" : ""}`}
       >
         INDUSTRIAL
@@ -317,8 +335,8 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: clamp(5.5rem, 7vw, 7rem);
-    gap: 2rem;
+    height: clamp(5.25rem, 6.5vw, 7rem);
+    gap: clamp(0.75rem, 1.5vw, 2rem);
   }
 
   /* Logo */
@@ -332,7 +350,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
 
   .incoltec-header__logo-img {
     display: block;
-    height: clamp(2.1rem, 3.5vw, 3.15rem);
+    height: clamp(2rem, 3.2vw, 3.15rem);
     width: auto;
   }
 
@@ -344,7 +362,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
   .incoltec-header__links {
     display: flex;
     align-items: center;
-    gap: clamp(0.25rem, 1.5vw, 1.75rem);
+    gap: clamp(0.35rem, 1.2vw, 1.5rem);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -362,8 +380,8 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
     gap: 0.25rem;
     padding: 0.5rem 0;
     font-family: var(--font-primary);
-    font-size: 0.9375rem;
-    font-weight: 400;
+    font-size: clamp(0.8125rem, 0.9vw, 0.9375rem);
+    font-weight: 500;
     line-height: 1.5;
     color: var(--c-dark, #1e1e1e);
     text-decoration: none;
@@ -556,13 +574,36 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
   .incoltec-header__mobile-toggle {
     display: flex;
     align-items: center;
+  }
+
+  #astronav-menu {
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+    margin: -0.5rem;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-dark, #1e1e1e);
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    touch-manipulation: manipulation;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  #astronav-menu:hover,
+  #astronav-menu:focus-visible {
+    background-color: rgba(0, 0, 0, 0.05);
+    outline: none;
   }
 
   .incoltec-header__hamburger-svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    color: var(--c-dark, #1e1e1e);
+    width: 1.75rem;
+    height: 1.75rem;
+    color: currentColor;
+    display: block;
   }
 
   .incoltec-header__mobile-actions {
@@ -624,11 +665,22 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
 
   /* ---- RESPONSIVE: DESKTOP (1024+) ---- */
   @media (min-width: 1024px) {
-    .incoltec-header__links-wrap {
+    .incoltec-header__links-wrap,
+    .incoltec-header__links-wrap.hidden,
+    :global(.incoltec-header__links-wrap),
+    :global(.incoltec-header__links-wrap.hidden) {
       display: flex !important;
       align-items: center;
       flex: 1;
       justify-content: center;
+      position: static;
+      background: transparent;
+      box-shadow: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      max-height: none;
+      overflow: visible;
     }
 
     .incoltec-header__actions {
@@ -647,12 +699,33 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
   /* ---- RESPONSIVE: MOBILE (< 1024) ---- */
   @media (max-width: 1023px) {
     .incoltec-header__links-wrap {
-      /* Controlled by astro-navbar (hidden by default) */
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+      padding: 1.25rem clamp(1.25rem, 4vw, 2.5rem) 2rem;
+      margin: 0;
       flex-direction: column;
       align-items: stretch;
-      padding: 1rem 0 0;
-      border-top: 1px solid #f0f0f0;
-      margin-top: 0.5rem;
+      max-height: calc(100dvh - clamp(5.5rem, 7vw, 7rem) - 1rem);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      z-index: 100;
+    }
+
+    .incoltec-header__links-wrap.hidden {
+      display: none !important;
+    }
+
+    .incoltec-header__links-wrap:not(.hidden) {
+      display: flex !important;
     }
 
     .incoltec-header__links {
@@ -661,10 +734,27 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
       gap: 0;
     }
 
+    .incoltec-header__link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
     .incoltec-header__link {
       padding: 0.875rem 0;
       font-size: 1.0625rem;
       font-weight: 500;
+      width: 100%;
+    }
+
+    .incoltec-header__chevron-btn {
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
     }
 
     .incoltec-header__dropdown {
@@ -674,33 +764,61 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
       transform: none;
       padding-top: 0;
       min-width: auto;
+      width: 100%;
     }
 
-    .incoltec-header__dropdown:not([hidden]),
+    .incoltec-header__dropdown.hidden {
+      display: none !important;
+    }
+
     .incoltec-header__dropdown:not(.hidden) {
-      transform: none;
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      transform: none !important;
     }
 
     .incoltec-header__dropdown-panel {
       border: none;
       border-radius: 0;
       box-shadow: none;
-      padding: 0 0 0 1rem;
+      padding: 0.25rem 0 0.5rem 1rem;
       background: transparent;
     }
 
     .incoltec-header__dropdown-link {
-      padding: 0.6rem 0.5rem;
-      font-size: 0.9375rem;
+      padding: 0.65rem 0.5rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .incoltec-header__dropdown-link:hover {
+      color: var(--c-dark, #1e1e1e);
+      background: rgba(0, 0, 0, 0.03);
     }
 
     .incoltec-header__actions {
       display: none !important;
     }
 
-    .incoltec-header__sub-bar {
-      /* Hide sub-bar on mobile for cleaner look */
+    .incoltec-header__mobile-actions {
+      display: block;
+      padding: 1.5rem 0 0.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      margin-top: 1rem;
     }
+
+    .incoltec-header__mobile-lang {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+  }
+
+  :global(#astronav-menu .astronav-toggle.hidden) {
+    display: none !important;
   }
 </style>
 
@@ -714,4 +832,33 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
+
+  // Close mobile nav when clicking outside header
+  document.addEventListener("click", (e) => {
+    const navMenuItems = document.querySelector(".incoltec-header__links-wrap");
+    const menuButton = document.getElementById("astronav-menu");
+    if (!navMenuItems || !menuButton) return;
+
+    if (!navMenuItems.classList.contains("hidden")) {
+      const headerEl = document.getElementById("site-header");
+      if (headerEl && !headerEl.contains(e.target as Node)) {
+        navMenuItems.classList.add("hidden");
+        const icons = menuButton.querySelectorAll(".astronav-toggle");
+        icons.forEach((el) => el.classList.toggle("hidden"));
+      }
+    }
+  });
+
+  // Close mobile nav on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const navMenuItems = document.querySelector(".incoltec-header__links-wrap");
+      const menuButton = document.getElementById("astronav-menu");
+      if (navMenuItems && !navMenuItems.classList.contains("hidden")) {
+        navMenuItems.classList.add("hidden");
+        const icons = menuButton?.querySelectorAll(".astronav-toggle");
+        icons?.forEach((el) => el.classList.toggle("hidden"));
+      }
+    }
+  });
 </script>

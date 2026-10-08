@@ -76,7 +76,15 @@
   --font-primary: var(--font-sans);
   --font-heading: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
   --font-script: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
-  --font-golden: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
+  /* 2026 Fluid Typography & Dynamic Scaling Baseline (WCAG 1.4.4 compliant, max <= 2.5x min) */
+  --fluid-hero: clamp(2.75rem, 1.25rem + 5.5vw, 7.5rem);
+  --fluid-display: clamp(2.25rem, 1.25rem + 3.8vw, 5.25rem);
+  --fluid-h1: clamp(2rem, 1.15rem + 3vw, 4.25rem);
+  --fluid-h2: clamp(1.65rem, 1.1rem + 2.2vw, 3.25rem);
+  --fluid-h3: clamp(1.35rem, 1rem + 1.2vw, 2.25rem);
+  --fluid-body: clamp(0.9375rem, 0.9rem + 0.25vw, 1.125rem);
+  --fluid-section-py: clamp(3.5rem, 2rem + 5vw, 7.5rem);
+  --fluid-gap: clamp(1.25rem, 1rem + 1.5vw, 2.5rem);
 }
 
 *, ::before, ::after {
@@ -86,6 +94,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 110px;
+  overflow-x: clip;
 }
 
 body {
@@ -95,14 +104,108 @@ body {
   line-height: 1.65;
   margin: 0;
   padding: 0;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure images and media adapt fluidly without overflow or layout shifts */
+img, picture, svg, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Explicit centering guarantees */
 .mx-auto {
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+/* ============================================================
+   2026 RESPONSIVE ARCHITECTURE CORE UTILITIES
+   ============================================================ */
+
+/* 1. Component Isolation with Container Queries */
+.cq-wrapper, [data-container] {
+  container-type: inline-size;
+}
+
+/* 2. Intrinsic Breakpoint-Free Grids */
+.intrinsic-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--fluid-gap);
+}
+
+.intrinsic-grid-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.intrinsic-grid-sub {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.intrinsic-grid-footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+/* 3. Fluid Typography & Dynamic Viewport Height Utilities */
+.fluid-hero {
+  font-size: var(--fluid-hero);
+  line-height: 1.05;
+  overflow-wrap: break-word;
+}
+
+.fluid-display {
+  font-size: var(--fluid-display);
+  line-height: 1.12;
+  overflow-wrap: break-word;
+}
+
+.fluid-h1 {
+  font-size: var(--fluid-h1);
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+.fluid-h2 {
+  font-size: var(--fluid-h2);
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+
+.fluid-h3 {
+  font-size: var(--fluid-h3);
+  line-height: 1.3;
+  overflow-wrap: break-word;
+}
+
+.fluid-body {
+  font-size: var(--fluid-body);
+  line-height: 1.65;
+}
+
+.fluid-section-py {
+  padding-top: var(--fluid-section-py);
+  padding-bottom: var(--fluid-section-py);
+}
+
+/* Viewport safety for mobile browser address bars */
+.h-dvh {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.min-h-dvh {
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Headings: Golden Hills Signature Brand Typography */
@@ -113,6 +216,7 @@ h1.font-heading, h2.font-heading, h3.font-heading, h4.font-heading,
   font-weight: normal;
   line-height: 1.25;
   letter-spacing: normal;
+  overflow-wrap: break-word;
 }
 
 h5, h6 {
@@ -266,4 +370,66 @@ a:hover {
 .delay-400 { transition-delay: 400ms; }
 .delay-500 { transition-delay: 500ms; }
 .delay-600 { transition-delay: 600ms; }
+
+/* ============================================================
+   FLOWY TEXT & ORGANIC MOTION SYSTEM
+   Smooth liquid transitions and floating typography
+   ============================================================ */
+@keyframes flowy-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-0.3deg);
+  }
+}
+
+@keyframes flowy-drift {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(2px, -3px);
+  }
+  66% {
+    transform: translate(-2px, -1px);
+  }
+}
+
+@keyframes flowy-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 0.95;
+    transform: translateY(-2px) scale(1.004);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.flowy-text {
+  display: inline-block;
+  animation: flowy-entrance 1.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity, filter;
+}
+
+.flowy-float {
+  animation: flowy-float 7s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* Subtle continuous flowy entrance on headings when revealed */
+.reveal.active .font-heading,
+.reveal-up.active .font-heading,
+.reveal-scale.active .font-heading {
+  animation: flowy-entrance 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 

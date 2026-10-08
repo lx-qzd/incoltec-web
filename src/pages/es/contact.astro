@@ -2,42 +2,54 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import Hero from '../../components/Hero.astro';
 ---
 
 <Layout 
   title="Contacto y Solicitud de Muestras"
-  description="Ponte en contacto con el equipo técnico de INCOLTEC. Solicita muestras de colorantes naturales, formulaciones a medida y asesoramiento regulatorio para tu producto alimentario."
+  description="Ponte en contacto con el equipo técnico de formulación de INCOLTEC. Solicita muestras de productos, mezclas personalizadas de tonos y asesoramiento regulatorio para tus aplicaciones de alimentos y bebidas."
 >
   <Header currentPath="/es/contact" />
   
   <main>
-    <Hero 
-      title="Contacto" 
-      subtitle="Innovación, formulación técnica y soporte personalizado"
-      backgroundImage="/assets/fondo1.jpg" 
-    />
+    <section class="contact-hero-section relative min-h-[100dvh] flex items-center py-[clamp(5rem,10dvh,8rem)] overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/assets/fondo1.jpg" 
+          alt="Fondo" 
+          class="w-full h-full object-cover" 
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          width="1920"
+          height="1080"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"></div>
+      </div>
+      
+      <!-- Decorative Polygons (Left) -->
+      <div class="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-10 w-32 md:w-56 opacity-80 pointer-events-none">
+        <div class="polygon polygon-yellow"></div>
+        <div class="polygon polygon-pink"></div>
+        <div class="polygon polygon-blue"></div>
+      </div>
 
-
-    <section class="contact-section container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h2>Ponte en contacto</h2>
-          <p>
-            Estamos aquí para responder tus preguntas y ayudarte a desarrollar la solución 
-            perfecta para tus necesidades.
-          </p>
-          <div class="info-block">
-            <h3>Email</h3>
-            <p>info@incoltec.com</p>
-          </div>
-          <div class="info-block">
-            <h3>Oficinas</h3>
-            <p>Nuestras instalaciones principales se encuentran listas para atender tus requerimientos.</p>
-          </div>
-        </div>
+      <div class="container relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6">
         
-        <div class="contact-form-container">
+        <!-- Frosted Glass Card Wrapper -->
+        <div class="glass-card-dark rounded-3xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100">
+          <div class="w-full text-center mb-8">
+            <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">
+              Consultas Directas
+            </span>
+            <h1 class="font-heading text-[clamp(2.5rem,1.8rem+3.5vw,4.5rem)] text-white font-normal mb-3 leading-tight">Contacto</h1>
+
+            <p class="text-white/85 text-[clamp(0.95rem,0.9rem+0.3vw,1.125rem)] font-light max-w-xl mx-auto leading-relaxed">
+              Conecta con nuestro equipo técnico de ciencia de alimentos para formulaciones personalizadas, dossiers técnicos o muestras piloto.
+            </p>
+          </div>
+
+          <div class="contact-form-container w-full">
+
           <form class="contact-form" id="contactForm" action="/api/contact" method="POST">
             <!-- Anti-spam Honeypot -->
             <div style="display:none;">
@@ -45,36 +57,44 @@ import Hero from '../../components/Hero.astro';
               <input type="text" id="bot_field_es_contact" name="bot_field" />
             </div>
 
-            <div class="form-group">
-              <label for="name">Nombre</label>
-              <input type="text" id="name" name="name" required placeholder="Tu nombre" />
+            <div class="form-grid">
+              <div class="form-group">
+                <input type="text" id="name" name="name" required placeholder="NOMBRE" />
+              </div>
+              <div class="form-group">
+                <input type="email" id="email" name="email" required placeholder="EMAIL" />
+              </div>
             </div>
+            
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required placeholder="tu@email.com" />
+              <input type="text" id="company" name="company" placeholder="NOMBRE DE LA EMPRESA" />
             </div>
+            
             <div class="form-group">
-              <label for="message">Mensaje</label>
-              <textarea id="message" name="message" rows="5" required placeholder="¿En qué podemos ayudarte?"></textarea>
+              <textarea id="message" name="message" rows="5" required placeholder="¿EN QUÉ PODEMOS AYUDARTE?"></textarea>
             </div>
 
             <div class="form-checkbox">
               <input type="checkbox" id="privacy" name="privacy" required />
-              <label for="privacy">He leído y acepto la <a href="/es/privacy-policy" class="text-[var(--c-cyan)] hover:underline">Política de Privacidad</a>.</label>
+              <label for="privacy">HE LEÍDO Y ACEPTO LA <a href="/es/privacy-policy" class="hover:underline">POLÍTICA DE PRIVACIDAD</a></label>
             </div>
 
             <div class="form-checkbox">
               <input type="checkbox" id="commercial" name="commercial" />
-              <label for="commercial">Deseo recibir comunicaciones comerciales sobre productos y servicios de Incoltec.</label>
+              <label for="commercial">DESEO RECIBIR COMUNICACIONES COMERCIALES</label>
             </div>
 
             <div id="form-feedback" class="hidden my-4 p-3 rounded text-sm font-medium"></div>
 
-            <button type="submit" class="submit-btn" id="submitBtn">Enviar Mensaje</button>
+            <div class="submit-container flex justify-end mt-6">
+              <button type="submit" class="submit-btn" id="submitBtn">ENVIAR</button>
+            </div>
           </form>
         </div>
       </div>
+    </div>
     </section>
+
   </main>
 
   <Footer />
@@ -136,112 +156,139 @@ import Hero from '../../components/Hero.astro';
 </script>
 
 <style>
-  .contact-section {
-    padding: 6rem 2rem;
+  .contact-hero-section {
+    overflow: hidden;
   }
 
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    max-width: 1000px;
-    margin: 0 auto;
+  /* Polygons styling */
+  .polygon {
+    height: 90px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
-
-  .contact-info h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+  
+  .polygon-yellow { 
+    background: linear-gradient(90deg, #ffde00, #ffae00); 
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); 
   }
-
-  .contact-info p {
-    color: var(--c-light);
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
+  .polygon-pink { 
+    background: linear-gradient(90deg, #ff1b7a, #e6005c); 
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); 
   }
-
-  .info-block h3 {
-    font-size: 1.2rem;
-    color: var(--c-yellow);
-    margin-bottom: 0.5rem;
-  }
-
-  .info-block p {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+  .polygon-blue { 
+    background: linear-gradient(90deg, #0084ff, #0056b3); 
+    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); 
   }
 
   .contact-form-container {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 2.5rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    container-type: inline-size;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .form-group {
     margin-bottom: 1.5rem;
   }
 
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-  }
-
   .form-group input,
   .form-group textarea {
     width: 100%;
-    padding: 0.8rem;
-    background: rgba(0, 0, 0, 0.5);
+    min-height: 48px;
+    padding: 1rem 1.2rem;
+    background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--c-white);
-    border-radius: 4px;
+    border-radius: 12px;
     font-family: inherit;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .form-group input:focus,
   .form-group textarea:focus {
     outline: none;
-    border-color: var(--c-cyan);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
   }
 
   .form-checkbox {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.8rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
   }
 
   .form-checkbox input[type="checkbox"] {
-    margin-top: 0.3rem;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
     cursor: pointer;
+    position: relative;
+    display: grid;
+    place-content: center;
+  }
+
+  .form-checkbox input[type="checkbox"]::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em white;
+    background-color: white;
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+  .form-checkbox input[type="checkbox"]:checked::before {
+    transform: scale(1);
   }
 
   .form-checkbox label {
-    font-size: 0.9rem;
-    color: var(--c-light);
-    line-height: 1.4;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.05em;
+    cursor: pointer;
   }
 
   .submit-btn {
-    background: var(--c-magenta);
+    background: rgba(255, 255, 255, 0.2);
     color: var(--c-white);
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    min-height: 48px;
+    padding: 0.75rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
     cursor: pointer;
-    border-radius: 4px;
-    width: 100%;
-    transition: background 0.3s ease;
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    touch-manipulation: manipulation;
   }
 
   .submit-btn:hover {
-    background: #c20055;
-  }
-
-  @media (max-width: 768px) {
-    .contact-grid {
-      grid-template-columns: 1fr;
-    }
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
   }
 </style>

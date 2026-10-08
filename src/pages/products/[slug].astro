@@ -127,7 +127,7 @@ const { Content } = await render(product);
   .product-header-section {
     background: #ffffff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 4rem 2rem;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
   }
   .content {
     max-width: 1000px;
@@ -156,21 +156,16 @@ const { Content } = await render(product);
     opacity: 0.5;
   }
 
+  /* Intrinsic Flex Header Layout */
   .header-layout {
     display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-  @media (min-width: 768px) {
-    .header-layout {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: clamp(1.5rem, 3vw, 3rem);
   }
 
   .header-text {
-    flex: 1;
+    flex: 1 1 min(100%, 460px);
   }
   .header-text h1 {
     font-size: clamp(2rem, 4vw, 3rem);
@@ -178,7 +173,7 @@ const { Content } = await render(product);
     margin-bottom: 1.5rem;
   }
   .subtitle {
-    font-size: 1.25rem;
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.25rem);
     color: var(--c-dark);
     opacity: 0.8;
     line-height: 1.6;
@@ -188,14 +183,10 @@ const { Content } = await render(product);
   .specs-card {
     background: rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 1.5rem;
+    padding: clamp(1.25rem, 2.5vw, 1.5rem);
     border-radius: 0;
-    width: 100%;
-  }
-  @media (min-width: 768px) {
-    .specs-card {
-      width: 320px;
-    }
+    flex: 1 1 min(100%, 300px);
+    max-width: 380px;
   }
   
   .specs-card h3 {
@@ -235,25 +226,21 @@ const { Content } = await render(product);
     border: 1px solid rgba(0,0,0,0.1);
   }
 
-  /* Main Layout */
+  /* Main Layout - Intrinsic 2-Column with Wrap */
   .content-section {
-    padding: 4rem 2rem 6rem;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem) clamp(4rem, 6vw, 6rem);
   }
   .main-layout {
     display: flex;
-    flex-direction: column;
-    gap: 4rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: clamp(2rem, 4vw, 4rem);
     max-width: 1000px;
     margin: 0 auto;
   }
-  @media (min-width: 1024px) {
-    .main-layout {
-      flex-direction: row;
-    }
-  }
 
   .main-content {
-    flex: 1;
+    flex: 1 1 min(100%, 500px);
   }
   
   .prose-content {
@@ -321,14 +308,10 @@ const { Content } = await render(product);
     font-size: 0.9rem;
   }
 
-  /* Sidebar */
+  /* Sidebar - Intrinsic Flex */
   .sidebar {
-    width: 100%;
-  }
-  @media (min-width: 1024px) {
-    .sidebar {
-      width: 320px;
-    }
+    flex: 1 1 min(100%, 300px);
+    max-width: 400px;
   }
 
   .download-card {
@@ -337,7 +320,7 @@ const { Content } = await render(product);
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 0;
-    padding: 2rem;
+    padding: clamp(1.5rem, 3vw, 2rem);
     text-align: center;
     box-shadow: 0 4px 30px rgba(0,0,0,0.03);
   }
@@ -350,7 +333,7 @@ const { Content } = await render(product);
   }
   
   .download-card h3 {
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
     font-weight: 700;
     margin-bottom: 0.5rem;
   }
@@ -374,6 +357,7 @@ const { Content } = await render(product);
 
   .form-input {
     width: 100%;
+    min-height: 48px;
     padding: 0.8rem 1rem;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -393,10 +377,11 @@ const { Content } = await render(product);
   .submit-btn {
     margin-top: 0.5rem;
     width: 100%;
+    min-height: 48px;
     background-color: var(--c-magenta);
     color: var(--c-white);
     font-weight: 600;
-    padding: 1rem;
+    padding: 0.875rem 1.5rem;
     border: none;
     border-radius: 0;
     cursor: pointer;
@@ -405,6 +390,7 @@ const { Content } = await render(product);
     justify-content: center;
     gap: 0.5rem;
     transition: background-color 0.3s ease;
+    touch-manipulation: manipulation;
   }
   .submit-btn:hover {
     background-color: #c40058;

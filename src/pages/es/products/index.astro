@@ -1,0 +1,328 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Hero from '../../../components/Hero.astro';
+import { getCollection } from 'astro:content';
+
+const allProducts = await getCollection('products');
+
+// Extract unique categories and applications for filters
+const categories = [...new Set(allProducts.map(p => p.data.category))];
+const applications = [...new Set(allProducts.flatMap(p => p.data.applications))];
+---
+
+<Layout 
+  title="Soluciones de Colorantes Alimentarios y Catálogo"
+  description="Explora la gama completa de colorantes naturales, alimentos colorantes y premezclas vitamínicas de INCOLTEC con especificaciones técnicas para la industria."
+>
+
+  <Header currentPath="/es/products" />
+  
+  <Hero 
+    title="Nuestras Soluciones de Color Natural" 
+    subtitle="Descubre nuestra amplia gama de soluciones cromáticas de alto rendimiento diseñadas específicamente para la industria alimentaria B2B."
+    backgroundImage="/assets/fondo1.jpg" 
+  />
+  
+  <main class="bg-[#F8FAFC]">
+    <div class="content-section container">
+      <div class="content">
+      
+      <!-- Search and Filter Bar -->
+      <div class="search-bar-container">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" id="searchInput" placeholder="Buscar por nombre, color o código E..." class="search-input" />
+        </div>
+        
+        <div class="filter-wrapper">
+          <select id="categoryFilter" class="category-select">
+            <option value="">Todas las Categorías</option>
+            {categories.map(cat => (
+              <option value={cat}>{cat}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="productsGrid" class="features-grid" style="margin-top: 3rem;">
+        {allProducts.map(product => (
+          <div class="feature-card product-card" data-title={product.data.title.toLowerCase()} data-category={product.data.category}>
+            <div class="product-header">
+              <span class="product-category">{product.data.category}</span>
+              {product.data.color && (
+                <span class="product-color-indicator">
+                   <span class="color-dot" style={`background-color: ${
+                     product.data.color.toLowerCase().includes('amarillo') ? '#FBBF24' : 
+                     product.data.color.toLowerCase().includes('rojo') || product.data.color.toLowerCase().includes('magenta') ? '#EF4444' :
+                     product.data.color.toLowerCase().includes('verde') ? '#10B981' :
+                     product.data.color.toLowerCase().includes('azul') ? '#3B82F6' :
+                     product.data.color.toLowerCase().includes('blanco') ? '#FFFFFF' : '#cccccc'
+                   }`}></span>
+                   {product.data.color}
+                </span>
+              )}
+            </div>
+            
+            <a href={`/products/${product.id}`}>
+              <h3>{product.data.title}</h3>
+            </a>
+            
+            <p class="product-description">{product.data.description}</p>
+            
+            {product.data.applications && (
+              <div class="product-tags">
+                {product.data.applications.slice(0, 3).map(app => (
+                  <span class="tag">{app}</span>
+                ))}
+                {product.data.applications.length > 3 && (
+                  <span class="tag-more">+{product.data.applications.length - 3}</span>
+                )}
+              </div>
+            )}
+            
+            <a href={`/products/${product.id}`} class="view-btn text-magenta">
+              Ver Ficha Técnica
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div id="noResults" class="no-results hidden">
+        <svg class="w-16 h-16 text-gray-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 64px; height: 64px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3>No se encontraron productos</h3>
+        <p>Prueba ajustando tus criterios de búsqueda o categoría.</p>
+      </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+  const categoryFilter = document.getElementById('categoryFilter') as HTMLSelectElement;
+  const productCards = document.querySelectorAll('.product-card');
+  const noResults = document.getElementById('noResults');
+
+  function filterProducts() {
+    const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    const selectedCategory = categoryFilter ? categoryFilter.value : '';
+    let visibleCount = 0;
+
+    productCards.forEach(card => {
+      const htmlCard = card as HTMLElement;
+      const title = htmlCard.dataset.title || '';
+      const category = htmlCard.dataset.category || '';
+      const text = htmlCard.innerText.toLowerCase();
+
+      const matchesSearch = !searchTerm || title.includes(searchTerm) || text.includes(searchTerm);
+      const matchesCategory = !selectedCategory || category === selectedCategory;
+
+      if (matchesSearch && matchesCategory) {
+        htmlCard.style.display = 'flex';
+        visibleCount++;
+      } else {
+        htmlCard.style.display = 'none';
+      }
+    });
+
+    if (noResults) {
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+  }
+
+  if (searchInput) searchInput.addEventListener('input', filterProducts);
+  if (categoryFilter) categoryFilter.addEventListener('change', filterProducts);
+</script>
+
+<style>
+  .content-section {
+    padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 3vw, 2rem);
+  }
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .search-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
+  }
+  @media (min-width: 640px) {
+    .search-bar-container {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+  .search-input-wrapper {
+    position: relative;
+    flex: 1;
+  }
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #94A3B8;
+  }
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border: 1px solid #CBD5E1;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s;
+  }
+  .search-input:focus {
+    border-color: #E30066;
+    box-shadow: 0 0 0 3px rgba(227, 0, 102, 0.1);
+  }
+  .filter-wrapper {
+    min-width: 200px;
+  }
+  .category-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #CBD5E1;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .category-select:focus {
+    border-color: #E30066;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  .product-card {
+    background: #ffffff;
+    border: 1px solid #E2E8F0;
+    border-radius: 1rem;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.1);
+    border-color: #CBD5E1;
+  }
+  .product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .product-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #E30066;
+    background: rgba(227, 0, 102, 0.08);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+  .product-color-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: #64748B;
+  }
+  .color-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  .product-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1E293B;
+    margin-bottom: 0.75rem;
+    transition: color 0.2s;
+  }
+  .product-card a:hover h3 {
+    color: #E30066;
+  }
+  .product-description {
+    font-size: 0.9rem;
+    color: #64748B;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+  }
+  .product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .tag {
+    font-size: 0.75rem;
+    background: #F1F5F9;
+    color: #475569;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+  .tag-more {
+    font-size: 0.75rem;
+    color: #94A3B8;
+    align-self: center;
+  }
+  .view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #E30066;
+    transition: gap 0.2s;
+  }
+  .view-btn:hover {
+    gap: 0.75rem;
+  }
+  .no-results {
+    text-align: center;
+    padding: 4rem 1rem;
+  }
+  .no-results.hidden {
+    display: none;
+  }
+  .no-results h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 0.5rem;
+  }
+  .no-results p {
+    color: #64748B;
+  }
+</style>

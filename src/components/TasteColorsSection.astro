@@ -9,40 +9,40 @@ interface Props {
 const { isEs = false } = Astro.props;
 ---
 
-<section id="taste-colors" class="w-full bg-[#FFFDF9] pt-24 md:pt-32 lg:pt-40 pb-16 md:pb-24 scroll-mt-20 overflow-hidden">
-  <div class="w-full max-w-[1240px] mx-auto px-6 sm:px-8 md:px-12 flex flex-col items-stretch">
+<section id="taste-colors" class="w-full bg-[#FFFDF9] pt-16 sm:pt-24 md:pt-32 pb-12 sm:pb-16 md:pb-24 scroll-mt-20 overflow-hidden @container">
+  <div class="w-full max-w-[1240px] mx-auto px-4 sm:px-8 md:px-12 flex flex-col items-stretch">
     
     <!-- Header with Scroll Reveal -->
-    <div class="text-center max-w-3xl mx-auto mb-20 md:mb-28 reveal delay-75 flex flex-col items-center">
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24 reveal delay-75 flex flex-col items-center">
       <div class="inline-flex items-center gap-2.5 mb-4">
         <BrandEIcon class="w-4 h-5 shrink-0" />
         <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
-          {isEs ? "Gama de Colores & Ingredientes" : "Colors & Ingredient Portfolio"}
+          {isEs ? "Gama de Colores e Ingredientes" : "Colors and Ingredient Portfolio"}
         </span>
       </div>
 
-      <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#89385C] font-normal mb-6 leading-tight">
+      <h2 class="font-heading fluid-h1 text-[#89385C] font-normal mb-6 leading-tight flowy-text">
         {isEs ? "Saborea los Colores" : "Taste Colors"}
       </h2>
 
       <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-8"></div>
-      <p class="font-verdana text-base sm:text-lg text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
+      <p class="font-verdana fluid-body text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
         {isEs
           ? "Naturaleza como inspiración. Las soluciones de INCOLTEC combinan elementos orgánicos con tecnología avanzada para crear una experiencia visual incomparable que despierta emociones y realza el atractivo de los alimentos."
           : "Nature as inspiration. INCOLTEC solutions combine organic botanicals with advanced processing technology to create an unparalleled visual experience that evokes emotion and elevates food appeal."}
       </p>
     </div>
 
-    <!-- 3 Category Cards: Colorantes Naturales, Alimentos Colorantes, Vitaminas & Premixes with Staggered Scroll Reveal -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-24 md:mb-36">
+    <!-- 3 Category Cards: Intrinsic Breakpoint-Free Auto-Fit Grid with Staggered Scroll Reveal -->
+    <div class="grid gap-6 sm:gap-8 mb-16 md:mb-28 @container" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));">
       
       <!-- Sub-anchor: Colorantes Naturales -->
-      <div id="colorantes-naturales" class="scroll-mt-28 bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100">
+      <div id="colorantes-naturales" class="scroll-mt-28 bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100">
         <div>
           <div class="w-12 h-12 rounded-2xl bg-[#FFC000]/15 text-[#b58900] flex items-center justify-center mb-6 font-bold">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
           </div>
-          <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal mb-4">
+          <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal mb-4">
             {isEs ? "Colorantes Naturales" : "Natural Colors"}
           </h3>
           <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
@@ -52,23 +52,23 @@ const { isEs = false } = Astro.props;
           </p>
         </div>
         <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#b58900] uppercase tracking-wider font-verdana">
-          {isEs ? "Alta Concentración & Estabilidad" : "High Concentration & Stability"}
+          {isEs ? "Alta Concentración y Estabilidad" : "High Concentration and Stability"}
         </div>
       </div>
 
       <!-- Sub-anchor: Alimentos Colorantes -->
-      <div id="alimentos-colorantes" class="scroll-mt-28 bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200">
+      <div id="alimentos-colorantes" class="scroll-mt-28 bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200">
         <div>
           <div class="w-12 h-12 rounded-2xl bg-[#E30066]/10 text-[#E30066] flex items-center justify-center mb-6 font-bold">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </div>
-          <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal mb-4">
+          <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal mb-4">
             {isEs ? "Alimentos Colorantes" : "Coloring Foods"}
           </h3>
           <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
             {isEs
               ? "100% Clean Label. Elaborados exclusivamente con materias primas alimentarias comestibles mediante procesos físicos: Azafrán, Concentrados de Espirulina (Blue Genipa), Zanahoria Negra y Remolacha."
-              : "100% Clean Label. Crafted strictly from edible agricultural foods through gentle physical processes: Saffron, Spirulina & Genipa Blue, Black Carrot, and Beetroot concentrates."}
+              : "100% Clean Label. Crafted strictly from edible agricultural foods through gentle physical processes: Saffron, Spirulina and Genipa Blue, Black Carrot, and Beetroot concentrates."}
           </p>
         </div>
         <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#E30066] uppercase tracking-wider font-verdana">
@@ -77,13 +77,13 @@ const { isEs = false } = Astro.props;
       </div>
 
       <!-- Sub-anchor: Vitaminas & Pre Mixes -->
-      <div id="vitaminas-premixes" class="scroll-mt-28 bg-white p-8 sm:p-10 md:p-12 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300">
+      <div id="vitaminas-premixes" class="scroll-mt-28 bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300">
         <div>
           <div class="w-12 h-12 rounded-2xl bg-[#008AD8]/10 text-[#008AD8] flex items-center justify-center mb-6 font-bold">
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
           </div>
-          <h3 class="text-3xl sm:text-4xl font-heading text-[#1E1E1E] font-normal mb-4">
-            {isEs ? "Vitaminas & Premixes" : "Vitamins & Pre Mixes"}
+          <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal mb-4">
+            {isEs ? "Vitaminas y Premixes" : "Vitamins and Pre Mixes"}
           </h3>
           <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
             {isEs
@@ -96,6 +96,29 @@ const { isEs = false } = Astro.props;
         </div>
       </div>
 
+    </div>
+
+    <!-- Explore Products CTA Bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6 p-6 sm:p-8 bg-gradient-to-r from-[#FAF8F5] via-white to-[#FAF8F5] rounded-2xl border border-gray-200/80 mb-16 md:mb-24 shadow-xs reveal delay-150">
+      <div>
+        <h4 class="font-heading text-2xl sm:text-3xl text-[#1E1E1E] font-normal mb-1">
+          {isEs ? "Catálogo Completo de Productos" : "Comprehensive Product Catalog"}
+        </h4>
+        <p class="font-verdana text-xs sm:text-sm text-gray-600 font-light m-0">
+          {isEs 
+            ? "Accede a fichas técnicas, dosificación y aplicaciones industriales de nuestra gama de colorantes y premezclas."
+            : "Access technical data sheets, dosing parameters, and industrial specifications across our full product portfolio."}
+        </p>
+      </div>
+      <a 
+        href={isEs ? "/es/products" : "/products"}
+        class="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#89385C] hover:bg-[#702847] text-white text-xs sm:text-sm font-semibold font-verdana transition-all duration-200 hover:-translate-y-0.5 shadow-md"
+      >
+        <span>{isEs ? "Ver Todos los Productos" : "Explore All Products"}</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
     </div>
 
   </div>

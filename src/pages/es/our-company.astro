@@ -3,102 +3,24 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Hero from '../../components/Hero.astro';
+import OurCompanySection from '../../components/OurCompanySection.astro';
 ---
 
 <Layout 
   title="Nuestra Empresa y Valores"
-  description="Conoce INCOLTEC: nuestra misión, solidez corporativa, liderazgo industrial e innovación continua en tecnología de colorantes naturales para alimentos."
+  description="Conoce INCOLTEC: misión, solidez corporativa, liderazgo industrial, capacidades de laboratorio e innovación continua en soluciones cromáticas de origen natural."
 >
   <Header currentPath="/es/our-company" />
   
   <main>
     <Hero 
       title="Nuestra Empresa" 
-      subtitle="Comprensión profunda de los mercados, la ciencia alimentaria y las culturas culinarias"
+      subtitle="Conocimiento profundo de los mercados, la ciencia de los alimentos y las culturas culinarias"
       backgroundImage="/assets/fondo1.jpg" 
     />
 
-
-    <section class="content-section container">
-      <div class="content">
-        <h2>Cercanía, Conocimiento Local y Adaptación</h2>
-        <p>
-          La explosión cromática de nuestras formulaciones simboliza la diversidad de sabores, ingredientes 
-          y tradiciones que enriquecen la industria alimentaria. En INCOLTEC, entendemos que cada mercado 
-          es único, por lo que adaptamos nuestras soluciones a las preferencias regionales.
-        </p>
-        
-        <div class="features-grid">
-          <div class="feature-card">
-            <h3 class="text-magenta">Solidez Corporativa</h3>
-            <p>Construimos relaciones a largo plazo basadas en la confianza y el cumplimiento.</p>
-          </div>
-          <div class="feature-card">
-            <h3 class="text-yellow">Liderazgo Industrial</h3>
-            <p>Marcamos la pauta en el desarrollo de soluciones cromáticas avanzadas.</p>
-          </div>
-          <div class="feature-card">
-            <h3 class="text-cyan">Innovación Permanente</h3>
-            <p>Nuestra filosofía "Tecnología Vibrante" nos impulsa a buscar siempre la mejora continua.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <OurCompanySection isEs={true} />
   </main>
 
   <Footer />
 </Layout>
-
-<style>
-  .content-section {
-    padding: 6rem 2rem;
-  }
-
-  .content {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  .content p {
-    font-size: 1.15rem;
-    color: #555;
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-  }
-
-  .feature-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 8px;
-    transition: transform 0.3s ease, background 0.3s ease;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .feature-card h3 {
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-  }
-
-  .feature-card p {
-    font-size: 1rem;
-    text-align: left;
-    margin-bottom: 0;
-  }
-</style>

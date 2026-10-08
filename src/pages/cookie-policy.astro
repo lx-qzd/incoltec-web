@@ -7,8 +7,8 @@ import Footer from '../components/Footer.astro';
 <Layout title="Cookie Policy">
   <Header currentPath="/cookie-policy" />
   
-  <main class="container mx-auto px-4 py-20 max-w-4xl text-gray-300">
-    <h1 class="text-4xl font-light mb-8 text-white">Cookie Policy</h1>
+  <main class="container mx-auto px-4 sm:px-6 py-[clamp(3.5rem,7vw,6rem)] max-w-4xl text-gray-300">
+    <h1 class="font-heading text-[clamp(2.25rem,1.8rem+2.5vw,3.5rem)] font-light mb-8 text-white leading-tight">Cookie Policy</h1>
     
     <div class="prose prose-invert max-w-none font-light leading-relaxed">
       <p>Last updated: August 2026</p>
@@ -40,13 +40,14 @@ import Footer from '../components/Footer.astro';
 
 <style>
   h2 {
-    font-size: 1.8rem;
+    font-size: clamp(1.35rem, 1.15rem + 1vw, 1.8rem);
     color: white;
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: 400;
   }
   p {
+    font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
     margin-bottom: 1rem;
   }
   ul {

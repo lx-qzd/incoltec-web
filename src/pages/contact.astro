@@ -12,13 +12,14 @@ import Hero from '../components/Hero.astro';
   <Header currentPath="/contact" />
   
   <main>
-    <section class="contact-hero-section relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
+    <section class="contact-hero-section relative min-h-[100dvh] flex items-center py-[clamp(5rem,10dvh,8rem)] overflow-hidden">
       <div class="absolute inset-0 z-0">
         <img 
           src="/assets/fondo1.jpg" 
           alt="Background" 
           class="w-full h-full object-cover" 
-          loading="lazy"
+          loading="eager"
+          fetchpriority="high"
           decoding="async"
           width="1920"
           height="1080"
@@ -41,9 +42,9 @@ import Hero from '../components/Hero.astro';
             <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">
               Direct Inquiries
             </span>
-            <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl text-white font-normal mb-3 leading-tight">Contact Us</h1>
+            <h1 class="font-heading text-[clamp(2.5rem,1.8rem+3.5vw,4.5rem)] text-white font-normal mb-3 leading-tight">Contact Us</h1>
 
-            <p class="text-white/85 text-base sm:text-lg font-light max-w-xl mx-auto leading-relaxed">
+            <p class="text-white/85 text-[clamp(0.95rem,0.9rem+0.3vw,1.125rem)] font-light max-w-xl mx-auto leading-relaxed">
               Connect with our technical food science team for custom formulations, technical dossiers, or pilot sample requests.
             </p>
           </div>
@@ -180,9 +181,13 @@ import Hero from '../components/Hero.astro';
     clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); 
   }
 
+  .contact-form-container {
+    container-type: inline-size;
+  }
+
   .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
     gap: 1.5rem;
     margin-bottom: 1.5rem;
   }
@@ -194,6 +199,7 @@ import Hero from '../components/Hero.astro';
   .form-group input,
   .form-group textarea {
     width: 100%;
+    min-height: 48px;
     padding: 1rem 1.2rem;
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -205,6 +211,10 @@ import Hero from '../components/Hero.astro';
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
   }
 
   .form-group input::placeholder,
@@ -266,6 +276,7 @@ import Hero from '../components/Hero.astro';
     background: rgba(255, 255, 255, 0.2);
     color: var(--c-white);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    min-height: 48px;
     padding: 0.75rem 2.5rem;
     font-size: 1rem;
     font-weight: 500;
@@ -274,19 +285,11 @@ import Hero from '../components/Hero.astro';
     border-radius: 999px;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    touch-manipulation: manipulation;
   }
 
   .submit-btn:hover {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
-  }
-
-  @media (max-width: 768px) {
-    .form-grid {
-      grid-template-columns: 1fr;
-    }
-    .contact-hero-section {
-      padding-top: 8rem;
-    }
   }
 </style>
