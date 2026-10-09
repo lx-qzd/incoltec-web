@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Certifications from "./Certifications.astro";
+import logoFooter from "../assets/logo-incoltec-footer.png";
 
 const currentYear = new Date().getFullYear();
 const urlPath = Astro.url.pathname;
@@ -69,9 +70,15 @@ const content = isEs ? esLinks : enLinks;
 
 <footer class="footer">
   <div class="container footer-content">
-    <div class="footer-logo">
-      <Image src="/assets/logo-incoltec-footer.png" alt="Incoltec Logo" width={600} height={200} class="h-[75px] w-auto object-contain" />
-    </div>
+      <Image 
+        src={logoFooter} 
+        alt="Incoltec Logo" 
+        width={600} 
+        height={200} 
+        class="h-[75px] w-auto object-contain" 
+        loading="lazy"
+        decoding="async"
+      />
     
     <div class="footer-links">
       <div class="link-group">
@@ -103,7 +110,7 @@ const content = isEs ? esLinks : enLinks;
     </div>
   </div>
   
-  <Certifications variant="dark" title={isEs ? "Calidad y Seguridad Certificada" : "Certified Quality & Safety"} />
+  <Certifications variant="dark" title={isEs ? "Calidad y Seguridad Certificada" : "Certified Quality and Safety"} />
   
   <div class="footer-bottom container">
     <div class="footer-bottom-inner">

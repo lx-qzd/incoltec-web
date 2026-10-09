@@ -1,0 +1,25 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ColorSolutionsSection from "../../components/ColorSolutionsSection.astro";
+import LeadMagnet from "../../components/LeadMagnet.astro";
+---
+
+<Layout 
+  title="Soluciones de Color - Incoltec"
+  description="Nuestros laboratorios de Incoltec aportan soluciones pensadas para resolver cualquier necesidad en cualquier color. Aplicar una solución, no sólo es remediar un problema."
+  image="/assets/soluciones.jpg"
+>
+  <Header currentPath="/es/color-solutions" />
+
+  <ColorSolutionsSection isEs={true} showHero={true} />
+
+  <LeadMagnet 
+    title="Solicita una Solución de Color a Medida"
+    description="Contacta con nuestro equipo técnico de laboratorio para desarrollar soluciones de color natural ajustadas a tus parámetros térmicos, de pH y vida útil."
+    buttonText="Solicitar Asesoramiento Técnico"
+  />
+
+  <Footer />
+</Layout>

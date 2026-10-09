@@ -1,0 +1,1109 @@
+---
+interface Props {
+  isEs?: boolean;
+  showHero?: boolean;
+}
+
+const { isEs = false, showHero = true } = Astro.props;
+
+interface Application {
+  id: string;
+  slug: string;
+  titleEn: string;
+  titleEs: string;
+  image: string;
+  jpgFallback: string;
+  category: "bakery" | "beverages" | "dairy" | "savory" | "confectionery" | "health";
+  categoryEn: string;
+  categoryEs: string;
+  descEn: string;
+  descEs: string;
+  colorsEn: string[];
+  colorsEs: string[];
+  featuredProducts: { name: string; slug: string }[];
+}
+
+const applications: Application[] = [
+  {
+    id: "bakery",
+    slug: "bakery",
+    titleEn: "Bakery",
+    titleEs: "Panificación y rebozados",
+    image: "/assets/applications/rebozados.webp",
+    jpgFallback: "/assets/applications/rebozados.jpg",
+    category: "bakery",
+    categoryEn: "Bakery & Doughs",
+    categoryEs: "Panadería y Masas",
+    descEn: "High-performance heat-resistant color solutions for bread, cakes, pastries, batters, breadcrumbs, and baked crusts.",
+    descEs: "Soluciones de color termoestables de alto rendimiento para panes, bollería, rebozados, galletas y masas horneadas.",
+    colorsEn: ["E-100 Curcumin", "E-160a Betacarotene", "E-160c Paprika", "E-150 Caramel"],
+    colorsEs: ["E-100 Curcumina", "E-160a Betacaroteno", "E-160c Páprika", "E-150 Caramelo"],
+    featuredProducts: [
+      { name: isEs ? "Curcumina E-100" : "Curcumin E-100", slug: "curcumina-e100" },
+      { name: isEs ? "Betacaroteno" : "Betacarotene", slug: "betacaroteno" }
+    ]
+  },
+  {
+    id: "cooked-prawns",
+    slug: "cooked-prawns-substitute-caviar-and-surimi",
+    titleEn: "Cooked prawns, substitute caviar and surimi",
+    titleEs: "Langostinos cocidos, sucedáneo de caviar y surimi",
+    image: "/assets/applications/langostinos.webp",
+    jpgFallback: "/assets/applications/langostinos.jpg",
+    category: "savory",
+    categoryEn: "Seafood & Surimi",
+    categoryEs: "Pescados y Surimi",
+    descEn: "Surface coating and mass coloring for seafood analogues, imitation crab, substitute caviar, and brine-stable prawns.",
+    descEs: "Coloración superficial y en masa para análogos marinos, surimi, sucedáneo de caviar y langostinos estables en salmuera.",
+    colorsEn: ["E-120 Carmine", "E-160c Paprika Extract", "E-153 Vegetable Carbon"],
+    colorsEs: ["E-120 Carmín", "E-160c Oleorresina de Páprika", "E-153 Carbón Vegetal"],
+    featuredProducts: [
+      { name: isEs ? "Carmín E-120" : "Carmine E-120", slug: "carmin-e120" }
+    ]
+  },
+  {
+    id: "creams-purees",
+    slug: "creams-purees-gazpachos-and-baby-purees-and-soups",
+    titleEn: "Creams, purees, gazpachos and baby purees and soups",
+    titleEs: "Cremas, purés, gazpachos y potitos para bebé",
+    image: "/assets/applications/cremas.webp",
+    jpgFallback: "/assets/applications/cremas.jpg",
+    category: "savory",
+    categoryEn: "Soups & Purees",
+    categoryEs: "Cremas y Purés",
+    descEn: "Clean-label and organic botanical extracts for vegetable soups, purees, chilled gazpachos, and certified infant nutrition.",
+    descEs: "Extractos botánicos limpios y certificados para cremas de verduras, purés, gazpachos frescos y alimentación infantil.",
+    colorsEn: ["E-162 Beetroot Red", "E-141 Chlorophyll", "Carrot Extract", "E-100 Curcumin"],
+    colorsEs: ["E-162 Rojo Remolacha", "E-141 Clorofila", "Extracto de Zanahoria", "E-100 Curcumina"],
+    featuredProducts: [
+      { name: isEs ? "Rojo Remolacha" : "Beetroot Red", slug: "rojo-remolacha" },
+      { name: isEs ? "Clorofila E-141" : "Chlorophyll E-141", slug: "clorofila-e141" }
+    ]
+  },
+  {
+    id: "dairy-margarines",
+    slug: "dairy-and-margarines",
+    titleEn: "Dairy and margarines",
+    titleEs: "Lácteos y margarinas",
+    image: "/assets/applications/margarina.webp",
+    jpgFallback: "/assets/applications/margarina.jpg",
+    category: "dairy",
+    categoryEn: "Dairy & Fats",
+    categoryEs: "Lácteos y Grasas",
+    descEn: "Liposoluble and water-dispersible formulations engineered for cheese rinds, processed cheeses, butters, and vegetable fats.",
+    descEs: "Formulaciones liposolubles e hidrodispersables para quesos procesados, mantequillas, margarinas y grasas vegetales.",
+    colorsEn: ["E-160b Annatto / Bixin", "E-160a Betacarotene", "E-160c Paprika"],
+    colorsEs: ["E-160b Bixina / Annatto", "E-160a Betacaroteno", "E-160c Páprika"],
+    featuredProducts: [
+      { name: isEs ? "Betacaroteno" : "Betacarotene", slug: "betacaroteno" }
+    ]
+  },
+  {
+    id: "drinks",
+    slug: "drinks",
+    titleEn: "Drinks",
+    titleEs: "Bebidas",
+    image: "/assets/applications/bebidas.webp",
+    jpgFallback: "/assets/applications/bebidas.jpg",
+    category: "beverages",
+    categoryEn: "Beverages",
+    categoryEs: "Bebidas",
+    descEn: "Crystal-clear and stable cloudy beverage emulsions with high lightfastness and zero ring formation across acidic pH ranges.",
+    descEs: "Emulsiones transparentes o turbias de máxima estabilidad a la luz y pH ácido, sin sedimentación ni halo en cuello de botella.",
+    colorsEn: ["E-163 Anthocyanins", "Spirulina Blue Extract", "E-100 Curcumin", "E-160a Betacarotene"],
+    colorsEs: ["E-163 Antocianinas", "Extracto de Espirulina Azul", "E-100 Curcumina", "E-160a Betacaroteno"],
+    featuredProducts: [
+      { name: isEs ? "Espirulina Azul" : "Spirulina Blue", slug: "espirulina-azul" },
+      { name: isEs ? "Curcumina E-100" : "Curcumin E-100", slug: "curcumina-e100" }
+    ]
+  },
+  {
+    id: "supplements",
+    slug: "food-dietary-and-vitamin-supplements",
+    titleEn: "Food, dietary and vitamin supplements",
+    titleEs: "Suplementos alimenticios, dietéticos y vitamínicos",
+    image: "/assets/applications/suplementos-vitaminicos.webp",
+    jpgFallback: "/assets/applications/suplementos-vitaminicos.jpg",
+    category: "health",
+    categoryEn: "Nutraceuticals",
+    categoryEs: "Nutracéuticos",
+    descEn: "High-potency botanical pigments and customized vitamin premixes for compressed tablets, softgels, syrups, and functional gummies.",
+    descEs: "Pigmentos botánicos de alta pureza y premezclas vitamínicas a medida para comprimidos, cápsulas, jarabes y gummies funcionales.",
+    colorsEn: ["Spirulina Blue", "Black Carrot Extract", "Custom Vitamin Premixes", "Lutein"],
+    colorsEs: ["Espirulina Azul", "Extracto de Zanahoria Negra", "Premezclas Vitamínicas", "Luteína"],
+    featuredProducts: [
+      { name: isEs ? "Premixes Vitamínicos" : "Vitamin Premixes", slug: "premixes-vitaminicos" },
+      { name: isEs ? "Zanahoria Negra" : "Black Carrot", slug: "zanahoria-negra" }
+    ]
+  },
+  {
+    id: "juices",
+    slug: "fruit-and-vegetables-juices",
+    titleEn: "Fruit and vegetables juices",
+    titleEs: "Zumos de fruta y verdura",
+    image: "/assets/applications/zumos.webp",
+    jpgFallback: "/assets/applications/zumos.jpg",
+    category: "beverages",
+    categoryEn: "Juices & Nectars",
+    categoryEs: "Zumos y Néctares",
+    descEn: "100% plant-based coloring foods to restore and enhance authentic chromatic shades in thermal and HPP juices.",
+    descEs: "Alimentos colorantes 100% vegetales para revitalizar la tonalidad natural en zumos pasteurizados y tratamientos HPP.",
+    colorsEn: ["Red Beet Extract", "Black Carrot", "Curcumin Water-Soluble", "Safflower"],
+    colorsEs: ["Extracto de Remolacha", "Zanahoria Negra", "Curcumina Hidrosoluble", "Cártamo"],
+    featuredProducts: [
+      { name: isEs ? "Zanahoria Negra" : "Black Carrot", slug: "zanahoria-negra" },
+      { name: isEs ? "Rojo Remolacha" : "Beetroot Red", slug: "rojo-remolacha" }
+    ]
+  },
+  {
+    id: "ice-creams",
+    slug: "ice-creams-and-yogurts",
+    titleEn: "Ice creams and yogurts",
+    titleEs: "Helados, yogures y sorbetes",
+    image: "/assets/applications/yoghurt.webp",
+    jpgFallback: "/assets/applications/yoghurt.jpg",
+    category: "dairy",
+    categoryEn: "Ice Cream & Yogurt",
+    categoryEs: "Helados y Yogures",
+    descEn: "Freeze-thaw and pasteurization-resistant colors that prevent migration and bleeding in variegated fruit ripples and swirls.",
+    descEs: "Colores resistentes a congelación y pasteurización que evitan la migración o sangrado en veteados y bases lácteas.",
+    colorsEn: ["E-120 Carmine", "E-141 Chlorophyll", "Spirulina Blue", "E-100 Curcumin"],
+    colorsEs: ["E-120 Carmín", "E-141 Clorofila", "Espirulina Azul", "E-100 Curcumina"],
+    featuredProducts: [
+      { name: isEs ? "Carmín E-120" : "Carmine E-120", slug: "carmin-e120" },
+      { name: isEs ? "Clorofila E-141" : "Chlorophyll E-141", slug: "clorofila-e141" }
+    ]
+  },
+  {
+    id: "confectionery",
+    slug: "jams-and-confectionery",
+    titleEn: "Jams and confectionery",
+    titleEs: "Mermeladas y confitería",
+    image: "/assets/applications/mermelada.webp",
+    jpgFallback: "/assets/applications/mermelada.jpg",
+    category: "confectionery",
+    categoryEn: "Confectionery & Jams",
+    categoryEs: "Confitería y Mermeladas",
+    descEn: "Exceptional thermal tolerance and low pH resilience for fruit spreads, jellies, hard candies, pastilles, and gummy bears.",
+    descEs: "Excepcional tolerancia térmica y resistencia a bajo pH para mermeladas, golosinas, caramelos duros y rellenos de fruta.",
+    colorsEn: ["Anthocyanins", "E-120 Carmine Lakes", "Betacarotene", "Chlorophyll"],
+    colorsEs: ["Antocianinas", "Lacas de Carmín E-120", "Betacaroteno", "Clorofila"],
+    featuredProducts: [
+      { name: isEs ? "Curcumina E-100" : "Curcumin E-100", slug: "curcumina-e100" },
+      { name: isEs ? "Carmín E-120" : "Carmine E-120", slug: "carmin-e120" }
+    ]
+  },
+  {
+    id: "meat",
+    slug: "meat-products",
+    titleEn: "Meat products",
+    titleEs: "Cárnicos",
+    image: "/assets/applications/carnico.webp",
+    jpgFallback: "/assets/applications/carnico.jpg",
+    category: "savory",
+    categoryEn: "Meat & Charcuterie",
+    categoryEs: "Cárnicos y Embutidos",
+    descEn: "Formulations tailored for fresh minced meats, cured sausages, and cooked hams, preserving appetizing pink and cured nuances.",
+    descEs: "Formulaciones para elaborados frescos, embutidos curados y productos cocidos, garantizando una coloración cárnica apetecible.",
+    colorsEn: ["E-120 Carmine", "E-160c Paprika Oleoresin", "E-162 Beetroot Red"],
+    colorsEs: ["E-120 Carmín", "E-160c Oleorresina de Páprika", "E-162 Rojo Remolacha"],
+    featuredProducts: [
+      { name: isEs ? "Carmín E-120" : "Carmine E-120", slug: "carmin-e120" }
+    ]
+  },
+  {
+    id: "pasta",
+    slug: "pasta",
+    titleEn: "Pasta",
+    titleEs: "Pastas",
+    image: "/assets/applications/pasta.webp",
+    jpgFallback: "/assets/applications/pasta.jpg",
+    category: "bakery",
+    categoryEn: "Pasta & Noodles",
+    categoryEs: "Pastas y Fideos",
+    descEn: "Uniform golden shades and vibrant specialty hues for fresh, dry, and filled pasta doughs resistant to boiling water extrusion.",
+    descEs: "Tonos dorados consistentes y colores botánicos para pastas frescas, secas y rellenas resistentes al hervor y extrusión.",
+    colorsEn: ["E-100 Curcumin", "E-160a Betacarotene", "E-160c Paprika", "Chlorophyll"],
+    colorsEs: ["E-100 Curcumina", "E-160a Betacaroteno", "E-160c Páprika", "Clorofila"],
+    featuredProducts: [
+      { name: isEs ? "Curcumina E-100" : "Curcumin E-100", slug: "curcumina-e100" },
+      { name: isEs ? "Betacaroteno" : "Betacarotene", slug: "betacaroteno" }
+    ]
+  },
+  {
+    id: "preserves",
+    slug: "preserves",
+    titleEn: "Preserves",
+    titleEs: "Conservas",
+    image: "/assets/applications/conservas.webp",
+    jpgFallback: "/assets/applications/conservas.jpg",
+    category: "savory",
+    categoryEn: "Preserves & Canning",
+    categoryEs: "Conservas y Encurtidos",
+    descEn: "Autoclave sterilization-proof pigments that preserve visual freshness inside glass jars and metallic cans over extended shelf-life.",
+    descEs: "Pigmentos resistentes a la esterilización en autoclave que preservan la frescura visual en tarros de cristal y latas.",
+    colorsEn: ["E-120 Carmine", "E-141 Copper Chlorophyllin", "E-160d Lycopene"],
+    colorsEs: ["E-120 Carmín", "E-141 Complejo Cúprico de Clorofila", "E-160d Licopeno"],
+    featuredProducts: [
+      { name: isEs ? "Clorofila E-141" : "Chlorophyll E-141", slug: "clorofila-e141" },
+      { name: isEs ? "Carmín E-120" : "Carmine E-120", slug: "carmin-e120" }
+    ]
+  },
+  {
+    id: "ready-meals",
+    slug: "ready-meals-and-instant-soups",
+    titleEn: "Ready meals and instant soups",
+    titleEs: "Platos preparados y sopas instantáneas",
+    image: "/assets/applications/platos-preparados.webp",
+    jpgFallback: "/assets/applications/platos-preparados.jpg",
+    category: "savory",
+    categoryEn: "Ready Meals",
+    categoryEs: "Platos Preparados",
+    descEn: "Spray-dried, instant dispersible color solutions developed for microwave dishes, instant soups, and ambient convenience foods.",
+    descEs: "Soluciones atomizadas e instantáneamente dispersables para recetas microondables, sopas deshidratadas y platos de conveniencia.",
+    colorsEn: ["E-160c Paprika Extract", "E-100 Turmeric", "E-150 Caramel", "Beetroot"],
+    colorsEs: ["E-160c Extracto de Páprika", "E-100 Cúrcuma", "E-150 Caramelo", "Remolacha"],
+    featuredProducts: [
+      { name: isEs ? "Curcumina E-100" : "Curcumin E-100", slug: "curcumina-e100" }
+    ]
+  },
+  {
+    id: "sauces",
+    slug: "sauces",
+    titleEn: "Sauces",
+    titleEs: "Salsas",
+    image: "/assets/applications/salsas.webp",
+    jpgFallback: "/assets/applications/salsas.jpg",
+    category: "savory",
+    categoryEn: "Sauces & Condiments",
+    categoryEs: "Salsas y Condimentos",
+    descEn: "Emulsion-friendly colorants providing vivid color stability without phase separation in mayonnaise, ketchup, mustard, and dressings.",
+    descEs: "Colorantes para emulsiones de máxima estabilidad sin sinéresis en mayonesas, kétchup, mostazas, vinagretas y salsas étnicas.",
+    colorsEn: ["E-100 Curcumin", "E-160c Paprika Oleoresin", "E-150 Caramel", "Lutein"],
+    colorsEs: ["E-100 Curcumina", "E-160c Oleorresina de Páprika", "E-150 Caramelo", "Luteína"],
+    featuredProducts: [
+      { name: isEs ? "Curcumina E-100" : "Curcumin E-100", slug: "curcumina-e100" },
+      { name: isEs ? "Betacaroteno" : "Betacarotene", slug: "betacaroteno" }
+    ]
+  },
+  {
+    id: "snacks",
+    slug: "snacks",
+    titleEn: "Snacks",
+    titleEs: "Snacks",
+    image: "/assets/applications/snacks.webp",
+    jpgFallback: "/assets/applications/snacks.jpg",
+    category: "bakery",
+    categoryEn: "Snacks & Seasonings",
+    categoryEs: "Snacks y Aperitivos",
+    descEn: "Superior shear and frying heat resistance for extruded snacks, potato chips, pellets, tortilla chips, and topical seasonings.",
+    descEs: "Excelente resistencia térmica y a fricción mecánica en snacks extrusionados, patatas fritas, pellets y sazonadores superficiales.",
+    colorsEn: ["E-160c Paprika Oleoresin", "E-160b Annatto", "E-100 Curcumin"],
+    colorsEs: ["E-160c Oleorresina de Páprika", "E-160b Annatto", "E-100 Curcumina"],
+    featuredProducts: [
+      { name: isEs ? "Curcumina E-100" : "Curcumin E-100", slug: "curcumina-e100" }
+    ]
+  },
+  {
+    id: "spices",
+    slug: "spices",
+    titleEn: "Spices",
+    titleEs: "Especias",
+    image: "/assets/applications/especias.webp",
+    jpgFallback: "/assets/applications/especias.jpg",
+    category: "savory",
+    categoryEn: "Spices & Blends",
+    categoryEs: "Especias y Mezclas",
+    descEn: "Microencapsulated colors that standardize natural color variation in curry powders, paprika rubs, and dry seasoning blends.",
+    descEs: "Colorantes microencapsulados para corregir y homogeneizar mezclas secas de especias, curris y adobos industriales.",
+    colorsEn: ["E-100 Curcumin", "E-160c Paprika Oleoresin", "Chlorophyllin"],
+    colorsEs: ["E-100 Curcumina", "E-160c Oleorresina de Páprika", "Clorofilina"],
+    featuredProducts: [
+      { name: isEs ? "Curcumina E-100" : "Curcumin E-100", slug: "curcumina-e100" }
+    ]
+  },
+  {
+    id: "desserts",
+    slug: "various-desserts",
+    titleEn: "Various desserts",
+    titleEs: "Postres diversos",
+    image: "/assets/applications/postres.webp",
+    jpgFallback: "/assets/applications/postres.jpg",
+    category: "confectionery",
+    categoryEn: "Desserts & Pastry",
+    categoryEs: "Postres y Repostería",
+    descEn: "Radiant, appetizing shades for flans, custards, gelatin cups, mousses, fruit toppings, and dairy-based desserts.",
+    descEs: "Tonos luminosos y tentadores para flanes, natillas, gelatinas, mousses, coberturas y postres refrigerados.",
+    colorsEn: ["E-120 Carmine", "E-160a Betacarotene", "E-100 Curcumin", "E-141 Chlorophyll"],
+    colorsEs: ["E-120 Carmín", "E-160a Betacaroteno", "E-100 Curcumina", "E-141 Clorofila"],
+    featuredProducts: [
+      { name: isEs ? "Carmín E-120" : "Carmine E-120", slug: "carmin-e120" },
+      { name: isEs ? "Clorofila E-141" : "Chlorophyll E-141", slug: "clorofila-e141" }
+    ]
+  },
+  {
+    id: "vegan",
+    slug: "vegetarian-and-vegan-foods",
+    titleEn: "Vegetarian and vegan foods",
+    titleEs: "Alimentos vegetarianos y veganos",
+    image: "/assets/applications/vegetarianos.webp",
+    jpgFallback: "/assets/applications/vegetarianos.jpg",
+    category: "health",
+    categoryEn: "Plant-Based & Vegan",
+    categoryEs: "Alimentos Veganos",
+    descEn: "100% plant-derived, carmine-free pigment blends that replicate authentic raw meat pinkness and realistic browning during cooking.",
+    descEs: "Mezclas de pigmentos 100% botánicos sin carmín que replican el aspecto de carne cruda y su oscurecimiento al cocinarse.",
+    colorsEn: ["E-162 Beetroot Red", "E-160d Lycopene", "Apple & Hibiscus Concentrate", "E-150 Caramel"],
+    colorsEs: ["E-162 Rojo Remolacha", "E-160d Licopeno", "Concentrado de Manzana e Hibisco", "E-150 Caramelo"],
+    featuredProducts: [
+      { name: isEs ? "Rojo Remolacha" : "Beetroot Red", slug: "rojo-remolacha" },
+      { name: isEs ? "Zanahoria Negra" : "Black Carrot", slug: "zanahoria-negra" }
+    ]
+  }
+];
+
+const categoriesFilter = [
+  { key: "all", nameEn: "All Applications", nameEs: "Todas las aplicaciones" },
+  { key: "bakery", nameEn: "Bakery & Doughs", nameEs: "Panadería y Masas" },
+  { key: "beverages", nameEn: "Beverages & Juices", nameEs: "Bebidas y Zumos" },
+  { key: "dairy", nameEn: "Dairy & Ice Cream", nameEs: "Lácteos y Helados" },
+  { key: "savory", nameEn: "Savory & Meat", nameEs: "Cárnicos y Salados" },
+  { key: "confectionery", nameEn: "Confectionery & Sweets", nameEs: "Confitería y Dulces" },
+  { key: "health", nameEn: "Plant-Based & Health", nameEs: "Veganos y Nutracéuticos" },
+];
+---
+
+<div class="color-solutions-wrapper w-full">
+  {showHero && (
+    <section 
+      id="aplicaciones" 
+      class="relative w-full min-h-[520px] md:min-h-[580px] flex items-center justify-center overflow-hidden bg-cover bg-center"
+      style="background-image: url('/assets/soluciones.webp'), url('/assets/soluciones.jpg');"
+    >
+      <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/35 pointer-events-none"></div>
+
+      <div class="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-8 md:px-12 py-16 md:py-24">
+        <div class="max-w-2xl text-white">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4 text-xs font-semibold tracking-wider uppercase text-[#FFC000]">
+            <span class="w-2 h-2 rounded-full bg-[#008AD8] animate-pulse"></span>
+            {isEs ? "Catálogo de Aplicaciones" : "Application Directory"}
+          </div>
+
+          <h1 class="font-heading fluid-hero text-white uppercase font-bold tracking-tight mb-4 leading-none">
+            {isEs ? "Soluciones de Color" : "Colour Solutions"}
+          </h1>
+
+          <p class="font-verdana text-white/90 text-sm sm:text-base md:text-lg mb-8 leading-relaxed max-w-xl">
+            {isEs 
+              ? "Busca nuestros productos entre las diferentes aplicaciones de color disponibles en nuestra web."
+              : "Search for our products among the different colour applications available on our website."}
+          </p>
+
+          <div class="relative max-w-lg">
+            <div class="relative flex items-center">
+              <span class="absolute left-4 text-white/70 pointer-events-none">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </span>
+              <input 
+                type="text" 
+                id="buscadorAplicaciones" 
+                class="w-full bg-black/40 backdrop-blur-md text-white placeholder-white/70 border-2 border-white/80 rounded-xl pl-12 pr-10 py-3.5 text-sm sm:text-base focus:outline-none focus:border-[#FFC000] focus:ring-2 focus:ring-[#FFC000]/30 transition-all shadow-xl"
+                placeholder={isEs ? "Buscar aplicaciones de colorantes..." : "Search coloring applications..."}
+                autocomplete="off"
+              />
+              <button 
+                id="clearSearchBtn" 
+                class="absolute right-3 text-white/60 hover:text-white hidden p-1 focus:outline-none"
+                aria-label="Clear search"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            <div 
+              id="resultBuscador" 
+              class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden z-50 max-h-80 overflow-y-auto"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Main Content Area: Food Coloring Applications Grid -->
+  <main id="main-applications" class="w-full bg-[#FFFDF9] py-16 sm:py-20 md:py-28">
+    <div class="w-full max-w-[1240px] mx-auto px-4 sm:px-8 md:px-12">
+      
+      <!-- Section Header -->
+      <div class="max-w-3xl mb-10 md:mb-14">
+        <div class="inline-block mb-3">
+          <span class="font-verdana text-xs uppercase tracking-[0.2em] text-[#E30066] font-bold">
+            {isEs ? "Formulaciones y Sectores" : "Formulation & Sectors"}
+          </span>
+        </div>
+        <h2 class="font-heading fluid-h1 text-[#1E1E1E] font-normal mb-4 leading-tight">
+          {isEs ? "Aplicaciones de colorantes alimentarios" : "Food coloring applications"}
+        </h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-[#008AD8] via-[#E30066] to-[#FFC000] rounded-full mb-6"></div>
+        <p class="font-verdana fluid-body text-gray-700 font-light leading-relaxed">
+          {isEs 
+            ? "Concentramos ciencia, servicio e innovación para ofrecer las mejores soluciones de color para alimentos y bebidas. Incoltec brinda una variedad cromática muy amplia en colorantes alimenticios de calidad en el mundo."
+            : "We bring together science, service, and innovation to provide optimal colour solutions for the food and beverage industry. Incoltec offers the most extensive range of high-quality food colours globally."}
+        </p>
+      </div>
+
+      <!-- Quick Category Filter Chips -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
+        {categoriesFilter.map(cat => (
+          <button 
+            type="button" 
+            class="filter-chip whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border border-gray-200 bg-white text-gray-700 hover:border-[#E30066] hover:text-[#E30066] cursor-pointer"
+            data-category={cat.key}
+          >
+            {isEs ? cat.nameEs : cat.nameEn}
+          </button>
+        ))}
+      </div>
+
+      <!-- Active Filter Status & Reset -->
+      <div id="filterStatus" class="flex items-center justify-between text-xs sm:text-sm text-gray-500 mb-6 hidden">
+        <span id="resultsCount"></span>
+        <button id="resetFiltersBtn" class="text-[#E30066] hover:underline font-semibold cursor-pointer">
+          {isEs ? "Restablecer filtros" : "Reset filters"}
+        </button>
+      </div>
+
+      <!-- 18 Applications Grid -->
+      <div 
+        id="applicationsGrid" 
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-7"
+      >
+        {applications.map((app, index) => (
+          <div 
+            class="single-application group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col cursor-pointer"
+            data-app-id={app.id}
+            data-category={app.category}
+            data-title={isEs ? app.titleEs.toLowerCase() : app.titleEn.toLowerCase()}
+            data-title-alt={isEs ? app.titleEn.toLowerCase() : app.titleEs.toLowerCase()}
+            data-desc={isEs ? app.descEs.toLowerCase() : app.descEn.toLowerCase()}
+          >
+            <!-- Image Container -->
+            <div class="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
+              <picture>
+                <source type="image/webp" srcset={app.image} />
+                <img 
+                  src={app.jpgFallback} 
+                  alt={isEs ? app.titleEs : app.titleEn} 
+                  class="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </picture>
+              
+              <!-- Subtle Category Chip on Image -->
+              <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-md">
+                {isEs ? app.categoryEs : app.categoryEn}
+              </div>
+
+              <!-- Quick Action Overlay on Hover -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <span class="text-white text-xs font-semibold flex items-center gap-1.5">
+                  <span>{isEs ? "Ver solución técnica" : "View technical solution"}</span>
+                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-heading text-lg font-bold text-gray-900 group-hover:text-[#E30066] transition-colors line-clamp-2 mb-2 leading-snug">
+                  {isEs ? app.titleEs : app.titleEn}
+                </h3>
+                <p class="font-verdana text-xs text-gray-600 line-clamp-2 leading-relaxed mb-4">
+                  {isEs ? app.descEs : app.descEn}
+                </p>
+              </div>
+
+              <!-- Recommended Color Chips -->
+              <div class="pt-3 border-t border-gray-100">
+                <div class="flex flex-wrap gap-1.5">
+                  {(isEs ? app.colorsEs : app.colorsEn).slice(0, 2).map(c => (
+                    <span class="inline-block bg-gray-50 border border-gray-200/80 text-gray-700 text-[11px] px-2 py-0.5 rounded-md font-mono">
+                      {c}
+                    </span>
+                  ))}
+                  {(isEs ? app.colorsEs : app.colorsEn).length > 2 && (
+                    <span class="text-[11px] text-gray-400 font-mono py-0.5">
+                      +{(isEs ? app.colorsEs : app.colorsEn).length - 2}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- No Results State -->
+      <div id="noAppResults" class="hidden text-center py-16 bg-white rounded-2xl border border-gray-100 mt-6 p-8">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
+          <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <h4 class="font-heading text-xl text-gray-800 mb-2">
+          {isEs ? "No se encontraron aplicaciones" : "No coloring applications found"}
+        </h4>
+        <p class="font-verdana text-sm text-gray-500 mb-6 max-w-md mx-auto">
+          {isEs 
+            ? "Prueba a buscar con otro término o restablece los filtros para ver todas las 18 aplicaciones disponibles."
+            : "Try another search term or reset your filters to explore all 18 available industrial color solutions."}
+        </p>
+        <button id="resetSearchBtn" class="px-6 py-2.5 rounded-full bg-[#E30066] text-white text-sm font-semibold hover:bg-[#c00055] transition-colors cursor-pointer">
+          {isEs ? "Ver todas las aplicaciones" : "View all applications"}
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Section 2: "A solution is a transformation, alchemy..." exactly matching original page -->
+  <section class="w-full bg-white py-16 sm:py-24 border-t border-gray-100 overflow-hidden">
+    <div class="w-full max-w-[1240px] mx-auto px-4 sm:px-8 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        
+        <!-- Left Column: Scientific and Philosophical Content -->
+        <div class="lg:col-span-7 flex flex-col justify-center">
+          <div class="inline-block mb-3">
+            <span class="font-verdana text-xs uppercase tracking-[0.2em] text-[#008AD8] font-bold">
+              {isEs ? "Innovación y Desarrollo" : "Innovation & Development"}
+            </span>
+          </div>
+
+          <h3 class="font-heading text-2xl sm:text-3xl md:text-4xl text-[#1E1E1E] font-normal leading-tight mb-6">
+            {isEs 
+              ? "Una solución es una transformación, una alquimia, una aplicación para crear y transformar."
+              : "A solution is a transformation, alchemy, an application for creating and transforming."}
+          </h3>
+
+          <div class="space-y-4 font-verdana text-gray-700 text-sm sm:text-base font-light leading-relaxed mb-8">
+            <p>
+              {isEs ? (
+                <span>
+                  Nuestros <strong>laboratorios de Incoltec</strong> aportan soluciones pensadas para resolver cualquier necesidad en cualquier color. Aplicar una solución, no sólo es remediar un problema, sino también es dar herramientas para generar nuevos productos y con ello innovar.
+                </span>
+              ) : (
+                <span>
+                  <strong>Our laboratories</strong> develop solutions designed to address diverse colour requirements. Applying a solution goes beyond resolving an issues; it involves equipping clients with tools to generate new products and foster innovation.
+                </span>
+              )}
+            </p>
+            <p>
+              {isEs ? (
+                <span>
+                  Incoltec mantiene un <strong>feedback permanente</strong> con los clientes, con las tendencias mundiales y con la comunidad científica, con el objetivo de brindar soluciones de calidad y poder aportar el mejor asesoramiento y acompañamiento.
+                </span>
+              ) : (
+                <span>
+                  Incoltec maintains a <strong>permanent feedback</strong> with the clients, global trends, and the scientific community to deliver quality solutions and offer optimal advice and support.
+                </span>
+              )}
+            </p>
+          </div>
+
+          <!-- Feature Highlights Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-100">
+            <div class="p-4 rounded-xl bg-[#F8FAFC] border border-gray-100">
+              <div class="text-[#008AD8] font-bold text-lg mb-1">100%</div>
+              <div class="text-xs font-semibold text-gray-800 mb-0.5">{isEs ? "A Medida" : "Customized"}</div>
+              <div class="text-[11px] text-gray-500">{isEs ? "Ajuste colorimétrico exacto" : "Tailored color formulation"}</div>
+            </div>
+            <div class="p-4 rounded-xl bg-[#F8FAFC] border border-gray-100">
+              <div class="text-[#E30066] font-bold text-lg mb-1">R&D</div>
+              <div class="text-xs font-semibold text-gray-800 mb-0.5">{isEs ? "Laboratorio Propio" : "In-House Lab"}</div>
+              <div class="text-[11px] text-gray-500">{isEs ? "Pruebas térmicas y de pH" : "Thermal & pH stress testing"}</div>
+            </div>
+            <div class="p-4 rounded-xl bg-[#F8FAFC] border border-gray-100">
+              <div class="text-[#FFC000] font-bold text-lg mb-1">Global</div>
+              <div class="text-xs font-semibold text-gray-800 mb-0.5">{isEs ? "Cumplimiento UE/FDA" : "EU/FDA Compliance"}</div>
+              <div class="text-[11px] text-gray-500">{isEs ? "Garantía de etiqueta limpia" : "Clean-label certification"}</div>
+            </div>
+          </div>
+
+          <!-- CTA to Contact -->
+          <div class="mt-8 flex flex-wrap gap-4 items-center">
+            <a 
+              href={isEs ? "/es/contact" : "/contact"}
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1E1E1E] text-white hover:bg-[#E30066] font-semibold text-sm transition-colors shadow-md"
+            >
+              <span>{isEs ? "Solicitar Asesoría de Formulación" : "Request Formulation Consultation"}</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a 
+              href={isEs ? "/es/products" : "/products"}
+              class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gray-300 text-gray-700 hover:border-gray-900 font-semibold text-sm transition-colors"
+            >
+              <span>{isEs ? "Ver Todos los Productos" : "Browse All Products"}</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Parallax Image Showcase -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+            <picture>
+              <source type="image/webp" srcset="/assets/Innovacion-y-calidad.webp" />
+              <img 
+                src="/assets/Innovacion-y-calidad.jpg" 
+                alt={isEs ? "Innovación y Calidad Incoltec" : "Innovation and Quality Incoltec"} 
+                class="w-full h-auto object-cover max-h-[540px] transform hover:scale-103 transition-transform duration-700"
+                loading="lazy"
+              />
+            </picture>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+            
+            <!-- Glassmorphism badge overlay -->
+            <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-white/40 shadow-lg">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-[#E30066]/10 text-[#E30066] flex items-center justify-center shrink-0">
+                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-gray-900 uppercase tracking-wider">
+                    {isEs ? "Calidad y Rigor Técnico" : "Quality & Technical Rigor"}
+                  </div>
+                  <div class="text-[11px] text-gray-600">
+                    {isEs ? "Laboratorios de Control y Desarrollo INCOLTEC" : "INCOLTEC Development & QC Laboratories"}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Application Detail Modal -->
+  <div 
+    id="appModal" 
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div 
+      id="appModalCard" 
+      class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-gray-100 transform scale-95 transition-transform duration-300 max-h-[90vh] flex flex-col"
+    >
+      <!-- Modal Header Image -->
+      <div class="relative h-56 sm:h-64 w-full bg-gray-100 shrink-0">
+        <img id="modalImg" src="" alt="" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+        
+        <button 
+          id="closeModalBtn" 
+          class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md transition-colors cursor-pointer"
+          aria-label="Close modal"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <div class="absolute bottom-4 left-6 right-6 text-white">
+          <span id="modalCategory" class="inline-block text-[11px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded bg-white/20 backdrop-blur-md mb-2"></span>
+          <h3 id="modalTitle" class="font-heading text-2xl sm:text-3xl font-bold leading-tight"></h3>
+        </div>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6">
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">
+            {isEs ? "Descripción y Rendimiento" : "Suitability & Performance"}
+          </h4>
+          <p id="modalDesc" class="font-verdana text-sm sm:text-base text-gray-700 leading-relaxed"></p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2.5">
+            {isEs ? "Colorantes y Pigmentos Recomendados" : "Recommended Pigments & Solutions"}
+          </h4>
+          <div id="modalColors" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Matching Products in Catalog -->
+        <div id="modalProductsContainer" class="p-4 rounded-2xl bg-amber-50/50 border border-amber-200/60">
+          <div class="flex items-center gap-2 text-xs font-bold text-amber-900 mb-2">
+            <svg class="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>{isEs ? "Productos INCOLTEC recomendados para esta aplicación" : "Matching INCOLTEC products in catalog"}</span>
+          </div>
+          <div id="modalProductsList" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Modal Actions -->
+        <div class="pt-4 border-t border-gray-100 flex flex-wrap gap-3 items-center justify-between">
+          <a 
+            id="modalCatalogLink" 
+            href={isEs ? "/es/products" : "/products"}
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#008AD8] text-white hover:bg-[#0070b0] font-semibold text-xs sm:text-sm transition-colors shadow-sm"
+          >
+            <span>{isEs ? "Ver catálogo completo" : "Browse product catalog"}</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+
+          <a 
+            href={isEs ? "/es/contact" : "/contact"}
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#E30066] text-white hover:bg-[#c00055] font-semibold text-xs sm:text-sm transition-colors shadow-sm"
+          >
+            <span>{isEs ? "Solicitar muestra técnica" : "Request sample / advice"}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Pass data to client-side script -->
+<script is:inline define:vars={{ applications, isEs }}>
+  window.__incoltecApplications = applications;
+  window.__incoltecIsEs = isEs;
+</script>
+
+<script>
+  function initColorSolutions() {
+    const searchInput = document.getElementById("buscadorAplicaciones") as HTMLInputElement | null;
+    const resultDropdown = document.getElementById("resultBuscador") as HTMLDivElement | null;
+    const clearSearchBtn = document.getElementById("clearSearchBtn") as HTMLButtonElement | null;
+    const grid = document.getElementById("applicationsGrid");
+    const cards = document.querySelectorAll(".single-application") as NodeListOf<HTMLElement>;
+    const noResults = document.getElementById("noAppResults");
+    const filterChips = document.querySelectorAll(".filter-chip") as NodeListOf<HTMLButtonElement>;
+    const filterStatus = document.getElementById("filterStatus");
+    const resultsCount = document.getElementById("resultsCount");
+    const resetFiltersBtn = document.getElementById("resetFiltersBtn");
+    const resetSearchBtn = document.getElementById("resetSearchBtn");
+
+    // Modal elements
+    const modal = document.getElementById("appModal");
+    const modalCard = document.getElementById("appModalCard");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const modalImg = document.getElementById("modalImg") as HTMLImageElement | null;
+    const modalCategory = document.getElementById("modalCategory");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
+    const modalColors = document.getElementById("modalColors");
+    const modalProductsList = document.getElementById("modalProductsList");
+    const modalCatalogLink = document.getElementById("modalCatalogLink") as HTMLAnchorElement | null;
+
+    const apps = (window as any).__incoltecApplications || [];
+    const isEs = (window as any).__incoltecIsEs || false;
+
+    let activeCategory = "all";
+    let searchQuery = "";
+
+    // Set first chip active
+    const firstChip = document.querySelector('.filter-chip[data-category="all"]');
+    if (firstChip) {
+      firstChip.classList.add("bg-[#E30066]", "text-white", "border-[#E30066]");
+      firstChip.classList.remove("bg-white", "text-gray-700");
+    }
+
+    function filterGrid() {
+      const q = searchQuery.trim().toLowerCase();
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const title = card.getAttribute("data-title") || "";
+        const titleAlt = card.getAttribute("data-title-alt") || "";
+        const desc = card.getAttribute("data-desc") || "";
+        const category = card.getAttribute("data-category") || "";
+
+        const matchesCategory = activeCategory === "all" || category === activeCategory;
+        const matchesQuery = !q || title.includes(q) || titleAlt.includes(q) || desc.includes(q);
+
+        if (matchesCategory && matchesQuery) {
+          card.style.display = "";
+          visibleCount++;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      // Update counters & states
+      if (noResults) {
+        noResults.classList.toggle("hidden", visibleCount > 0);
+      }
+      if (grid) {
+        grid.classList.toggle("hidden", visibleCount === 0);
+      }
+
+      if (filterStatus && resultsCount) {
+        const total = cards.length;
+        if (q || activeCategory !== "all") {
+          filterStatus.classList.remove("hidden");
+          resultsCount.textContent = isEs 
+            ? `Mostrando ${visibleCount} de ${total} aplicaciones` 
+            : `Showing ${visibleCount} of ${total} applications`;
+        } else {
+          filterStatus.classList.add("hidden");
+        }
+      }
+    }
+
+    // Search input handler
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        searchQuery = searchInput.value;
+        if (clearSearchBtn) {
+          clearSearchBtn.classList.toggle("hidden", !searchQuery);
+        }
+        updateSuggestions(searchQuery);
+        filterGrid();
+      });
+
+      // Hide suggestions when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!searchInput.contains(e.target as Node) && !resultDropdown?.contains(e.target as Node)) {
+          if (resultDropdown) resultDropdown.classList.add("hidden");
+        }
+      });
+    }
+
+    if (clearSearchBtn && searchInput) {
+      clearSearchBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        searchQuery = "";
+        clearSearchBtn.classList.add("hidden");
+        if (resultDropdown) resultDropdown.classList.add("hidden");
+        filterGrid();
+        searchInput.focus();
+      });
+    }
+
+    // Populate live suggestion dropdown
+    function updateSuggestions(q: string) {
+      if (!resultDropdown) return;
+      const clean = q.trim().toLowerCase();
+      if (!clean) {
+        resultDropdown.classList.add("hidden");
+        resultDropdown.innerHTML = "";
+        return;
+      }
+
+      const matches = apps.filter((a: any) => {
+        const tEn = a.titleEn.toLowerCase();
+        const tEs = a.titleEs.toLowerCase();
+        const dEn = a.descEn.toLowerCase();
+        const dEs = a.descEs.toLowerCase();
+        return tEn.includes(clean) || tEs.includes(clean) || dEn.includes(clean) || dEs.includes(clean);
+      });
+
+      if (matches.length === 0) {
+        resultDropdown.classList.remove("hidden");
+        resultDropdown.innerHTML = `
+          <div class="p-4 text-xs text-gray-500 text-center">
+            ${isEs ? "Sin resultados para" : "No results for"} "${q}"
+          </div>
+        `;
+        return;
+      }
+
+      resultDropdown.classList.remove("hidden");
+      resultDropdown.innerHTML = matches.map((m: any) => `
+        <a 
+          href="#main-applications" 
+          data-app-id="${m.id}" 
+          class="suggestion-item flex items-center gap-3 p-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors cursor-pointer"
+        >
+          <img src="${m.image}" alt="${isEs ? m.titleEs : m.titleEn}" class="w-10 h-10 object-cover rounded-lg shrink-0" />
+          <div class="overflow-hidden">
+            <div class="font-semibold text-xs sm:text-sm text-gray-900 truncate">${isEs ? m.titleEs : m.titleEn}</div>
+            <div class="text-[11px] text-gray-500 truncate">${isEs ? m.categoryEs : m.categoryEn}</div>
+          </div>
+        </a>
+      `).join("");
+
+      // Suggestion click listener
+      resultDropdown.querySelectorAll(".suggestion-item").forEach(item => {
+        item.addEventListener("click", (e) => {
+          e.preventDefault();
+          const appId = item.getAttribute("data-app-id");
+          const targetApp = apps.find((a: any) => a.id === appId);
+          if (targetApp) {
+            openModal(targetApp);
+          }
+          resultDropdown.classList.add("hidden");
+        });
+      });
+    }
+
+    // Category chips handler
+    filterChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        const cat = chip.getAttribute("data-category") || "all";
+        activeCategory = cat;
+
+        filterChips.forEach(c => {
+          c.classList.remove("bg-[#E30066]", "text-white", "border-[#E30066]");
+          c.classList.add("bg-white", "text-gray-700", "border-gray-200");
+        });
+        chip.classList.add("bg-[#E30066]", "text-white", "border-[#E30066]");
+        chip.classList.remove("bg-white", "text-gray-700");
+
+        filterGrid();
+      });
+    });
+
+    // Reset buttons
+    function resetAll() {
+      searchQuery = "";
+      activeCategory = "all";
+      if (searchInput) searchInput.value = "";
+      if (clearSearchBtn) clearSearchBtn.classList.add("hidden");
+      if (resultDropdown) resultDropdown.classList.add("hidden");
+
+      filterChips.forEach(c => {
+        if (c.getAttribute("data-category") === "all") {
+          c.classList.add("bg-[#E30066]", "text-white", "border-[#E30066]");
+          c.classList.remove("bg-white", "text-gray-700");
+        } else {
+          c.classList.remove("bg-[#E30066]", "text-white", "border-[#E30066]");
+          c.classList.add("bg-white", "text-gray-700");
+        }
+      });
+
+      filterGrid();
+    }
+
+    if (resetFiltersBtn) resetFiltersBtn.addEventListener("click", resetAll);
+    if (resetSearchBtn) resetSearchBtn.addEventListener("click", resetAll);
+
+    // Card click opens modal
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        const appId = card.getAttribute("data-app-id");
+        const app = apps.find((a: any) => a.id === appId);
+        if (app) {
+          openModal(app);
+        }
+      });
+    });
+
+    function openModal(app: any) {
+      if (!modal || !modalCard) return;
+
+      if (modalImg) {
+        modalImg.src = app.image;
+        modalImg.alt = isEs ? app.titleEs : app.titleEn;
+      }
+      if (modalCategory) {
+        modalCategory.textContent = isEs ? app.categoryEs : app.categoryEn;
+      }
+      if (modalTitle) {
+        modalTitle.textContent = isEs ? app.titleEs : app.titleEn;
+      }
+      if (modalDesc) {
+        modalDesc.textContent = isEs ? app.descEs : app.descEn;
+      }
+
+      if (modalColors) {
+        const colors = isEs ? app.colorsEs : app.colorsEn;
+        modalColors.innerHTML = colors.map((c: string) => `
+          <span class="px-2.5 py-1 rounded-lg bg-gray-100 border border-gray-200 text-gray-800 text-xs font-mono font-medium">
+            ${c}
+          </span>
+        `).join("");
+      }
+
+      if (modalProductsList) {
+        const prods = app.featuredProducts || [];
+        if (prods.length > 0) {
+          modalProductsList.innerHTML = prods.map((p: any) => `
+            <a 
+              href="${isEs ? `/es/products/${p.slug}` : `/products/${p.slug}`}" 
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white border border-amber-300 text-amber-900 text-xs font-semibold hover:bg-amber-100 transition-colors"
+            >
+              <span>${p.name}</span>
+              <svg class="w-3.5 h-3.5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          `).join("");
+        } else {
+          modalProductsList.innerHTML = `
+            <span class="text-xs text-amber-800/80">
+              ${isEs ? "Consultar con laboratorio para formulación específica." : "Contact laboratory for custom formulation."}
+            </span>
+          `;
+        }
+      }
+
+      if (modalCatalogLink) {
+        const targetSearch = encodeURIComponent(isEs ? app.titleEs : app.titleEn);
+        modalCatalogLink.href = isEs ? `/es/products?search=${targetSearch}` : `/products?search=${targetSearch}`;
+      }
+
+      // Show modal
+      modal.classList.remove("opacity-0", "pointer-events-none");
+      modalCard.classList.remove("scale-95");
+      modalCard.classList.add("scale-100");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      if (!modal || !modalCard) return;
+      modal.classList.add("opacity-0", "pointer-events-none");
+      modalCard.classList.add("scale-95");
+      modalCard.classList.remove("scale-100");
+      document.body.style.overflow = "";
+    }
+
+    if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+    if (modal) {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+    }
+
+    // Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
+    });
+  }
+
+  // Run on page load & Astro view transitions
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initColorSolutions);
+  } else {
+    initColorSolutions();
+  }
+  document.addEventListener("astro:page-load", initColorSolutions);
+</script>
+
+<style>
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

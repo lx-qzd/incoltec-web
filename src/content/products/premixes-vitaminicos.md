@@ -11,6 +11,7 @@ color: "Personalizado / Neutro"
 solubility: "Hidrosoluble y Dispersable"
 phRange: "3.0 - 8.0"
 pdfLink: "/downloads/premixes-vitaminas-ficha-tecnica.pdf"
+image: "/assets/products/vitamins-premixes/vitaminas-premixes.webp"
 ---
 
 Las **Premezclas Vitamínicas y de Micronutrientes** de INCOLTEC combinan ciencia nutricional y tecnología de formulación homogénea. Proveemos formulaciones exactas que cumplen las dosis RDA y declaraciones de salud en etiquetado.

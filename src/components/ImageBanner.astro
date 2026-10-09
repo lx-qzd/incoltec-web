@@ -1,6 +1,5 @@
 ---
-import { getImage } from "astro:assets";
-import BrandEIcon from "./BrandEIcon.astro";
+import { Image } from "astro:assets";
 import fondo1Webp from "../assets/fondo1.webp";
 import fondo2Webp from "../assets/fondo2.webp";
 import fondo3Webp from "../assets/fondo3.webp";
@@ -22,26 +21,24 @@ const {
 } = Astro.props;
 
 // Map string image paths to optimized Astro assets if available
-let optimizedSrc = image;
-if (image.includes("fondo1")) {
-  optimizedSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 })).src;
-} else if (image.includes("fondo2")) {
-  optimizedSrc = (await getImage({ src: fondo2Webp, format: 'webp', width: 1920 })).src;
-} else if (image.includes("fondo3")) {
-  optimizedSrc = (await getImage({ src: fondo3Webp, format: 'webp', width: 1920 })).src;
+let imageAsset: any = image;
+if (typeof image === 'string') {
+  if (image.includes("fondo1")) imageAsset = fondo1Webp;
+  else if (image.includes("fondo2")) imageAsset = fondo2Webp;
+  else if (image.includes("fondo3")) imageAsset = fondo3Webp;
 }
 ---
 
 <section class={`relative w-full ${height} flex items-center justify-center overflow-hidden py-16 px-4 @container`}>
   <!-- Background Image with smooth zoom on hover -->
-  <img 
-    src={optimizedSrc} 
+  <Image 
+    src={imageAsset} 
     alt={title || "Incoltec food color solutions"} 
     class="absolute inset-0 w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-[12s] ease-out" 
     loading="lazy"
     decoding="async"
-    width="1920"
-    height="1080"
+    width={1920}
+    height={1080}
   />
   
   <!-- Subtle Vignette Layer -->
@@ -51,8 +48,7 @@ if (image.includes("fondo1")) {
   {(tag || title || subtitle) && (
     <div class="relative z-20 max-w-4xl mx-auto w-full text-center px-6 sm:px-8 py-8 reveal-scale delay-100 @container">
       {tag && (
-        <div class="inline-flex items-center gap-2.5 mb-5 drop-shadow-md">
-          <BrandEIcon class="w-3.5 h-4.5 shrink-0" />
+        <div class="mb-5 drop-shadow-md">
           <span class="font-verdana text-xs sm:text-sm uppercase tracking-[0.25em] font-bold text-[#FFC000]">
             {tag}
           </span>

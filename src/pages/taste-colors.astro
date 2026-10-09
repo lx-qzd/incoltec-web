@@ -3,10 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
+import TasteColorsSection from '../components/TasteColorsSection.astro';
 ---
 
 <Layout 
-  title="Taste Colors - Natural Food Color Solutions"
+  title="Taste Colors - Natural Food Color Solutions | INCOLTEC"
   description="Explore INCOLTEC's natural colors, coloring foods, and botanical pigment extracts designed to deliver exceptional sensory brilliance and clean label appeal."
 >
   <Header currentPath="/taste-colors" />
@@ -18,17 +19,7 @@ import Hero from '../components/Hero.astro';
       backgroundImage="/assets/fondo1.jpg" 
     />
 
-
-    <section class="content-section container">
-      <div class="content">
-        <h2>Nature as Inspiration</h2>
-        <p>
-          INCOLTEC solutions combine organic elements with advanced technology to 
-          create an unparalleled visual experience. Our colors awaken emotions and enhance 
-          the appeal of food.
-        </p>
-      </div>
-    </section>
+    <TasteColorsSection isEs={false} />
   </main>
 
   <Footer />

@@ -1,6 +1,4 @@
 ---
-import BrandEIcon from './BrandEIcon.astro';
-
 interface Props {
   isEs?: boolean;
 }
@@ -13,10 +11,9 @@ const { isEs = false } = Astro.props;
     
     <!-- Header with Scroll Reveal -->
     <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24 reveal delay-75 flex flex-col items-center">
-      <div class="inline-flex items-center gap-2.5 mb-4">
-        <BrandEIcon class="w-4 h-5 shrink-0" />
+      <div class="mb-4">
         <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold">
-          {isEs ? "Vida y Color" : "Life & Color"}
+          {isEs ? "Vida y Color" : "Life and Color"}
         </span>
       </div>
 
@@ -34,10 +31,9 @@ const { isEs = false } = Astro.props;
 
     <!-- Sub-anchor: Compromiso with Scroll Reveal -->
     <div id="compromiso" class="scroll-mt-28 mb-20 md:mb-28">
-      <div class="flex items-center gap-3.5 mb-8 sm:mb-10 reveal delay-100">
-        <BrandEIcon class="w-4 h-5 shrink-0" />
+      <div class="mb-8 sm:mb-10 reveal delay-100">
         <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal">
-          {isEs ? "Compromiso de Calidad y Seguridad Alimentaria" : "Commitment to Quality & Food Safety"}
+          {isEs ? "Compromiso de Calidad y Seguridad Alimentaria" : "Commitment to Quality and Food Safety"}
         </h3>
       </div>
 
@@ -85,14 +81,13 @@ const { isEs = false } = Astro.props;
 
     <!-- Sub-anchor: Calidad with Reveal & Soft-bordered styling -->
     <div id="calidad" class="scroll-mt-28 bg-[#FAF8F5] p-6 sm:p-10 md:p-14 lg:p-16 rounded-2xl border border-[#EDE8E0] reveal delay-100 w-full @container">
-      <div class="flex items-center gap-3 mb-4">
-        <BrandEIcon class="w-4 h-5 shrink-0" />
+      <div class="mb-4">
         <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
           {isEs ? "Consistencia en Aplicación" : "Application Consistency"}
         </span>
       </div>
       <h3 class="fluid-h2 font-heading text-[#1E1E1E] font-normal mb-6 leading-tight">
-        {isEs ? "Fiabilidad Técnica y Soporte de Calidad" : "Technical Reliability & Quality Support"}
+        {isEs ? "Fiabilidad Técnica y Soporte de Calidad" : "Technical Reliability and Quality Support"}
       </h3>
       <p class="font-verdana text-gray-700 text-sm sm:text-base font-light leading-relaxed mb-8 max-w-3xl">
         {isEs

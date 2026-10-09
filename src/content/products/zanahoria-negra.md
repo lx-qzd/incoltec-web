@@ -11,6 +11,7 @@ color: "Rojo Intenso / Violeta"
 solubility: "Hidrosoluble"
 phRange: "2.5 - 5.5"
 pdfLink: "/downloads/zanahoria-negra-ficha-tecnica.pdf"
+image: "/assets/products/colouring-foods/Alimento_colorante_Zanahoria-negra-1-600x600.webp"
 ---
 
 El **Concentrado de Zanahoria Negra** es la elección predilecta para fabricantes globales que buscan una etiqueta 100% limpia sin códigos aditivos ("E-numbers"). Obtenido mediante procesos físicos de prensado, filtración y concentración.

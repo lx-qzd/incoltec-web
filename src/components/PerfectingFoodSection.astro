@@ -1,6 +1,4 @@
 ---
-import BrandEIcon from './BrandEIcon.astro';
-
 interface Props {
   isEs?: boolean;
 }
@@ -13,8 +11,7 @@ const { isEs = false } = Astro.props;
     
     <!-- Header with Scroll Reveal -->
     <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24 reveal delay-75 flex flex-col items-center">
-      <div class="inline-flex items-center gap-2.5 mb-4">
-        <BrandEIcon class="w-4 h-5 shrink-0" />
+      <div class="mb-4">
         <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">
           {isEs ? "Ciencia y Aplicación" : "Science and Application"}
         </span>
@@ -34,8 +31,7 @@ const { isEs = false } = Astro.props;
 
     <!-- Sub-anchor: Soluciones -->
     <div id="soluciones" class="scroll-mt-28 mb-20 md:mb-28">
-      <div class="flex items-center gap-3.5 mb-8 sm:mb-10 reveal delay-100">
-        <BrandEIcon class="w-5 h-6 shrink-0" />
+      <div class="mb-8 sm:mb-10 reveal delay-100">
         <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal">
           {isEs ? "Soluciones de Color por Sector Industrial" : "Tailored Color Solutions by Industry"}
         </h3>
@@ -168,14 +164,26 @@ const { isEs = false } = Astro.props;
         </div>
 
       </div>
+
+      <!-- Explore all 18 Color Applications CTA -->
+      <div class="mt-10 text-center reveal delay-200">
+        <a 
+          href={isEs ? "/es/color-solutions" : "/color-solutions"}
+          class="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#008AD8] to-[#E30066] text-white font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl hover:scale-103 transition-all duration-300 group"
+        >
+          <span>{isEs ? "Explorar las 18 Aplicaciones de Color" : "Explore All 18 Food Color Applications"}</span>
+          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
     </div>
 
     <!-- Sub-anchor: Innovación with Reveal & Container Query Context -->
     <div id="innovacion" class="scroll-mt-28 bg-[#FAF8F5] p-6 sm:p-10 md:p-14 lg:p-16 rounded-2xl border border-[#EDE8E0] reveal delay-150 w-full @container">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-14 items-center">
         <div class="md:col-span-8">
-          <div class="flex items-center gap-3 mb-4">
-            <BrandEIcon class="w-4 h-5 shrink-0" />
+          <div class="mb-4">
             <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">
               {isEs ? "Desarrollo a la Medida" : "Custom Formulation"}
             </span>

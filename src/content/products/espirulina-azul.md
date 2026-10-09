@@ -11,6 +11,7 @@ color: "Azul Eléctrico / Celeste"
 solubility: "Hidrosoluble"
 phRange: "3.5 - 8.0"
 pdfLink: "/downloads/espirulina-azul-ficha-tecnica.pdf"
+image: "/assets/products/colouring-foods/cupcake-2023-11-27-04-55-03-utc-300x300.webp"
 ---
 
 El tono azul natural es uno de los mayores hitos tecnológicos de la industria de colorantes. En INCOLTEC ofrecemos concentrados estandarizados de **Espirulina Azul** y **Blue Genipa (Jagua/Huito)** para formular tanto tonos azules vibrantes como verdes puros (combinado con curcumina o cártamo).

@@ -11,6 +11,7 @@ color: "Amarillo Brillante"
 solubility: "Hidrosoluble y Liposoluble"
 phRange: "2.5 - 7.5"
 pdfLink: "/downloads/curcumina-e100-ficha-tecnica.pdf"
+image: "/assets/products/natural-colourants/colorante_natural_e100_1-1.webp"
 ---
 
 La **Curcumina E-100** de INCOLTEC es una de las soluciones cromáticas naturales más versátiles y demandadas por la industria alimentaria internacional. Formulada para sustituir colorantes sintéticos como la Tartrazina (E-102), aporta un color amarillo cálido y luminoso.

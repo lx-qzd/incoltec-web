@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/Hero.astro';
+import { Image } from 'astro:assets';
+import fondo1Webp from '../assets/fondo1.webp';
 ---
 
 <Layout 
@@ -14,15 +16,14 @@ import Hero from '../components/Hero.astro';
   <main>
     <section class="contact-hero-section relative min-h-[100dvh] flex items-center py-[clamp(5rem,10dvh,8rem)] overflow-hidden">
       <div class="absolute inset-0 z-0">
-        <img 
-          src="/assets/fondo1.jpg" 
-          alt="Background" 
+        <Image 
+          src={fondo1Webp} 
+          alt="Incoltec formulation contact background" 
           class="w-full h-full object-cover" 
           loading="eager"
-          fetchpriority="high"
           decoding="async"
-          width="1920"
-          height="1080"
+          width={1920}
+          height={1080}
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"></div>
       </div>
@@ -39,12 +40,12 @@ import Hero from '../components/Hero.astro';
         <!-- Frosted Glass Card Wrapper -->
         <div class="glass-card-dark rounded-3xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100">
           <div class="w-full text-center mb-8">
-            <span class="inline-block text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">
+            <span class="inline-block font-verdana text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">
               Direct Inquiries
             </span>
             <h1 class="font-heading text-[clamp(2.5rem,1.8rem+3.5vw,4.5rem)] text-white font-normal mb-3 leading-tight">Contact Us</h1>
 
-            <p class="text-white/85 text-[clamp(0.95rem,0.9rem+0.3vw,1.125rem)] font-light max-w-xl mx-auto leading-relaxed">
+            <p class="font-verdana text-white/85 text-[clamp(0.95rem,0.9rem+0.3vw,1.125rem)] font-light max-w-xl mx-auto leading-relaxed">
               Connect with our technical food science team for custom formulations, technical dossiers, or pilot sample requests.
             </p>
           </div>

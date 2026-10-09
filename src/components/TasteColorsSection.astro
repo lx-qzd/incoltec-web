@@ -1,5 +1,4 @@
 ---
-import BrandEIcon from './BrandEIcon.astro';
 import ColorComparison from './ColorComparison.astro';
 
 interface Props {
@@ -14,8 +13,7 @@ const { isEs = false } = Astro.props;
     
     <!-- Header with Scroll Reveal -->
     <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24 reveal delay-75 flex flex-col items-center">
-      <div class="inline-flex items-center gap-2.5 mb-4">
-        <BrandEIcon class="w-4 h-5 shrink-0" />
+      <div class="mb-4">
         <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
           {isEs ? "Gama de Colores e Ingredientes" : "Colors and Ingredient Portfolio"}
         </span>
@@ -37,62 +35,104 @@ const { isEs = false } = Astro.props;
     <div class="grid gap-6 sm:gap-8 mb-16 md:mb-28 @container" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));">
       
       <!-- Sub-anchor: Colorantes Naturales -->
-      <div id="colorantes-naturales" class="scroll-mt-28 bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100">
+      <div id="colorantes-naturales" class="scroll-mt-28 bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100 group">
         <div>
-          <div class="w-12 h-12 rounded-2xl bg-[#FFC000]/15 text-[#b58900] flex items-center justify-center mb-6 font-bold">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+          <!-- Visual Image Preview -->
+          <div class="grid grid-cols-3 gap-2 mb-6 rounded-xl overflow-hidden bg-gray-50 p-1 border border-gray-100">
+            <img src="/assets/products/natural-colourants/colorante_natural_e100_1-1.webp" alt="Curcumina E-100" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+            <img src="/assets/products/natural-colourants/glass-jar-of-strawberry-milkshake-and-ingredients-2023-11-27-05-14-29-utc-300x300.webp" alt="Carmín E-120" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-75" loading="lazy" />
+            <img src="/assets/products/natural-colourants/concept-of-delicious-food-ice-cream-isolated-on-2023-11-27-05-28-44-utc-300x300.webp" alt="Clorofilina E-141" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-150" loading="lazy" />
           </div>
-          <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal mb-4">
-            {isEs ? "Colorantes Naturales" : "Natural Colors"}
-          </h3>
+
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-[#FFC000]/15 text-[#b58900] flex items-center justify-center font-bold shrink-0">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+            </div>
+            <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal m-0">
+              {isEs ? "Colorantes Naturales" : "Natural Colors"}
+            </h3>
+          </div>
+
           <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
             {isEs
               ? "Extractos concentrados y estandarizados derivados directamente de fuentes botánicas y minerales: E-100 Curcumina, E-120 Carmín, E-141 Cu-Clorofilina, E-160b Bixina/Norina y Antocianinas."
               : "Concentrated, standardized extracts derived directly from botanical and mineral sources: E-100 Curcumin, E-120 Carmine, E-141 Cu-Chlorophyllin, E-160b Annatto, and Anthocyanins."}
           </p>
         </div>
-        <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#b58900] uppercase tracking-wider font-verdana">
-          {isEs ? "Alta Concentración y Estabilidad" : "High Concentration and Stability"}
+        <div class="pt-5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#b58900] uppercase tracking-wider font-verdana">
+          <span>{isEs ? "Alta Concentración" : "High Concentration"}</span>
+          <a href={isEs ? "/es/products?category=Colorantes+Naturales" : "/products?category=Colorantes+Naturales"} class="hover:underline flex items-center gap-1 text-[#89385C]">
+            <span>{isEs ? "Ver gama" : "Explore"}</span>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
 
       <!-- Sub-anchor: Alimentos Colorantes -->
-      <div id="alimentos-colorantes" class="scroll-mt-28 bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200">
+      <div id="alimentos-colorantes" class="scroll-mt-28 bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200 group">
         <div>
-          <div class="w-12 h-12 rounded-2xl bg-[#E30066]/10 text-[#E30066] flex items-center justify-center mb-6 font-bold">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <!-- Visual Image Preview -->
+          <div class="grid grid-cols-3 gap-2 mb-6 rounded-xl overflow-hidden bg-gray-50 p-1 border border-gray-100">
+            <img src="/assets/products/colouring-foods/cupcake-2023-11-27-04-55-03-utc-300x300.webp" alt="Espirulina Azul" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+            <img src="/assets/products/colouring-foods/Alimento_colorante_AZAFRAN-1.webp" alt="Azafrán" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-75" loading="lazy" />
+            <img src="/assets/products/colouring-foods/Alimento_colorante_Zanahoria-negra-1-600x600.webp" alt="Zanahoria Negra" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-150" loading="lazy" />
           </div>
-          <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal mb-4">
-            {isEs ? "Alimentos Colorantes" : "Coloring Foods"}
-          </h3>
+
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-[#E30066]/10 text-[#E30066] flex items-center justify-center font-bold shrink-0">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal m-0">
+              {isEs ? "Alimentos Colorantes" : "Coloring Foods"}
+            </h3>
+          </div>
+
           <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
             {isEs
               ? "100% Clean Label. Elaborados exclusivamente con materias primas alimentarias comestibles mediante procesos físicos: Azafrán, Concentrados de Espirulina (Blue Genipa), Zanahoria Negra y Remolacha."
               : "100% Clean Label. Crafted strictly from edible agricultural foods through gentle physical processes: Saffron, Spirulina and Genipa Blue, Black Carrot, and Beetroot concentrates."}
           </p>
         </div>
-        <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#E30066] uppercase tracking-wider font-verdana">
-          {isEs ? "Sin Número E • Etiqueta Limpia" : "No E-Numbers • Clean Label"}
+        <div class="pt-5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#E30066] uppercase tracking-wider font-verdana">
+          <span>{isEs ? "Clean Label" : "Clean Label"}</span>
+          <a href={isEs ? "/es/products?category=Alimentos+Colorantes" : "/products?category=Alimentos+Colorantes"} class="hover:underline flex items-center gap-1 text-[#89385C]">
+            <span>{isEs ? "Ver gama" : "Explore"}</span>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
 
       <!-- Sub-anchor: Vitaminas & Pre Mixes -->
-      <div id="vitaminas-premixes" class="scroll-mt-28 bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300">
+      <div id="vitaminas-premixes" class="scroll-mt-28 bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100/90 flex flex-col justify-between hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300 group">
         <div>
-          <div class="w-12 h-12 rounded-2xl bg-[#008AD8]/10 text-[#008AD8] flex items-center justify-center mb-6 font-bold">
-            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          <!-- Visual Image Preview -->
+          <div class="grid grid-cols-3 gap-2 mb-6 rounded-xl overflow-hidden bg-gray-50 p-1 border border-gray-100">
+            <img src="/assets/products/vitamins-premixes/vitaminas-premixes.webp" alt="Premixes" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+            <img src="/assets/products/vitamins-premixes/suplementos-vitaminicos-300x300.webp" alt="Vitamina E" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-75" loading="lazy" />
+            <img src="/assets/products/vitamins-premixes/vitaminas-2.webp" alt="Vitamina A" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-150" loading="lazy" />
           </div>
-          <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal mb-4">
-            {isEs ? "Vitaminas y Premixes" : "Vitamins and Pre Mixes"}
-          </h3>
+
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-xl bg-[#008AD8]/10 text-[#008AD8] flex items-center justify-center font-bold shrink-0">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+            </div>
+            <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal m-0">
+              {isEs ? "Vitaminas y Premixes" : "Vitamins and Pre Mixes"}
+            </h3>
+          </div>
+
           <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed mb-6">
             {isEs
               ? "Premezclas a medida para la fortificación y enriquecimiento nutricional de alimentos y bebidas. Vitaminas A, D, C, complejo B y micronutrientes combinados con soporte cromático homogéneo."
               : "Custom premixes for nutritional fortification and enrichment of foods and beverages. Vitamins A, D, C, B-complex, and micronutrients combined with homogeneous chromatic carriers."}
           </p>
         </div>
-        <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#008AD8] uppercase tracking-wider font-verdana">
-          {isEs ? "Fortificación Nutracéutica" : "Nutraceutical Fortification"}
+        <div class="pt-5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#008AD8] uppercase tracking-wider font-verdana">
+          <span>{isEs ? "Fortificación Nutracéutica" : "Nutraceutical Fortification"}</span>
+          <a href={isEs ? "/es/products?category=Vitaminas+y+Premixes" : "/products?category=Vitaminas+y+Premixes"} class="hover:underline flex items-center gap-1 text-[#89385C]">
+            <span>{isEs ? "Ver gama" : "Explore"}</span>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
- ---
-import { getImage } from "astro:assets";
-import BrandEIcon from "./BrandEIcon.astro";
+---
+import { Image } from "astro:assets";
+import defaultBg from "../assets/food-colors-application.webp";
 
 interface Point {
   title: string;
@@ -14,7 +14,7 @@ interface Props {
   artificialTitle?: string;
   naturalPoints?: Point[];
   artificialPoints?: Point[];
-  bgImage?: string;
+  bgImage?: string | ImageMetadata;
 }
 
 const { 
@@ -34,10 +34,10 @@ const {
     { title: "WARNING LABELS", text: "Requires strict warning labels in many regions" },
     { title: "DISTRUST", text: "Decreasing consumer trust and market share" }
   ],
-  bgImage = "/assets/food-colors-application.webp"
+  bgImage = defaultBg
 } = Astro.props;
 
-const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgImage, format: 'webp', width: 1200 })).src;
+const imageToRender = (typeof bgImage === 'string' && bgImage.includes('food-colors-application')) ? defaultBg : bgImage;
 ---
 
 <section id={id} class="w-full flex flex-col md:flex-row bg-[#FFFDF9] min-h-[100dvh] scroll-mt-24 overflow-hidden">
@@ -45,8 +45,7 @@ const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgI
   <div class="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-10 md:p-12 lg:p-16 order-2 md:order-1 @container">
     <div class="max-w-2xl text-center flex flex-col items-center w-full">
       <div class="reveal-up delay-75 w-full flex flex-col items-center">
-        <div class="inline-flex items-center gap-2.5 mb-4">
-          <BrandEIcon class="w-4 h-5 shrink-0" />
+        <div class="mb-4">
           <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
             Comparison Analysis
           </span>
@@ -128,18 +127,26 @@ const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgI
     </div>
   </div>
 
-  <!-- Right Side: Optimized Visual Image with Viewport Height Safety -->
   <div class="w-full md:w-1/2 min-h-[380px] md:min-h-[100dvh] order-1 md:order-2 relative overflow-hidden reveal delay-200">
-    <img 
-      src={bgUrl} 
-      alt={title} 
-      sizes="(min-width: 768px) 50vw, 100vw"
-      class="absolute inset-0 w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-[10s] ease-out" 
-      loading="lazy"
-      decoding="async"
-      width="1200"
-      height="1200"
-    />
+    {typeof imageToRender === "string" ? (
+      <Image 
+        src={imageToRender} 
+        alt={title} 
+        class="absolute inset-0 w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-[10s] ease-out" 
+        loading="lazy"
+        decoding="async"
+        width={1200}
+        height={1200}
+      />
+    ) : (
+      <Image 
+        src={imageToRender} 
+        alt={title} 
+        class="absolute inset-0 w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-[10s] ease-out" 
+        loading="lazy"
+        decoding="async"
+      />
+    )}
     <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none md:bg-gradient-to-r md:from-black/20 md:via-transparent md:to-black/30"></div>
   </div>
 </section>

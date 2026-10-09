@@ -1,5 +1,7 @@
 ---
 import { Astronav, MenuItems, MenuIcon, DropdownItems } from "astro-navbar";
+import { Image } from "astro:assets";
+import logoIncoltec from "../assets/LogoIncoltec.png";
 
 const { currentPath = "/" } = Astro.props;
 const pathname = Astro.url.pathname;
@@ -39,6 +41,17 @@ const enLinks: NavLink[] = [
     ],
   },
   {
+    name: "Colour Solutions",
+    url: "/color-solutions",
+    dropdown: [
+      { name: "All Applications", url: "/color-solutions#main-applications" },
+      { name: "Bakery & Doughs", url: "/color-solutions#main-applications" },
+      { name: "Beverages & Juices", url: "/color-solutions#main-applications" },
+      { name: "Dairy & Ice Cream", url: "/color-solutions#main-applications" },
+      { name: "Savory & Meat", url: "/color-solutions#main-applications" },
+    ],
+  },
+  {
     name: "Vibrant Life",
     url: "/#vibrant-life",
     dropdown: [
@@ -68,7 +81,7 @@ const enLinks: NavLink[] = [
     name: "Perfecting Food",
     url: "/#perfecting-food",
     dropdown: [
-      { name: "Solutions", url: "/#soluciones" },
+      { name: "Solutions", url: "/color-solutions" },
       { name: "Innovation", url: "/#innovacion" },
     ],
   },
@@ -93,6 +106,17 @@ const esLinks: NavLink[] = [
       { name: "Colorantes Naturales", url: "/es/#colorantes-naturales" },
       { name: "Alimentos Colorantes", url: "/es/#alimentos-colorantes" },
       { name: "Vitaminas y Pre Mixes", url: "/es/#vitaminas-premixes" },
+    ],
+  },
+  {
+    name: "Soluciones de Color",
+    url: "/es/color-solutions",
+    dropdown: [
+      { name: "Todas las Aplicaciones", url: "/es/color-solutions#main-applications" },
+      { name: "Panadería y Masas", url: "/es/color-solutions#main-applications" },
+      { name: "Bebidas y Zumos", url: "/es/color-solutions#main-applications" },
+      { name: "Lácteos y Helados", url: "/es/color-solutions#main-applications" },
+      { name: "Cárnicos y Salados", url: "/es/color-solutions#main-applications" },
     ],
   },
   {
@@ -125,7 +149,7 @@ const esLinks: NavLink[] = [
     name: "Perfeccionando Alimentos",
     url: "/es/#perfecting-food",
     dropdown: [
-      { name: "Soluciones", url: "/es/#soluciones" },
+      { name: "Soluciones", url: "/es/color-solutions" },
       { name: "Innovación", url: "/es/#innovacion" },
     ],
   },
@@ -152,12 +176,13 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
     <nav class="incoltec-header__nav" aria-label="Primary">
       <!-- Logo -->
       <a href={isEs ? "/es" : "/"} class="incoltec-header__logo" aria-label="Incoltec Home">
-        <img
-          src="/assets/LogoIncoltec.png"
+        <span class="sr-only">Incoltec Home</span>
+        <Image
+          src={logoIncoltec}
           alt="Incoltec"
           class="incoltec-header__logo-img"
-          width="220"
-          height="50"
+          width={220}
+          height={50}
           loading="eager"
           decoding="async"
         />
@@ -181,6 +206,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
                         <a
                           href={link.url}
                           class="incoltec-header__link"
+                          aria-label={link.name}
                         >
                           <span>{link.name}</span>
                         </a>
@@ -195,6 +221,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
                             fill="none"
                             stroke="currentColor"
                             stroke-width="2"
+                            aria-hidden="true"
                           >
                             <path
                               stroke-linecap="round"
@@ -212,6 +239,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
                                 <a
                                   href={sublink.url}
                                   class="incoltec-header__dropdown-link"
+                                  aria-label={sublink.name}
                                 >
                                   {sublink.name}
                                 </a>
@@ -227,6 +255,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
                       class={`incoltec-header__link ${
                         link.url.includes("#contact") ? "incoltec-header__link--contact" : ""
                       }`}
+                      aria-label={link.name}
                     >
                       {link.name}
                     </a>
@@ -238,19 +267,21 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
 
           <!-- Mobile-only language switcher & actions -->
           <div class="incoltec-header__mobile-actions">
-            <a href={isEs ? "/es/#contact" : "/#contact"} class="incoltec-header__cta w-full text-center mb-4">
+            <a href={isEs ? "/es/#contact" : "/#contact"} class="incoltec-header__cta w-full text-center mb-4" aria-label={isEs ? "Contáctanos" : "Get in Touch"}>
               {isEs ? "Contáctanos" : "Get in Touch"}
             </a>
             <div class="incoltec-header__mobile-lang">
               <a
                 href={enPath}
                 class={`incoltec-header__lang-link ${!isEs ? "is-active" : ""}`}
+                aria-label="English"
                 >EN</a
               >
               <span class="incoltec-header__lang-sep">|</span>
               <a
                 href={esPath}
                 class={`incoltec-header__lang-link ${isEs ? "is-active" : ""}`}
+                aria-label="Español"
                 >ES</a
               >
             </div>
@@ -264,16 +295,18 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
           <a
             href={enPath}
             class={`incoltec-header__lang-link ${!isEs ? "is-active" : ""}`}
+            aria-label="English"
             >EN</a
           >
           <span class="incoltec-header__lang-sep">|</span>
           <a
             href={esPath}
             class={`incoltec-header__lang-link ${isEs ? "is-active" : ""}`}
+            aria-label="Español"
             >ES</a
           >
         </div>
-        <a href={isEs ? "/es/#contact" : "/#contact"} class="incoltec-header__cta">
+        <a href={isEs ? "/es/#contact" : "/#contact"} class="incoltec-header__cta" aria-label={isEs ? "Contáctanos" : "Get in Touch"}>
           {isEs ? "Contáctanos" : "Get in Touch"}
         </a>
       </div>
@@ -286,12 +319,14 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
       <a
         href="/horeca"
         class={`incoltec-header__tab ${activeTab === "HORECA" ? "is-active" : ""}`}
+        aria-label="HORECA Solutions"
       >
         HORECA
       </a>
       <a
         href={isEs ? "/es" : "/"}
         class={`incoltec-header__tab ${activeTab === "INDUSTRIAL" ? "is-active" : ""}`}
+        aria-label="Industrial Food Solutions"
       >
         INDUSTRIAL
       </a>

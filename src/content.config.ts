@@ -12,6 +12,7 @@ const productsCollection = defineCollection({
     solubility: z.string().optional(),
     phRange: z.string().optional(),
     pdfLink: z.string().optional(),
+    image: z.string().optional(),
   }),
 });
 

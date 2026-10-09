@@ -11,6 +11,7 @@ color: "Rojo / Rubí / Magenta"
 solubility: "Hidrosoluble y Lacas dispersables"
 phRange: "3.5 - 9.0"
 pdfLink: "/downloads/carmin-e120-ficha-tecnica.pdf"
+image: "/assets/products/natural-colourants/glass-jar-of-strawberry-milkshake-and-ingredients-2023-11-27-05-14-29-utc-300x300.webp"
 ---
 
 El **Carmín de Cochinilla E-120** es reconocido internacionalmente por su incomparable resistencia a la degradación térmica, procesos de esterilización y exposición solar prolongada.

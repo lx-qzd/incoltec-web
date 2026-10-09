@@ -3,10 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Hero from '../../components/Hero.astro';
+import TasteColorsSection from '../../components/TasteColorsSection.astro';
 ---
 
 <Layout 
-  title="Saborea los Colores - Soluciones de Colorantes Naturales"
+  title="Saborea los Colores - Soluciones de Colorantes Naturales | INCOLTEC"
   description="Descubre la gama de colorantes naturales, alimentos colorantes y extractos botánicos de INCOLTEC diseñados para maximizar el atractivo visual de tus productos alimentarios."
 >
   <Header currentPath="/es/taste-colors" />
@@ -18,17 +19,7 @@ import Hero from '../../components/Hero.astro';
       backgroundImage="/assets/fondo1.jpg" 
     />
 
-
-    <section class="content-section container">
-      <div class="content">
-        <h2>La Naturaleza como Inspiración</h2>
-        <p>
-          Las soluciones de INCOLTEC combinan elementos orgánicos con tecnología avanzada para 
-          crear una experiencia visual sin igual. Nuestros colores despiertan emociones y aumentan 
-          el atractivo de los alimentos.
-        </p>
-      </div>
-    </section>
+    <TasteColorsSection isEs={true} />
   </main>
 
   <Footer />

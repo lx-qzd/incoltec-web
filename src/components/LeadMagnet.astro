@@ -1,8 +1,7 @@
 ---
-import BrandEIcon from "./BrandEIcon.astro";
 import PdfSection from "./PdfSection.astro";
 
-import { getImage } from "astro:assets";
+import { Image } from "astro:assets";
 import fondo1Webp from "../assets/fondo1.webp";
 
 interface Props {
@@ -25,19 +24,18 @@ const {
   privacyText = "I agree to the Privacy Policy"
 } = Astro.props;
 
-const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 })).src;
 ---
 
 <section id="contact" class="contact-hero-section relative min-h-[100dvh] flex items-center pt-24 sm:pt-28 pb-16 sm:pb-20 scroll-mt-24 overflow-hidden @container">
   <div class="absolute inset-0 z-0">
-    <img 
-      src={bgSrc} 
+    <Image 
+      src={fondo1Webp} 
       alt="Background" 
       class="w-full h-full object-cover" 
       loading="lazy"
       decoding="async"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
     />
     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"></div>
   </div>
@@ -55,8 +53,7 @@ const bgSrc = (await getImage({ src: fondo1Webp, format: 'webp', width: 1920 }))
     <div class="glass-card-dark rounded-2xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100 @container">
       
       <div class="w-full text-center mb-8">
-        <div class="inline-flex items-center gap-2.5 mb-3">
-          <BrandEIcon class="w-4 h-5 shrink-0" />
+        <div class="mb-3">
           <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold">
             Get in Touch
           </span>

@@ -11,6 +11,7 @@ color: "Verde Esmeralda / Olivo"
 solubility: "Hidrosoluble y Liposoluble"
 phRange: "3.0 - 9.0"
 pdfLink: "/downloads/clorofilina-e141-ficha-tecnica.pdf"
+image: "/assets/products/natural-colourants/concept-of-delicious-food-ice-cream-isolated-on-2023-11-27-05-28-44-utc-300x300.webp"
 ---
 
 La **Clorofilina Cúprica E-141** de INCOLTEC resuelve el histórico reto de la inestabilidad de la clorofila vegetal común frente a la luz y el calor, proporcionando un color verde fresco, vibrante y duradero.

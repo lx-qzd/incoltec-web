@@ -1,12 +1,13 @@
 ---
-import { getImage } from "astro:assets";
+import { Image } from "astro:assets";
+import defaultBg from "../assets/fondo3.webp";
 
 interface Props {
   id?: string;
   title?: string;
   subtitle?: string;
   description?: string;
-  bgImage?: string;
+  bgImage?: any;
 }
 
 const { 
@@ -14,16 +15,20 @@ const {
   title = "Our Company",
   subtitle = "Who We Are",
   description = "We are a dynamic team of innovators and visionaries dedicated to transforming food color solutions into extraordinary experiences globally.",
-  bgImage = "/assets/fondo3.jpg"
+  bgImage = defaultBg
 } = Astro.props;
 
-const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgImage, format: 'webp', width: 960 })).src;
+const imageToRender = (typeof bgImage === 'string' && bgImage.includes('fondo3')) ? defaultBg : bgImage;
 ---
 
 <section id={id} class="w-full flex flex-col md:flex-row bg-[#FFFDF9] min-h-screen scroll-mt-24">
   <!-- Left Side: Image -->
   <div class="w-full md:w-1/2 min-h-[400px] md:min-h-screen relative order-1 md:order-1">
-    <img src={bgUrl} alt={title} class="absolute inset-0 w-full h-full object-cover" />
+    {typeof imageToRender === "string" ? (
+      <Image src={imageToRender} alt={title} width={960} height={1080} class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+    ) : (
+      <Image src={imageToRender} alt={title} class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
+    )}
   </div>
 
   <!-- Right Side: Content -->

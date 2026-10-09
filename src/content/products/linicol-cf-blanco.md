@@ -10,6 +10,7 @@ color: "Blanco Opaco"
 solubility: "Dispersable en agua"
 phRange: "3.0 - 9.0"
 pdfLink: "/downloads/linicol-blanco-ficha-tecnica.pdf"
+image: "/assets/products/colouring-foods/chewing-gum-2021-08-26-18-17-24-utc-1.webp"
 ---
 
 Tras la prohibición del Dióxido de Titanio (E171) como aditivo alimentario en la Unión Europea, **Linicol CF Blanco** se posiciona como la solución definitiva. Basado en almidones modificados y carbonato cálcico, ofrece un efecto blanqueador y opacificante excepcional.

@@ -10,6 +10,7 @@ color: "Rojo/Rosado"
 solubility: "Hidrosoluble"
 phRange: "2.5 - 6.0"
 pdfLink: "/downloads/rojo-remolacha-ficha-tecnica.pdf"
+image: "/assets/products/colouring-foods/Alimento_colorante_Remolacha-1.webp"
 ---
 
 Nuestro **Rojo Remolacha E162** se obtiene a partir de raíces seleccionadas de *Beta vulgaris*, garantizando un rojo intenso y vibrante para múltiples aplicaciones alimentarias. Es la elección predilecta para fabricantes que buscan limpiar su etiquetado de colorantes artificiales.
