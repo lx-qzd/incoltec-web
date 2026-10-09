@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Organigram from './Organigram.astro';
-import labImg from '../assets/food-colors-application.webp';
 
 interface Props {
   isEs?: boolean;
@@ -10,324 +9,568 @@ interface Props {
 const { isEs = false } = Astro.props;
 ---
 
-<section id="our-company" class="w-full bg-[#FFFDF9] py-16 sm:py-24 md:py-32 scroll-mt-20 overflow-hidden @container">
+<section id="our-company" class="w-full bg-[#FFFDF9] py-12 sm:py-16 md:py-24 scroll-mt-20 overflow-hidden @container">
   <div class="w-full max-w-[1240px] mx-auto px-4 sm:px-8 md:px-12 flex flex-col items-stretch">
     
-    <!-- Header with Scroll Reveal -->
-    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24 reveal delay-75 flex flex-col items-center">
-      <div class="mb-4">
+    <!-- Hero / Section Header with Scroll Reveal -->
+    <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal delay-75 flex flex-col items-center">
+      <div class="mb-3">
         <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">
-          {isEs ? "Sobre Incoltec" : "About Incoltec"}
+          {isEs ? "Soluciones de Color Aplicables a Bebidas y Alimentos" : "Colour Solutions Applicable to Drinks and Food"}
         </span>
       </div>
 
-      <h2 class="font-heading fluid-h1 text-[#89385C] font-normal mb-6 leading-tight flowy-text">
-        {isEs ? "Nuestra Empresa" : "Our Company"}
-      </h2>
+      <h1 class="font-heading fluid-h1 text-[#89385C] font-normal mb-6 leading-tight flowy-text">
+        {isEs ? "Sobre Incoltec" : "About Incoltec"}
+      </h1>
 
-      <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-8"></div>
+      <div class="w-24 h-[2px] bg-[#C6ACB8] mx-auto mb-6"></div>
       <p class="font-verdana fluid-body text-gray-700 font-light leading-relaxed max-w-2xl mx-auto">
         {isEs 
           ? "Proximidad, conocimiento local y adaptación. La explosión cromática de nuestras formulaciones simboliza la diversidad de sabores, ingredientes y tradiciones que enriquecen la industria alimentaria mundial."
-          : "Proximity, local knowledge, and adaptation. The chromatic explosion of our formulations symbolizes the diversity of flavors, ingredients, and traditions enriching the global food industry."}
+          : "Proximity, local knowledge, and adaptation. The chromatic explosion of our formulations symbolizes the diversity of flavours, ingredients, and traditions enriching the global food industry."}
       </p>
     </div>
 
-    <!-- 1. Authentic Company Foundations (From about-incoltec) -->
-    <div class="mb-20 md:mb-28 reveal delay-100 bg-white rounded-3xl p-8 sm:p-12 border border-gray-100 shadow-sm">
-      <div class="max-w-3xl mb-10">
-        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold block mb-2">
-          {isEs ? "Desde el Laboratorio hasta el Cliente Final" : "From the Laboratory to the Final Client"}
-        </span>
-        <h3 class="fluid-h2 font-heading text-[#1E1E1E] font-normal m-0 mb-4">
-          {isEs ? "Ciencia, Tecnología e Innovación al Servicio del Color" : "Science, Technology and Innovation for Food Colour"}
-        </h3>
-        <p class="font-verdana text-gray-600 text-sm sm:text-base font-light leading-relaxed">
-          {isEs
-            ? "Incoltec es un proveedor global de colorantes alimentarios naturales. Desarrollamos soluciones innovadoras a partir de materias primas seleccionadas con rigurosa investigación científica. Aseguramos una producción fiable y constante bajo los más estrictos estándares internacionales en los cinco continentes."
-            : "Incoltec is a global provider of natural food colouring. We develop innovative colour solutions derived from natural sources through rigorous scientific research, ensuring reliable and constant production under strict international standards on every continent."}
-        </p>
-      </div>
-
-      <!-- Solutions by Sectors (Sectores Industriales Atendidos) -->
-      <div class="pt-8 border-t border-gray-100">
-        <h4 class="font-verdana text-xs font-bold uppercase tracking-wider text-gray-400 mb-6">
-          {isEs ? "Soluciones Cromáticas por Sector Alimentario" : "Chromatic Solutions by Food Sector"}
-        </h4>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4 font-verdana text-xs sm:text-sm">
-          {[
-            { en: "Dairy Products", es: "Lácteos y Postres" },
-            { en: "Meat Products", es: "Cárnicos y Embutidos" },
-            { en: "Beverages & Drinks", es: "Bebidas y Refrescos" },
-            { en: "Bakery & Cereals", es: "Panadería y Cereales" },
-            { en: "Confectionery & Sweets", es: "Confitería y Golosinas" },
-            { en: "Snacks & Appetizers", es: "Snacks y Aperitivos" },
-            { en: "Fruit & Veg Preps", es: "Preparados de Fruta" },
-            { en: "Sauces & Condiments", es: "Salsas y Aderezos" },
-            { en: "Pasta & Noodles", es: "Pastas y Harinas" },
-            { en: "Creams & Fillings", es: "Cremas y Rellenos" }
-          ].map(sector => (
-            <div class="bg-[#FAF8F5] p-3.5 rounded-xl border border-gray-100/80 flex items-center gap-2.5 text-gray-700 font-medium hover:bg-white hover:shadow-xs transition-colors">
-              <span class="w-2 h-2 rounded-full bg-[#E30066]"></span>
-              <span>{isEs ? sector.es : sector.en}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+    <!-- Quick Navigation Subnav (Sticky Pills) matching the Header Dropdown -->
+    <div class="sticky top-20 z-30 mb-16 md:mb-20 bg-white/90 backdrop-blur-md p-2 rounded-2xl border border-gray-200/80 shadow-md flex flex-wrap items-center justify-center gap-2 font-verdana text-xs sm:text-sm">
+      <a 
+        href="#about" 
+        class="px-4 py-2 rounded-xl text-gray-700 hover:text-[#89385C] hover:bg-gray-100/80 transition-all font-medium flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-[#E30066]"></span>
+        <span>{isEs ? "Sobre la empresa" : "About the company"}</span>
+      </a>
+      <a 
+        href="#laboratory" 
+        class="px-4 py-2 rounded-xl text-gray-700 hover:text-[#89385C] hover:bg-gray-100/80 transition-all font-medium flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+        <span>{isEs ? "Laboratorio y producción" : "Laboratory and production"}</span>
+      </a>
+      <a 
+        href="#quality" 
+        class="px-4 py-2 rounded-xl text-gray-700 hover:text-[#89385C] hover:bg-gray-100/80 transition-all font-medium flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-[#FFC000]"></span>
+        <span>{isEs ? "Compromiso de calidad" : "Quality commitment"}</span>
+      </a>
+      <a 
+        href="#organization" 
+        class="px-4 py-2 rounded-xl text-gray-700 hover:text-[#89385C] hover:bg-gray-100/80 transition-all font-medium flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-[#89385C]"></span>
+        <span>{isEs ? "Organización" : "Organization"}</span>
+      </a>
     </div>
 
-    <!-- 2. Strategic Pillars & Experience Stats -->
-    <div class="mb-20 md:mb-28">
-      <div class="mb-8 sm:mb-10 reveal delay-100">
-        <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal">
-          {isEs ? "Pilares Estratégicos de Calidad" : "Strategic Quality Pillars"}
-        </h3>
-      </div>
+    <!-- ========================================================================================= -->
+    <!-- SECTION 1: ABOUT THE COMPANY (Sobre la empresa / about-incoltec) -->
+    <!-- ========================================================================================= -->
+    <div id="about" class="scroll-mt-32 mb-24 md:mb-32">
+      <!-- Alternate Anchor IDs for Spanish and live site routes -->
+      <span id="sobre-incoltec" class="scroll-mt-32"></span>
+      <span id="sobre-la-empresa" class="scroll-mt-32"></span>
 
-      <div class="grid gap-6 sm:gap-8 mb-16 md:mb-24 @container" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));">
-        <div class="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-100 flex flex-col justify-between">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-[#E30066]/10 flex items-center justify-center text-[#E30066] mb-6 font-bold text-lg font-verdana">
-              01
-            </div>
-            <h4 class="text-2xl sm:text-3xl font-heading text-[#E30066] mb-4">
-              {isEs ? "Solidez Corporativa" : "Corporate Solidity"}
-            </h4>
-            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+      <!-- Introduction Card -->
+      <div class="bg-white rounded-3xl p-8 sm:p-12 md:p-16 border border-gray-100 shadow-sm mb-12 reveal delay-100">
+        <div class="max-w-3xl mb-10">
+          <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-[#E30066]/10 text-[#E30066] rounded-lg text-xs font-semibold uppercase tracking-wider font-verdana">
+            {isEs ? "1. Sobre la Empresa" : "1. About the Company"}
+          </div>
+          <h2 class="fluid-h2 font-heading text-[#1E1E1E] font-normal m-0 mb-6">
+            {isEs ? "Soluciones de color aplicables a bebidas y alimentos" : "Colour solutions applicable to drinks and food"}
+          </h2>
+          <div class="space-y-4 font-verdana text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+            <p>
               {isEs
-                ? "Construimos relaciones duraderas basadas en la confianza, cumplimiento riguroso de normativas y trazabilidad completa de cada suministro."
-                : "We build long-term relationships based on trust, strict compliance with global food standards, and complete supply traceability."}
+                ? "Incoltec es una empresa proveedora global de colorantes alimentarios naturales. Nuestras innovadoras soluciones de color son derivados de fuentes naturales y de nuestra rigurosa investigación científica."
+                : "Incoltec is a global provider of natural food colouring. Our innovative colour solutions are derived from natural sources through rigorous scientific research."}
+            </p>
+            <p>
+              {isEs
+                ? "Las aplicaciones del colorante alimentario son soluciones en la industria alimentaria, presentes en lácteos, carnes, preparaciones con verduras, frutas y hortalizas, panificados, cereales y snacks, pastas, cremas, pastelería y repostería, bebidas, entre otros."
+                : "The applications of food colouring span across various sectors of the food industry, including dairy products, meats, preparations with vegetables and fruits, baked goods, cereals, snacks, pasta, creams, confectionery, beverages, among others."}
+            </p>
+            <p>
+              {isEs
+                ? "Realizamos colores preservando la calidad de los productos y pensando en las necesidades de cada cliente. Incoltec es garantía de calidad en la producción de colores, garantizando soluciones innovadoras y eficientes para cada cliente."
+                : "We craft colours while preserving product quality and tailoring solutions to meet each client’s unique needs. Incoltec ensures a guarantee of quality in the production offering innovative and efficient solutions for every client."}
+            </p>
+            <p class="font-medium text-[#89385C]">
+              {isEs
+                ? "Ayudamos a la industria alimentaria a conseguir soluciones de color en todas partes del mundo, con garantía de calidad."
+                : "We contribute to the global food industry by providing quality assured colour solutions worldwide."}
             </p>
           </div>
         </div>
 
-        <div class="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-200 flex flex-col justify-between">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-[#FFC000]/15 flex items-center justify-center text-[#FFC000] mb-6 font-bold text-lg font-verdana">
-              02
-            </div>
-            <h4 class="text-2xl sm:text-3xl font-heading text-[#b58900] mb-4">
-              {isEs ? "Liderazgo Industrial" : "Industrial Leadership"}
-            </h4>
-            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
-              {isEs
-                ? "Marcamos la pauta en el desarrollo de soluciones cromáticas avanzadas para productores de alimentos de gran escala y mercados exigentes."
-                : "We set the standard in developing advanced chromatic solutions for large-scale food processors and demanding markets."}
-            </p>
-          </div>
-        </div>
-
-        <div class="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100/90 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 reveal delay-300 flex flex-col justify-between">
-          <div>
-            <div class="w-12 h-12 rounded-2xl bg-[#008AD8]/10 flex items-center justify-center text-[#008AD8] mb-6 font-bold text-lg font-verdana">
-              03
-            </div>
-            <h4 class="text-2xl sm:text-3xl font-heading text-[#008AD8] mb-4">
-              {isEs ? "Innovación Continua" : "Continuous Innovation"}
-            </h4>
-            <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
-              {isEs
-                ? "Nuestra filosofía nos impulsa a buscar siempre la mejora constante en estabilidad, brillo y biodisponibilidad."
-                : "Our philosophy drives us to continually enhance color stability, brilliance, and bioavailability."}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Stats Bar with Intrinsic Auto-Fit Grid -->
-      <div class="bg-white rounded-2xl p-6 sm:p-10 md:p-12 shadow-sm border border-[#89385C]/10 grid gap-6 sm:gap-8 text-center reveal delay-150 mb-16 md:mb-24 @container" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));">
-        <div>
-          <div class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#89385C] mb-2">
-            20<span class="font-bold text-[#FFC000]">+</span>
-          </div>
-          <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
-            {isEs ? "Años de Experiencia" : "Years of Experience"}
-          </p>
-        </div>
-        <div>
-          <div class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#89385C] mb-2">
-            100<span class="font-bold text-[#E30066]">%</span>
-          </div>
-          <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
-            {isEs ? "Opciones Naturales" : "Natural Options"}
-          </p>
-        </div>
-        <div>
-          <div class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#89385C] mb-2">
-            50<span class="font-bold text-[#008AD8]">+</span>
-          </div>
-          <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
-            {isEs ? "Mercados Globales" : "Global Markets"}
-          </p>
-        </div>
-        <div>
-          <div class="text-3xl sm:text-4xl md:text-5xl font-serif font-normal text-[#89385C] mb-2">
-            10<span class="font-bold text-[#89385C]">K+</span>
-          </div>
-          <p class="font-verdana text-xs sm:text-sm text-gray-500 uppercase tracking-widest mt-2 font-medium">
-            {isEs ? "Clientes Satisfechos" : "Happy Clients"}
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. Sub-anchor: Organización (Official Corporate Organigram) -->
-    <div id="organizacion" class="scroll-mt-28 mb-20 md:mb-28">
-      <Organigram isEs={isEs} />
-    </div>
-
-    <!-- 4. Sub-anchor: Laboratorio & Producción (From laboratory-and-production) -->
-    <div id="laboratorio" class="scroll-mt-28 bg-[#FAF8F5] p-6 sm:p-10 md:p-14 lg:p-16 rounded-3xl border border-[#EDE8E0] reveal delay-100 w-full mb-20 md:mb-28 @container">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-14 items-center mb-12">
-        <div class="md:col-span-7 reveal-left delay-150">
-          <div class="mb-4">
-            <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
-              {isEs ? "Investigación y Desarrollo" : "Research and Development"}
-            </span>
-          </div>
-          <h3 class="fluid-h2 font-heading text-[#1E1E1E] font-normal mb-6 leading-tight">
-            {isEs ? "Laboratorio y Planta Piloto de Aplicación" : "Advanced Laboratory and Application Pilot Plant"}
+        <!-- Food Sector Applications Gallery with Actual Live Food Photography -->
+        <div class="pt-8 border-t border-gray-100">
+          <h3 class="font-verdana text-xs font-bold uppercase tracking-wider text-gray-400 mb-6">
+            {isEs ? "Sectores Alimentarios Atendidos" : "Food Industry Sectors Served"}
           </h3>
-          <p class="font-verdana text-gray-700 text-sm sm:text-base font-light leading-relaxed mb-6">
-            {isEs
-              ? "Disponemos de modernos laboratorios y planta piloto para aplicaciones en cárnicos, lácteos, bebidas y panadería. Priorizando la calidad, manipulamos cuidadosamente las materias primas y aseguramos el valor nutricional y sensorial de cada formulación."
-              : "We operate modern application laboratories and a pilot plant for meat, dairy, beverage, and bakery products. Prioritizing quality production, we handle raw materials meticulously and uphold our commitment to producers, guaranteeing the stability and sensory value of every product."}
-          </p>
-          <p class="font-verdana text-gray-700 text-sm sm:text-base font-light leading-relaxed mb-8">
-            {isEs
-              ? "Formulamos soluciones líquidas, en pasta, en polvo y en gel, adaptadas a la matriz físico-química de su producto final, evaluando resistencia térmica, pH, foto-estabilidad y vida útil."
-              : "We formulate liquid, paste, powder, and gel solutions tailored specifically to the physicochemical matrix of your food product, evaluating thermal stability, pH variance, photostability, and shelf life."}
-          </p>
-          <div class="flex flex-wrap gap-2.5 sm:gap-3">
-            <span class="font-verdana px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-xs">
-              {isEs ? "Colorantes Líquidos y en Pasta" : "Liquid and Paste Colors"}
-            </span>
-            <span class="font-verdana px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-xs">
-              {isEs ? "Polvo y Geles de Precisión" : "Powder and Precision Gels"}
-            </span>
-            <span class="font-verdana px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-xs">
-              {isEs ? "Ensayos de Estabilidad a Medida" : "Custom Stability Testing"}
-            </span>
-            <span class="font-verdana px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white text-xs font-medium text-gray-700 border border-gray-200 shadow-xs">
-              {isEs ? "Stock Fiable y Garantizado" : "Consistently Reliable Stock"}
-            </span>
-          </div>
-        </div>
+          
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
+              <img src="/assets/company/fruit-mango-ice-cream-in-a-waffle-cup-2023-11-27-04-51-19-utc-scaled.webp" alt="Lácteos y Helados" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Lácteos y Helados" : "Dairy & Ice Cream"}</span>
+            </div>
+            
+            <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
+              <img src="/assets/company/crispy-kentucky-fried-chicken-french-fries-isolat-2024-02-06-18-41-29-utc-scaled.webp" alt="Cárnicos y Salados" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Cárnicos y Embutidos" : "Meats & Savory"}</span>
+            </div>
 
-        <div class="md:col-span-5 relative reveal-right delay-200">
-          <div class="relative rounded-2xl overflow-hidden shadow-xl aspect-4/3 group">
-            <Image 
-              src={labImg} 
-              alt={isEs ? "Laboratorio Incoltec" : "Incoltec Laboratory"} 
-              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" 
-              loading="lazy"
-              decoding="async"
-              width={800}
-              height={600}
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-            <div class="font-verdana absolute bottom-4 left-4 right-4 text-white text-xs sm:text-sm font-light">
-              {isEs ? "Control analítico y cromático por espectrofotometría" : "Spectrophotometric chromatic and analytical quality control"}
+            <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
+              <img src="/assets/company/fresh-and-healthy-passion-fruit-smoothie-2023-11-27-05-18-16-utc-scaled.webp" alt="Bebidas y Zumos" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Bebidas y Zumos" : "Beverages & Drinks"}</span>
+            </div>
+
+            <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
+              <img src="/assets/company/freshly-baked-jelly-donuts-2023-11-27-05-08-39-utc-scaled.webp" alt="Panadería y Bollería" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Panadería y Repostería" : "Bakery & Pastry"}</span>
+            </div>
+
+            <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
+              <img src="/assets/company/yummy-yellow-vitamin-c-gummy-jellies-coming-out-fr-2023-11-27-04-58-38-utc-scaled.webp" alt="Confitería y Golosinas" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Confitería y Golosinas" : "Confectionery & Sweets"}</span>
+            </div>
+
+            <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
+              <img src="/assets/company/paella-seafood-rice-rice-with-seafood-2023-11-27-05-25-36-utc-scaled.webp" alt="Platos Preparados" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Platos Preparados y Arroces" : "Ready Meals & Rice"}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Specialized Lab Equipment (Equipamiento Técnico Oficial) -->
-      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/80">
-        <h4 class="font-verdana text-xs font-bold uppercase tracking-wider text-[#008AD8] mb-4">
-          {isEs ? "Tecnología e Instrumental de Laboratorio" : "Specialized Laboratory Equipment & Capabilities"}
-        </h4>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 font-verdana text-xs text-gray-600">
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Espectrofotómetros</span>
+      <!-- Formats & Product Typologies (Colorantes líquidos, en pasta, polvo y gel) -->
+      <div class="bg-gradient-to-br from-[#89385C] to-[#5e223c] rounded-3xl p-8 sm:p-12 text-white shadow-lg mb-12 reveal delay-150">
+        <div class="max-w-3xl mb-10">
+          <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold block mb-2">
+            {isEs ? "Formatos y Presentaciones" : "Formats and Presentations"}
+          </span>
+          <h2 class="fluid-h2 font-heading font-normal m-0 mb-4 text-white">
+            {isEs 
+              ? "Colorantes líquidos, colorantes en pasta, colorantes en polvo y en gel"
+              : "Liquid colourants, paste colourants, powder colourants and gel colourants"}
+          </h2>
+          <p class="font-verdana text-white/90 text-sm sm:text-base font-light leading-relaxed">
+            {isEs
+              ? "La producción y utilización de colorantes alimenticios naturales aporta color, aroma, textura, nutrición y fuerza a una amplia variedad de alimentos y bebidas para hacerlos más atractivos y saludables. La innovación es vanguardia y está presente en nuestros productos."
+              : "The production and application of natural food colouring contributes colour, aroma, texture, nutrition and strength to a diverse range of foods and beverages, enhancing their appeal and health benefits. Our products embody avant-garde innovation in this regard."}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-verdana text-xs sm:text-sm">
+          <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15 flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-[#FFC000]/20 text-[#FFC000] flex items-center justify-center font-bold mb-4">
+                01
+              </div>
+              <h3 class="font-heading text-xl font-normal text-white mb-2">
+                {isEs ? "Colorantes Naturales" : "Natural Colourants"}
+              </h3>
+              <p class="text-white/80 font-light leading-relaxed">
+                {isEs
+                  ? "Derivados de fuentes agrícolas, biológicas y minerales. En nuestro portfolio encontramos Beta-Caroteno, Apocarotenal y Licopeno, entre otros. Obtenidos de materias primas sostenibles: zanahoria negra, col lombarda, remolacha, uva, cúrcuma, alfalfa, pimentón. Idénticos, son color natural."
+                  : "These are derived from agricultural, biological or mineral sources. In our portfolio we find Beta-Carotene, Apocarotenal and Lycopene, among others. Obtained from sustainable raw materials: black carrot, red cabbage, beetroot, grape, turmeric, alfalfa, paprika. Identical, they are natural colour."}
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/10 text-xs font-semibold text-[#FFC000] uppercase tracking-wider mt-4">
+              {isEs ? "Alta Estabilidad" : "High Stability"}
+            </div>
           </div>
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Colorímetros</span>
+
+          <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15 flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-[#E30066]/30 text-white flex items-center justify-center font-bold mb-4">
+                02
+              </div>
+              <h3 class="font-heading text-xl font-normal text-white mb-2">
+                {isEs ? "Alimentos Colorantes (LINICOL®)" : "Colouring Foods (LINICOL®)"}
+              </h3>
+              <p class="text-white/80 font-light leading-relaxed">
+                {isEs
+                  ? "Producidos de concentrados de frutas, vegetales, flores comestibles y algas. Resultado de procesos físicos; libres de aditivos sintéticos. Responden a la demanda de 'etiquetado limpio'; nuestros alimentos colorantes LINICOL® ofrecen la solución perfecta en una amplia gama de matices. Aptos para la industria vegana."
+                  : "Produced from fruit, vegetable, edible flower and algae concentrates. Only natural physical processes are used in our manufacturing, free of synthetic additives or organic solvents. Answering the demand for 'clean labeling', our LINICOL® range is suitable for the vegan industry."}
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/10 text-xs font-semibold text-[#FFC000] uppercase tracking-wider mt-4">
+              {isEs ? "Etiqueta Limpia • Sin Número E" : "Clean Label • No E-Numbers"}
+            </div>
           </div>
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Texturómetros</span>
+
+          <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/15 flex flex-col justify-between">
+            <div>
+              <div class="w-8 h-8 rounded-lg bg-[#008AD8]/30 text-white flex items-center justify-center font-bold mb-4">
+                03
+              </div>
+              <h3 class="font-heading text-xl font-normal text-white mb-2">
+                {isEs ? "Vitaminas y Premixes" : "Vitamins and Premixes"}
+              </h3>
+              <p class="text-white/80 font-light leading-relaxed">
+                {isEs
+                  ? "Necesarios para una dieta equilibrada, generalmente la obtención de las mismas se efectúa a través de alimentos manufacturados enriquecidos, con un impacto positivo para la salud. Presentes en la industria de alimentos nutricionales, batidos, suplementos y bebidas."
+                  : "Vitamins are essential compounds for life. In a balanced way and in essential doses, they promote proper physiological functioning. Generally obtained through enriched manufactured foods with a positive impact on health. Present in nutritional foods, shakes, supplements, and beverages."}
+              </p>
+            </div>
+            <div class="pt-4 border-t border-white/10 text-xs font-semibold text-[#FFC000] uppercase tracking-wider mt-4">
+              {isEs ? "Enriquecimiento Nutricional" : "Nutritional Enrichment"}
+            </div>
           </div>
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Refractómetros</span>
+        </div>
+      </div>
+
+      <!-- History & Global Presence Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <!-- History: ¿Cómo llegamos aquí? -->
+        <div class="bg-white rounded-3xl p-8 sm:p-10 border border-gray-100 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-[#89385C]/10 text-[#89385C] flex items-center justify-center font-bold mb-5">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="font-heading text-2xl sm:text-3xl text-[#1E1E1E] font-normal mb-4">
+              {isEs ? "¿Cómo llegamos aquí?" : "How did we get here?"}
+            </h3>
+            <div class="space-y-3 font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+              <p>
+                {isEs
+                  ? "En 2012 un grupo de profesionales quiso ir más allá en la industria de colorantes para alimentos. Retomando las recetas tradicionales, ya que la aplicación de colorantes en los alimentos y bebidas que consumimos datan de mucho tiempo atrás, aplicando ciencia y tecnología nace Incoltec."
+                  : "In 2012, a group of professionals in the food colouring industry sought to advance by drawing inspiration from traditional recipes, rooted in the longstanding history of colourants in our food and beverages. Incoltec was founded through the infusion of science and technology."}
+              </p>
+              <p>
+                {isEs
+                  ? "Caracterizados por la rigurosidad de producción e innovación, nuestros productos fueron desarrollándose a la par de las normas internacionales de salud, lo cual nos posiciona en calidad y seguridad internacional."
+                  : "Characterized by our rigorous production and innovation, our products have been crafted in accordance with international health standards, establishing our position worldwide in quality and safety."}
+              </p>
+            </div>
           </div>
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Densitómetros</span>
+          <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#89385C] uppercase tracking-wider font-verdana mt-6">
+            {isEs ? "Fundada en 2012 • Pasión por el Color" : "Founded in 2012 • Passion for Colour"}
           </div>
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Básculas de Precisión</span>
+        </div>
+
+        <!-- Global Presence: 4 specialized plants -->
+        <div class="bg-white rounded-3xl p-8 sm:p-10 border border-gray-100 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-[#008AD8]/10 text-[#008AD8] flex items-center justify-center font-bold mb-5">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="font-heading text-2xl sm:text-3xl text-[#1E1E1E] font-normal mb-4">
+              {isEs ? "Infraestructura y Presencia Global" : "Global Infrastructure & Delegations"}
+            </h3>
+            <div class="space-y-3 font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+              <p>
+                {isEs
+                  ? "Disponemos de cuatro plantas y laboratorios especializados y delegaciones en todo el mundo. Distribuimos en Europa, América, América Latina y Asia."
+                  : "We operate four specialized production plants and laboratories, with delegations worldwide. We distribute across Europe, North America, Latin America, and Asia."}
+              </p>
+              <p>
+                {isEs
+                  ? "Nuestras diferentes delegaciones nos permiten ofrecer atención y soluciones a medida a todos nuestros clientes. Aprovisionamiento seguro, rápido y confiable."
+                  : "Our international delegations allow us to offer tailored attention and customized solutions to all clients. Safe, fast, and reliable supply guaranteed."}
+              </p>
+            </div>
           </div>
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Medidores de pH</span>
-          </div>
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Agitadores y Turbinas</span>
-          </div>
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Emulsionadores</span>
-          </div>
-          <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#008AD8]"></span>
-            <span>Mezcladores de Polvo</span>
+          <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#008AD8] uppercase tracking-wider font-verdana mt-6">
+            {isEs ? "4 Plantas Especializadas • Distribución Global" : "4 Specialized Plants • Worldwide Supply"}
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 5. Quality Commitment, Mission & Vision (From quality-commitment) -->
-    <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-100 shadow-sm reveal delay-150">
-      <div class="max-w-3xl mb-10">
-        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold block mb-2">
-          {isEs ? "Compromiso de Calidad y Seguridad" : "Quality Commitment and Safety"}
-        </span>
-        <h3 class="fluid-h2 font-heading text-[#1E1E1E] font-normal m-0 mb-4">
-          {isEs ? "Misión, Visión y Valores Corporativos" : "Mission, Vision and Corporate Values"}
-        </h3>
-        <p class="font-verdana text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+
+    <!-- ========================================================================================= -->
+    <!-- SECTION 2: LABORATORY AND PRODUCTION (Laboratorio y producción / laboratory-and-production) -->
+    <!-- ========================================================================================= -->
+    <div id="laboratory" class="scroll-mt-32 mb-24 md:mb-32">
+      <!-- Alternate Anchor IDs -->
+      <span id="laboratorio" class="scroll-mt-32"></span>
+      <span id="laboratorio-y-produccion" class="scroll-mt-32"></span>
+
+      <div class="bg-[#FAF8F5] p-8 sm:p-12 md:p-16 rounded-3xl border border-[#EDE8E0] shadow-sm">
+        <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-[#008AD8]/15 text-[#008AD8] rounded-lg text-xs font-semibold uppercase tracking-wider font-verdana">
+          {isEs ? "2. Laboratorio y Producción" : "2. Laboratory and Production"}
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12">
+          <div class="lg:col-span-7">
+            <span class="font-verdana text-xs uppercase tracking-[0.2em] text-[#89385C] font-bold block mb-2">
+              {isEs ? "Las normas ISO son compromiso de calidad" : "ISO standards are a commitment to quality"}
+            </span>
+            <h2 class="fluid-h2 font-heading text-[#1E1E1E] font-normal mb-6 leading-tight">
+              {isEs ? "Nuestros Laboratorios y Planta Piloto" : "Our Laboratories & Pilot Application Plant"}
+            </h2>
+            <div class="space-y-4 font-verdana text-gray-700 text-sm sm:text-base font-light leading-relaxed mb-6">
+              <p>
+                {isEs
+                  ? "Contamos con laboratorios modernos y planta piloto de aplicaciones de productos cárnicos, lácteos, bebidas y panificación."
+                  : "We have modern laboratories and a pilot plant for application in meat, dairy, beverage and bakery products."}
+              </p>
+              <p>
+                {isEs
+                  ? "Logrando productos finales de calidad, cuidamos las materias primas y nos comprometemos con los productores para garantizar el valor del producto."
+                  : "Prioritizing the production of quality goods, we carefully handle raw materials and uphold our commitment to producers, ensuring the value of each product."}
+              </p>
+              <p>
+                {isEs
+                  ? "Nuestra estrategia trabaja comprometida con la comunidad científica, mejorando los perfiles nutricionales y el ingreso a nuevas categorías de negocio."
+                  : "Our strategic approach involves active collaboration with the scientific community, enhancing nutritional profiles, and exploring new business categories."}
+              </p>
+              <p>
+                {isEs
+                  ? "Con nuestro equipo especializado de laboratorio, extraemos los principios activos del color. Desarrollamos y proveemos aditivos, colorantes, semillas y aceites para aportar color, aroma, textura, nutrición y fuerza a una amplia variedad de alimentos y bebidas."
+                  : "Utilizing specialized laboratory equipment, we extract the active principles of colour. We develop and supply additives, colourants, seeds, and oils to enhance the colour, aroma, texture, nutrition, and strength of a diverse range of foods and beverages."}
+              </p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="rounded-2xl overflow-hidden shadow-xl border border-gray-200/80 group">
+              <img 
+                src="/assets/company/laboratorio1.webp" 
+                alt={isEs ? "Laboratorio de Aplicaciones Incoltec" : "Incoltec Applications Laboratory"} 
+                class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" 
+                loading="lazy" 
+              />
+              <div class="bg-white p-4 font-verdana text-xs text-gray-600 border-t border-gray-100 flex items-center justify-between">
+                <span>{isEs ? "Planta piloto de aplicaciones e I+D" : "Pilot plant for food applications & R&D"}</span>
+                <span class="font-semibold text-[#008AD8]">ISO Certified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Specialized Equipment List (Exact items from laboratory-and-production) -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/80 mb-8">
+          <h3 class="font-verdana text-xs font-bold uppercase tracking-wider text-[#008AD8] mb-4">
+            {isEs ? "Inversión en Calidad: Equipamiento Especializado de Laboratorio" : "Investing in Quality: Specialized Laboratory Equipment"}
+          </h3>
+          <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light mb-6">
+            {isEs
+              ? "Espectrofotómetro, colorímetro, texturómetro, refractómetro, densímetro, balanzas de precisión, pH metro, agitadores para líquidos, emulsificadores y mini mezcladores para polvo, entre otros, son nuestra inversión en calidad para garantizar soluciones de color en todo el mundo."
+              : "Spectrophotometers, colorimeters, texturometer, refractometer, densimeter, precision balance, pH meters, liquid stirrers, emulsifiers, and mini powder mixers, among others, represent our investment in quality to ensure reliable global colour solutions."}
+          </p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 font-verdana text-xs text-gray-700">
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>Espectrofotómetros</span>
+            </div>
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>Colorímetros</span>
+            </div>
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>Texturómetros</span>
+            </div>
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>Refractómetros</span>
+            </div>
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>Densitómetros</span>
+            </div>
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>Balanzas de Precisión</span>
+            </div>
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>pH-metros</span>
+            </div>
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>Agitadores de Líquidos</span>
+            </div>
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>Emulsificadores</span>
+            </div>
+            <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
+              <span>Mezcladores de Polvo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extraction Capabilities List -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/80">
+          <h3 class="font-verdana text-xs font-bold uppercase tracking-wider text-[#89385C] mb-4">
+            {isEs ? "Capacidades de Extracción y Transformación de Principios Activos" : "Active Principles Extraction & Processing Capabilities"}
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 font-verdana text-xs sm:text-sm">
+            <div class="p-4 bg-[#FAF8F5] rounded-xl border border-gray-100">
+              <span class="font-bold text-[#89385C] block mb-1">01. {isEs ? "Principios Activos" : "Active Principles"}</span>
+              <p class="text-gray-600 m-0 text-xs font-light">{isEs ? "Aislamiento y purificación selectiva de pigmentos botánicos." : "Selective isolation and purification of botanical pigments."}</p>
+            </div>
+            <div class="p-4 bg-[#FAF8F5] rounded-xl border border-gray-100">
+              <span class="font-bold text-[#89385C] block mb-1">02. {isEs ? "Generación de Óleos" : "Generation of Oils"}</span>
+              <p class="text-gray-600 m-0 text-xs font-light">{isEs ? "Oleorresinas y suspensiones lipídicas de alta concentración." : "High-concentration oleoresins and lipid suspensions."}</p>
+            </div>
+            <div class="p-4 bg-[#FAF8F5] rounded-xl border border-gray-100">
+              <span class="font-bold text-[#89385C] block mb-1">03. {isEs ? "Mezclas Líquidas y Polvos" : "Liquid & Powder Blends"}</span>
+              <p class="text-gray-600 m-0 text-xs font-light">{isEs ? "Formulaciones homogéneas a medida para cada proceso industrial." : "Tailored homogeneous formulas for every production line."}</p>
+            </div>
+            <div class="p-4 bg-[#FAF8F5] rounded-xl border border-gray-100">
+              <span class="font-bold text-[#89385C] block mb-1">04. {isEs ? "Emulsiones y Moliendas" : "Emulsions & Sieving"}</span>
+              <p class="text-gray-600 m-0 text-xs font-light">{isEs ? "Microemulsiones transparentes, tamizado fino y dispersión total." : "Transparent microemulsions, fine sieving, and total dispersibility."}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================================= -->
+    <!-- SECTION 3: QUALITY COMMITMENT (Compromiso de calidad / quality-commitment) -->
+    <!-- ========================================================================================= -->
+    <div id="quality" class="scroll-mt-32 mb-24 md:mb-32">
+      <!-- Alternate Anchor IDs -->
+      <span id="compromiso-de-calidad" class="scroll-mt-32"></span>
+      <span id="calidad" class="scroll-mt-32"></span>
+
+      <div class="bg-white rounded-3xl p-8 sm:p-12 md:p-16 border border-gray-100 shadow-sm">
+        <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-[#FFC000]/20 text-[#b58900] rounded-lg text-xs font-semibold uppercase tracking-wider font-verdana">
+          {isEs ? "3. Compromiso de Calidad" : "3. Quality Commitment"}
+        </div>
+        
+        <div class="max-w-4xl mb-12">
+          <span class="font-verdana text-xs uppercase tracking-[0.2em] text-[#008AD8] font-bold block mb-2">
+            {isEs ? "Innovación & Tecnología" : "Innovation & Technology"}
+          </span>
+          <h2 class="fluid-h2 font-heading text-[#1E1E1E] font-normal m-0 mb-6 leading-tight">
+            {isEs 
+              ? "Controlar la calidad de los colorantes que luego serán aplicados en la industria alimentaria"
+              : "Control the quality of the colours that will be applied in the food industry"}
+          </h2>
+          <div class="space-y-4 font-verdana text-gray-600 text-sm sm:text-base font-light leading-relaxed">
+            <p>
+              {isEs
+                ? "Incoltec aplica ciencia, tecnología e innovación a la tradición de los colores alimentarios. El correcto tratamiento de la materia prima es prioritario para lograr excelentes resultados. Y por esa razón, Incoltec se compromete a garantizar una producción fiable y constante bajo los estrictos estándares de calidad internacionales."
+                : "Incoltec applies science, technology, and innovation to the tradition of food colouring. The correct treatment of the raw materials is a priority to achieve excellent results. For this reason, Incoltec is committed to ensuring reliable and constant production under strict international standards on every continent."}
+            </p>
+            <p>
+              {isEs
+                ? "Entendemos que un buen producto lo es todo, nuestros conocimientos en calidad y la tecnología nos hacen destacar, y queremos que nuestros clientes también lo hagan. Cuidando el proceso de selección, manipulación y elaboración de nuestros productos."
+                : "We understand that a good product is everything. Our expertise in quality and technology sets us apart, and we aim for our customers to stand out as well. To achieve this objective, we meticulously handle the selection, handling, and elaboration process of our products."}
+            </p>
+            <p>
+              {isEs
+                ? "Los estándares de calidad en todo el proceso productivo están presentes y avalados según la normativa vigente (normas ISO); es la misión de la empresa: cuantificar la sanidad y calidad de los alimentos con colorantes."
+                : "The quality standards throughout the production process are present and endorsed according to current regulations (ISO standards). The company's mission is to ensure the sanitation and quality of food with colourants."}
+            </p>
+          </div>
+        </div>
+
+        <!-- Mission & Vision Cards (Exact text from quality-commitment) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <!-- Mission -->
+          <div class="bg-[#FAF8F5] p-8 rounded-2xl border border-gray-200/70 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-[#008AD8]/15 text-[#008AD8] flex items-center justify-center font-bold mb-4 font-verdana text-sm">
+                M
+              </div>
+              <h3 class="font-heading text-2xl text-[#1E1E1E] font-normal mb-3">
+                {isEs ? "Misión" : "Mission"}
+              </h3>
+              <div class="space-y-3 font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+                <p>
+                  {isEs
+                    ? "Gestión basada en inversión continua en tecnología e investigación, promoviendo la generación de capacidades y soluciones sostenibles en la industria alimentaria donde todos se beneficien. Responsabilidad social y calidad en nuestros servicios y productos."
+                    : "We are dedicated to management rooted in continual investment in technology and research, cultivating the creation of capabilities and sustainable solutions in the food industry for the benefit of all."}
+                </p>
+                <p>
+                  {isEs
+                    ? "Nuestra fortaleza traducida en términos de eficiencia, se construye con un equipo de profesionales en distintas disciplinas con calidad humana, a tu servicio para ofrecer soluciones de color a medida y de excelencia."
+                    : "Upholding social responsibility and quality in our services and products, we derive strength and efficiency from a multidisciplinary team characterized by their human qualities, providing customized, excellent colour solutions."}
+                </p>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-gray-200/80 text-xs font-semibold text-[#008AD8] uppercase tracking-wider font-verdana mt-6">
+              {isEs ? "Sostenibilidad & Excelencia Humana" : "Sustainability & Human Excellence"}
+            </div>
+          </div>
+
+          <!-- Vision -->
+          <div class="bg-[#FAF8F5] p-8 rounded-2xl border border-gray-200/70 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-[#E30066]/15 text-[#E30066] flex items-center justify-center font-bold mb-4 font-verdana text-sm">
+                V
+              </div>
+              <h3 class="font-heading text-2xl text-[#1E1E1E] font-normal mb-3">
+                {isEs ? "Visión" : "Vision"}
+              </h3>
+              <div class="space-y-3 font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed">
+                <p>
+                  {isEs
+                    ? "Consolidarnos como empresa fabricante líder en alimentos colorantes naturales en todo el mundo, brindando soluciones y aplicaciones de calidad a todo el sector alimenticio. Incoltec es pasión por los colores. Sumar valor."
+                    : "We established ourselves as a leading global manufacturer of natural food colouring, offering quality solutions and applications to the entire food sector. Incoltec embodies a passion for colours, enhancing value in every dimension."}
+                </p>
+                <p>
+                  {isEs
+                    ? "Trayectoria, investigación, calidad y compromiso distinguen a Incoltec en la producción y comercialización de colorantes alimentarios en todo el mundo."
+                    : "Trayectory, research, quality, and commitment distinguish Incoltec in the production and commercialization of food colouring worldwide."}
+                </p>
+              </div>
+            </div>
+            <div class="pt-4 border-t border-gray-200/80 text-xs font-semibold text-[#E30066] uppercase tracking-wider font-verdana mt-6">
+              {isEs ? "Liderazgo Global • Pasión por el Color" : "Global Leadership • Passion for Colours"}
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Dyes / Colorantes a medida callout banner -->
+        <div class="bg-gradient-to-r from-[#FAF8F5] via-white to-[#FAF8F5] p-6 sm:p-8 rounded-2xl border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 class="font-heading text-xl sm:text-2xl text-[#1E1E1E] font-normal mb-1">
+              {isEs ? "Colorantes a medida para alimentación" : "Custom dyes for food"}
+            </h3>
+            <p class="font-verdana text-xs sm:text-sm text-gray-600 font-light m-0 max-w-2xl">
+              {isEs
+                ? "La calidad no tiene precio, tiene valor, en nuestro caso color. Es natural que nos elijas. Nuestro equipo de tecnología nos permite generar colores a medida y garantizar el stock."
+                : "Quality is priceless; it has value, in our case colour. It is natural for you to choose us. Our technology team allows us to generate custom colours and guarantee stock."}
+            </p>
+          </div>
+          <div class="shrink-0 flex items-center gap-3">
+            <img src="/assets/company/IFS-Broker-RGB.webp" alt="IFS Broker" class="h-12 w-auto object-contain" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================================================= -->
+    <!-- SECTION 4: ORGANIZATION (Organización / organization) -->
+    <!-- ========================================================================================= -->
+    <div id="organization" class="scroll-mt-32">
+      <!-- Alternate Anchor IDs -->
+      <span id="organizacion" class="scroll-mt-32"></span>
+
+      <div class="mb-8 text-center max-w-2xl mx-auto">
+        <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-[#89385C]/10 text-[#89385C] rounded-lg text-xs font-semibold uppercase tracking-wider font-verdana">
+          {isEs ? "4. Organización" : "4. Organization"}
+        </div>
+        <h2 class="fluid-h2 font-heading text-[#1E1E1E] font-normal mb-3">
+          {isEs ? "Estructura y Equipo de Incoltec" : "Incoltec Corporate Structure & Team"}
+        </h2>
+        <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light">
           {isEs
-            ? "Nuestros laboratorios y procesos productivos están respaldados por las normativas internacionales de calidad (normas ISO, FSSC 22000, Halal y Kosher). La misión de Incoltec es garantizar la salubridad, calidad y atractivo sensorial de los alimentos en todo el mundo."
-            : "Our laboratories and production procedures are endorsed according to international ISO requirements, FSSC 22000, Halal, and Kosher certifications. Incoltec's mission is to guarantee food sanitation, safety, and sensory appeal across the global food sector."}
+            ? "Conoce a los profesionales que lideran nuestra gestión, laboratorios, operaciones y atención comercial en todo el mundo."
+            : "Meet the professionals leading our management, laboratories, operations, and global customer sales across the globe."}
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-gray-100">
-        <div class="bg-[#FAF8F5] p-6 sm:p-8 rounded-2xl border border-gray-100">
-          <div class="w-10 h-10 rounded-xl bg-[#008AD8]/15 text-[#008AD8] flex items-center justify-center font-bold mb-4 font-verdana text-sm">
-            M
-          </div>
-          <h4 class="font-heading text-2xl text-[#1E1E1E] font-normal mb-3">
-            {isEs ? "Nuestra Misión" : "Our Mission"}
-          </h4>
-          <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed m-0">
-            {isEs
-              ? "Gestión basada en la inversión continua en tecnología e investigación, cultivando capacidades y soluciones sostenibles en la industria alimentaria con responsabilidad social y excelencia humana."
-              : "Management rooted in continual investment in technology and research, cultivating sustainable capabilities and solutions in the food industry with social responsibility and human quality."}
-          </p>
-        </div>
-
-        <div class="bg-[#FAF8F5] p-6 sm:p-8 rounded-2xl border border-gray-100">
-          <div class="w-10 h-10 rounded-xl bg-[#E30066]/15 text-[#E30066] flex items-center justify-center font-bold mb-4 font-verdana text-sm">
-            V
-          </div>
-          <h4 class="font-heading text-2xl text-[#1E1E1E] font-normal mb-3">
-            {isEs ? "Nuestra Visión" : "Our Vision"}
-          </h4>
-          <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light leading-relaxed m-0">
-            {isEs
-              ? "Consolidarnos como fabricante y proveedor global de referencia en colorantes naturales y soluciones de color, potenciando el valor de cada producto en todas sus dimensiones sensoriales."
-              : "Establish ourselves as a leading global manufacturer and reference supplier of natural food colourings, enhancing value in every dimension of the food sector."}
-          </p>
-        </div>
-      </div>
+      <!-- The full official interactive Organigram with all 17 team photos -->
+      <Organigram isEs={isEs} />
     </div>
 
   </div>

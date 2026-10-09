@@ -70,15 +70,19 @@ const content = isEs ? esLinks : enLinks;
 
 <footer class="footer">
   <div class="container footer-content">
-      <Image 
-        src={logoFooter} 
-        alt="Incoltec Logo" 
-        width={600} 
-        height={200} 
-        class="h-[75px] w-auto object-contain" 
-        loading="lazy"
-        decoding="async"
-      />
+    <div class="footer-brand">
+      <a href={isEs ? "/es" : "/"} class="footer-logo-link" aria-label="Incoltec Home">
+        <Image 
+          src={logoFooter} 
+          alt="Incoltec Logo" 
+          width={180} 
+          height={44} 
+          class="footer-logo-img" 
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    </div>
     
     <div class="footer-links">
       <div class="link-group">
@@ -143,10 +147,28 @@ const content = isEs ? esLinks : enLinks;
     container-type: inline-size;
   }
 
-  .footer-logo img {
-    height: clamp(48px, 6vw, 75px);
-    width: auto;
-    margin-bottom: 0.75rem;
+  .footer-brand {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .footer-logo-link {
+    display: inline-block;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-logo-link:hover {
+    opacity: 0.85;
+  }
+
+  .footer-logo-img {
+    display: block;
+    height: 38px !important;
+    max-height: 42px !important;
+    width: auto !important;
+    max-width: 180px !important;
+    object-fit: contain !important;
   }
 
   /* Intrinsic Breakpoint-Free Footer Link Columns */
