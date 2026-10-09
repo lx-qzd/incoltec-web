@@ -26,13 +26,6 @@ import fondo1Webp from '../../assets/fondo1.webp';
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"></div>
       </div>
-      
-      <!-- Decorative Polygons (Left) -->
-      <div class="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-10 w-32 md:w-56 opacity-80 pointer-events-none">
-        <div class="polygon polygon-yellow"></div>
-        <div class="polygon polygon-pink"></div>
-        <div class="polygon polygon-blue"></div>
-      </div>
 
       <div class="container relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6">
         
@@ -159,26 +152,6 @@ import fondo1Webp from '../../assets/fondo1.webp';
 <style>
   .contact-hero-section {
     overflow: hidden;
-  }
-
-  /* Polygons styling */
-  .polygon {
-    height: 90px;
-    width: 100%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  .polygon-yellow { 
-    background: linear-gradient(90deg, #ffde00, #ffae00); 
-    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); 
-  }
-  .polygon-pink { 
-    background: linear-gradient(90deg, #ff1b7a, #e6005c); 
-    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); 
-  }
-  .polygon-blue { 
-    background: linear-gradient(90deg, #0084ff, #0056b3); 
-    clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%); 
   }
 
   .contact-form-container {

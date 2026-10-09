@@ -23,24 +23,7 @@ const bgUrl = typeof bgImage === 'string' ? bgImage : (await getImage({ src: bgI
 
     <!-- Right Side Content Box -->
     <div class="relative w-full sm:w-[90%] md:w-3/4 lg:w-[60%] ml-auto bg-black/60 backdrop-blur-md border border-white/10 p-5 sm:p-6 md:p-10 lg:p-16 shadow-2xl reveal-scale delay-200 mt-4 sm:mt-16 md:mt-32">
-      
-      <!-- The 3 Arrows attached to the black box -->
-      <div class="absolute -left-8 sm:-left-12 md:-left-16 lg:-left-24 top-1/2 -translate-y-1/2 flex flex-col w-12 sm:w-16 md:w-24 lg:w-32 gap-1.5 sm:gap-2 z-30 opacity-90 mix-blend-screen hidden sm:flex">
-        <!-- Arrow 1: Yellow -->
-        <div class="w-full h-8 sm:h-12 md:h-16 lg:h-20 bg-[#FFC000] arrow-shape shadow-lg shadow-[#FFC000]/20"></div>
-        <!-- Arrow 2: Magenta -->
-        <div class="w-full h-8 sm:h-12 md:h-16 lg:h-20 bg-[#E30066] arrow-shape shadow-lg shadow-[#E30066]/20"></div>
-        <!-- Arrow 3: Cyan -->
-        <div class="w-full h-8 sm:h-12 md:h-16 lg:h-20 bg-[#008AD8] arrow-shape shadow-lg shadow-[#008AD8]/20"></div>
-      </div>
-
       <slot />
     </div>
   </div>
 </section>
-
-<style>
-  .arrow-shape {
-    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
-  }
-</style>
