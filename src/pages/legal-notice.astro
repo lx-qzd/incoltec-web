@@ -1,53 +1,35 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import LegalPage from '../components/LegalPage.astro';
+import { company, hqAddressLine } from '../data/company';
 ---
 
-<Layout title="Legal Notice">
-  <Header currentPath="/legal-notice" />
-  
-  <main class="container mx-auto px-4 sm:px-6 py-[clamp(3.5rem,7vw,6rem)] max-w-4xl text-gray-300">
-    <h1 class="font-heading text-[clamp(2.25rem,1.8rem+2.5vw,3.5rem)] font-light mb-8 text-white leading-tight">Legal Notice</h1>
-    
-    <div class="prose prose-invert max-w-none font-light leading-relaxed">
-      <p>Last updated: August 2026</p>
-      
-      <h2>1. General Information</h2>
-      <p>In compliance with the duty of information, the following data is reflected below:</p>
-      <ul>
-        <li><strong>Company Name:</strong> Incoltec</li>
-        <li><strong>Address:</strong> Av. Principal, Zona Industrial</li>
-        <li><strong>Email:</strong> info@incoltec.com</li>
-        <li><strong>Registration:</strong> Commercial Registry</li>
-      </ul>
-      
-      <h2>2. Intellectual Property</h2>
-      <p>The intellectual property rights of the website and the different elements contained therein are owned by Incoltec. The reproduction, distribution, and public communication of all or part of the contents of this webpage without authorization is expressly prohibited.</p>
+<LegalPage title="Legal notice" description="Identification details of the owner of the incoltec.com website and terms of use." heading="Legal notice" updated="Last updated: November 2026">
+  <h2>1. Company details</h2>
+  <p>In accordance with article 10 of Spanish Law 34/2002 on Information Society Services and Electronic Commerce (LSSI-CE), the owner of this website is:</p>
+  <ul>
+    <li><strong>Company name:</strong> {company.legalName} ("INCOLTEC")</li>
+    <li><strong>Tax ID (NIF):</strong> {company.taxId}</li>
+    <li><strong>Registered office:</strong> {hqAddressLine}, Spain</li>
+    <li><strong>Registry details:</strong> {company.registryEn}</li>
+    <li><strong>Phone:</strong> <a href={company.phoneHref}>{company.phone}</a></li>
+    <li><strong>Email:</strong> <a href={`mailto:${company.email}`}>{company.email}</a></li>
+  </ul>
 
-      <h2>3. Exclusion of Liability</h2>
-      <p>Incoltec is not responsible, in any case, for damages of any kind that may cause, by way of example: errors or omissions in the content, lack of availability of the portal or the transmission of viruses or malicious or harmful programs in the content, despite having adopted all the necessary technological measures to avoid it.</p>
-    </div>
-  </main>
+  <h2>2. Purpose and terms of use</h2>
+  <p>This website provides information about the company and its products and services for the food industry. By using it you accept these terms. Users agree to use the content appropriately and not for unlawful purposes or in bad faith.</p>
 
-  <Footer />
-</Layout>
+  <h2>3. Technical product information</h2>
+  <p>Product information is for guidance only. Binding specifications are those in the current technical data sheet, regulatory documentation and commercial offer for each product. Food manufacturers are responsible for checking that their final product complies with the regulations of their market.</p>
 
-<style>
-  h2 {
-    font-size: clamp(1.35rem, 1.15rem + 1vw, 1.8rem);
-    color: white;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 400;
-  }
-  p {
-    font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
-    margin-bottom: 1rem;
-  }
-  ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-</style>
+  <h2>4. Intellectual and industrial property</h2>
+  <p>The content of this website (text, images, design, logos and trademarks, including LINICOL) belongs to {company.legalName} or to third parties who have authorised its use. Reproduction, distribution or public communication without express permission is prohibited.</p>
+
+  <h2>5. Liability</h2>
+  <p>INCOLTEC is not liable for damage arising from errors or omissions in the content, from the website being unavailable or from viruses, despite having taken reasonable technical measures to prevent them. Links to third-party websites are provided for information only.</p>
+
+  <h2>6. Data protection and cookies</h2>
+  <p>Personal data is processed according to our <a href="/privacy-policy">Privacy policy</a>, and cookies according to our <a href="/cookie-policy">Cookie policy</a>.</p>
+
+  <h2>7. Governing law</h2>
+  <p>These terms are governed by Spanish law. Any dispute will be submitted to the courts that have jurisdiction under applicable law.</p>
+</LegalPage>

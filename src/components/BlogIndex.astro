@@ -1,0 +1,157 @@
+---
+import Hero from './Hero.astro';
+import { getCollection } from 'astro:content';
+import type { Lang } from '../i18n/routes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const isEs = lang === 'es';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const t = isEs
+  ? {
+      title: 'Blog técnico y novedades', sub: 'Innovación, cambios regulatorios y técnicas de aplicación del color en la industria alimentaria.',
+      note: 'Por ahora nuestros artículos técnicos se publican en inglés. Las versiones en español se añadirán progresivamente.',
+      read: 'Leer artículo (en inglés)', badge: 'EN', locale: 'es-ES',
+    }
+  : {
+      title: 'Technical insights and news', sub: 'Innovation, regulatory changes and colour application techniques for the food industry.',
+      note: '', read: 'Read article', badge: '', locale: 'en-GB',
+    };
+---
+
+<Hero title={t.title} subtitle={t.sub} backgroundImage="/assets/fondo2.jpg" />
+
+<main id="main" class="bg-[#F8FAFC]">
+  <div class="content-section container">
+    <div class="content">
+      {t.note && <p class="lang-note" role="note">{t.note}</p>}
+      <div class="features-grid">
+        {posts.map((post) => (
+          <article class="feature-card article-card" lang={isEs ? 'en' : undefined}>
+            <div class="article-meta">
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString(t.locale, { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <span class="meta-dot"></span>
+              <span>{post.data.author}</span>
+              {t.badge && <span class="lang-badge" lang="es">{t.badge}</span>}
+            </div>
+            <h2><a href={`/blog/${post.id}`} hreflang="en">{post.data.title}</a></h2>
+            <p class="article-summary">{post.data.summary}</p>
+            <div class="card-footer">
+              <a href={`/blog/${post.id}`} hreflang="en" class="read-btn text-cyan" lang={isEs ? 'es' : undefined}>
+                {t.read}<span class="sr-only">: {post.data.title}</span>
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</main>
+
+<style>
+  .lang-note { background: #fff7ed; border: 1px solid #fed7aa; color: #7c2d12; border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 2rem; font-size: 0.95rem; }
+  .lang-badge { margin-left: 0.5rem; font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.45rem; border-radius: 0.35rem; background: #e2e8f0; color: #334155; }
+  .article-card h2 { font-size: 1.3rem; line-height: 1.3; margin: 0.75rem 0; }
+  .content-section {
+    padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 3vw, 2rem);
+  }
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
+  }
+
+  .feature-card.article-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    container-type: inline-size;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .feature-card.article-card:hover {
+    transform: translateY(-5px);
+    background: #ffffff;
+    border-color: rgba(0, 138, 216, 0.3);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.06);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--c-dark);
+    opacity: 0.6;
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+
+  .meta-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--c-dark);
+  }
+
+  .feature-card h2 {
+    font-size: clamp(1.35rem, 1.15rem + 0.8vw, 1.8rem);
+    line-height: 1.3;
+    margin-bottom: 1.25rem;
+    color: var(--c-dark);
+    overflow-wrap: break-word;
+    transition: color 0.3s ease;
+  }
+  
+  .feature-card:hover h3 {
+    color: var(--c-cyan);
+  }
+
+  .article-summary {
+    color: var(--c-dark);
+    opacity: 0.8;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+    text-align: left;
+  }
+
+  .card-footer {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .read-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+  }
+
+  .read-btn svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card:hover .read-btn svg {
+    transform: translateX(5px);
+  }
+</style>

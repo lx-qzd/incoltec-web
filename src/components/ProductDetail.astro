@@ -1,0 +1,160 @@
+---
+import { render } from 'astro:content';
+import ContactForm from './ContactForm.astro';
+import { swatch, type LocalizedProduct } from '../data/products';
+import { contactUrl, localizePath, SITE_URL, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  product: LocalizedProduct;
+  related: LocalizedProduct[];
+}
+const { lang, product, related } = Astro.props;
+const { Content } = await render(product.entry);
+const isEs = lang === 'es';
+const L = (p: string) => localizePath(p, lang);
+const productsUrl = L('/products');
+const familyUrl = `${productsUrl}?category=${product.family}`;
+
+const t = isEs
+  ? {
+      home: 'Inicio', products: 'Productos', profile: 'Perfil técnico', shade: 'Tono / color', solubility: 'Solubilidad',
+      ph: 'Rango de pH', apps: 'Aplicaciones recomendadas', sample: 'Solicitar muestra', tds: 'Solicitar ficha técnica',
+      formTitle: 'Ficha técnica y muestras', formText: 'Indica qué necesitas y te enviaremos la ficha técnica, la documentación regulatoria o una muestra de este producto.',
+      related: 'Otros productos de la familia', view: 'Ver producto', crumbs: 'Ruta de navegación',
+    }
+  : {
+      home: 'Home', products: 'Products', profile: 'Technical profile', shade: 'Colour / shade', solubility: 'Solubility',
+      ph: 'pH range', apps: 'Recommended applications', sample: 'Request a sample', tds: 'Request data sheet',
+      formTitle: 'Data sheet and samples', formText: 'Tell us what you need and we will send the technical data sheet, regulatory documentation or a sample of this product.',
+      related: 'More from this family', view: 'View product', crumbs: 'Breadcrumb',
+    };
+---
+
+<main id="main" class="product-detail-page bg-[#F8FAFC]">
+  <div class="pd-header bg-white">
+    <div class="pd-container">
+      <nav aria-label={t.crumbs} class="breadcrumbs">
+        <ol>
+          <li><a href={L('/')}>{t.home}</a></li>
+          <li><a href={productsUrl}>{t.products}</a></li>
+          <li><a href={familyUrl}>{product.familyLabel}</a></li>
+          <li aria-current="page">{product.title}</li>
+        </ol>
+      </nav>
+
+      <div class="header-layout">
+        {product.image && (
+          <div class="product-hero-media">
+            <img src={product.image} alt={product.title} width="240" height="240" class="product-hero-img" decoding="async" />
+          </div>
+        )}
+        <div class="header-text">
+          <p class="family-tag">{product.familyLabel}</p>
+          <h1>{product.title}</h1>
+          <p class="subtitle">{product.description}</p>
+          <div class="actions">
+            <a href={contactUrl(lang, { reason: 'datasheet', product: product.title })} class="btn btn-primary">{t.tds}</a>
+            <a href={contactUrl(lang, { reason: 'sample', product: product.title })} class="btn btn-secondary">{t.sample}</a>
+          </div>
+        </div>
+
+        <div class="specs-card">
+          <h2>{t.profile}</h2>
+          <dl>
+            {product.color && (
+              <div><dt>{t.shade}</dt><dd class="color-indicator"><span class="color-dot" style={`background-color: ${swatch(product.color)}`}></span>{product.color}</dd></div>
+            )}
+            {product.solubility && <div><dt>{t.solubility}</dt><dd>{product.solubility}</dd></div>}
+            {product.phRange && <div><dt>{t.ph}</dt><dd>{product.phRange}</dd></div>}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pd-container pd-body">
+    <div class="main-content">
+      <div class="prose-content"><Content /></div>
+
+      <section class="applications-section" aria-labelledby="apps-title">
+        <h2 id="apps-title">{t.apps}</h2>
+        <ul class="apps-grid">
+          {product.applications.map((app) => <li class="app-badge">{app}</li>)}
+        </ul>
+      </section>
+
+      {related.length > 0 && (
+        <section class="related" aria-labelledby="related-title">
+          <h2 id="related-title">{t.related}</h2>
+          <ul class="related-grid">
+            {related.map((r) => (
+              <li>
+                <a href={L(`/products/${r.id}`)} class="related-card">
+                  {r.image && <img src={r.image} alt="" width="64" height="64" loading="lazy" decoding="async" />}
+                  <span>{r.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+
+    <aside class="sidebar" aria-labelledby="pd-form-title">
+      <div class="download-card">
+        <h2 id="pd-form-title">{t.formTitle}</h2>
+        <p>{t.formText}</p>
+        <ContactForm lang={lang} id="productForm" variant="light" compact product={product.title} reason="datasheet" />
+      </div>
+    </aside>
+  </div>
+</main>
+
+<style>
+  .pd-container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 1.5rem); }
+  .pd-header { padding: clamp(2rem, 5vw, 3.5rem) 0; border-bottom: 1px solid #e2e8f0; }
+  .breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; list-style: none; padding: 0; margin: 0 0 2rem; font-size: 0.85rem; color: #475569; }
+  .breadcrumbs li + li::before { content: '›'; margin-right: 0.5rem; opacity: 0.6; }
+  .breadcrumbs a:hover { color: var(--c-magenta); text-decoration: underline; }
+  .breadcrumbs [aria-current] { color: #1e1e1e; font-weight: 600; }
+  .header-layout { display: flex; flex-wrap: wrap; align-items: flex-start; gap: clamp(1.5rem, 3vw, 3rem); }
+  .product-hero-media { flex: 0 0 clamp(150px, 20vw, 240px); aspect-ratio: 1; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
+  .product-hero-img { width: 100%; height: 100%; object-fit: cover; }
+  .header-text { flex: 1 1 min(100%, 420px); }
+  .family-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #e30066; margin-bottom: 0.5rem; }
+  .header-text h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
+  .subtitle { font-size: clamp(1rem, 0.95rem + 0.3vw, 1.2rem); color: #334155; line-height: 1.6; font-weight: 300; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+  .btn { display: inline-flex; align-items: center; min-height: 46px; padding: 0.7rem 1.4rem; border-radius: 0.75rem; font-weight: 600; font-size: 0.95rem; }
+  .btn-primary { background: #e30066; color: #fff; }
+  .btn-primary:hover { background: #c20055; }
+  .btn-secondary { border: 1px solid #1e1e1e; color: #1e1e1e; }
+  .btn-secondary:hover { background: #1e1e1e; color: #fff; }
+  .specs-card { flex: 1 1 min(100%, 280px); background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; }
+  .specs-card h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+  .specs-card dl > div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.6rem 0; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+  .specs-card dl > div:last-child { border-bottom: 0; }
+  .specs-card dt { color: #64748b; }
+  .specs-card dd { font-weight: 600; text-align: right; }
+  .color-indicator { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .color-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); flex-shrink: 0; }
+  .pd-body { display: grid; gap: clamp(2rem, 4vw, 3rem); padding-top: clamp(2rem, 5vw, 3.5rem); padding-bottom: clamp(3rem, 6vw, 5rem); }
+  @media (min-width: 1024px) { .pd-body { grid-template-columns: minmax(0, 1.7fr) minmax(320px, 1fr); align-items: start; } .sidebar { position: sticky; top: 7rem; } }
+  .prose-content :global(p) { line-height: 1.75; margin-bottom: 1rem; color: #334155; }
+  .prose-content :global(h2) { font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.75rem; }
+  .prose-content :global(ul), .prose-content :global(ol) { padding-left: 1.25rem; margin-bottom: 1rem; color: #334155; line-height: 1.7; }
+  .prose-content :global(ul) { list-style: disc; }
+  .prose-content :global(ol) { list-style: decimal; }
+  .applications-section, .related { margin-top: 2.5rem; }
+  .applications-section h2, .related h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; }
+  .apps-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; }
+  .app-badge { padding: 0.45rem 0.9rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 999px; font-size: 0.85rem; }
+  .related-grid { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); list-style: none; padding: 0; }
+  .related-card { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 0.75rem; font-size: 0.9rem; font-weight: 600; }
+  .related-card:hover { border-color: #e30066; }
+  .related-card img { width: 48px; height: 48px; object-fit: cover; border-radius: 0.5rem; }
+  .download-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06); }
+  .download-card h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .download-card > p { font-size: 0.9rem; color: #475569; margin-bottom: 1.25rem; line-height: 1.5; }
+</style>

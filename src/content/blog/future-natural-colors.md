@@ -4,7 +4,7 @@ date: 2026-07-23
 summary: "As European regulations tighten around synthetic additives, we explore the most effective and stable natural alternatives for food manufacturers."
 ---
 
-With the European Food Safety Authority (EFSA) banning Titanium Dioxide (E171) and increasing scrutiny on artificial dyes like Red 40 (Allura Red) and Yellow 5 (Tartrazine), food manufacturers are facing unprecedented challenges in product formulation.
+With titanium dioxide (E171) no longer authorised as a food additive in the EU (Commission Regulation (EU) 2022/63, adopted after EFSA concluded in 2021 that it could no longer be considered safe) and increasing scrutiny on artificial dyes like Red 40 (Allura Red) and Yellow 5 (Tartrazine), food manufacturers are facing unprecedented challenges in product formulation.
 
 ## The Push for Clean Labels
 

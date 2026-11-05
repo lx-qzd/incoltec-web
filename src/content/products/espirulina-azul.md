@@ -24,6 +24,6 @@ El tono azul natural es uno de los mayores hitos tecnológicos de la industria d
 
 ## Ventajas Competitivas
 
-1. **Sin Azul Sintético:** Alternativa natural de máxima seguridad alimentaria.
+1. **Sin azul sintético:** alternativa natural a los azules de síntesis.
 2. **Proceso de Extracción Suave:** 100% libre de disolventes orgánicos.
 3. **Versatilidad de Mezclas:** Base idónea para crear pantones verdes, turquesas y violetas naturales.

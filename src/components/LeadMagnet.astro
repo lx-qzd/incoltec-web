@@ -1,225 +1,50 @@
 ---
-import PdfSection from "./PdfSection.astro";
-
 import { Image } from "astro:assets";
 import fondo1Webp from "../assets/fondo1.webp";
+import ContactForm from "./ContactForm.astro";
+import { getLang } from "../i18n/routes";
 
 interface Props {
   title?: string;
   description?: string;
   buttonText?: string;
-  placeholderName?: string;
-  placeholderEmail?: string;
-  placeholderCompany?: string;
-  privacyText?: string;
+  /** Preselected reason in the form (sample, datasheet, formulation, horeca…). */
+  reason?: string;
 }
 
-const { 
-  title = "Contact Us",
-  description = "Get comprehensive information about our natural color applications, specifications, and regulatory compliance for the B2B food industry.",
-  buttonText = "Submit",
-  placeholderName = "Your Name",
-  placeholderEmail = "Corporate Email",
-  placeholderCompany = "Company Name",
-  privacyText = "I agree to the Privacy Policy"
+const lang = getLang(Astro.url.pathname);
+const isEs = lang === "es";
+const {
+  title = isEs ? "Contacto" : "Contact us",
+  description = isEs
+    ? "Solicita muestras, fichas técnicas o soporte de formulación para tus aplicaciones."
+    : "Request samples, technical data sheets or formulation support for your applications.",
+  buttonText,
+  reason = "",
 } = Astro.props;
-
 ---
 
 <section id="contact" class="contact-hero-section relative min-h-[100dvh] flex items-center pt-24 sm:pt-28 pb-16 sm:pb-20 scroll-mt-24 overflow-hidden @container">
   <div class="absolute inset-0 z-0">
-    <Image 
-      src={fondo1Webp} 
-      alt="Background" 
-      class="w-full h-full object-cover" 
-      loading="lazy"
-      decoding="async"
-      width={1920}
-      height={1080}
-    />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"></div>
+    <Image src={fondo1Webp} alt="" class="w-full h-full object-cover" loading="lazy" decoding="async" width={1920} height={1080} />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/65 pointer-events-none"></div>
   </div>
 
   <div class="container relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6">
-    
-    <!-- Frosted Glassmorphism Container Card -->
-    <div class="glass-card-dark rounded-2xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl reveal-scale delay-100 @container">
-      
+    <div class="glass-card-dark rounded-2xl p-6 sm:p-10 md:p-12 border border-white/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-2xl">
       <div class="w-full text-center mb-8">
-        <div class="mb-3">
-          <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold">
-            Get in Touch
-          </span>
-        </div>
-        <h2 class="font-heading fluid-h1 text-white font-normal mb-3 leading-tight">
-          {title}
-        </h2>
-
+        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold">
+          {isEs ? "Hablemos" : "Get in touch"}
+        </span>
+        <h2 class="font-heading fluid-h1 text-white font-normal mt-3 mb-3 leading-tight">{title}</h2>
         {description && <p class="font-verdana text-white/90 text-sm sm:text-base md:text-lg font-light max-w-2xl mx-auto leading-relaxed">{description}</p>}
       </div>
-
-      <div class="contact-form-container w-full">
-        <form class="contact-form" id="leadMagnetForm" action="#" method="POST" onsubmit="event.preventDefault(); alert('Form submitted!');">
-          <!-- Anti-spam Honeypot -->
-          <div style="display:none;">
-            <label for="bot_field_lead">Leave this empty:</label>
-            <input type="text" id="bot_field_lead" name="bot_field" />
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <input type="text" id="lm_name" name="name" required placeholder={placeholderName} />
-            </div>
-            <div class="form-group">
-              <input type="email" id="lm_email" name="email" required placeholder={placeholderEmail} />
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <input type="text" id="lm_company" name="company" placeholder={placeholderCompany} />
-          </div>
-          
-          <div class="form-group">
-            <textarea id="lm_message" name="message" rows="4" required placeholder="HOW CAN WE HELP"></textarea>
-          </div>
-
-          <div class="form-checkbox">
-            <input type="checkbox" id="lm_privacy" name="privacy" required />
-            <label for="lm_privacy">{privacyText}</label>
-          </div>
-
-          <div class="form-checkbox">
-            <input type="checkbox" id="lm_commercial" name="commercial" />
-            <label for="lm_commercial">I WOULD LIKE TO RECEIVE COMMERCIAL COMMUNICATIONS</label>
-          </div>
-
-          <div class="submit-container flex justify-center sm:justify-end mt-6">
-            <button type="submit" class="submit-btn" id="lm_submitBtn">{buttonText}</button>
-          </div>
-        </form>
-      </div>
-
+      <ContactForm lang={lang} id="leadForm" variant="dark" reason={reason} submitLabel={buttonText} />
     </div>
   </div>
 </section>
 
-
 <style>
-  .contact-hero-section {
-    overflow: hidden;
-  }
-
-  .contact-form-container {
-    container-type: inline-size;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 1rem 1.2rem;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--c-white);
-    border-radius: 12px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    letter-spacing: 0.05em;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-
-  .form-group input::placeholder,
-  .form-group textarea::placeholder {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-
-  .form-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 1rem;
-  }
-
-  .form-checkbox input[type="checkbox"] {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    position: relative;
-    display: grid;
-    place-content: center;
-  }
-
-  .form-checkbox input[type="checkbox"]::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em white;
-    background-color: white;
-    transform-origin: center;
-    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-  }
-
-  .form-checkbox input[type="checkbox"]:checked::before {
-    transform: scale(1);
-  }
-
-  .form-checkbox label {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.9);
-    letter-spacing: 0.05em;
-    cursor: pointer;
-  }
-
-  .submit-btn {
-    background: linear-gradient(135deg, var(--c-magenta, #E30066) 0%, #FF1A75 100%);
-    color: var(--c-white);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 0.85rem 2.75rem;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    border-radius: 0.85rem;
-    box-shadow: 0 4px 15px rgba(227, 0, 102, 0.4);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-  }
-
-  .submit-btn:hover {
-    background: linear-gradient(135deg, #c20055 0%, #E30066 100%);
-    border-color: rgba(255, 255, 255, 0.7);
-    box-shadow: 0 6px 22px rgba(227, 0, 102, 0.6);
-    transform: translateY(-2px);
-  }
-
-  @media (max-width: 768px) {
-    .contact-hero-section {
-      padding-top: 7rem;
-    }
-  }
+  .contact-hero-section { overflow: hidden; }
+  @media (max-width: 768px) { .contact-hero-section { padding-top: 7rem; } }
 </style>

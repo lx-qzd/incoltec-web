@@ -16,6 +16,19 @@ const productsCollection = defineCollection({
   }),
 });
 
+// English translations of the product sheets. Same file name (id) as the
+// Spanish entry in ./products; technical fields not listed here are shared.
+const productsEnCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/products-en" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    applications: z.array(z.string()),
+    color: z.string().optional(),
+    solubility: z.string().optional(),
+  }),
+});
+
 const blogCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
   schema: z.object({
@@ -29,5 +42,6 @@ const blogCollection = defineCollection({
 
 export const collections = {
   'products': productsCollection,
+  'products-en': productsEnCollection,
   'blog': blogCollection,
 };

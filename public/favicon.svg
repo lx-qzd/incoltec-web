@@ -1,9 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
-    <path d="M50.4 78.5a75.1 75.1 0 0 0-28.5 6.9l24.2-65.7c.7-2 1.9-3.2 3.4-3.2h29c1.5 0 2.7 1.2 3.4 3.2l24.2 65.7s-11.6-7-28.5-7L67 45.5c-.4-1.7-1.6-2.8-2.9-2.8-1.3 0-2.5 1.1-2.9 2.7L50.4 78.5Zm-1.1 28.2Zm-4.2-20.2c-2 6.6-.6 15.8 4.2 20.2a17.5 17.5 0 0 1 .2-.7 5.5 5.5 0 0 1 5.7-4.5c2.8.1 4.3 1.5 4.7 4.7.2 1.1.2 2.3.2 3.5v.4c0 2.7.7 5.2 2.2 7.4a13 13 0 0 0 5.7 4.9v-.3l-.2-.3c-1.8-5.6-.5-9.5 4.4-12.8l1.5-1a73 73 0 0 0 3.2-2.2 16 16 0 0 0 6.8-11.4c.3-2 .1-4-.6-6l-.8.6-1.6 1a37 37 0 0 1-22.4 2.7c-5-.7-9.7-2-13.2-6.2Z" />
-    <style>
-        path { fill: #000; }
-        @media (prefers-color-scheme: dark) {
-            path { fill: #FFF; }
-        }
-    </style>
+<svg 
+  viewBox="883 17 62 76" 
+  fill="none" 
+  xmlns="http://www.w3.org/2000/svg"
+  
+>
+  <defs>
+    
+    <linearGradient id="e-brand-cyan" x1="883.8" y1="81.9" x2="944.44" y2="81.9" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2b3990"/>
+      <stop offset="0.15" stop-color="#274297"/>
+      <stop offset="0.4" stop-color="#1e5bac"/>
+      <stop offset="0.72" stop-color="#0f84cd"/>
+      <stop offset="1" stop-color="#00aeef"/>
+    </linearGradient>
+
+    
+    <linearGradient id="e-brand-magenta" x1="883.8" y1="54.83" x2="944.27" y2="54.83" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ee4488"/>
+      <stop offset="0.24" stop-color="#ec4284"/>
+      <stop offset="0.44" stop-color="#e63e7a"/>
+      <stop offset="0.63" stop-color="#dd3769"/>
+      <stop offset="0.81" stop-color="#d02c50"/>
+      <stop offset="0.98" stop-color="#c01f31"/>
+      <stop offset="1" stop-color="#be1e2d"/>
+    </linearGradient>
+
+    
+    <linearGradient id="e-brand-yellow" x1="883.8" y1="27.77" x2="944.52" y2="27.77" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f78c1f"/>
+      <stop offset="0.14" stop-color="#f7901f"/>
+      <stop offset="0.29" stop-color="#f79c22"/>
+      <stop offset="0.43" stop-color="#f7b026"/>
+      <stop offset="0.58" stop-color="#f8cc2b"/>
+      <stop offset="0.71" stop-color="#f9ed32"/>
+      <stop offset="1" stop-color="#f9ed32"/>
+    </linearGradient>
+  </defs>
+
+  
+  <path fill="url(#e-brand-yellow)" d="M921.17,17.31h-36.07c-.72,0-1.31.59-1.31,1.31v18.31c0,.72.59,1.31,1.31,1.31h59.16c.09,0,.17-.03.25-.05l-23.34-20.87Z"/>
+
+  
+  <path fill="url(#e-brand-magenta)" d="M920.81,44.37h-35.71c-.72,0-1.31.59-1.31,1.31v18.31c0,.72.59,1.31,1.31,1.31h59.16s0,0,0,0l-23.46-20.92Z"/>
+
+  
+  <path fill="url(#e-brand-cyan)" d="M920.95,71.44h-35.84c-.72,0-1.31.59-1.31,1.31v18.31c0,.72.59,1.31,1.31,1.31h59.16c.06,0,.11-.03.17-.03l-23.49-20.89Z"/>
 </svg>

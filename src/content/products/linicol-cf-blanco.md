@@ -1,7 +1,7 @@
 ---
-title: "Linicol CF Blanco (Sustituto E171)"
-description: "Alternativa natural y segura al Dióxido de Titanio (E171). Proporciona excelente opacidad y blancura sin los riesgos regulatorios."
-category: "Linicol CF"
+title: "LINICOL CF Blanco (alternativa al E171)"
+description: "Alternativa al dióxido de titanio (E171). Proporciona excelente opacidad y blancura para formulaciones que deben cumplir la normativa europea vigente."
+category: "Alimentos Colorantes"
 applications:
   - Confitería
   - Panadería
@@ -13,7 +13,7 @@ pdfLink: "/downloads/linicol-blanco-ficha-tecnica.pdf"
 image: "/assets/products/colouring-foods/chewing-gum-2021-08-26-18-17-24-utc-1.webp"
 ---
 
-Tras la prohibición del Dióxido de Titanio (E171) como aditivo alimentario en la Unión Europea, **Linicol CF Blanco** se posiciona como la solución definitiva. Basado en almidones modificados y carbonato cálcico, ofrece un efecto blanqueador y opacificante excepcional.
+Desde que el dióxido de titanio (E171) dejó de estar autorizado como aditivo alimentario en la Unión Europea (Reglamento (UE) 2022/63, tras la evaluación de seguridad de la EFSA), **LINICOL CF Blanco** ofrece una alternativa práctica. Basado en almidones y carbonato cálcico, ofrece un efecto blanqueador y opacificante excepcional.
 
 ## Aplicaciones Principales
 
@@ -23,6 +23,6 @@ Tras la prohibición del Dióxido de Titanio (E171) como aditivo alimentario en 
 
 ## Ventajas Competitivas
 
-1. **100% Legal y Seguro:** Totalmente compatible con la normativa europea post-E171.
+1. **Encaje regulatorio:** diseñado para formulaciones que deben cumplir la normativa europea tras la retirada del E171.
 2. **Alta Capacidad de Opacidad:** Diseñado para igualar la reflectancia de la luz del dióxido de titanio.
 3. **Estabilidad Térmica:** Soporta procesos de horneado y cocción sin amarillear.

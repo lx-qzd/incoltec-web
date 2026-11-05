@@ -1,7 +1,7 @@
 ---
 title: "Premixes Vitamínicos y Micronutrientes"
 description: "Premezclas a medida para la fortificación y enriquecimiento nutricional de alimentos y bebidas. Vitaminas A, D, C, complejo B y minerales con vehículo cromático homogéneo."
-category: "Premixes"
+category: "Vitaminas y Premixes"
 applications:
   - Bebidas Funcionales y Energéticas
   - Cereales de Desayuno

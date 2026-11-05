@@ -3,9 +3,9 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
-import node from "@astrojs/node";
-
 import vercel from "@astrojs/vercel";
+
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -29,6 +29,19 @@ export default defineConfig({
     '/es/compromiso-de-calidad': '/es/our-company#quality',
     '/organizacion': '/es/our-company#organization',
     '/es/organizacion': '/es/our-company#organization',
+    // Former pages named after creative slogans (now sections / clear menu labels)
+    '/vibrant-life': '/our-company#quality',
+    '/es/vibrant-life': '/es/our-company#quality',
+    '/taste-colors': '/products',
+    '/es/taste-colors': '/es/products',
+    '/perfecting-food': '/color-solutions',
+    '/es/perfecting-food': '/es/color-solutions',
+    '/es/soluciones-de-color': '/es/color-solutions',
+    // Old incoltec.com URLs
+    '/contacto': '/es/contact',
+    '/aviso-legal': '/es/legal-notice',
+    '/politica-de-proteccion-de-datos': '/es/privacy-policy',
+    '/politica-de-cookies': '/es/cookie-policy',
   },
   i18n: {
     defaultLocale: "en",
@@ -37,6 +50,14 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
+
+  integrations: [
+    sitemap({
+      // Only real pages; API routes and redirects are excluded automatically.
+      i18n: { defaultLocale: 'en', locales: { en: 'en', es: 'es' } },
+      filter: (page) => !page.includes('/api/'),
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss()]

@@ -1,60 +1,37 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import LegalPage from '../../components/LegalPage.astro';
+import { company, hqAddressLine } from '../../data/company';
 ---
 
-<Layout title="Política de Privacidad">
-  <Header currentPath="/privacy-policy" />
-  
-  <main class="container mx-auto px-4 sm:px-6 py-[clamp(3.5rem,7vw,6rem)] max-w-4xl text-gray-300">
-    <h1 class="font-heading text-[clamp(2.25rem,1.8rem+2.5vw,3.5rem)] font-light mb-8 text-white leading-tight">Política de Privacidad</h1>
-    
-    <div class="prose prose-invert max-w-none font-light leading-relaxed">
-      <p>Última actualización: Agosto 2026</p>
-      
-      <h2>1. Introducción</h2>
-      <p>Bienvenido a Incoltec. Respetamos su privacidad y estamos comprometidos a proteger sus datos personales. Esta política de privacidad le informará sobre cómo cuidamos sus datos personales cuando visita nuestro sitio web.</p>
-      
-      <h2>2. Datos que Recopilamos</h2>
-      <p>Podemos recopilar, usar, almacenar y transferir diferentes tipos de datos personales sobre usted, que incluyen:</p>
-      <ul>
-        <li><strong>Datos de Identidad</strong> incluye nombre, apellido o un identificador similar.</li>
-        <li><strong>Datos de Contacto</strong> incluye dirección de correo electrónico y números de teléfono.</li>
-        <li><strong>Datos Técnicos</strong> incluye dirección de protocolo de internet (IP), tipo y versión del navegador, configuración de zona horaria y ubicación.</li>
-      </ul>
+<LegalPage title="Política de privacidad" description="Cómo trata Incoltec los datos personales que recoge a través de su sitio web." heading="Política de privacidad" updated="Última actualización: noviembre de 2026">
+  <h2>1. Responsable del tratamiento</h2>
+  <ul>
+    <li><strong>Responsable:</strong> {company.legalName} (INCOLTEC), NIF {company.taxId}</li>
+    <li><strong>Dirección:</strong> {hqAddressLine}, España</li>
+    <li><strong>Contacto para privacidad:</strong> <a href={`mailto:${company.email}`}>{company.email}</a> · {company.phone}</li>
+  </ul>
 
-      <h2>3. Cómo Usamos Sus Datos</h2>
-      <p>Solo usaremos sus datos personales cuando la ley nos lo permita. Lo más común es que usemos sus datos personales en las siguientes circunstancias:</p>
-      <ul>
-        <li>Cuando necesitemos ejecutar el contrato que estamos a punto de celebrar o hemos celebrado con usted.</li>
-        <li>Cuando sea necesario para nuestros intereses legítimos (o los de un tercero) y sus intereses y derechos fundamentales no prevalezcan sobre esos intereses.</li>
-        <li>Cuando necesitemos cumplir con una obligación legal.</li>
-      </ul>
+  <h2>2. Qué datos tratamos, para qué y con qué base jurídica</h2>
+  <table>
+    <thead><tr><th>Tratamiento</th><th>Datos</th><th>Finalidad</th><th>Base jurídica</th><th>Conservación</th></tr></thead>
+    <tbody>
+      <tr><td>Formulario de contacto, muestras y fichas técnicas</td><td>Nombre, email, empresa, teléfono (opcional), país, producto y mensaje; idioma y página de origen</td><td>Responder a tu consulta y gestionar el envío de documentación o muestras</td><td>Tu consentimiento (art. 6.1.a RGPD) y medidas precontractuales a tu solicitud (art. 6.1.b)</td><td>El tiempo necesario para atender la consulta y, después, un máximo de 2 años o los plazos legales aplicables</td></tr>
+      <tr><td>Comunicaciones comerciales</td><td>Nombre, email y empresa</td><td>Enviarte información sobre productos, novedades y eventos</td><td>Tu consentimiento, que se pide en una casilla separada y no marcada</td><td>Hasta que retires el consentimiento</td></tr>
+      <tr><td>Boletín (newsletter)</td><td>Email</td><td>Enviarte el boletín de noticias</td><td>Tu consentimiento</td><td>Hasta que te des de baja</td></tr>
+      <tr><td>Analítica web (solo si la aceptas)</td><td>Datos de navegación seudonimizados</td><td>Conocer el uso del sitio para mejorarlo</td><td>Tu consentimiento a través del panel de cookies</td><td>Según la <a href="/es/cookie-policy">Política de cookies</a></td></tr>
+    </tbody>
+  </table>
+  <p>Los campos marcados como obligatorios son necesarios para atender tu solicitud. No tomamos decisiones automatizadas ni elaboramos perfiles con efectos jurídicos.</p>
 
-      <h2>4. Contáctenos</h2>
-      <p>Si tiene alguna pregunta sobre esta política de privacidad o nuestras prácticas de privacidad, contáctenos en info@incoltec.com.</p>
-    </div>
-  </main>
+  <h2>3. Destinatarios y encargados del tratamiento</h2>
+  <p>No cedemos tus datos a terceros salvo obligación legal. Para prestar el servicio contamos con proveedores que actúan como encargados del tratamiento con contrato conforme al art. 28 RGPD: alojamiento web (Vercel Inc.), servicio de correo electrónico corporativo y, si está activado, la herramienta de analítica y la de protección antispam del formulario.</p>
 
-  <Footer />
-</Layout>
+  <h2>4. Transferencias internacionales</h2>
+  <p>Algunos proveedores, como Vercel Inc., pueden tratar datos fuera del Espacio Económico Europeo. En esos casos las transferencias se amparan en el Marco de Privacidad de Datos UE-EE. UU. o en las cláusulas contractuales tipo aprobadas por la Comisión Europea.</p>
 
-<style>
-  h2 {
-    font-size: clamp(1.35rem, 1.15rem + 1vw, 1.8rem);
-    color: white;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 400;
-  }
-  p {
-    font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
-    margin-bottom: 1rem;
-  }
-  ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-</style>
+  <h2>5. Tus derechos</h2>
+  <p>Puedes ejercer los derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad, así como retirar tu consentimiento en cualquier momento, escribiendo a <a href={`mailto:${company.email}`}>{company.email}</a> e indicando el derecho que deseas ejercer. Si consideras que no hemos atendido correctamente tu solicitud, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>).</p>
+
+  <h2>6. Seguridad</h2>
+  <p>Aplicamos medidas técnicas y organizativas adecuadas para proteger tus datos, como el cifrado de las comunicaciones (HTTPS) y el acceso restringido a la información.</p>
+</LegalPage>

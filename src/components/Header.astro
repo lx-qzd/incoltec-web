@@ -1,199 +1,101 @@
 ---
 import { Astronav, MenuItems, MenuIcon, DropdownItems } from "astro-navbar";
 import { Image } from "astro:assets";
-import logoIncoltec from "../assets/LogoIncoltec.png";
+// Wordmark without the "Shaping the future of food appeal" tagline, which was
+// unreadable at header size (~4px tall).
+import logoIncoltec from "../assets/LogoIncoltec-wordmark.png";
+import { getAlternates, getLang, localizePath, normalizePath } from "../i18n/routes";
 
-const { currentPath = "/" } = Astro.props;
-const pathname = Astro.url.pathname;
-const isEs = pathname.startsWith("/es") || Astro.currentLocale === "es";
+// `currentPath` is accepted for backwards compatibility but no longer needed.
+interface Props { currentPath?: string }
 
-let enPath = pathname;
-let esPath = pathname;
-if (isEs) {
-  enPath = pathname.replace(/^\/es(\/|$)/, '$1') || '/';
-  esPath = pathname;
-} else {
-  enPath = pathname;
-  esPath = pathname === '/' ? '/es' : `/es${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
-}
+const pathname = normalizePath(Astro.url.pathname);
+const lang = getLang(pathname);
+const isEs = lang === "es";
+const alt = getAlternates(pathname);
+const L = (p: string) => localizePath(p, lang);
 
+interface Sublink { name: string; url: string }
+interface NavLink { name: string; url: string; match: string; dropdown?: Sublink[] }
 
-interface Sublink {
-  name: string;
-  url: string;
-}
+const t = isEs
+  ? {
+      products: "Productos", all: "Todos los productos", natural: "Colorantes naturales",
+      colouring: "Alimentos colorantes (LINICOL)", vitamins: "Vitaminas y premixes",
+      sectors: "Soluciones por sector", quality: "Calidad e I+D", qualityCommit: "Calidad y seguridad alimentaria",
+      lab: "Laboratorio y producción", company: "Empresa", about: "Quiénes somos", org: "Organización",
+      resources: "Recursos", catalogs: "Catálogos", blog: "Blog", contact: "Contacto",
+      home: "Incoltec – inicio", toggle: (n: string) => `Mostrar submenú ${n}`,
+      langNote: "Este artículo solo está disponible en inglés",
+    }
+  : {
+      products: "Products", all: "All products", natural: "Natural colours",
+      colouring: "Colouring foods (LINICOL)", vitamins: "Vitamins and premixes",
+      sectors: "Solutions by sector", quality: "Quality & R&D", qualityCommit: "Quality and food safety",
+      lab: "Laboratory and production", company: "Company", about: "About us", org: "Organisation",
+      resources: "Resources", catalogs: "Catalogues", blog: "Blog", contact: "Contact",
+      home: "Incoltec – home", toggle: (n: string) => `Show ${n} submenu`,
+      langNote: "",
+    };
 
-interface NavLink {
-  name: string;
-  url: string;
-  dropdown?: Sublink[];
-}
-
-const enLinks: NavLink[] = [
+const links: NavLink[] = [
   {
-    name: "Products",
-    url: "/products",
+    name: t.products, url: L("/products"), match: "/products",
     dropdown: [
-      { name: "All Products", url: "/products" },
-      { name: "Natural Colors", url: "/#colorantes-naturales" },
-      { name: "Coloring Foods", url: "/#alimentos-colorantes" },
-      { name: "Vitamins and Pre Mixes", url: "/#vitaminas-premixes" },
+      { name: t.all, url: L("/products") },
+      { name: t.natural, url: `${L("/products")}?category=natural-colours` },
+      { name: t.colouring, url: `${L("/products")}?category=colouring-foods` },
+      { name: t.vitamins, url: `${L("/products")}?category=vitamins-premixes` },
+    ],
+  },
+  { name: t.sectors, url: L("/color-solutions"), match: "/color-solutions" },
+  { name: "HORECA", url: L("/horeca"), match: "/horeca" },
+  {
+    name: t.quality, url: `${L("/our-company")}#quality`, match: "#quality",
+    dropdown: [
+      { name: t.qualityCommit, url: `${L("/our-company")}#quality` },
+      { name: t.lab, url: `${L("/our-company")}#laboratory` },
     ],
   },
   {
-    name: "Colour Solutions",
-    url: "/color-solutions",
+    name: t.company, url: L("/our-company"), match: "/our-company",
     dropdown: [
-      { name: "All Applications", url: "/color-solutions#main-applications" },
-      { name: "Bakery & Doughs", url: "/color-solutions#main-applications" },
-      { name: "Beverages & Juices", url: "/color-solutions#main-applications" },
-      { name: "Dairy & Ice Cream", url: "/color-solutions#main-applications" },
-      { name: "Savory & Meat", url: "/color-solutions#main-applications" },
+      { name: t.about, url: `${L("/our-company")}#about` },
+      { name: t.org, url: `${L("/our-company")}#organization` },
     ],
   },
   {
-    name: "Vibrant Life",
-    url: "/#vibrant-life",
+    name: t.resources, url: L("/catalogs"), match: "/catalogs|/blog",
     dropdown: [
-      { name: "Commitment", url: "/#compromiso" },
-      { name: "Quality", url: "/#calidad" },
+      { name: t.catalogs, url: L("/catalogs") },
+      { name: t.blog, url: L("/blog") },
     ],
   },
-  {
-    name: "Taste Colors",
-    url: "/#taste-colors",
-    dropdown: [
-      {
-        name: "Natural Colors",
-        url: "/#colorantes-naturales",
-      },
-      {
-        name: "Coloring Foods",
-        url: "/#alimentos-colorantes",
-      },
-      {
-        name: "Vitamins and Pre Mixes",
-        url: "/#vitaminas-premixes",
-      },
-    ],
-  },
-  {
-    name: "Perfecting Food",
-    url: "/#perfecting-food",
-    dropdown: [
-      { name: "Solutions", url: "/color-solutions" },
-      { name: "Innovation", url: "/#innovacion" },
-    ],
-  },
-  {
-    name: "About Incoltec",
-    url: "/our-company",
-    dropdown: [
-      { name: "About the company", url: "/our-company#about" },
-      { name: "Laboratory and production", url: "/our-company#laboratory" },
-      { name: "Quality commitment", url: "/our-company#quality" },
-      { name: "Organization", url: "/our-company#organization" },
-    ],
-  },
-  { name: "Catalogs", url: "/catalogs" },
-  { name: "Blog", url: "/blog" },
 ];
 
-const esLinks: NavLink[] = [
-  {
-    name: "Productos",
-    url: "/es/products",
-    dropdown: [
-      { name: "Todos los Productos", url: "/es/products" },
-      { name: "Colorantes Naturales", url: "/es/#colorantes-naturales" },
-      { name: "Alimentos Colorantes", url: "/es/#alimentos-colorantes" },
-      { name: "Vitaminas y Pre Mixes", url: "/es/#vitaminas-premixes" },
-    ],
-  },
-  {
-    name: "Soluciones de Color",
-    url: "/es/color-solutions",
-    dropdown: [
-      { name: "Todas las Aplicaciones", url: "/es/color-solutions#main-applications" },
-      { name: "Panadería y Masas", url: "/es/color-solutions#main-applications" },
-      { name: "Bebidas y Zumos", url: "/es/color-solutions#main-applications" },
-      { name: "Lácteos y Helados", url: "/es/color-solutions#main-applications" },
-      { name: "Cárnicos y Salados", url: "/es/color-solutions#main-applications" },
-    ],
-  },
-  {
-    name: "Vida Vibrante",
-    url: "/es/#vibrant-life",
-    dropdown: [
-      { name: "Compromiso", url: "/es/#compromiso" },
-      { name: "Calidad", url: "/es/#calidad" },
-    ],
-  },
-  {
-    name: "Saborea los Colores",
-    url: "/es/#taste-colors",
-    dropdown: [
-      {
-        name: "Colorantes Naturales",
-        url: "/es/#colorantes-naturales",
-      },
-      {
-        name: "Alimentos Colorantes",
-        url: "/es/#alimentos-colorantes",
-      },
-      {
-        name: "Vitaminas y Pre Mixes",
-        url: "/es/#vitaminas-premixes",
-      },
-    ],
-  },
-  {
-    name: "Perfeccionando Alimentos",
-    url: "/es/#perfecting-food",
-    dropdown: [
-      { name: "Soluciones", url: "/es/color-solutions" },
-      { name: "Innovación", url: "/es/#innovacion" },
-    ],
-  },
-  {
-    name: "Sobre Incoltec",
-    url: "/es/our-company",
-    dropdown: [
-      { name: "Sobre la empresa", url: "/es/our-company#about" },
-      { name: "Laboratorio y producción", url: "/es/our-company#laboratory" },
-      { name: "Compromiso de calidad", url: "/es/our-company#quality" },
-      { name: "Organización", url: "/es/our-company#organization" },
-    ],
-  },
-  { name: "Catálogos", url: "/es/catalogs" },
-  { name: "Blog", url: "/es/blog" },
-];
-
-const links = isEs ? esLinks : enLinks;
-
-// HORECA/INDUSTRIAL tab state
-const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUSTRIAL";
+const base = pathname.replace(/^\/es(?=\/|$)/, "") || "/";
+const isCurrent = (link: NavLink) =>
+  !link.match.startsWith("#") && link.match.split("|").some((m) => base === m || base.startsWith(`${m}/`));
+const contactHref = L("/contact");
+// When the Spanish version is only a fallback (EN-only article), say so on the switcher.
+const esTitle = alt.translated ? "Español" : "Español – este contenido solo está disponible en inglés";
 ---
 
 <header class="incoltec-header" id="site-header" data-scrolled="false">
   <div class="incoltec-header__shell">
-    <nav class="incoltec-header__nav" aria-label="Primary">
-      <!-- Logo -->
-      <a href={isEs ? "/es" : "/"} class="incoltec-header__logo" aria-label="Incoltec Home">
-        <span class="sr-only">Incoltec Home</span>
+    <nav class="incoltec-header__nav" aria-label={isEs ? "Principal" : "Primary"}>
+      <a href={L("/")} class="incoltec-header__logo" aria-label={t.home}>
         <Image
           src={logoIncoltec}
           alt="Incoltec"
           class="incoltec-header__logo-img"
           width={220}
-          height={50}
+          height={44}
           loading="eager"
           decoding="async"
         />
       </a>
 
-
-      <!-- Navigation Links -->
       <Astronav closeOnClick>
         <div class="incoltec-header__mobile-toggle">
           <MenuIcon class="incoltec-header__hamburger-svg" />
@@ -201,140 +103,68 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
 
         <MenuItems class="hidden lg:flex incoltec-header__links-wrap">
           <ul class="incoltec-header__links">
-            {
-              links.map((link) => (
-                <li class="incoltec-header__link-item">
-                  {link.dropdown ? (
-                    <div class="astronav-dropdown group relative">
-                      <div class="incoltec-header__link-row flex items-center justify-between">
-                        <a
-                          href={link.url}
-                          class="incoltec-header__link"
-                          aria-label={link.name}
-                        >
-                          <span>{link.name}</span>
-                        </a>
-                        <button
-                          type="button"
-                          aria-label={`Toggle ${link.name} submenu`}
-                          class="incoltec-header__chevron-btn p-1 text-[#666] hover:text-[#1e1e1e]"
-                        >
-                          <svg
-                            class="incoltec-header__chevron"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            aria-hidden="true"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                      <DropdownItems class="incoltec-header__dropdown">
-                        <div class="incoltec-header__dropdown-panel">
-                          <ul class="incoltec-header__dropdown-list">
-                            {link.dropdown.map((sublink) => (
-                              <li>
-                                <a
-                                  href={sublink.url}
-                                  class="incoltec-header__dropdown-link"
-                                  aria-label={sublink.name}
-                                >
-                                  {sublink.name}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </DropdownItems>
+            {links.map((link) => (
+              <li class="incoltec-header__link-item">
+                {link.dropdown ? (
+                  <div class="astronav-dropdown group relative">
+                    <div class="incoltec-header__link-row flex items-center justify-between">
+                      <a href={link.url} class="incoltec-header__link" aria-current={isCurrent(link) ? "page" : undefined}>
+                        <span>{link.name}</span>
+                      </a>
+                      <button
+                        type="button"
+                        aria-label={t.toggle(link.name)}
+                        aria-haspopup="true"
+                        class="incoltec-header__chevron-btn p-1 text-[#666] hover:text-[#1e1e1e]"
+                      >
+                        <svg class="incoltec-header__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                      </button>
                     </div>
-                  ) : (
-                    <a
-                      href={link.url}
-                      class={`incoltec-header__link ${
-                        link.url.includes("#contact") ? "incoltec-header__link--contact" : ""
-                      }`}
-                      aria-label={link.name}
-                    >
-                      {link.name}
-                    </a>
-                  )}
-                </li>
-              ))
-            }
+                    <DropdownItems class="incoltec-header__dropdown">
+                      <div class="incoltec-header__dropdown-panel">
+                        <ul class="incoltec-header__dropdown-list">
+                          {link.dropdown.map((sublink) => (
+                            <li><a href={sublink.url} class="incoltec-header__dropdown-link">{sublink.name}</a></li>
+                          ))}
+                        </ul>
+                      </div>
+                    </DropdownItems>
+                  </div>
+                ) : (
+                  <a
+                    href={link.url}
+                    class={`incoltec-header__link ${link.name === "HORECA" ? "incoltec-header__link--horeca" : ""}`}
+                    aria-current={isCurrent(link) ? "page" : undefined}
+                  >
+                    {link.name}
+                  </a>
+                )}
+              </li>
+            ))}
           </ul>
 
-          <!-- Mobile-only language switcher & actions -->
           <div class="incoltec-header__mobile-actions">
-            <a href={isEs ? "/es/#contact" : "/#contact"} class="incoltec-header__cta w-full text-center mb-4" aria-label={isEs ? "Contáctanos" : "Get in Touch"}>
-              {isEs ? "Contáctanos" : "Get in Touch"}
-            </a>
+            <a href={contactHref} class="incoltec-header__cta w-full text-center mb-4">{t.contact}</a>
             <div class="incoltec-header__mobile-lang">
-              <a
-                href={enPath}
-                class={`incoltec-header__lang-link ${!isEs ? "is-active" : ""}`}
-                aria-label="English"
-                >EN</a
-              >
-              <span class="incoltec-header__lang-sep">|</span>
-              <a
-                href={esPath}
-                class={`incoltec-header__lang-link ${isEs ? "is-active" : ""}`}
-                aria-label="Español"
-                >ES</a
-              >
+              <a href={alt.en} hreflang="en" lang="en" class={`incoltec-header__lang-link ${!isEs ? "is-active" : ""}`} aria-current={!isEs ? "true" : undefined} title="English">EN</a>
+              <span class="incoltec-header__lang-sep" aria-hidden="true">|</span>
+              <a href={alt.es} hreflang="es" lang="es" class={`incoltec-header__lang-link ${isEs ? "is-active" : ""}`} aria-current={isEs ? "true" : undefined} title={esTitle}>ES</a>
             </div>
           </div>
         </MenuItems>
       </Astronav>
 
-      <!-- Desktop Actions (right side) -->
       <div class="incoltec-header__actions">
-        <div class="incoltec-header__lang-switch">
-          <a
-            href={enPath}
-            class={`incoltec-header__lang-link ${!isEs ? "is-active" : ""}`}
-            aria-label="English"
-            >EN</a
-          >
-          <span class="incoltec-header__lang-sep">|</span>
-          <a
-            href={esPath}
-            class={`incoltec-header__lang-link ${isEs ? "is-active" : ""}`}
-            aria-label="Español"
-            >ES</a
-          >
+        <div class="incoltec-header__lang-switch" role="group" aria-label={isEs ? "Idioma" : "Language"}>
+          <a href={alt.en} hreflang="en" lang="en" class={`incoltec-header__lang-link ${!isEs ? "is-active" : ""}`} aria-current={!isEs ? "true" : undefined} title="English">EN</a>
+          <span class="incoltec-header__lang-sep" aria-hidden="true">|</span>
+          <a href={alt.es} hreflang="es" lang="es" class={`incoltec-header__lang-link ${isEs ? "is-active" : ""}`} aria-current={isEs ? "true" : undefined} title={esTitle}>ES</a>
         </div>
-        <a href={isEs ? "/es/#contact" : "/#contact"} class="incoltec-header__cta" aria-label={isEs ? "Contáctanos" : "Get in Touch"}>
-          {isEs ? "Contáctanos" : "Get in Touch"}
-        </a>
+        <a href={contactHref} class="incoltec-header__cta">{t.contact}</a>
       </div>
     </nav>
-  </div>
-
-  <!-- HORECA / INDUSTRIAL Switch -->
-  <div class="incoltec-header__sub-bar">
-    <div class="incoltec-header__sub-bar-inner">
-      <a
-        href="/horeca"
-        class={`incoltec-header__tab ${activeTab === "HORECA" ? "is-active" : ""}`}
-        aria-label="HORECA Solutions"
-      >
-        HORECA
-      </a>
-      <a
-        href={isEs ? "/es" : "/"}
-        class={`incoltec-header__tab ${activeTab === "INDUSTRIAL" ? "is-active" : ""}`}
-        aria-label="Industrial Food Solutions"
-      >
-        INDUSTRIAL
-      </a>
-    </div>
   </div>
 </header>
 
@@ -389,7 +219,7 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
 
   .incoltec-header__logo-img {
     display: block;
-    height: clamp(2rem, 3.2vw, 3.15rem);
+    height: clamp(1.6rem, 2.4vw, 2.3rem);
     width: auto;
   }
 
@@ -472,7 +302,8 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
     .incoltec-header__dropdown {
       display: block !important; /* override astro-navbar's hidden class */
     }
-    .astronav-dropdown:hover .incoltec-header__dropdown {
+    .astronav-dropdown:hover .incoltec-header__dropdown,
+    .astronav-dropdown:focus-within .incoltec-header__dropdown {
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
@@ -595,6 +426,15 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
     opacity: 1;
   }
 
+  .incoltec-header__link[aria-current="page"] {
+    color: var(--c-magenta, #E30066);
+  }
+
+  .incoltec-header__link--horeca {
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
   .incoltec-header__link--contact {
     color: var(--c-magenta, #E30066) !important;
     font-weight: 600 !important;
@@ -656,50 +496,6 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
     display: flex;
     align-items: center;
     gap: 0.75rem;
-  }
-
-  /* ---- SUB-BAR: HORECA / INDUSTRIAL ---- */
-  .incoltec-header__sub-bar {
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    background: rgba(255, 255, 255, 0.97);
-  }
-
-  .incoltec-header__sub-bar-inner {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 clamp(1.25rem, 3vw, 3rem);
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-
-  .incoltec-header__tab {
-    position: relative;
-    padding: 0.75rem 1.75rem;
-    font-family: var(--font-primary);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #666;
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    transition:
-      color 0.2s ease,
-      border-color 0.2s ease,
-      background 0.2s ease;
-  }
-
-  .incoltec-header__tab:hover {
-    color: #333;
-    background: rgba(0, 0, 0, 0.015);
-  }
-
-  .incoltec-header__tab.is-active {
-    color: var(--c-dark, #1e1e1e);
-    border-bottom-color: var(--c-dark, #1e1e1e);
   }
 
   /* ---- RESPONSIVE: DESKTOP (1024+) ---- */
@@ -886,6 +682,18 @@ const activeTab: string = currentPath.startsWith("/horeca") ? "HORECA" : "INDUST
         icons.forEach((el) => el.classList.toggle("hidden"));
       }
     }
+  });
+
+  // Keep aria-expanded in sync on dropdown toggle buttons (keyboard / screen readers).
+  document.querySelectorAll<HTMLButtonElement>(".incoltec-header__chevron-btn").forEach((btn) => {
+    btn.setAttribute("aria-expanded", "false");
+    btn.addEventListener("click", () => {
+      const menu = btn.closest(".astronav-dropdown")?.querySelector(".incoltec-header__dropdown");
+      requestAnimationFrame(() => {
+        const open = !!menu && !menu.classList.contains("hidden");
+        btn.setAttribute("aria-expanded", String(open));
+      });
+    });
   });
 
   // Close mobile nav on Escape key

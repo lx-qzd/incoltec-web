@@ -1,7 +1,7 @@
 ---
-title: "Rojo Remolacha E162"
+title: "Rojo Remolacha E-162"
 description: "Colorante natural rojo rubí a base de extracto de remolacha. Excelente alternativa al Rojo Allura para productos con pH ácido."
-category: "Extractos Naturales"
+category: "Colorantes Naturales"
 applications:
   - Bebidas
   - Cárnicos
@@ -23,6 +23,6 @@ Nuestro **Rojo Remolacha E162** se obtiene a partir de raíces seleccionadas de 
 
 ## Ventajas Competitivas
 
-1. **Clean Label:** Reconocido como ingrediente seguro y natural.
+1. **Origen natural:** obtenido a partir de remolacha.
 2. **Excelente en pH Ácido:** Desarrolla su máximo potencial de color en medios ácidos (pH 4-5).
 3. **Perfil de Sabor Neutro:** Nuestro proceso de purificación elimina las notas a tierra características de la remolacha.

@@ -198,7 +198,7 @@ const { isEs = false } = Astro.props;
           </p>
           <div class="flex items-center gap-4">
             <a 
-              href={isEs ? "/es/#contact" : "/#contact"} 
+              href={isEs ? "/es/contact?reason=sample" : "/contact?reason=sample"} 
               class="font-verdana inline-flex items-center gap-2.5 px-8 py-3.5 rounded-2xl text-white font-medium text-xs sm:text-sm transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl"
               style="background: linear-gradient(135deg, #E30066 0%, #FF1A75 100%); box-shadow: 0 6px 18px rgba(227, 0, 102, 0.35);"
             >
@@ -210,12 +210,12 @@ const { isEs = false } = Astro.props;
 
         <div class="md:col-span-4 flex flex-col gap-6">
           <div class="bg-white p-8 rounded-2xl border border-gray-200/80 shadow-sm text-center">
-            <span class="text-3xl sm:text-4xl font-serif font-normal text-[#E30066]">48h</span>
-            <p class="font-verdana text-xs text-gray-500 uppercase tracking-wider mt-2 font-medium">{isEs ? "Respuesta Técnica Rápida" : "Rapid Technical Response"}</p>
+            <span class="text-3xl sm:text-4xl font-serif font-normal text-[#E30066]">48 h</span>
+            <p class="font-verdana text-xs text-gray-600 uppercase tracking-wider mt-2 font-medium">{isEs ? "Objetivo de primera respuesta técnica (días laborables)" : "Target first technical reply (working days)"}</p>
           </div>
           <div class="bg-white p-8 rounded-2xl border border-gray-200/80 shadow-sm text-center">
-            <span class="text-3xl sm:text-4xl font-serif font-normal text-[#008AD8]">100%</span>
-            <p class="font-verdana text-xs text-gray-500 uppercase tracking-wider mt-2 font-medium">{isEs ? "Ajuste Espectral Exacto" : "Precise Spectral Match"}</p>
+            <span class="text-3xl sm:text-4xl font-serif font-normal text-[#008AD8]">{isEs ? "A medida" : "Tailored"}</span>
+            <p class="font-verdana text-xs text-gray-600 uppercase tracking-wider mt-2 font-medium">{isEs ? "Tono ajustado a tu matriz y proceso" : "Shade matched to your matrix and process"}</p>
           </div>
         </div>
       </div>

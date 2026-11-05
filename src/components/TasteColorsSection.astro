@@ -169,27 +169,29 @@ const { isEs = false } = Astro.props;
     title={isEs ? "¿Por qué elegir Colorantes Naturales?" : "Natural vs Artificial Colors"}
     naturalTitle={isEs ? "Colorantes Naturales" : "Natural Colors"}
     artificialTitle={isEs ? "Colorantes Artificiales" : "Artificial Colors"}
+    eyebrow={isEs ? "Comparativa" : "Comparison"}
+    artificialTag={isEs ? "Sintéticos" : "Synthetic"}
     naturalPoints={isEs ? [
-      { title: "ETIQUETA LIMPIA", text: "Clean label demandada por consumidores conscientes y mercados prémium." },
-      { title: "100% NATURAL", text: "Derivados directos de plantas, frutos y minerales sostenibles." },
-      { title: "VALOR NUTRICIONAL", text: "Sin impacto negativo en la biodisponibilidad ni en la salud." },
-      { title: "CUMPLIMIENTO GLOBAL", text: "Aprobados y promovidos por los reguladores alimentarios internacionales." }
+      { title: "ETIQUETA LIMPIA", text: "Responden a la demanda de etiquetas más sencillas y reconocibles." },
+      { title: "ORIGEN NATURAL", text: "Obtenidos de plantas, frutas, verduras y otras fuentes naturales." },
+      { title: "ALIMENTOS COLORANTES", text: "Algunas soluciones se declaran como ingrediente, sin número E." },
+      { title: "CUMPLIMIENTO NORMATIVO", text: "Formulados conforme a la normativa europea de aditivos e ingredientes." }
     ] : [
-      { title: "CLEAN LABEL", text: "Clean label appeal for health-conscious consumers and premium tiers." },
-      { title: "100% NATURAL", text: "Derived from plant, fruit, and mineral renewable sources." },
-      { title: "NUTRITIOUS", text: "No negative impact on nutritional value or digestive microbiome." },
-      { title: "COMPLIANT", text: "Increasingly demanded and favored by global food authorities." }
+      { title: "CLEAN LABEL", text: "Meet the demand for simpler, recognisable ingredient lists." },
+      { title: "NATURAL ORIGIN", text: "Obtained from plants, fruit, vegetables and other natural sources." },
+      { title: "COLOURING FOODS", text: "Some solutions are declared as ingredients, with no E-number." },
+      { title: "REGULATORY FIT", text: "Formulated in line with EU rules on additives and ingredients." }
     ]}
     artificialPoints={isEs ? [
-      { title: "RIESGOS DE SALUD", text: "Vinculados reiteradamente a hipersensibilidad, alergias e hiperactividad." },
-      { title: "SINTÉTICOS", text: "Químicos sintéticos basados en subproductos del petróleo." },
-      { title: "ETIQUETAS DE ALERTA", text: "Exigen leyendas de advertencia obligatorias en múltiples países." },
-      { title: "PÉRDIDA DE CONFIANZA", text: "Rechazo acelerado por parte de las nuevas generaciones de compradores." }
+      { title: "ORIGEN SINTÉTICO", text: "Obtenidos mediante síntesis química." },
+      { title: "ADVERTENCIA OBLIGATORIA", text: "En la UE, seis colorantes azoicos exigen una advertencia sobre la actividad y la atención de los niños." },
+      { title: "PERCEPCIÓN DEL CONSUMIDOR", text: "Cada vez más consumidores prefieren alternativas de origen natural." },
+      { title: "REFORMULACIÓN", text: "Muchas marcas los están sustituyendo en sus productos." }
     ] : [
-      { title: "HEALTH RISKS", text: "Often linked to health concerns, hyperreactivity, and allergies." },
-      { title: "SYNTHETIC", text: "Synthetic petrochemical derivatives with artificial molecular structures." },
-      { title: "WARNING LABELS", text: "Requires strict warning labels and mandatory disclaimers." },
-      { title: "DISTRUST", text: "Steeply decreasing consumer trust and diminishing market viability." }
+      { title: "SYNTHETIC ORIGIN", text: "Produced by chemical synthesis." },
+      { title: "MANDATORY WARNING", text: "In the EU, six azo colours require a warning about effects on children's activity and attention." },
+      { title: "CONSUMER PERCEPTION", text: "A growing share of consumers prefer naturally sourced alternatives." },
+      { title: "REFORMULATION", text: "Many brands are replacing them in their products." }
     ]}
     bgImage="/assets/food-colors-application.webp"
   />
