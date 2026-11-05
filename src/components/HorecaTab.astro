@@ -13,8 +13,7 @@ import type { Lang } from '../i18n/routes';
 
 interface Props { lang?: Lang }
 const { lang = 'en' } = Astro.props;
-// Name to be confirmed with Incoltec: earlier copy mixed "Faus" and "Fausto".
-const chef = 'Faus Arroyo';
+const chef = 'Fausto Arroyo';
 const t = lang === 'es'
   ? {
       quote1: '«De la cocina de élite', quote2: 'a tus operaciones»',
