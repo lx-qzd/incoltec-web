@@ -14,10 +14,11 @@ Las plantillas usan los marcadores `[NOMBRE]`, `[CARGO]`, `[MÓVIL]`, `[MÓVIL_T
 
 ## Imágenes
 
-Las imágenes se sirven desde la web: `https://incoltec.com/email-signature/` (carpeta `public/email-signature/` del proyecto):
-`logo-incoltec.png`, `icon-linkedin.png`, `icon-youtube.png`, `ifs-broker-logo.png` y `banner-productos.jpg`.
+Las imágenes de la firma (`logo-incoltec.png`, `icon-linkedin.png`, `icon-youtube.png`, `ifs-broker-logo.png`, `banner-productos.jpg`) están en `public/email-signature/` y se publican con la web.
 
-**Hasta que la web esté publicada en incoltec.com**, esa dirección no existe: en el generador abre «Opciones avanzadas» y usa `https://incoltec-web-sbbi.vercel.app/email-signature/`. Cuando se cambie el dominio, vuelve a generar y pegar la firma.
+- **Ahora:** se sirven desde la web de pruebas, `https://incoltec-web-sbbi.vercel.app/email-signature/` (valor por defecto del generador). Solo existen allí cuando el último cambio de la web está publicado (merge en `main`).
+- **Cuando la web nueva esté en incoltec.com:** se puede cambiar a `https://incoltec.com/email-signature/` en «Opciones avanzadas» y volver a copiar la firma. La dirección de Vercel seguirá funcionando, así que las firmas ya instaladas no se rompen.
+- Si alguna imagen no se puede cargar, el generador lo avisa: no copies la firma hasta que el aviso desaparezca.
 
 ## Instalación
 

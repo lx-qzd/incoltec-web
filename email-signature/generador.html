@@ -28,6 +28,7 @@
   .preview { border: 1px dashed #cbd5e1; border-radius: 10px; padding: 20px; background: #fff; overflow-x: auto; }
   .preview.dark { background: #1f1f1f; }
   .status { min-height: 20px; font-size: 13px; color: #047857; margin-top: 8px; }
+  .warn { font-size: 13px; color: #9a3412; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 10px 12px; margin-top: 8px; }
   textarea { width: 100%; min-height: 140px; font: 12px/1.4 ui-monospace, Menlo, monospace; border: 1px solid var(--line); border-radius: 8px; padding: 8px; margin-top: 10px; }
   details { margin-top: 12px; font-size: 14px; }
 </style>
@@ -56,8 +57,8 @@
     <details>
       <summary>Opciones avanzadas</summary>
       <label for="base">URL de las imágenes</label>
-      <input id="base" type="url" value="https://incoltec.com/email-signature/">
-      <p class="hint">Mientras la web no esté en incoltec.com usa https://incoltec-web-sbbi.vercel.app/email-signature/</p>
+      <input id="base" type="url" value="https://incoltec-web-sbbi.vercel.app/email-signature/">
+      <p class="hint">Dirección pública donde están las imágenes de la firma. Cuando la web nueva esté en incoltec.com puedes cambiarla a https://incoltec.com/email-signature/ y volver a copiar la firma.</p>
     </details>
   </form>
 
@@ -75,6 +76,7 @@
       <button type="button" id="showcode">Ver código</button>
     </div>
     <p class="status" id="status" role="status" aria-live="polite"></p>
+    <p class="warn" id="imgwarn" role="alert" hidden></p>
     <textarea id="code" hidden readonly aria-label="Código HTML de la firma"></textarea>
   </section>
 </main>
@@ -145,6 +147,25 @@ function render() {
   const h = html();
   $('preview').innerHTML = $('noimg').getAttribute('aria-pressed') === 'true' ? h.replace(/<img [^>]*alt="([^"]*)"[^>]*>/g, '<span style="font-size:11px;color:#888;border:1px dashed #bbb;padding:2px 4px;">$1</span>') : h;
   $('code').value = h;
+  checkImages();
+}
+
+// Warn when the images are not reachable at the chosen address (a broken image in a
+// signature is what every recipient would see).
+function checkImages() {
+  const imgs = [...$('preview').querySelectorAll('img')];
+  const failed = new Set();
+  const warn = $('imgwarn');
+  warn.hidden = true;
+  imgs.forEach((img) => {
+    const report = () => {
+      failed.add(img.getAttribute('src').split('/').pop());
+      warn.hidden = false;
+      warn.textContent = `No se pueden cargar estas imágenes desde ${data().base}: ${[...failed].join(', ')}. ` +
+        'No copies la firma todavía: comprueba que la web con las imágenes está publicada o cambia la dirección en «Opciones avanzadas».';
+    };
+    if (img.complete && img.naturalWidth === 0) report(); else img.addEventListener('error', report, { once: true });
+  });
 }
 document.querySelectorAll('#f input').forEach((i) => i.addEventListener('input', render));
 document.querySelectorAll('[data-v]').forEach((b) => b.addEventListener('click', () => {
