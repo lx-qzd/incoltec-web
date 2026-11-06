@@ -1,0 +1,49 @@
+---
+import type { Lang } from '../i18n/routes';
+import { localizePath } from '../i18n/routes';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const es = lang === 'es';
+const states = es
+  ? {
+      confirmed: ['Suscripción confirmada', 'Gracias. Recibirás el boletín de Incoltec. Te hemos enviado un email con el enlace para darte de baja cuando quieras.'],
+      unsubscribed: ['Baja realizada', 'Ya no recibirás el boletín de Incoltec.'],
+      invalid: ['Enlace no válido o caducado', 'El enlace de confirmación caduca a los 7 días. Vuelve a suscribirte desde el pie de cualquier página.'],
+      error: ['No se ha podido completar', 'Ha ocurrido un error. Inténtalo más tarde o escríbenos a info@incoltec.com.'],
+    }
+  : {
+      confirmed: ['Subscription confirmed', 'Thank you. You will receive the Incoltec newsletter. We have emailed you a link to unsubscribe whenever you want.'],
+      unsubscribed: ['Unsubscribed', 'You will no longer receive the Incoltec newsletter.'],
+      invalid: ['Invalid or expired link', 'Confirmation links expire after 7 days. Please subscribe again from the footer of any page.'],
+      error: ['Something went wrong', 'An error occurred. Please try again later or email info@incoltec.com.'],
+    };
+---
+
+<main id="main" class="nl-status">
+  <div class="nl-status__card">
+    <h1>{es ? 'Boletín de Incoltec' : 'Incoltec newsletter'}</h1>
+    {Object.entries(states).map(([key, [title, text]]) => (
+      <section data-status={key} hidden={key !== 'confirmed'}>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </section>
+    ))}
+    <a href={localizePath('/', lang)} class="nl-status__btn">{es ? 'Volver al inicio' : 'Back to home'}</a>
+  </div>
+</main>
+
+<script>
+  const status = new URLSearchParams(location.search).get('status') || 'confirmed';
+  const sections = document.querySelectorAll<HTMLElement>('[data-status]');
+  const known = [...sections].some((s) => s.dataset.status === status);
+  sections.forEach((s) => (s.hidden = s.dataset.status !== (known ? status : 'invalid')));
+</script>
+
+<style>
+  .nl-status { padding: clamp(4rem, 10vw, 8rem) 1rem; background: #fffdf9; }
+  .nl-status__card { max-width: 560px; margin: 0 auto; background: #fff; border: 1px solid #e2e8f0; border-radius: 1rem; padding: 2rem; text-align: center; }
+  .nl-status h1 { font-family: var(--font-heading); font-size: 2.25rem; color: #89385c; margin-bottom: 1rem; }
+  .nl-status h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; color: #1e1e1e; }
+  .nl-status p { color: #475569; margin-bottom: 1.5rem; }
+  .nl-status__btn { display: inline-flex; min-height: 44px; align-items: center; padding: 0.6rem 1.3rem; border-radius: 0.75rem; background: #e30066; color: #fff; font-weight: 600; }
+</style>

@@ -4,6 +4,7 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import { getAlternates, getLang, normalizePath, SITE_URL } from '../i18n/routes';
 import { company } from '../data/company';
+import { Font } from 'astro:assets';
 
 interface Props {
   title: string;
@@ -53,6 +54,18 @@ const ogImage = image
   : `${siteUrl}/assets/food-colors-application.png`;
 
 const matomoSiteId = import.meta.env.PUBLIC_MATOMO_SITE_ID;
+// Google Search Console HTML-tag verification (optional).
+const gscVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  "url": `${siteUrl}/`,
+  "name": "Incoltec",
+  "inLanguage": isEs ? "es-ES" : "en",
+  "publisher": { "@id": `${siteUrl}/#organization` }
+};
 const matomoUrl = import.meta.env.PUBLIC_MATOMO_URL || 'https://stats.incoltec.com/';
 
 const organizationSchema = {
@@ -131,14 +144,21 @@ const organizationSchema = {
 
 		<!-- Structured data -->
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)} />
+		<script type="application/ld+json" is:inline set:html={JSON.stringify(websiteSchema)} />
 		{schema.map((s) => <script type="application/ld+json" is:inline set:html={JSON.stringify(s)} />)}
 
-		<!-- Typography: Golden Hills (Signature Headings), Playfair Display (Serif), Inter (Body Sans) -->
-		<link rel="preload" href="/fonts/GoldenHillsDEMO.woff2" as="font" type="font/woff2" crossorigin />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+		<!-- Self-hosted fonts (Astro Fonts API). Preload only what renders above the fold. -->
+		<Font cssVariable="--font-golden-hills" preload />
+		<Font cssVariable="--font-inter" preload />
+		<Font cssVariable="--font-playfair" />
+		<Font cssVariable="--font-great-vibes" />
 
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<meta name="theme-color" content="#1E1E1E" />
+		{gscVerification && <meta name="google-site-verification" content={gscVerification} />}
+
+		<!-- Page-specific head content, e.g. LCP image preload -->
+		<slot name="head" />
 
 		<!-- Matomo: only rendered when PUBLIC_MATOMO_SITE_ID is set; runs only after analytics consent -->
 		{matomoSiteId && (

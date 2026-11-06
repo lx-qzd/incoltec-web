@@ -1,5 +1,6 @@
 ---
 import Hero from './Hero.astro';
+import { Image } from 'astro:assets';
 import { families, getLocalizedProducts, swatch, type FamilyKey } from '../data/products';
 import { localizePath, type Lang } from '../i18n/routes';
 
@@ -62,7 +63,7 @@ const productHref = (id: string) => localizePath(`/products/${id}`, lang);
           <article class="feature-card product-card" data-search={`${product.title} ${product.description} ${product.color ?? ''}`.toLowerCase()} data-category={product.family}>
             {product.image && (
               <a href={productHref(product.id)} class="product-image-wrap" tabindex="-1" aria-hidden="true">
-                <img src={product.image} alt="" loading="lazy" decoding="async" width="300" height="300" class="product-thumb-img" />
+                <Image src={product.image} alt="" width={480} widths={[320, 480, 640]} sizes="(min-width: 640px) 380px, 100vw" class="product-thumb-img" />
               </a>
             )}
             <div class="product-header">
@@ -284,8 +285,8 @@ const productHref = (id: string) => localizePath(`/products/${id}`, lang);
   }
 
   .tag {
-    background: rgba(0, 138, 216, 0.15);
-    color: #4db8ff;
+    background: rgba(0, 138, 216, 0.1);
+    color: #075985; /* 7:1 contrast on the light tag background (WCAG AA) */
   }
 
   .tag-more {

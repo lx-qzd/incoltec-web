@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 // unreadable at header size (~4px tall).
 import logoIncoltec from "../assets/LogoIncoltec-wordmark.png";
 import { getAlternates, getLang, localizePath, normalizePath } from "../i18n/routes";
+import { getSectors } from "../data/sectors";
 
 // `currentPath` is accepted for backwards compatibility but no longer needed.
 interface Props { currentPath?: string }
@@ -38,6 +39,8 @@ const t = isEs
       langNote: "",
     };
 
+const sectors = await getSectors(lang);
+
 const links: NavLink[] = [
   {
     name: t.products, url: L("/products"), match: "/products",
@@ -48,7 +51,13 @@ const links: NavLink[] = [
       { name: t.vitamins, url: `${L("/products")}?category=vitamins-premixes` },
     ],
   },
-  { name: t.sectors, url: L("/color-solutions"), match: "/color-solutions" },
+  {
+    name: t.sectors, url: L("/color-solutions"), match: "/color-solutions|/sectors",
+    dropdown: [
+      { name: isEs ? "Todas las aplicaciones" : "All applications", url: L("/color-solutions") },
+      ...sectors.map((s) => ({ name: s.entry.data.eyebrow, url: L(`/sectors/${s.slug}`) })),
+    ],
+  },
   { name: "HORECA", url: L("/horeca"), match: "/horeca" },
   {
     name: t.quality, url: `${L("/our-company")}#quality`, match: "#quality",
@@ -91,8 +100,7 @@ const esTitle = alt.translated ? "Español" : "Español – este contenido solo 
           class="incoltec-header__logo-img"
           width={220}
           height={44}
-          loading="eager"
-          decoding="async"
+          priority
         />
       </a>
 

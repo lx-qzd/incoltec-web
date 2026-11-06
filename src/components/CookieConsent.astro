@@ -114,18 +114,48 @@ const isEs = urlPath.startsWith('/es');
 </script>
 
 <style is:global>
-  :root {
-    --cc-primary-color: var(--c-magenta);
-    --cc-bg: var(--c-dark);
-    --cc-text: var(--c-light);
-    --cc-btn-primary-bg: var(--c-magenta);
-    --cc-btn-primary-text: var(--c-white);
+  /* Brand theme for vanilla-cookieconsent v3 (variable names per v3 docs).
+     Scoped to #cc-main so it always wins over the library's :root defaults. */
+  #cc-main {
+    --cc-bg: #1e1e1e;
+    --cc-primary-color: #ffffff;
+    --cc-secondary-color: #d4d4d4;
+    --cc-link-color: #ff5c9f;
+
+    --cc-btn-primary-bg: #e30066;
+    --cc-btn-primary-color: #ffffff;
+    --cc-btn-primary-border-color: #e30066;
     --cc-btn-primary-hover-bg: #c20055;
-    --cc-btn-secondary-bg: rgba(255, 255, 255, 0.1);
-    --cc-btn-secondary-text: var(--c-light);
-    --cc-btn-secondary-hover-bg: rgba(255, 255, 255, 0.2);
-    --cc-separator-border-color: rgba(255, 255, 255, 0.1);
-    --cc-toggle-on-bg: var(--c-cyan);
-    --cc-toggle-off-bg: rgba(255, 255, 255, 0.2);
+    --cc-btn-primary-hover-color: #ffffff;
+    --cc-btn-primary-hover-border-color: #c20055;
+
+    --cc-btn-secondary-bg: #2e2e2e;
+    --cc-btn-secondary-color: #ffffff;
+    --cc-btn-secondary-border-color: #5a5a5a;
+    --cc-btn-secondary-hover-bg: #3a3a3a;
+    --cc-btn-secondary-hover-color: #ffffff;
+    --cc-btn-secondary-hover-border-color: #8a8a8a;
+
+    --cc-separator-border-color: #3a3a3a;
+    --cc-toggle-on-bg: #008ad8;
+    --cc-toggle-off-bg: #6b6b6b;
+    --cc-toggle-on-knob-bg: #ffffff;
+    --cc-toggle-off-knob-bg: #ffffff;
+    --cc-toggle-readonly-bg: #4a4a4a;
+    --cc-toggle-readonly-knob-bg: #bdbdbd;
+    --cc-toggle-readonly-knob-icon-color: #4a4a4a;
+
+    --cc-section-category-border: #3a3a3a;
+    --cc-cookie-category-block-bg: #262626;
+    --cc-cookie-category-block-border: #3a3a3a;
+    --cc-cookie-category-block-hover-bg: #2c2c2c;
+    --cc-cookie-category-block-hover-border: #4a4a4a;
+    --cc-cookie-category-expanded-block-bg: #262626;
+    --cc-cookie-category-expanded-block-hover-bg: #2c2c2c;
+
+    --cc-overlay-bg: rgba(0, 0, 0, 0.65);
+    --cc-footer-bg: #181818;
+    --cc-footer-color: #d4d4d4;
+    --cc-footer-border-color: #3a3a3a;
   }
 </style>

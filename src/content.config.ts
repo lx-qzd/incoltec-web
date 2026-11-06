@@ -3,7 +3,8 @@ import { glob } from 'astro/loaders';
 
 const productsCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/products" }),
-  schema: z.object({
+  // `image` is a path relative to the .md file so Astro optimises it (WebP, srcset, dimensions).
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     category: z.string(),
@@ -12,7 +13,7 @@ const productsCollection = defineCollection({
     solubility: z.string().optional(),
     phRange: z.string().optional(),
     pdfLink: z.string().optional(),
-    image: z.string().optional(),
+    image: image().optional(),
   }),
 });
 
@@ -26,6 +27,19 @@ const productsEnCollection = defineCollection({
     applications: z.array(z.string()),
     color: z.string().optional(),
     solubility: z.string().optional(),
+  }),
+});
+
+// SEO landing pages by food sector. One file per language: sectors/{es,en}/<slug>.md
+const sectorsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/sectors" }),
+  schema: z.object({
+    title: z.string(),
+    metaTitle: z.string(),
+    description: z.string(),
+    eyebrow: z.string(),
+    order: z.number(),
+    products: z.array(z.string()),
   }),
 });
 
@@ -43,5 +57,6 @@ const blogCollection = defineCollection({
 export const collections = {
   'products': productsCollection,
   'products-en': productsEnCollection,
+  'sectors': sectorsCollection,
   'blog': blogCollection,
 };

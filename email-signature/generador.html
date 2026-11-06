@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generador de firma Incoltec</title>
+<style>
+  :root { --ink: #1e1e1e; --muted: #5b6470; --line: #e2e8f0; --brand: #e30066; --bg: #f8fafc; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; color: var(--ink); background: var(--bg); }
+  header { padding: 24px 16px 8px; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  header p { margin: 0; color: var(--muted); font-size: 14px; }
+  main { max-width: 1100px; margin: 0 auto; padding: 16px; display: grid; gap: 20px; grid-template-columns: 1fr; }
+  @media (min-width: 900px) { main { grid-template-columns: 340px 1fr; } }
+  form, .out { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+  main > * { min-width: 0; }
+  label { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 4px; }
+  input[type=text], input[type=email], input[type=tel], input[type=url] { width: 100%; padding: 9px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font: inherit; font-size: 14px; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; font-size: 14px; }
+  .row label { display: inline-flex; gap: 6px; align-items: center; margin: 0; font-weight: 500; }
+  .hint { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .tabs button, .actions button { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: #fff; cursor: pointer; font: inherit; font-size: 14px; }
+  .tabs button[aria-pressed=true] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .actions .primary { background: var(--brand); color: #fff; border-color: var(--brand); font-weight: 600; }
+  .preview { border: 1px dashed #cbd5e1; border-radius: 10px; padding: 20px; background: #fff; overflow-x: auto; }
+  .preview.dark { background: #1f1f1f; }
+  .status { min-height: 20px; font-size: 13px; color: #047857; margin-top: 8px; }
+  .warn { font-size: 13px; color: #9a3412; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 10px 12px; margin-top: 8px; }
+  textarea { width: 100%; min-height: 140px; font: 12px/1.4 ui-monospace, Menlo, monospace; border: 1px solid var(--line); border-radius: 8px; padding: 8px; margin-top: 10px; }
+  details { margin-top: 12px; font-size: 14px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Generador de firma de email · Incoltec</h1>
+  <p>Rellena tus datos, revisa la vista previa y pulsa «Copiar firma» para pegarla en Outlook o Gmail.</p>
+</header>
+<main>
+  <form id="f" autocomplete="off">
+    <label for="nombre">Nombre y apellidos</label>
+    <input id="nombre" type="text" value="Nombre Apellido">
+    <label for="cargo">Cargo</label>
+    <input id="cargo" type="text" value="Cargo">
+    <label for="movil">Móvil</label>
+    <input id="movil" type="tel" value="+34 600 00 00 00">
+    <label for="telefono">Teléfono Incoltec</label>
+    <input id="telefono" type="tel" value="+34 93 798 62 16">
+    <label for="email">Email</label>
+    <input id="email" type="email" value="nombre@incoltec.com">
+    <div class="row">
+      <label><input type="checkbox" id="banner"> Banner de productos</label>
+      <label><input type="checkbox" id="ifs" checked> Distintivo IFS</label>
+    </div>
+    <details>
+      <summary>Opciones avanzadas</summary>
+      <label for="base">URL de las imágenes</label>
+      <input id="base" type="url" value="https://incoltec-web-sbbi.vercel.app/email-signature/">
+      <p class="hint">Dirección pública donde están las imágenes de la firma. Cuando la web nueva esté en incoltec.com puedes cambiarla a https://incoltec.com/email-signature/ y volver a copiar la firma.</p>
+    </details>
+  </form>
+
+  <section class="out" aria-label="Vista previa">
+    <div class="tabs" role="group" aria-label="Versión">
+      <button type="button" data-v="horizontal" aria-pressed="true">Horizontal</button>
+      <button type="button" data-v="compacta" aria-pressed="false">Compacta (respuestas)</button>
+      <button type="button" id="dark" aria-pressed="false">Ver en modo oscuro</button>
+      <button type="button" id="noimg" aria-pressed="false">Ver sin imágenes</button>
+    </div>
+    <div id="preview" class="preview"></div>
+    <div class="actions">
+      <button type="button" class="primary" id="copy">Copiar firma</button>
+      <button type="button" id="download">Descargar .html</button>
+      <button type="button" id="showcode">Ver código</button>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+    <p class="warn" id="imgwarn" role="alert" hidden></p>
+    <textarea id="code" hidden readonly aria-label="Código HTML de la firma"></textarea>
+  </section>
+</main>
+
+<script>
+/* Plantillas: tablas + estilos inline, sin CSS externo, sin scripts.
+   Las mismas que email-signature/firma.html y firma-compacta.html. */
+const LINKEDIN = 'https://www.linkedin.com/company/incoltec/';
+const YOUTUBE = 'https://www.youtube.com/@incoltec-colorantesalimentario';
+const PRIVACY = 'https://incoltec.com/politica-de-proteccion-de-datos/';
+const esc = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const tel = (s) => String(s).replace(/[^\d+]/g, '');
+
+function horizontal(d) {
+  // Explicit white card: keeps dark text readable in clients that don't invert colours (Apple Mail dark mode).
+  return `<table cellpadding="0" cellspacing="0" border="0" role="presentation" bgcolor="#ffffff" style="background-color:#ffffff;border-radius:8px;"><tr><td style="padding:12px 14px;background-color:#ffffff;">
+<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family:Arial,Helvetica,sans-serif;color:#1e1e1e;width:560px;max-width:100%;">
+  <tr>
+    <td valign="middle" width="190" style="padding:0 16px 0 0;border-right:2px solid #e30066;">
+      <a href="https://incoltec.com" style="text-decoration:none;"><img src="${d.base}logo-incoltec.png" width="180" height="53" alt="INCOLTEC – Shaping the future of food appeal" style="display:block;border:0;width:180px;height:53px;"></a>
+    </td>
+    <td valign="middle" style="padding:0 0 0 16px;">
+      <p style="margin:0;font-size:16px;line-height:20px;font-weight:bold;color:#1e1e1e;">${esc(d.nombre)}</p>
+      <p style="margin:0 0 8px;font-size:13px;line-height:18px;color:#c2005a;">${esc(d.cargo)}</p>
+      <p style="margin:0;font-size:12px;line-height:19px;color:#333333;">
+        <span style="color:#777777;">M</span>&nbsp;<a href="tel:${tel(d.movil)}" style="color:#333333;text-decoration:none;">${esc(d.movil)}</a>&nbsp;&nbsp;<span style="color:#777777;">T</span>&nbsp;<a href="tel:${tel(d.telefono)}" style="color:#333333;text-decoration:none;">${esc(d.telefono)}</a><br>
+        <a href="mailto:${esc(d.email)}" style="color:#333333;text-decoration:none;">${esc(d.email)}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://incoltec.com" style="color:#0369a1;text-decoration:none;font-weight:bold;">incoltec.com</a>
+      </p>
+      <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="margin-top:8px;"><tr>
+        <td valign="middle" style="padding:0 6px 0 0;"><a href="${LINKEDIN}"><img src="${d.base}icon-linkedin.png" width="24" height="24" alt="LinkedIn" style="display:block;border:0;width:24px;height:24px;"></a></td>
+        <td valign="middle" style="padding:0 14px 0 0;"><a href="${YOUTUBE}"><img src="${d.base}icon-youtube.png" width="24" height="24" alt="YouTube" style="display:block;border:0;width:24px;height:24px;"></a></td>
+        ${d.ifs ? `<td valign="middle" style="padding:0;"><img src="${d.base}ifs-broker-logo.png" width="110" height="40" alt="Certified IFS Broker – Bureau Veritas" style="display:block;border:0;width:110px;height:40px;"></td>` : ''}
+      </tr></table>
+    </td>
+  </tr>
+  ${d.banner ? `<tr><td colspan="2" style="padding:12px 0 0;"><a href="https://incoltec.com/products"><img src="${d.base}banner-productos.jpg" width="560" height="90" alt="Colorantes naturales y alimentos colorantes Incoltec" style="display:block;border:0;width:560px;max-width:100%;height:auto;"></a></td></tr>` : ''}
+  <tr>
+    <td colspan="2" style="padding:10px 0 0;font-size:10px;line-height:14px;color:#666666;">
+      <a href="${PRIVACY}" style="color:#666666;">Política de protección de datos - Data protection policy</a>
+    </td>
+  </tr>
+</table>
+</td></tr></table>`;
+}
+
+function compacta(d) {
+  return `<table cellpadding="0" cellspacing="0" border="0" role="presentation" bgcolor="#ffffff" style="font-family:Arial,Helvetica,sans-serif;color:#1e1e1e;max-width:420px;background-color:#ffffff;">
+  <tr><td style="padding:8px 10px 0;font-size:13px;line-height:18px;background-color:#ffffff;">
+    <strong style="color:#1e1e1e;">${esc(d.nombre)}</strong> <span style="color:#c2005a;">· ${esc(d.cargo)}</span><br>
+    <a href="https://incoltec.com" style="color:#1e1e1e;text-decoration:none;font-weight:bold;letter-spacing:1px;">INCOLTEC</a>
+    <span style="color:#777777;font-size:12px;">&nbsp;|&nbsp;<a href="tel:${tel(d.movil)}" style="color:#333333;text-decoration:none;">${esc(d.movil)}</a>&nbsp;|&nbsp;<a href="mailto:${esc(d.email)}" style="color:#333333;text-decoration:none;">${esc(d.email)}</a></span>
+  </td></tr>
+  <tr><td style="padding:4px 10px 8px;font-size:10px;line-height:14px;color:#666666;background-color:#ffffff;">
+    <a href="${PRIVACY}" style="color:#666666;">Política de protección de datos - Data protection policy</a>
+  </td></tr>
+</table>`;
+}
+
+const $ = (id) => document.getElementById(id);
+let version = 'horizontal';
+function data() {
+  let base = $('base').value.trim(); if (base && !base.endsWith('/')) base += '/';
+  return { nombre: $('nombre').value, cargo: $('cargo').value, movil: $('movil').value, telefono: $('telefono').value,
+           email: $('email').value, banner: $('banner').checked, ifs: $('ifs').checked, base };
+}
+function html() { return version === 'horizontal' ? horizontal(data()) : compacta(data()); }
+function render() {
+  const h = html();
+  $('preview').innerHTML = $('noimg').getAttribute('aria-pressed') === 'true' ? h.replace(/<img [^>]*alt="([^"]*)"[^>]*>/g, '<span style="font-size:11px;color:#888;border:1px dashed #bbb;padding:2px 4px;">$1</span>') : h;
+  $('code').value = h;
+  checkImages();
+}
+
+// Warn when the images are not reachable at the chosen address (a broken image in a
+// signature is what every recipient would see).
+function checkImages() {
+  const imgs = [...$('preview').querySelectorAll('img')];
+  const failed = new Set();
+  const warn = $('imgwarn');
+  warn.hidden = true;
+  imgs.forEach((img) => {
+    const report = () => {
+      failed.add(img.getAttribute('src').split('/').pop());
+      warn.hidden = false;
+      warn.textContent = `No se pueden cargar estas imágenes desde ${data().base}: ${[...failed].join(', ')}. ` +
+        'No copies la firma todavía: comprueba que la web con las imágenes está publicada o cambia la dirección en «Opciones avanzadas».';
+    };
+    if (img.complete && img.naturalWidth === 0) report(); else img.addEventListener('error', report, { once: true });
+  });
+}
+document.querySelectorAll('#f input').forEach((i) => i.addEventListener('input', render));
+document.querySelectorAll('[data-v]').forEach((b) => b.addEventListener('click', () => {
+  version = b.dataset.v;
+  document.querySelectorAll('[data-v]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  render();
+}));
+$('dark').addEventListener('click', (e) => { const on = e.target.getAttribute('aria-pressed') !== 'true'; e.target.setAttribute('aria-pressed', String(on)); $('preview').classList.toggle('dark', on); });
+$('noimg').addEventListener('click', (e) => { const on = e.target.getAttribute('aria-pressed') !== 'true'; e.target.setAttribute('aria-pressed', String(on)); render(); });
+$('copy').addEventListener('click', async () => {
+  const h = html();
+  try {
+    await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([h], { type: 'text/html' }), 'text/plain': new Blob([$('preview').innerText], { type: 'text/plain' }) })]);
+  } catch {
+    // Fallback: select the rendered preview and copy it as rich text.
+    const r = document.createRange(); r.selectNodeContents($('preview'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); s.removeAllRanges();
+  }
+  $('status').textContent = 'Firma copiada. Pégala en la configuración de firma de tu correo.';
+});
+$('download').addEventListener('click', () => {
+  const doc = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Firma ${esc(data().nombre)}</title></head><body>\n${html()}\n</body></html>`;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([doc], { type: 'text/html' }));
+  a.download = `firma-${(data().nombre || 'incoltec').toLowerCase().normalize('NFD').replace(/[^\w]+/g, '-')}.html`;
+  a.click();
+});
+$('showcode').addEventListener('click', () => { $('code').hidden = !$('code').hidden; });
+
+// Optional URL parameters (used for test screenshots): ?v=compacta&banner=1&dark=1&noimg=1&base=…
+const q = new URLSearchParams(location.search);
+if (q.get('base')) $('base').value = q.get('base');
+if (q.get('banner') === '1') $('banner').checked = true;
+if (q.get('v') === 'compacta') document.querySelector('[data-v="compacta"]').click();
+if (q.get('noimg') === '1') $('noimg').click();
+if (q.get('dark') === '1') $('dark').click();
+render();
+</script>
+</body>
+</html>

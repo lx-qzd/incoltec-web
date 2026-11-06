@@ -1,4 +1,11 @@
 ---
+import companyImg1 from '../assets/company/crispy-kentucky-fried-chicken-french-fries-isolat-2024-02-06-18-41-29-utc-scaled.jpg';
+import companyImg2 from '../assets/company/fresh-and-healthy-passion-fruit-smoothie-2023-11-27-05-18-16-utc-scaled.jpg';
+import companyImg3 from '../assets/company/freshly-baked-jelly-donuts-2023-11-27-05-08-39-utc-scaled.jpg';
+import companyImg4 from '../assets/company/fruit-mango-ice-cream-in-a-waffle-cup-2023-11-27-04-51-19-utc-scaled.jpg';
+import companyImg5 from '../assets/company/laboratorio1.jpg';
+import companyImg6 from '../assets/company/paella-seafood-rice-rice-with-seafood-2023-11-27-05-25-36-utc-scaled.jpg';
+import companyImg7 from '../assets/company/yummy-yellow-vitamin-c-gummy-jellies-coming-out-fr-2023-11-27-04-58-38-utc-scaled.jpg';
 import { Image } from 'astro:assets';
 import Organigram from './Organigram.astro';
 
@@ -113,32 +120,32 @@ const { isEs = false } = Astro.props;
           
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
-              <img src="/assets/company/fruit-mango-ice-cream-in-a-waffle-cup-2023-11-27-04-51-19-utc-scaled.webp" alt="Lácteos y Helados" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <Image src={companyImg4} width={480} alt={isEs ? "Lácteos y Helados" : "Dairy and ice cream"} class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
               <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Lácteos y Helados" : "Dairy & Ice Cream"}</span>
             </div>
             
             <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
-              <img src="/assets/company/crispy-kentucky-fried-chicken-french-fries-isolat-2024-02-06-18-41-29-utc-scaled.webp" alt="Cárnicos y Salados" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <Image src={companyImg1} width={480} alt={isEs ? "Cárnicos y Salados" : "Meat and savoury"} class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
               <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Cárnicos y Embutidos" : "Meats & Savory"}</span>
             </div>
 
             <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
-              <img src="/assets/company/fresh-and-healthy-passion-fruit-smoothie-2023-11-27-05-18-16-utc-scaled.webp" alt="Bebidas y Zumos" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <Image src={companyImg2} width={480} alt={isEs ? "Bebidas y Zumos" : "Beverages and juices"} class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
               <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Bebidas y Zumos" : "Beverages & Drinks"}</span>
             </div>
 
             <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
-              <img src="/assets/company/freshly-baked-jelly-donuts-2023-11-27-05-08-39-utc-scaled.webp" alt="Panadería y Bollería" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <Image src={companyImg3} width={480} alt={isEs ? "Panadería y Bollería" : "Bakery and pastries"} class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
               <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Panadería y Repostería" : "Bakery & Pastry"}</span>
             </div>
 
             <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
-              <img src="/assets/company/yummy-yellow-vitamin-c-gummy-jellies-coming-out-fr-2023-11-27-04-58-38-utc-scaled.webp" alt="Confitería y Golosinas" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <Image src={companyImg7} width={480} alt={isEs ? "Confitería y Golosinas" : "Confectionery and sweets"} class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
               <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Confitería y Golosinas" : "Confectionery & Sweets"}</span>
             </div>
 
             <div class="group rounded-2xl overflow-hidden border border-gray-100 bg-[#FAF8F5] p-3 text-center hover:shadow-md transition-all">
-              <img src="/assets/company/paella-seafood-rice-rice-with-seafood-2023-11-27-05-25-36-utc-scaled.webp" alt="Platos Preparados" class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
+              <Image src={companyImg6} width={480} alt={isEs ? "Platos Preparados" : "Ready meals"} class="w-full aspect-square object-cover rounded-xl mb-2.5 group-hover:scale-105 transition-transform" loading="lazy" />
               <span class="font-verdana text-xs font-semibold text-gray-800 block">{isEs ? "Platos Preparados y Arroces" : "Ready Meals & Rice"}</span>
             </div>
           </div>
@@ -257,7 +264,7 @@ const { isEs = false } = Astro.props;
         <!-- Global Presence: 4 specialized plants -->
         <div class="bg-white rounded-3xl p-8 sm:p-10 border border-gray-100 shadow-sm flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-[#008AD8]/10 text-[#008AD8] flex items-center justify-center font-bold mb-5">
+            <div class="w-10 h-10 rounded-xl bg-[#008AD8]/10 text-[#0369A1] flex items-center justify-center font-bold mb-5">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -278,7 +285,7 @@ const { isEs = false } = Astro.props;
               </p>
             </div>
           </div>
-          <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#008AD8] uppercase tracking-wider font-verdana mt-6">
+          <div class="pt-6 border-t border-gray-100 text-xs font-semibold text-[#0369A1] uppercase tracking-wider font-verdana mt-6">
             {isEs ? "4 Plantas Especializadas • Distribución Global" : "4 Specialized Plants • Worldwide Supply"}
           </div>
         </div>
@@ -295,7 +302,7 @@ const { isEs = false } = Astro.props;
       <span id="laboratorio-y-produccion" class="scroll-mt-32"></span>
 
       <div class="bg-[#FAF8F5] p-8 sm:p-12 md:p-16 rounded-3xl border border-[#EDE8E0] shadow-sm">
-        <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-[#008AD8]/15 text-[#008AD8] rounded-lg text-xs font-semibold uppercase tracking-wider font-verdana">
+        <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-[#008AD8]/15 text-[#0369A1] rounded-lg text-xs font-semibold uppercase tracking-wider font-verdana">
           {isEs ? "2. Laboratorio y Producción" : "2. Laboratory and Production"}
         </div>
         
@@ -333,15 +340,15 @@ const { isEs = false } = Astro.props;
 
           <div class="lg:col-span-5">
             <div class="rounded-2xl overflow-hidden shadow-xl border border-gray-200/80 group">
-              <img 
-                src="/assets/company/laboratorio1.webp" 
+              <Image 
+                src={companyImg5} width={1000} 
                 alt={isEs ? "Laboratorio de Aplicaciones Incoltec" : "Incoltec Applications Laboratory"} 
                 class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" 
                 loading="lazy" 
               />
               <div class="bg-white p-4 font-verdana text-xs text-gray-600 border-t border-gray-100 flex items-center justify-between">
                 <span>{isEs ? "Planta piloto de aplicaciones e I+D" : "Pilot plant for food applications & R&D"}</span>
-                <span class="font-semibold text-[#008AD8]">ISO Certified</span>
+                <span class="font-semibold text-[#0369A1]">{isEs ? "Calidad certificada" : "Certified quality"}</span>
               </div>
             </div>
           </div>
@@ -349,7 +356,7 @@ const { isEs = false } = Astro.props;
 
         <!-- Specialized Equipment List (Exact items from laboratory-and-production) -->
         <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/80 mb-8">
-          <h3 class="font-verdana text-xs font-bold uppercase tracking-wider text-[#008AD8] mb-4">
+          <h3 class="font-verdana text-xs font-bold uppercase tracking-wider text-[#0369A1] mb-4">
             {isEs ? "Inversión en Calidad: Equipamiento Especializado de Laboratorio" : "Investing in Quality: Specialized Laboratory Equipment"}
           </h3>
           <p class="font-verdana text-gray-600 text-xs sm:text-sm font-light mb-6">
@@ -361,43 +368,43 @@ const { isEs = false } = Astro.props;
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 font-verdana text-xs text-gray-700">
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>Espectrofotómetros</span>
+              <span>{isEs ? "Espectrofotómetros" : "Spectrophotometers"}</span>
             </div>
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>Colorímetros</span>
+              <span>{isEs ? "Colorímetros" : "Colorimeters"}</span>
             </div>
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>Texturómetros</span>
+              <span>{isEs ? "Texturómetros" : "Texture analysers"}</span>
             </div>
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>Refractómetros</span>
+              <span>{isEs ? "Refractómetros" : "Refractometers"}</span>
             </div>
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>Densitómetros</span>
+              <span>{isEs ? "Densitómetros" : "Density meters"}</span>
             </div>
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>Balanzas de Precisión</span>
+              <span>{isEs ? "Balanzas de Precisión" : "Precision balances"}</span>
             </div>
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>pH-metros</span>
+              <span>{isEs ? "pH-metros" : "pH meters"}</span>
             </div>
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>Agitadores de Líquidos</span>
+              <span>{isEs ? "Agitadores de Líquidos" : "Liquid stirrers"}</span>
             </div>
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>Emulsificadores</span>
+              <span>{isEs ? "Emulsificadores" : "Emulsifiers"}</span>
             </div>
             <div class="p-3 bg-[#FAF8F5] rounded-xl border border-gray-100 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-[#008AD8]"></span>
-              <span>Mezcladores de Polvo</span>
+              <span>{isEs ? "Mezcladores de Polvo" : "Powder mixers"}</span>
             </div>
           </div>
         </div>
@@ -439,12 +446,12 @@ const { isEs = false } = Astro.props;
       <span id="calidad" class="scroll-mt-32"></span>
 
       <div class="bg-white rounded-3xl p-8 sm:p-12 md:p-16 border border-gray-100 shadow-sm">
-        <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-[#FFC000]/20 text-[#b58900] rounded-lg text-xs font-semibold uppercase tracking-wider font-verdana">
+        <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-[#FFC000]/20 text-[#7A5C00] rounded-lg text-xs font-semibold uppercase tracking-wider font-verdana">
           {isEs ? "3. Compromiso de Calidad" : "3. Quality Commitment"}
         </div>
         
         <div class="max-w-4xl mb-12">
-          <span class="font-verdana text-xs uppercase tracking-[0.2em] text-[#008AD8] font-bold block mb-2">
+          <span class="font-verdana text-xs uppercase tracking-[0.2em] text-[#0369A1] font-bold block mb-2">
             {isEs ? "Innovación & Tecnología" : "Innovation & Technology"}
           </span>
           <h2 class="fluid-h2 font-heading text-[#1E1E1E] font-normal m-0 mb-6 leading-tight">
@@ -476,7 +483,7 @@ const { isEs = false } = Astro.props;
           <!-- Mission -->
           <div class="bg-[#FAF8F5] p-8 rounded-2xl border border-gray-200/70 flex flex-col justify-between">
             <div>
-              <div class="w-10 h-10 rounded-xl bg-[#008AD8]/15 text-[#008AD8] flex items-center justify-center font-bold mb-4 font-verdana text-sm">
+              <div class="w-10 h-10 rounded-xl bg-[#008AD8]/15 text-[#0369A1] flex items-center justify-center font-bold mb-4 font-verdana text-sm">
                 M
               </div>
               <h3 class="font-heading text-2xl text-[#1E1E1E] font-normal mb-3">
@@ -495,7 +502,7 @@ const { isEs = false } = Astro.props;
                 </p>
               </div>
             </div>
-            <div class="pt-4 border-t border-gray-200/80 text-xs font-semibold text-[#008AD8] uppercase tracking-wider font-verdana mt-6">
+            <div class="pt-4 border-t border-gray-200/80 text-xs font-semibold text-[#0369A1] uppercase tracking-wider font-verdana mt-6">
               {isEs ? "Sostenibilidad & Excelencia Humana" : "Sustainability & Human Excellence"}
             </div>
           </div>
@@ -522,7 +529,7 @@ const { isEs = false } = Astro.props;
                 </p>
               </div>
             </div>
-            <div class="pt-4 border-t border-gray-200/80 text-xs font-semibold text-[#E30066] uppercase tracking-wider font-verdana mt-6">
+            <div class="pt-4 border-t border-gray-200/80 text-xs font-semibold text-[#C2005A] uppercase tracking-wider font-verdana mt-6">
               {isEs ? "Liderazgo Global • Pasión por el Color" : "Global Leadership • Passion for Colours"}
             </div>
           </div>
@@ -541,7 +548,7 @@ const { isEs = false } = Astro.props;
             </p>
           </div>
           <div class="shrink-0 flex items-center gap-3">
-            <img src="/assets/company/IFS-Broker-RGB.webp" alt="IFS Broker" class="h-12 w-auto object-contain" loading="lazy" />
+            <img src="/assets/company/IFS-Broker-RGB.png" alt="IFS Broker" class="h-12 w-auto object-contain" loading="lazy" />
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ const { isEs = false } = Astro.props;
     <!-- Header with Scroll Reveal -->
     <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24 reveal delay-75 flex flex-col items-center">
       <div class="mb-4">
-        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
+        <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#0369A1] font-bold">
           {isEs ? "Gama de Colores e Ingredientes" : "Colors and Ingredient Portfolio"}
         </span>
       </div>
@@ -39,13 +39,13 @@ const { isEs = false } = Astro.props;
         <div>
           <!-- Visual Image Preview -->
           <div class="grid grid-cols-3 gap-2 mb-6 rounded-xl overflow-hidden bg-gray-50 p-1 border border-gray-100">
-            <img src="/assets/products/natural-colourants/colorante_natural_e100_1-1.webp" alt="Curcumina E-100" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-            <img src="/assets/products/natural-colourants/glass-jar-of-strawberry-milkshake-and-ingredients-2023-11-27-05-14-29-utc-300x300.webp" alt="Carmín E-120" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-75" loading="lazy" />
-            <img src="/assets/products/natural-colourants/concept-of-delicious-food-ice-cream-isolated-on-2023-11-27-05-28-44-utc-300x300.webp" alt="Clorofilina E-141" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-150" loading="lazy" />
+            <img src="/assets/products/natural-colourants/colorante_natural_e100_1-1.webp" alt={isEs ? "Curcumina E-100" : "Curcumin E-100"} class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+            <img src="/assets/products/natural-colourants/glass-jar-of-strawberry-milkshake-and-ingredients-2023-11-27-05-14-29-utc-300x300.webp" alt={isEs ? "Carmín E-120" : "Carmine E-120"} class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-75" loading="lazy" />
+            <img src="/assets/products/natural-colourants/concept-of-delicious-food-ice-cream-isolated-on-2023-11-27-05-28-44-utc-300x300.webp" alt={isEs ? "Clorofilina E-141" : "Chlorophyllin E-141"} class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-150" loading="lazy" />
           </div>
 
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-xl bg-[#FFC000]/15 text-[#b58900] flex items-center justify-center font-bold shrink-0">
+            <div class="w-10 h-10 rounded-xl bg-[#FFC000]/15 text-[#7A5C00] flex items-center justify-center font-bold shrink-0">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
             </div>
             <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal m-0">
@@ -59,7 +59,7 @@ const { isEs = false } = Astro.props;
               : "Concentrated, standardized extracts derived directly from botanical and mineral sources: E-100 Curcumin, E-120 Carmine, E-141 Cu-Chlorophyllin, E-160b Annatto, and Anthocyanins."}
           </p>
         </div>
-        <div class="pt-5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#b58900] uppercase tracking-wider font-verdana">
+        <div class="pt-5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#7A5C00] uppercase tracking-wider font-verdana">
           <span>{isEs ? "Alta Concentración" : "High Concentration"}</span>
           <a href={isEs ? "/es/products?category=Colorantes+Naturales" : "/products?category=Colorantes+Naturales"} class="hover:underline flex items-center gap-1 text-[#89385C]">
             <span>{isEs ? "Ver gama" : "Explore"}</span>
@@ -73,9 +73,9 @@ const { isEs = false } = Astro.props;
         <div>
           <!-- Visual Image Preview -->
           <div class="grid grid-cols-3 gap-2 mb-6 rounded-xl overflow-hidden bg-gray-50 p-1 border border-gray-100">
-            <img src="/assets/products/colouring-foods/cupcake-2023-11-27-04-55-03-utc-300x300.webp" alt="Espirulina Azul" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-            <img src="/assets/products/colouring-foods/Alimento_colorante_AZAFRAN-1.webp" alt="Azafrán" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-75" loading="lazy" />
-            <img src="/assets/products/colouring-foods/Alimento_colorante_Zanahoria-negra-1-600x600.webp" alt="Zanahoria Negra" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-150" loading="lazy" />
+            <img src="/assets/products/colouring-foods/cupcake-2023-11-27-04-55-03-utc-300x300.webp" alt={isEs ? "Espirulina Azul" : "Spirulina blue"} class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+            <img src="/assets/products/colouring-foods/Alimento_colorante_AZAFRAN-1.webp" alt={isEs ? "Azafrán" : "Saffron"} class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-75" loading="lazy" />
+            <img src="/assets/products/colouring-foods/Alimento_colorante_Zanahoria-negra-1-600x600.webp" alt={isEs ? "Zanahoria Negra" : "Black carrot"} class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-150" loading="lazy" />
           </div>
 
           <div class="flex items-center gap-3 mb-4">
@@ -107,13 +107,13 @@ const { isEs = false } = Astro.props;
         <div>
           <!-- Visual Image Preview -->
           <div class="grid grid-cols-3 gap-2 mb-6 rounded-xl overflow-hidden bg-gray-50 p-1 border border-gray-100">
-            <img src="/assets/products/vitamins-premixes/vitaminas-premixes.webp" alt="Premixes" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-            <img src="/assets/products/vitamins-premixes/suplementos-vitaminicos-300x300.webp" alt="Vitamina E" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-75" loading="lazy" />
-            <img src="/assets/products/vitamins-premixes/vitaminas-2.webp" alt="Vitamina A" class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-150" loading="lazy" />
+            <img src="/assets/products/vitamins-premixes/vitaminas-premixes.webp" alt={isEs ? "Premixes" : "Premixes"} class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+            <img src="/assets/products/vitamins-premixes/suplementos-vitaminicos-300x300.webp" alt={isEs ? "Vitamina E" : "Vitamin E"} class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-75" loading="lazy" />
+            <img src="/assets/products/vitamins-premixes/vitaminas-2.webp" alt={isEs ? "Vitamina A" : "Vitamin A"} class="w-full aspect-square object-cover rounded-lg group-hover:scale-105 transition-transform duration-300 delay-150" loading="lazy" />
           </div>
 
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-xl bg-[#008AD8]/10 text-[#008AD8] flex items-center justify-center font-bold shrink-0">
+            <div class="w-10 h-10 rounded-xl bg-[#008AD8]/10 text-[#0369A1] flex items-center justify-center font-bold shrink-0">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
             </div>
             <h3 class="fluid-h3 font-heading text-[#1E1E1E] font-normal m-0">
@@ -127,7 +127,7 @@ const { isEs = false } = Astro.props;
               : "Custom premixes for nutritional fortification and enrichment of foods and beverages. Vitamins A, D, C, B-complex, and micronutrients combined with homogeneous chromatic carriers."}
           </p>
         </div>
-        <div class="pt-5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#008AD8] uppercase tracking-wider font-verdana">
+        <div class="pt-5 border-t border-gray-100 flex items-center justify-between text-xs font-semibold text-[#0369A1] uppercase tracking-wider font-verdana">
           <span>{isEs ? "Fortificación Nutracéutica" : "Nutraceutical Fortification"}</span>
           <a href={isEs ? "/es/products?category=Vitaminas+y+Premixes" : "/products?category=Vitaminas+y+Premixes"} class="hover:underline flex items-center gap-1 text-[#89385C]">
             <span>{isEs ? "Ver gama" : "Explore"}</span>
