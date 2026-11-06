@@ -1,53 +1,35 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import LegalPage from '../../components/LegalPage.astro';
+import { company, hqAddressLine } from '../../data/company';
 ---
 
-<Layout title="Aviso Legal">
-  <Header currentPath="/legal-notice" />
-  
-  <main class="container mx-auto px-4 sm:px-6 py-[clamp(3.5rem,7vw,6rem)] max-w-4xl text-gray-300">
-    <h1 class="font-heading text-[clamp(2.25rem,1.8rem+2.5vw,3.5rem)] font-light mb-8 text-white leading-tight">Aviso Legal</h1>
-    
-    <div class="prose prose-invert max-w-none font-light leading-relaxed">
-      <p>Última actualización: Agosto 2026</p>
-      
-      <h2>1. Información General</h2>
-      <p>En cumplimiento con el deber de información, a continuación se reflejan los siguientes datos:</p>
-      <ul>
-        <li><strong>Nombre de la Empresa:</strong> Incoltec</li>
-        <li><strong>Dirección:</strong> Av. Principal, Zona Industrial</li>
-        <li><strong>Email:</strong> info@incoltec.com</li>
-        <li><strong>Registro:</strong> Registro Mercantil</li>
-      </ul>
-      
-      <h2>2. Propiedad Intelectual</h2>
-      <p>Los derechos de propiedad intelectual del sitio web y los distintos elementos que contiene son titularidad de Incoltec. Queda expresamente prohibida la reproducción, distribución y comunicación pública de la totalidad o parte de los contenidos de esta página web sin autorización.</p>
+<LegalPage title="Aviso legal" description="Datos identificativos del titular del sitio web incoltec.com y condiciones de uso." heading="Aviso legal" updated="Última actualización: noviembre de 2026">
+  <h2>1. Datos identificativos</h2>
+  <p>En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa de los datos del titular de este sitio web:</p>
+  <ul>
+    <li><strong>Razón social:</strong> {company.legalName} («INCOLTEC»)</li>
+    <li><strong>NIF:</strong> {company.taxId}</li>
+    <li><strong>Domicilio social:</strong> {hqAddressLine}, España</li>
+    <li><strong>Datos registrales:</strong> {company.registry}</li>
+    <li><strong>Teléfono:</strong> <a href={company.phoneHref}>{company.phone}</a></li>
+    <li><strong>Email:</strong> <a href={`mailto:${company.email}`}>{company.email}</a></li>
+  </ul>
 
-      <h2>3. Exclusión de Responsabilidad</h2>
-      <p>Incoltec no se hace responsable, en ningún caso, de los daños y perjuicios de cualquier naturaleza que pudieran ocasionar, a título enunciativo: errores u omisiones en los contenidos, falta de disponibilidad del portal o la transmisión de virus o programas maliciosos o lesivos en los contenidos, a pesar de haber adoptado todas las medidas tecnológicas necesarias para evitarlo.</p>
-    </div>
-  </main>
+  <h2>2. Objeto y condiciones de uso</h2>
+  <p>Este sitio web ofrece información sobre la empresa y sus productos y servicios para la industria alimentaria. El acceso implica la aceptación de estas condiciones. El usuario se compromete a hacer un uso adecuado de los contenidos y a no emplearlos para actividades ilícitas o contrarias a la buena fe.</p>
 
-  <Footer />
-</Layout>
+  <h2>3. Información técnica de productos</h2>
+  <p>La información de producto tiene carácter orientativo. Las especificaciones vinculantes son las que figuran en la ficha técnica, la documentación regulatoria y la oferta comercial vigentes para cada referencia. Corresponde al fabricante del alimento verificar la conformidad de su producto final con la normativa aplicable en su mercado.</p>
 
-<style>
-  h2 {
-    font-size: clamp(1.35rem, 1.15rem + 1vw, 1.8rem);
-    color: white;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 400;
-  }
-  p {
-    font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
-    margin-bottom: 1rem;
-  }
-  ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-</style>
+  <h2>4. Propiedad intelectual e industrial</h2>
+  <p>Los contenidos de este sitio (textos, imágenes, diseño, logotipos y marcas, incluida LINICOL) son titularidad de {company.legalName} o de terceros que han autorizado su uso. Queda prohibida su reproducción, distribución o comunicación pública sin autorización expresa.</p>
+
+  <h2>5. Responsabilidad</h2>
+  <p>INCOLTEC no se hace responsable de los daños derivados de errores u omisiones en los contenidos, de la falta de disponibilidad del sitio ni de la presencia de virus, pese a haber adoptado las medidas técnicas razonables para evitarlos. Los enlaces a sitios de terceros se ofrecen solo a título informativo.</p>
+
+  <h2>6. Protección de datos y cookies</h2>
+  <p>El tratamiento de datos personales se rige por la <a href="/es/privacy-policy">Política de privacidad</a> y el uso de cookies por la <a href="/es/cookie-policy">Política de cookies</a>.</p>
+
+  <h2>7. Legislación aplicable</h2>
+  <p>Estas condiciones se rigen por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales que correspondan conforme a derecho.</p>
+</LegalPage>

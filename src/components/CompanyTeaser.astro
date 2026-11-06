@@ -1,0 +1,41 @@
+---
+import { getLang, localizePath } from "../i18n/routes";
+
+const lang = getLang(Astro.url.pathname);
+const isEs = lang === "es";
+const L = (p: string) => localizePath(p, lang);
+const items = isEs
+  ? [
+      { title: "Quiénes somos", text: "Fabricante especializado en color para la industria alimentaria, con sede y laboratorio en Mataró (Barcelona).", href: `${L("/our-company")}#about` },
+      { title: "Laboratorio y producción", text: "Desarrollo de aplicaciones, control analítico de cada lote y planta de producción en Barberà del Vallès.", href: `${L("/our-company")}#laboratory` },
+      { title: "Calidad y seguridad alimentaria", text: "Sistemas de calidad certificados y documentación técnica y regulatoria para cada producto.", href: `${L("/our-company")}#quality` },
+    ]
+  : [
+      { title: "About us", text: "Specialist colour manufacturer for the food industry, with headquarters and laboratory in Mataró (Barcelona).", href: `${L("/our-company")}#about` },
+      { title: "Laboratory and production", text: "Application development, analytical control of every batch and a production plant in Barberà del Vallès.", href: `${L("/our-company")}#laboratory` },
+      { title: "Quality and food safety", text: "Certified quality systems and technical and regulatory documentation for every product.", href: `${L("/our-company")}#quality` },
+    ];
+---
+
+<section id="our-company" class="w-full bg-[#FFFDF9] py-16 sm:py-20 md:py-24 scroll-mt-24">
+  <div class="max-w-[1240px] mx-auto px-4 sm:px-8 md:px-12">
+    <div class="text-center max-w-3xl mx-auto mb-10 md:mb-14">
+      <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#E30066] font-bold">{isEs ? "Empresa" : "Company"}</span>
+      <h2 class="font-heading fluid-h1 text-[#89385C] font-normal mt-3 mb-4 leading-tight">{isEs ? "Sobre Incoltec" : "About Incoltec"}</h2>
+      <p class="font-verdana text-gray-700 font-light leading-relaxed">
+        {isEs
+          ? "Ciencia del color, conocimiento de mercado y soporte técnico cercano para fabricantes de alimentos y bebidas."
+          : "Colour science, market knowledge and hands-on technical support for food and beverage manufacturers."}
+      </p>
+    </div>
+    <div class="grid gap-6" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));">
+      {items.map((item) => (
+        <a href={item.href} class="block bg-white p-6 sm:p-8 rounded-2xl border border-gray-200/80 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+          <h3 class="font-heading text-2xl text-[#1E1E1E] mb-3">{item.title}</h3>
+          <p class="font-verdana text-gray-600 text-sm font-light leading-relaxed mb-4">{item.text}</p>
+          <span class="font-verdana text-sm font-semibold text-[#E30066]">{isEs ? "Saber más →" : "Learn more →"}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

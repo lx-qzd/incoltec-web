@@ -25,5 +25,5 @@ El **Concentrado de Zanahoria Negra** es la elección predilecta para fabricante
 ## Ventajas Competitivas
 
 1. **100% Clean Label:** Clasificado legalmente como ingrediente alimentario, no como aditivo.
-2. **Apto para Veganos y Kosher/Halal:** Sin ingredientes de origen animal.
+2. **Sin ingredientes de origen animal:** apto para posicionamientos vegetarianos y veganos.
 3. **Poder Colorante Concentrado:** Permite dosificaciones bajas manteniendo alta intensidad cromática.

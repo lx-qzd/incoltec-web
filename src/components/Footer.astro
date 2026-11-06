@@ -2,35 +2,39 @@
 import { Image } from "astro:assets";
 import Certifications from "./Certifications.astro";
 import logoFooter from "../assets/logo-incoltec-footer.png";
+import { getLang, localizePath } from "../i18n/routes";
+import { company, hqAddressLine } from "../data/company";
 
 const currentYear = new Date().getFullYear();
-const urlPath = Astro.url.pathname;
-const isEs = urlPath.startsWith('/es');
+const lang = getLang(Astro.url.pathname);
+const isEs = lang === 'es';
+const L = (p: string) => localizePath(p, lang);
 
 const enLinks = {
   company: {
     title: "Company",
     links: [
-      { name: "Our Company", url: "/#our-company" },
-      { name: "Vibrant Life", url: "/#vibrant-life" },
-      { name: "Taste Colors", url: "/#taste-colors" },
-      { name: "Perfecting Food", url: "/#perfecting-food" }
+      { name: "About us", url: `${L("/our-company")}#about` },
+      { name: "Quality & R&D", url: `${L("/our-company")}#quality` },
+      { name: "Solutions by sector", url: L("/color-solutions") },
+      { name: "HORECA", url: L("/horeca") }
     ]
   },
   resources: {
     title: "Resources",
     links: [
-      { name: "Products", url: "/products" },
-      { name: "Catalogs", url: "/catalogs" },
-      { name: "Get in Touch", url: "/#contact" }
+      { name: "Products", url: L("/products") },
+      { name: "Catalogues", url: L("/catalogs") },
+      { name: "Blog", url: L("/blog") },
+      { name: "Contact", url: L("/contact") }
     ]
   },
   legal: {
     title: "Legal",
     links: [
-      { name: "Legal Notice", url: "/legal-notice" },
-      { name: "Privacy Policy", url: "/privacy-policy" },
-      { name: "Cookie Policy", url: "/cookie-policy" }
+      { name: "Legal notice", url: L("/legal-notice") },
+      { name: "Privacy policy", url: L("/privacy-policy") },
+      { name: "Cookie policy", url: L("/cookie-policy") }
     ]
   },
   slogan: "Shaping the future of food appeal"
@@ -40,26 +44,27 @@ const esLinks = {
   company: {
     title: "Empresa",
     links: [
-      { name: "Nuestra Empresa", url: "/es/#our-company" },
-      { name: "Vida Vibrante", url: "/es/#vibrant-life" },
-      { name: "Saborea los Colores", url: "/es/#taste-colors" },
-      { name: "Perfeccionando Alimentos", url: "/es/#perfecting-food" }
+      { name: "Quiénes somos", url: `${L("/our-company")}#about` },
+      { name: "Calidad e I+D", url: `${L("/our-company")}#quality` },
+      { name: "Soluciones por sector", url: L("/color-solutions") },
+      { name: "HORECA", url: L("/horeca") }
     ]
   },
   resources: {
     title: "Recursos",
     links: [
-      { name: "Productos", url: "/es/products" },
-      { name: "Catálogos", url: "/es/catalogs" },
-      { name: "Contacto", url: "/es/#contact" }
+      { name: "Productos", url: L("/products") },
+      { name: "Catálogos", url: L("/catalogs") },
+      { name: "Blog", url: L("/blog") },
+      { name: "Contacto", url: L("/contact") }
     ]
   },
   legal: {
     title: "Legal",
     links: [
-      { name: "Aviso Legal", url: "/es/legal-notice" },
-      { name: "Política de Privacidad", url: "/es/privacy-policy" },
-      { name: "Política de Cookies", url: "/es/cookie-policy" }
+      { name: "Aviso legal", url: L("/legal-notice") },
+      { name: "Política de privacidad", url: L("/privacy-policy") },
+      { name: "Política de cookies", url: L("/cookie-policy") }
     ]
   },
   slogan: "Dando forma al futuro del atractivo alimentario"
@@ -71,7 +76,7 @@ const content = isEs ? esLinks : enLinks;
 <footer class="footer">
   <div class="container footer-content">
     <div class="footer-brand">
-      <a href={isEs ? "/es" : "/"} class="footer-logo-link" aria-label="Incoltec Home">
+      <a href={L("/")} class="footer-logo-link" aria-label={isEs ? "Incoltec – inicio" : "Incoltec – home"}>
         <Image 
           src={logoFooter} 
           alt="Incoltec Logo" 
@@ -82,6 +87,20 @@ const content = isEs ? esLinks : enLinks;
           decoding="async"
         />
       </a>
+      <p class="footer-slogan">{content.slogan}</p>
+      <address class="footer-address">
+        {company.legalName}<br />
+        {hqAddressLine}<br />
+        <a href={company.phoneHref}>{company.phone}</a> · <a href={`mailto:${company.email}`}>{company.email}</a>
+      </address>
+      <div class="footer-social">
+        <a href={company.social.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a href={company.social.youtube} target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+        </a>
+      </div>
     </div>
     
     <div class="footer-links">
@@ -106,9 +125,21 @@ const content = isEs ? esLinks : enLinks;
       <div class="link-group newsletter-group">
         <h3>{isEs ? 'Boletín' : 'Newsletter'}</h3>
         <p class="newsletter-desc">{isEs ? 'Suscríbete para recibir nuestras últimas noticias.' : 'Subscribe to receive our latest news.'}</p>
-        <form class="newsletter-form" action="#" method="POST" onsubmit="event.preventDefault();">
-          <input type="email" placeholder={isEs ? 'Tu correo' : 'Your email'} required />
-          <button type="submit">{isEs ? 'Suscribirse' : 'Subscribe'}</button>
+        <form class="newsletter-form-wrap" action="/api/contact" method="POST" data-newsletter>
+          <input type="hidden" name="form_type" value="newsletter" />
+          <input type="hidden" name="lang" value={lang} />
+          <input type="hidden" name="started" value="" data-started />
+          <input type="text" name="bot_field" tabindex="-1" autocomplete="off" class="nl-hp" aria-hidden="true" />
+          <div class="newsletter-form">
+            <label for="nl-email" class="sr-only">{isEs ? 'Tu email' : 'Your email'}</label>
+            <input id="nl-email" type="email" name="email" placeholder={isEs ? 'Tu email' : 'Your email'} required autocomplete="email" />
+            <button type="submit">{isEs ? 'Suscribirse' : 'Subscribe'}</button>
+          </div>
+          <label class="nl-consent">
+            <input type="checkbox" name="privacy" required />
+            <span>{isEs ? 'Acepto recibir el boletín y la ' : 'I agree to receive the newsletter and accept the '}<a href={L('/privacy-policy')}>{isEs ? 'política de privacidad' : 'privacy policy'}</a>. {isEs ? 'Puedes darte de baja en cualquier momento.' : 'You can unsubscribe at any time.'}</span>
+          </label>
+          <p class="nl-feedback" role="status" aria-live="polite" hidden></p>
         </form>
       </div>
     </div>
@@ -118,20 +149,59 @@ const content = isEs ? esLinks : enLinks;
   
   <div class="footer-bottom container">
     <div class="footer-bottom-inner">
-      <p class="footer-copyright">&copy; {currentYear} Incoltec. All rights reserved.</p>
+      <p class="footer-copyright">&copy; {currentYear} {company.legalName}. {isEs ? 'Todos los derechos reservados.' : 'All rights reserved.'}</p>
       <div class="footer-footnote-links">
         {content.legal.links.map((link, idx) => (
           <span class="footnote-item">
             <a href={link.url} class="footnote-link">{link.name}</a>
-            {idx < content.legal.links.length - 1 && <span class="footnote-sep">|</span>}
+            <span class="footnote-sep">|</span>
           </span>
         ))}
+        <button type="button" class="footnote-link footnote-btn" data-cc="show-preferencesModal">{isEs ? 'Configurar cookies' : 'Cookie settings'}</button>
       </div>
     </div>
   </div>
 </footer>
 
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-newsletter]').forEach((form) => {
+    const started = form.querySelector<HTMLInputElement>('[data-started]');
+    if (started) started.value = String(Date.now());
+    const fb = form.querySelector<HTMLElement>('.nl-feedback')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const btn = form.querySelector('button')!;
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const data = await res.json().catch(() => ({}));
+        fb.hidden = false;
+        fb.textContent = data.message || data.error || '';
+        fb.dataset.state = res.ok ? 'ok' : 'error';
+        if (res.ok) form.reset();
+      } catch {
+        fb.hidden = false; fb.dataset.state = 'error'; fb.textContent = 'Error';
+      } finally { btn.disabled = false; }
+    });
+  });
+</script>
+
 <style>
+  .footer-slogan { margin-top: 0.75rem; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-light); opacity: 0.75; }
+  .footer-address { margin-top: 1rem; font-style: normal; font-size: 0.85rem; line-height: 1.6; color: var(--c-light); opacity: 0.85; }
+  .footer-address a { text-decoration: underline; }
+  .footer-social { display: flex; gap: 1rem; margin-top: 1rem; color: var(--c-light); }
+  .footer-social a:hover { color: #fff; }
+  .nl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
+  .nl-consent { display: flex; gap: 0.5rem; align-items: flex-start; margin-top: 0.75rem; font-size: 0.75rem; line-height: 1.45; color: var(--c-light); opacity: 0.9; }
+  .nl-consent input { margin-top: 2px; accent-color: #e30066; flex-shrink: 0; }
+  .nl-consent a { text-decoration: underline; }
+  .nl-feedback { margin-top: 0.5rem; font-size: 0.8rem; }
+  .nl-feedback[data-state='ok'] { color: #a7f3d0; }
+  .nl-feedback[data-state='error'] { color: #fecaca; }
+  .footnote-btn { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; color: inherit; }
+
   .footer {
     background-color: var(--c-dark);
     padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(1rem, 2vw, 1.5rem);

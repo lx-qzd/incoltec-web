@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import fondo1Webp from '../assets/fondo1.webp';
+import ContactForm from './ContactForm.astro';
+import { company, directionsUrl, mapUrl } from '../data/company';
+import type { Lang } from '../i18n/routes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const isEs = lang === 'es';
+const hq = company.headquarters;
+// OpenStreetMap embed around Vía Europa, Mataró. Loaded only after the visitor
+// clicks, so no third-party request happens before consent.
+const osmEmbed = 'https://www.openstreetmap.org/export/embed.html?bbox=2.4220%2C41.5310%2C2.4420%2C41.5420&layer=mapnik';
+
+const t = isEs
+  ? {
+      eyebrow: 'Consultas directas', h1: 'Contacto',
+      intro: 'Solicita muestras, fichas técnicas, presupuestos o soporte de formulación. Nuestro equipo técnico-comercial te responderá personalmente.',
+      formTitle: 'Envíanos tu consulta', where: 'Dónde estamos', phone: 'Teléfono', email: 'Email',
+      directions: 'Cómo llegar', openMap: 'Ver en Google Maps', showMap: 'Mostrar mapa interactivo',
+      mapNote: 'Al mostrar el mapa se cargará contenido de OpenStreetMap.', mapTitle: 'Mapa de la sede de Incoltec en Mataró',
+    }
+  : {
+      eyebrow: 'Direct enquiries', h1: 'Contact us',
+      intro: 'Request samples, technical data sheets, quotations or formulation support. Our technical sales team will reply personally.',
+      formTitle: 'Send us your enquiry', where: 'Where to find us', phone: 'Phone', email: 'Email',
+      directions: 'Get directions', openMap: 'View on Google Maps', showMap: 'Show interactive map',
+      mapNote: 'Showing the map loads content from OpenStreetMap.', mapTitle: 'Map of Incoltec headquarters in Mataró',
+    };
+---
+
+<main id="main">
+  <section class="contact-hero relative flex items-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <Image src={fondo1Webp} alt="" class="w-full h-full object-cover" loading="eager" decoding="async" width={1920} height={1080} />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/65 pointer-events-none"></div>
+    </div>
+
+    <div class="container relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-8 text-white">
+        <span class="inline-block font-verdana text-xs uppercase tracking-[0.25em] text-[#FFC000] font-bold mb-3">{t.eyebrow}</span>
+        <h1 class="font-heading text-[clamp(2.5rem,1.8rem+3.5vw,4.5rem)] font-normal mb-3 leading-tight">{t.h1}</h1>
+        <p class="font-verdana text-white/90 text-[clamp(0.95rem,0.9rem+0.3vw,1.125rem)] font-light max-w-2xl mx-auto leading-relaxed">{t.intro}</p>
+      </div>
+
+      <div class="contact-layout">
+        <div class="glass-card-dark rounded-3xl p-6 sm:p-10 border border-white/20 backdrop-blur-2xl">
+          <h2 class="font-heading text-2xl text-white mb-6">{t.formTitle}</h2>
+          <ContactForm lang={lang} id="contactForm" variant="dark" />
+        </div>
+
+        <aside class="contact-info rounded-3xl p-6 sm:p-8 bg-white text-[#1e1e1e]" aria-labelledby="where-title">
+          <h2 id="where-title" class="font-heading text-2xl mb-5">{t.where}</h2>
+
+          <address class="not-italic space-y-5 font-verdana text-sm leading-relaxed">
+            <div>
+              <p class="font-semibold text-[#89385C]">{isEs ? hq.labelEs : hq.labelEn}</p>
+              <p>{company.legalName}<br />{hq.street}<br />{hq.postalCode} {hq.city} ({hq.region})<br />{isEs ? hq.country : hq.countryEn}</p>
+            </div>
+            <div>
+              <p class="font-semibold text-[#89385C]">{isEs ? company.production.labelEs : company.production.labelEn}</p>
+              <p>{company.production.city} ({company.production.region})</p>
+            </div>
+            <div>
+              <p><span class="font-semibold">{t.phone}:</span> <a href={company.phoneHref} class="underline">{company.phone}</a></p>
+              <p><span class="font-semibold">{t.email}:</span> <a href={`mailto:${company.email}`} class="underline">{company.email}</a></p>
+            </div>
+          </address>
+
+          <div class="flex flex-wrap gap-3 mt-6">
+            <a href={directionsUrl} target="_blank" rel="noopener" class="btn-dir">{t.directions}</a>
+            <a href={mapUrl} target="_blank" rel="noopener" class="btn-map">{t.openMap}</a>
+          </div>
+
+          <div class="map-box mt-6" data-map>
+            <button type="button" class="map-load" data-map-load data-src={osmEmbed} data-title={t.mapTitle}>
+              {t.showMap}
+              <span class="block text-xs font-normal mt-1 opacity-80">{t.mapNote}</span>
+            </button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-map-load]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = btn.dataset.src!;
+      iframe.title = btn.dataset.title!;
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'no-referrer';
+      iframe.className = 'map-frame';
+      btn.replaceWith(iframe);
+    });
+  });
+</script>
+
+<style>
+  .contact-hero { min-height: 100dvh; padding: clamp(5rem, 10dvh, 8rem) 0; }
+  .contact-layout { display: grid; gap: 1.5rem; grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 1024px) { .contact-layout { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+  .btn-dir, .btn-map { display: inline-flex; align-items: center; min-height: 44px; padding: 0.6rem 1.25rem; border-radius: 0.75rem; font-weight: 600; font-size: 0.9rem; }
+  .btn-dir { background: #e30066; color: #fff; }
+  .btn-dir:hover { background: #c20055; }
+  .btn-map { border: 1px solid #cbd5e1; color: #1e1e1e; }
+  .btn-map:hover { border-color: #1e1e1e; }
+  .map-box { border-radius: 1rem; overflow: hidden; background: #f1f5f9; aspect-ratio: 4 / 3; }
+  .map-load { width: 100%; height: 100%; font-weight: 600; color: #1e1e1e; cursor: pointer; padding: 1rem; }
+  .map-load:hover { background: #e2e8f0; }
+  :global(.map-frame) { width: 100%; height: 100%; border: 0; display: block; }
+</style>

@@ -8,9 +8,11 @@ interface Props {
   title?: string;
   subtitle?: string;
   backgroundImage?: string;
+  /** Slider mode only: the page's single H1 (visually hidden; slide titles are decorative). */
+  heading?: string;
 }
 
-const { title, subtitle, backgroundImage } = Astro.props;
+const { title, subtitle, backgroundImage, heading } = Astro.props;
 
 const pathname = Astro.url.pathname;
 const isEs = pathname.startsWith('/es') || Astro.currentLocale === 'es';
@@ -91,6 +93,7 @@ if (backgroundImage) {
   </section>
 ) : (
   <section class="relative w-full h-[100dvh] min-h-[560px] overflow-hidden bg-black @container" id="hero-slider">
+    {heading && <h1 class="sr-only">{heading}</h1>}
 
     <!-- Slides Container -->
     <div class="relative w-full h-full slider-wrapper">
@@ -99,7 +102,7 @@ if (backgroundImage) {
           <div class="absolute inset-0 bg-cover bg-center slide-bg transform scale-105 transition-transform duration-[10s] ease-out" style={`background-image: url('${slide.image}')`}></div>
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/50 pointer-events-none"></div>
           <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 z-10">
-            <h1 class="font-heading script-text text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.7)] leading-[1.05] mb-4 sm:mb-6 transform translate-y-8 opacity-0 transition-all duration-1000 delay-300 slide-title max-w-[92vw] text-[clamp(3.25rem,1.5rem+7.5vw,9.5rem)] flowy-text">{slide.title}</h1>
+            <p class="font-heading script-text text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.7)] leading-[1.05] mb-4 sm:mb-6 transform translate-y-8 opacity-0 transition-all duration-1000 delay-300 slide-title max-w-[92vw] text-[clamp(3.25rem,1.5rem+7.5vw,9.5rem)] flowy-text">{slide.title}</p>
             
             <!-- Subtitle Clean Presentation without Recuadro Border -->
             <div class="transform translate-y-8 opacity-0 transition-all duration-1000 delay-500 slide-subtitle max-w-[94%] sm:max-w-3xl">

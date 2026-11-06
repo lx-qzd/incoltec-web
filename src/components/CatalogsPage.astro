@@ -1,0 +1,63 @@
+---
+import Hero from './Hero.astro';
+import { catalogs, resolveCatalogFile } from '../data/catalogs';
+import { contactUrl, type Lang } from '../i18n/routes';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const isEs = lang === 'es';
+
+const copy = {
+  horeca: isEs
+    ? { tag: 'Hostelería y restauración', title: 'Catálogo HORECA', text: 'Soluciones de color e ingredientes funcionales para hoteles, restaurantes, pastelerías y catering.', color: '#B45309', name: 'Catálogo HORECA' }
+    : { tag: 'Hospitality and food service', title: 'HORECA catalogue', text: 'Colour and functional ingredient solutions for hotels, restaurants, bakeries and catering.', color: '#B45309', name: 'HORECA catalogue' },
+  industrial: isEs
+    ? { tag: 'Industria alimentaria', title: 'Catálogo Industrial', text: 'Colorantes naturales, alimentos colorantes, vitaminas y premixes con perfiles de estabilidad y documentación regulatoria.', color: '#0369A1', name: 'Catálogo Industrial' }
+    : { tag: 'Food manufacturing', title: 'Industrial catalogue', text: 'Natural colours, colouring foods, vitamins and premixes with stability profiles and regulatory documentation.', color: '#0369A1', name: 'Industrial catalogue' },
+};
+
+const items = catalogs.map((c) => ({ ...c, ...copy[c.id], pdf: resolveCatalogFile(c.file[lang]) }));
+const t = isEs
+  ? { h1: 'Catálogos de productos', sub: 'Especificaciones técnicas y guías de aplicación', download: 'Descargar PDF', request: 'Solicitar catálogo', pending: 'Te enviamos la versión más reciente por email.' }
+  : { h1: 'Product catalogues', sub: 'Technical specifications and application guides', download: 'Download PDF', request: 'Request catalogue', pending: 'We will email you the latest edition.' };
+---
+
+<Hero title={t.h1} subtitle={t.sub} backgroundImage="/assets/fondo2.jpg" />
+
+<main id="main" class="bg-[#FFFDF9]">
+  <section class="catalog-section container mx-auto px-4">
+    <div class="grid gap-6 sm:gap-8 max-w-5xl mx-auto" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));">
+      {items.map((c) => (
+        <div id={c.id} class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-10 text-center flex flex-col items-center justify-between shadow-sm">
+          <div>
+            <span class="inline-block font-verdana text-xs uppercase tracking-[0.25em] font-bold mb-3" style={`color:${c.color}`}>{c.tag}</span>
+            <h2 class="fluid-h2 font-heading font-normal mb-4 text-[#1E1E1E]">{c.title}</h2>
+            <p class="font-verdana text-gray-600 font-light leading-relaxed mb-8 max-w-md text-sm sm:text-base">{c.text}</p>
+          </div>
+          {c.pdf ? (
+            <a href={c.pdf.href} download class="cat-btn" data-track="catalogue_download" data-label={c.id}>
+              {t.download} <span class="opacity-80 font-normal">(PDF, {c.pdf.sizeKb} KB)</span>
+            </a>
+          ) : (
+            <div class="flex flex-col items-center gap-2">
+              <a href={contactUrl(lang, { reason: 'catalogue', product: c.name })} class="cat-btn" data-track="catalogue_request" data-label={c.id}>{t.request}</a>
+              <p class="font-verdana text-xs text-gray-500">{t.pending}</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+</main>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-track]').forEach((el) =>
+    el.addEventListener('click', () => (window as any)._paq?.push(['trackEvent', 'Catalogue', el.dataset.track, el.dataset.label])),
+  );
+</script>
+
+<style>
+  .catalog-section { padding: clamp(3rem, 6vw, 6rem) clamp(1rem, 3vw, 2rem); }
+  .cat-btn { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 48px; padding: 0.85rem 2rem; border-radius: 999px; font-weight: 600; font-size: 0.95rem; color: #fff; background: linear-gradient(90deg, #e30066, #ff1a75); }
+  .cat-btn:hover { box-shadow: 0 8px 20px rgba(227, 0, 102, 0.3); }
+</style>

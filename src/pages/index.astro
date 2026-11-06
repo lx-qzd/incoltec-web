@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Hero from "../components/Hero.astro";
-import OurCompanySection from "../components/OurCompanySection.astro";
+import CompanyTeaser from "../components/CompanyTeaser.astro";
 import ImageBanner from "../components/ImageBanner.astro";
 import VibrantLifeSection from "../components/VibrantLifeSection.astro";
 import TasteColorsSection from "../components/TasteColorsSection.astro";
@@ -11,21 +11,19 @@ import PerfectingFoodSection from "../components/PerfectingFoodSection.astro";
 import LeadMagnet from "../components/LeadMagnet.astro";
 ---
 
-<Layout 
-  title="Incoltec - Wholesale Food Color Manufacturer & Solutions"
-  description="INCOLTEC manufactures premium natural food colorings, coloring foods, vitamins and custom functional solutions for industrial food and beverage processors worldwide."
+<Layout
+  title="Natural food colours for industry | Incoltec"
+  description="Manufacturer of natural food colours, LINICOL colouring foods, vitamins and premixes, with B2B technical support for food and beverage producers."
 >
-  <Header currentPath="/" />
+  <Header />
 
 
-  <main>
-    <!-- Hero Slider (Image 1) -->
-    <Hero />
+  <main id="main">
+    <Hero heading="Natural food colours and colouring foods for the food industry" />
 
-    <!-- Section 1: Vibrant Life (Anchors: #vibrant-life, #compromiso, #calidad) -->
-    <VibrantLifeSection isEs={false} />
+    <!-- 1. Product families (anchors: #taste-colors, #colorantes-naturales, #alimentos-colorantes, #vitaminas-premixes) -->
+    <TasteColorsSection isEs={false} />
 
-    <!-- Image Break 1: Separates Vibrant Life and Taste Colors -->
     <ImageBanner 
       image="/assets/fondo1.jpg" 
       tag="Chromatic Technology" 
@@ -33,10 +31,9 @@ import LeadMagnet from "../components/LeadMagnet.astro";
       subtitle="Connecting culinary culture with world-class chromatic consistency." 
     />
 
-    <!-- Section 2: Taste Colors & VS Section (Anchors: #taste-colors, #colorantes-naturales, #alimentos-colorantes, #vitaminas-premixes) -->
-    <TasteColorsSection isEs={false} />
+    <!-- 2. Applications & technical support (anchors: #perfecting-food, #soluciones, #innovacion) -->
+    <PerfectingFoodSection isEs={false} />
 
-    <!-- Image Break 2: Separates Taste Colors and Perfecting Food -->
     <ImageBanner 
       image="/assets/fondo2.jpg" 
       tag="Certified Quality" 
@@ -44,25 +41,16 @@ import LeadMagnet from "../components/LeadMagnet.astro";
       subtitle="Ensuring clean-label confidence and unmatched sensory brilliance." 
     />
 
-    <!-- Section 3: Perfecting Food (Anchors: #perfecting-food, #soluciones, #innovacion) -->
-    <PerfectingFoodSection isEs={false} />
+    <!-- 3. Quality guarantee (anchors: #vibrant-life, #compromiso, #calidad) -->
+    <VibrantLifeSection isEs={false} />
 
-    <!-- Image Break 3: Separates Perfecting Food and Our Company -->
-    <ImageBanner 
-      image="/assets/fondo3.jpg" 
-      tag="Global Excellence" 
-      title="Science, Heritage and Industrial Scale" 
-      subtitle="Decades of expertise formulating high-performance colors for the global food industry." 
-    />
+    <!-- 4. Company summary; full content lives on /our-company -->
+    <CompanyTeaser />
 
-    <!-- Section 4: Our Company (Anchors: #our-company, #organizacion, #laboratorio) -->
-    <OurCompanySection isEs={false} />
-
-    <!-- Section 5: Contact Us & Catalog Download (Anchor: #contact) -->
-    <LeadMagnet 
-      title="Contact Us"
-      description="Request technical specifications, product catalogs, or tailored formulation samples for your B2B applications."
-      buttonText="Send Request"
+    <!-- 5. Contact (anchor: #contact) -->
+    <LeadMagnet
+      title="Contact us"
+      description="Request samples, technical data sheets or formulation support for your B2B applications."
     />
   </main>
 

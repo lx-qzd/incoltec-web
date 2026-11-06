@@ -1,0 +1,259 @@
+---
+/**
+ * Single contact / sample / data-sheet request form used everywhere
+ * (contact page, home lead block, product sheets) in both languages.
+ * Posts to /api/contact. Product and reason can be prefilled via props or
+ * via the URL (?product=…&reason=…).
+ */
+import { localizePath, type Lang } from '../i18n/routes';
+import { company } from '../data/company';
+
+interface Props {
+  lang: Lang;
+  /** Unique prefix so several forms can coexist on one page. */
+  id?: string;
+  variant?: 'dark' | 'light';
+  product?: string;
+  reason?: string;
+  compact?: boolean;
+  submitLabel?: string;
+}
+
+const { lang, id = 'cf', variant = 'dark', product = '', reason = '', compact = false, submitLabel } = Astro.props;
+const isEs = lang === 'es';
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+const reasons = isEs
+  ? [
+      ['sample', 'Solicitar muestra'],
+      ['datasheet', 'Ficha técnica / documentación'],
+      ['quote', 'Precio / presupuesto'],
+      ['formulation', 'Formulación o soporte técnico'],
+      ['horeca', 'Soluciones HORECA'],
+      ['catalogue', 'Catálogo'],
+      ['other', 'Otro'],
+    ]
+  : [
+      ['sample', 'Request a sample'],
+      ['datasheet', 'Technical data sheet / documentation'],
+      ['quote', 'Price / quotation'],
+      ['formulation', 'Formulation or technical support'],
+      ['horeca', 'HORECA solutions'],
+      ['catalogue', 'Catalogue'],
+      ['other', 'Other'],
+    ];
+
+const t = isEs
+  ? {
+      name: 'Nombre y apellidos', email: 'Email corporativo', company: 'Empresa', phone: 'Teléfono (opcional)',
+      country: 'País', reason: 'Motivo de la consulta', choose: 'Selecciona una opción', product: 'Producto de interés (opcional)',
+      message: '¿Qué necesitas?', messagePh: 'Describe tu aplicación, volúmenes, plazos o la documentación que necesitas.',
+      privacy: 'He leído y acepto la', privacyLink: 'política de privacidad', commercial: 'Deseo recibir comunicaciones comerciales de Incoltec (opcional).',
+      submit: 'Enviar consulta', sending: 'Enviando…', required: 'obligatorio',
+      info: `Responsable: ${company.legalName}. Finalidad: gestionar tu consulta y, solo si lo marcas, enviarte comunicaciones comerciales. Legitimación: tu consentimiento. Derechos: acceso, rectificación, supresión y otros en ${company.email}.`,
+      ok: 'Gracias. Hemos recibido tu consulta y te responderemos lo antes posible.',
+      fail: 'No se ha podido enviar la consulta. Inténtalo de nuevo o escríbenos a ' + company.email + '.',
+    }
+  : {
+      name: 'Full name', email: 'Business email', company: 'Company', phone: 'Phone (optional)',
+      country: 'Country', reason: 'Reason for enquiry', choose: 'Choose an option', product: 'Product of interest (optional)',
+      message: 'What do you need?', messagePh: 'Tell us about your application, volumes, timing or the documents you need.',
+      privacy: 'I have read and accept the', privacyLink: 'privacy policy', commercial: 'I would like to receive commercial communications from Incoltec (optional).',
+      submit: 'Send enquiry', sending: 'Sending…', required: 'required',
+      info: `Controller: ${company.legalName}. Purpose: to handle your enquiry and, only if you tick the box, to send you commercial communications. Legal basis: your consent. Rights: access, rectification, erasure and others at ${company.email}.`,
+      ok: 'Thank you. We have received your enquiry and will reply as soon as possible.',
+      fail: 'Your enquiry could not be sent. Please try again or email us at ' + company.email + '.',
+    };
+const f = (name: string) => `${id}-${name}`;
+---
+
+<form
+  class={`cf cf--${variant} ${compact ? 'cf--compact' : ''}`}
+  id={id}
+  action="/api/contact"
+  method="POST"
+  novalidate
+  data-contact-form
+  data-msg-ok={t.ok}
+  data-msg-fail={t.fail}
+  data-msg-sending={t.sending}
+>
+  <input type="hidden" name="form_type" value="contact" />
+  <input type="hidden" name="lang" value={lang} />
+  <input type="hidden" name="page" value="" data-page-url />
+  <input type="hidden" name="started" value="" data-started />
+  <div class="cf__hp" aria-hidden="true">
+    <label for={f('website')}>Website</label>
+    <input type="text" id={f('website')} name="bot_field" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <div class="cf__grid">
+    <div class="cf__field">
+      <label for={f('name')}>{t.name} <span class="cf__req" aria-hidden="true">*</span></label>
+      <input type="text" id={f('name')} name="name" required maxlength="120" autocomplete="name" />
+    </div>
+    <div class="cf__field">
+      <label for={f('email')}>{t.email} <span class="cf__req" aria-hidden="true">*</span></label>
+      <input type="email" id={f('email')} name="email" required maxlength="160" autocomplete="email" />
+    </div>
+    <div class="cf__field">
+      <label for={f('company')}>{t.company}</label>
+      <input type="text" id={f('company')} name="company" maxlength="160" autocomplete="organization" />
+    </div>
+    {!compact && (
+      <div class="cf__field">
+        <label for={f('phone')}>{t.phone}</label>
+        <input type="tel" id={f('phone')} name="phone" maxlength="40" autocomplete="tel" pattern="[0-9+()\s.\-]{6,40}" />
+      </div>
+    )}
+    <div class="cf__field">
+      <label for={f('country')}>{t.country}</label>
+      <input type="text" id={f('country')} name="country" maxlength="80" autocomplete="country-name" />
+    </div>
+    <div class="cf__field">
+      <label for={f('reason')}>{t.reason} <span class="cf__req" aria-hidden="true">*</span></label>
+      <select id={f('reason')} name="reason" required data-reason>
+        <option value="">{t.choose}</option>
+        {reasons.map(([value, label]) => <option value={value} selected={value === reason}>{label}</option>)}
+      </select>
+    </div>
+    <div class="cf__field cf__field--full">
+      <label for={f('product')}>{t.product}</label>
+      <input type="text" id={f('product')} name="product" maxlength="160" value={product} data-product />
+    </div>
+    <div class="cf__field cf__field--full">
+      <label for={f('message')}>{t.message} <span class="cf__req" aria-hidden="true">*</span></label>
+      <textarea id={f('message')} name="message" required minlength="10" maxlength="4000" rows={compact ? 4 : 5} placeholder={t.messagePh}></textarea>
+    </div>
+  </div>
+
+  <div class="cf__check">
+    <input type="checkbox" id={f('privacy')} name="privacy" required />
+    <label for={f('privacy')}>{t.privacy} <a href={localizePath('/privacy-policy', lang)} target="_blank" rel="noopener">{t.privacyLink}</a> <span class="cf__req" aria-hidden="true">*</span></label>
+  </div>
+  <div class="cf__check">
+    <input type="checkbox" id={f('commercial')} name="commercial" />
+    <label for={f('commercial')}>{t.commercial}</label>
+  </div>
+  <p class="cf__info">{t.info}</p>
+
+  {turnstileKey && <div class="cf-turnstile" data-sitekey={turnstileKey} data-language={lang}></div>}
+
+  <div class="cf__feedback" role="status" aria-live="polite" hidden></div>
+
+  <div class="cf__actions">
+    <button type="submit" class="cf__submit">{submitLabel ?? t.submit}</button>
+  </div>
+</form>
+
+{turnstileKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-contact-form]').forEach((form) => {
+    const params = new URLSearchParams(window.location.search);
+    const product = form.querySelector<HTMLInputElement>('[data-product]');
+    const reason = form.querySelector<HTMLSelectElement>('[data-reason]');
+    if (product && !product.value && params.get('product')) product.value = params.get('product')!;
+    if (reason && !reason.value && params.get('reason')) {
+      const r = params.get('reason')!;
+      if ([...reason.options].some((o) => o.value === r)) reason.value = r;
+    }
+    const page = form.querySelector<HTMLInputElement>('[data-page-url]');
+    if (page) page.value = window.location.href;
+    const started = form.querySelector<HTMLInputElement>('[data-started]');
+    if (started) started.value = String(Date.now());
+
+    const feedback = form.querySelector<HTMLElement>('.cf__feedback')!;
+    const button = form.querySelector<HTMLButtonElement>('.cf__submit')!;
+    const label = button.textContent;
+
+    const show = (msg: string, ok: boolean) => {
+      feedback.hidden = false;
+      feedback.textContent = msg;
+      feedback.classList.toggle('is-ok', ok);
+      feedback.classList.toggle('is-error', !ok);
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      button.disabled = true; // prevents double submission
+      button.textContent = form.dataset.msgSending ?? '…';
+      feedback.hidden = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok) {
+          show(data.message || form.dataset.msgOk || 'OK', true);
+          form.reset();
+          if (page) page.value = window.location.href;
+          if (started) started.value = String(Date.now());
+          (window as any)._paq?.push(['trackEvent', 'Lead', 'contact_submit', reason?.value || 'unknown']);
+        } else {
+          show(data.error || form.dataset.msgFail || 'Error', false);
+        }
+      } catch {
+        show(form.dataset.msgFail || 'Error', false);
+      } finally {
+        button.disabled = false;
+        button.textContent = label;
+        (window as any).turnstile?.reset?.();
+      }
+    });
+  });
+</script>
+
+<style>
+  .cf { width: 100%; text-align: left; }
+  .cf__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .cf__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 1rem 1.25rem; margin-bottom: 1.25rem; }
+  .cf--compact .cf__grid { grid-template-columns: 1fr; }
+  .cf__field--full { grid-column: 1 / -1; }
+  .cf__field label { display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em; margin-bottom: 0.35rem; }
+  .cf__req { color: #e30066; }
+  .cf input[type='text'], .cf input[type='email'], .cf input[type='tel'], .cf select, .cf textarea {
+    width: 100%; min-height: 46px; padding: 0.75rem 1rem; border-radius: 10px; font: inherit; font-size: 0.95rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .cf textarea { min-height: 120px; resize: vertical; }
+  .cf__check { display: flex; align-items: flex-start; gap: 0.65rem; margin-bottom: 0.75rem; font-size: 0.85rem; line-height: 1.45; }
+  .cf__check input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: #e30066; }
+  .cf__check a { text-decoration: underline; }
+  .cf__info { font-size: 0.72rem; line-height: 1.5; opacity: 0.85; margin: 0.5rem 0 1rem; }
+  .cf__feedback { margin: 1rem 0; padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.9rem; font-weight: 500; }
+  .cf__feedback.is-ok { background: rgba(16, 185, 129, 0.15); color: #047857; }
+  .cf__feedback.is-error { background: rgba(239, 68, 68, 0.15); color: #b91c1c; }
+  .cf__actions { display: flex; justify-content: flex-end; margin-top: 1rem; }
+  .cf--compact .cf__actions { justify-content: stretch; }
+  .cf--compact .cf__submit { width: 100%; }
+  .cf__submit {
+    min-height: 48px; padding: 0.8rem 2.25rem; border-radius: 0.85rem; border: 0; cursor: pointer; font-weight: 600; font-size: 1rem;
+    color: #fff; background: linear-gradient(135deg, #e30066 0%, #ff1a75 100%); box-shadow: 0 4px 15px rgba(227, 0, 102, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+  }
+  .cf__submit:hover { transform: translateY(-1px); box-shadow: 0 6px 22px rgba(227, 0, 102, 0.5); }
+  .cf__submit:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+  /* Dark (glass) variant */
+  .cf--dark { color: #fff; }
+  .cf--dark input[type='text'], .cf--dark input[type='email'], .cf--dark input[type='tel'], .cf--dark select, .cf--dark textarea {
+    background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.35); color: #fff;
+  }
+  .cf--dark select option { color: #1e1e1e; }
+  .cf--dark ::placeholder { color: rgba(255, 255, 255, 0.7); }
+  .cf--dark input:focus, .cf--dark select:focus, .cf--dark textarea:focus { background: rgba(255, 255, 255, 0.24); border-color: #fff; }
+  .cf--dark .cf__req { color: #ffc000; }
+  .cf--dark .cf__feedback.is-ok { color: #a7f3d0; background: rgba(16, 185, 129, 0.25); }
+  .cf--dark .cf__feedback.is-error { color: #fecaca; background: rgba(239, 68, 68, 0.25); }
+
+  /* Light variant */
+  .cf--light { color: #1e1e1e; }
+  .cf--light input[type='text'], .cf--light input[type='email'], .cf--light input[type='tel'], .cf--light select, .cf--light textarea {
+    background: #fff; border: 1px solid #cbd5e1; color: #1e1e1e;
+  }
+  .cf--light input:focus, .cf--light select:focus, .cf--light textarea:focus { border-color: #e30066; }
+  .cf--light .cf__info { color: #475569; }
+</style>

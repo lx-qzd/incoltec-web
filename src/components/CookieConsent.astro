@@ -27,16 +27,17 @@ const isEs = urlPath.startsWith('/es');
       necessary: {
         readOnly: true
       },
-      analytics: {},
-      marketing: {}
+      analytics: {
+        autoClear: { cookies: [{ name: /^_pk_/ }] }
+      }
     },
     language: {
       default: isEs ? 'es' : 'en',
       translations: {
         en: {
           consentModal: {
-            title: "We use cookies!",
-            description: "Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.",
+            title: "Cookies on this website",
+            description: "We use necessary cookies to make this site work and, only if you accept, analytics cookies to understand how it is used.",
             acceptAllBtn: "Accept all",
             acceptNecessaryBtn: "Reject all",
             showPreferencesBtn: "Manage preferences",
@@ -51,22 +52,17 @@ const isEs = urlPath.startsWith('/es');
             sections: [
               {
                 title: "Cookie Usage",
-                description: "I use cookies to ensure the basic functionalities of the website and to enhance your online experience. You can choose for each category to opt-in/out whenever you want."
+                description: "We use cookies for the basic functions of the website and, with your consent, to measure its use. You can change your choice at any time."
               },
               {
                 title: "Strictly Necessary Cookies",
-                description: "These cookies are essential for the proper functioning of my website. Without these cookies, the website would not work properly.",
+                description: "These cookies are essential for the website to work and cannot be disabled.",
                 linkedCategory: "necessary"
               },
               {
                 title: "Performance and Analytics Cookies",
-                description: "These cookies allow the website to remember the choices you have made in the past.",
+                description: "Pseudonymous statistics about visits and page use (Matomo, hosted by Incoltec). Only set if you accept.",
                 linkedCategory: "analytics"
-              },
-              {
-                title: "Advertisement and Targeting Cookies",
-                description: "These cookies collect information about how you use the website, which pages you visited and which links you clicked on. All of the data is anonymized and cannot be used to identify you.",
-                linkedCategory: "marketing"
               },
               {
                 title: "More information",
@@ -77,38 +73,33 @@ const isEs = urlPath.startsWith('/es');
         },
         es: {
           consentModal: {
-            title: "¡Usamos cookies!",
-            description: "Hola, este sitio web utiliza cookies esenciales para garantizar su correcto funcionamiento y cookies de seguimiento para comprender cómo interactúas con él. Estas últimas se establecerán solo tras su consentimiento.",
+            title: "Cookies en este sitio web",
+            description: "Usamos cookies necesarias para que el sitio funcione y, solo si las aceptas, cookies analíticas para conocer cómo se utiliza.",
             acceptAllBtn: "Aceptar todas",
             acceptNecessaryBtn: "Rechazar todas",
             showPreferencesBtn: "Gestionar preferencias",
             footer: "<a href=\"/es/privacy-policy\">Política de Privacidad</a>\n<a href=\"/es/cookie-policy\">Política de Cookies</a>"
           },
           preferencesModal: {
-            title: "Preferencias de Cookies",
+            title: "Preferencias de cookies",
             acceptAllBtn: "Aceptar todas",
             acceptNecessaryBtn: "Rechazar todas",
             savePreferencesBtn: "Guardar preferencias",
             closeIconLabel: "Cerrar ventana",
             sections: [
               {
-                title: "Uso de Cookies",
-                description: "Utilizo cookies para garantizar las funciones básicas del sitio web y mejorar su experiencia online. Puede elegir en cada categoría optar por participar/no participar cuando lo desee."
+                title: "Uso de cookies",
+                description: "Usamos cookies para las funciones básicas del sitio y, con tu consentimiento, para medir su uso. Puedes cambiar tu elección en cualquier momento."
               },
               {
                 title: "Cookies estrictamente necesarias",
-                description: "Estas cookies son esenciales para el correcto funcionamiento de mi sitio web. Sin estas cookies, el sitio web no funcionaría correctamente.",
+                description: "Estas cookies son imprescindibles para el funcionamiento del sitio y no se pueden desactivar.",
                 linkedCategory: "necessary"
               },
               {
                 title: "Cookies de rendimiento y análisis",
-                description: "Estas cookies permiten que el sitio web recuerde las elecciones que ha hecho en el pasado.",
+                description: "Estadísticas seudonimizadas de visitas y uso de páginas (Matomo, alojado por Incoltec). Solo se instalan si las aceptas.",
                 linkedCategory: "analytics"
-              },
-              {
-                title: "Cookies publicitarias y de orientación",
-                description: "Estas cookies recopilan información sobre cómo utiliza el sitio web, qué páginas visitó y en qué enlaces hizo clic. Todos los datos están anonimizados y no pueden usarse para identificarlo.",
-                linkedCategory: "marketing"
               },
               {
                 title: "Más información",

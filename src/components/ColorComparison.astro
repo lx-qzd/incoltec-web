@@ -15,6 +15,8 @@ interface Props {
   naturalPoints?: Point[];
   artificialPoints?: Point[];
   bgImage?: string | ImageMetadata;
+  eyebrow?: string;
+  artificialTag?: string;
 }
 
 const { 
@@ -34,7 +36,9 @@ const {
     { title: "WARNING LABELS", text: "Requires strict warning labels in many regions" },
     { title: "DISTRUST", text: "Decreasing consumer trust and market share" }
   ],
-  bgImage = defaultBg
+  bgImage = defaultBg,
+  eyebrow = "Comparison",
+  artificialTag = "Synthetic"
 } = Astro.props;
 
 const imageToRender = (typeof bgImage === 'string' && bgImage.includes('food-colors-application')) ? defaultBg : bgImage;
@@ -47,7 +51,7 @@ const imageToRender = (typeof bgImage === 'string' && bgImage.includes('food-col
       <div class="reveal-up delay-75 w-full flex flex-col items-center">
         <div class="mb-4">
           <span class="font-verdana text-xs uppercase tracking-[0.25em] text-[#008AD8] font-bold">
-            Comparison Analysis
+            {eyebrow}
           </span>
         </div>
         <h2 class="font-heading text-[#89385C] fluid-h1 font-normal mb-6 leading-tight">
@@ -100,7 +104,7 @@ const imageToRender = (typeof bgImage === 'string' && bgImage.includes('food-col
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-red-500/10">
             <h3 class="fluid-h3 font-heading text-gray-700 font-normal m-0">{artificialTitle}</h3>
             <span class="px-3.5 py-1 rounded-xl text-xs font-semibold uppercase tracking-wider bg-red-50 text-red-700 border border-red-200 font-verdana">
-              Synthetic
+              {artificialTag}
             </span>
           </div>
           

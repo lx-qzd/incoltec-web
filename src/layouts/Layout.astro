@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import { getAlternates, getLang, normalizePath, SITE_URL } from '../i18n/routes';
+import { company } from '../data/company';
 
 interface Props {
   title: string;
@@ -9,72 +11,79 @@ interface Props {
   image?: string;
   type?: string;
   noindex?: boolean;
+  /** Extra JSON-LD objects (BreadcrumbList, Article…) for this page. */
+  schema?: Record<string, unknown>[];
 }
 
-const { 
-  title, 
+const {
+  title,
   description,
   image,
   type = "website",
-  noindex = false
+  noindex = false,
+  schema = [],
 } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://incoltec.com';
-const pathname = Astro.url.pathname;
-const isEs = pathname.startsWith('/es') || Astro.currentLocale === 'es';
-const lang = isEs ? 'es' : 'en';
+const siteUrl = (Astro.site ? Astro.site.toString() : SITE_URL).replace(/\/$/, '');
+const pathname = normalizePath(Astro.url.pathname);
+const lang = getLang(pathname);
+const isEs = lang === 'es';
+const alternates = getAlternates(pathname);
 
-// Calculate canonical & alternate i18n URLs
-let enPath = pathname;
-let esPath = pathname;
-if (isEs) {
-  enPath = pathname.replace(/^\/es(\/|$)/, '$1') || '/';
-  esPath = pathname;
-} else {
-  enPath = pathname;
-  esPath = pathname === '/' ? '/es' : `/es${pathname.startsWith('/') ? pathname : `/${pathname}`}`;
-}
+/*
+ * Indexing is OFF unless the build explicitly opts in with SITE_INDEXABLE=true.
+ * Set it only in the production deployment served from incoltec.com so the
+ * Vercel preview/staging domains are never indexed.
+ */
+const indexable =
+  (process.env.SITE_INDEXABLE ?? import.meta.env.SITE_INDEXABLE) === 'true' && !noindex;
 
-const cleanPath = (p: string) => (p.endsWith('/') && p.length > 1 ? p.slice(0, -1) : p);
-const canonicalUrl = `${siteUrl}${cleanPath(pathname)}`;
-const enUrl = `${siteUrl}${cleanPath(enPath)}`;
-const esUrl = `${siteUrl}${cleanPath(esPath)}`;
-const defaultUrl = enUrl;
+const canonicalUrl = `${siteUrl}${pathname === '/' ? '/' : pathname}`;
+const abs = (p: string) => `${siteUrl}${p === '/' ? '/' : p}`;
 
 const defaultDesc = isEs
-  ? "INCOLTEC desarrolla ingredientes, colorantes naturales y soluciones funcionales innovadoras para la industria alimentaria B2B a nivel global."
-  : "INCOLTEC manufactures natural colors, coloring foods, vitamins and functional food ingredients for global food and beverage processors.";
+  ? "Fabricación y soluciones de color para alimentos y bebidas: colorantes naturales, alimentos colorantes LINICOL, vitaminas y soporte técnico B2B."
+  : "Natural food colours, colouring foods, vitamins and premixes with B2B technical support for food and beverage manufacturers.";
 
 const metaDescription = description || defaultDesc;
-const pageTitle = title.includes("INCOLTEC") ? title : `${title} | INCOLTEC - Shaping the Future of Food Appeal`;
-const ogImage = image || `${siteUrl}/assets/food-colors-application.png`;
+// Short, unique titles: "<page> | Incoltec". No long shared English suffix.
+const pageTitle = /incoltec/i.test(title) ? title : `${title} | Incoltec`;
+const ogImage = image
+  ? (image.startsWith('http') ? image : `${siteUrl}${image}`)
+  : `${siteUrl}/assets/food-colors-application.png`;
 
-// Organization Schema (JSON-LD) for rich snippet
+const matomoSiteId = import.meta.env.PUBLIC_MATOMO_SITE_ID;
+const matomoUrl = import.meta.env.PUBLIC_MATOMO_URL || 'https://stats.incoltec.com/';
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": `${siteUrl}/#organization`,
-  "name": "INCOLTEC",
-  "legalName": "Innovaciones Colorantes Técnicos S.L.",
+  "name": company.brand,
+  "legalName": company.legalName,
+  "taxID": company.taxId,
   "url": siteUrl,
   "logo": `${siteUrl}/assets/LogoIncoltec.png`,
-  "image": ogImage,
-  "description": "Manufacturer of high-performance natural food colors, coloring foods, vitamins and premixes for food and beverage manufacturers worldwide.",
+  "email": company.email,
+  "telephone": company.phone,
   "address": {
     "@type": "PostalAddress",
-    "addressCountry": "ES"
+    "streetAddress": company.headquarters.street,
+    "postalCode": company.headquarters.postalCode,
+    "addressLocality": company.headquarters.city,
+    "addressRegion": company.headquarters.region,
+    "addressCountry": company.headquarters.countryCode
   },
   "contactPoint": [
     {
       "@type": "ContactPoint",
       "contactType": "sales",
-      "email": "info@incoltec.com",
+      "email": company.email,
+      "telephone": company.phone,
       "availableLanguage": ["English", "Spanish"]
     }
   ],
-  "sameAs": [
-    "https://www.linkedin.com/company/incoltec"
-  ]
+  "sameAs": [company.social.linkedin, company.social.youtube]
 };
 ---
 
@@ -83,71 +92,86 @@ const organizationSchema = {
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-		<link rel="icon" type="image/png" href="/assets/logo-incoltec.png" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/assets/LogoIncoltec.png" />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Primary SEO Meta Tags -->
 		<title>{pageTitle}</title>
-		<meta name="title" content={pageTitle} />
 		<meta name="description" content={metaDescription} />
-		{noindex ? <meta name="robots" content="noindex, nofollow" /> : <meta name="robots" content="index, follow" />}
+		<meta name="robots" content={indexable ? "index, follow" : "noindex, nofollow"} />
 		<link rel="canonical" href={canonicalUrl} />
 
-		<!-- Internationalization (i18n) Alternate Tags -->
-		<link rel="alternate" hreflang="en" href={enUrl} />
-		<link rel="alternate" hreflang="es" href={esUrl} />
-		<link rel="alternate" hreflang="x-default" href={defaultUrl} />
+		<!-- hreflang: only reciprocal pairs for pages that really exist in both languages -->
+		{alternates.translated && (
+			<>
+				<link rel="alternate" hreflang="en" href={abs(alternates.en)} />
+				<link rel="alternate" hreflang="es" href={abs(alternates.es)} />
+				<link rel="alternate" hreflang="x-default" href={abs(alternates.en)} />
+			</>
+		)}
 
-		<!-- OpenGraph / Facebook / LinkedIn / WhatsApp -->
+		<!-- Open Graph -->
 		<meta property="og:type" content={type} />
-		<meta property="og:site_name" content="INCOLTEC" />
+		<meta property="og:site_name" content="Incoltec" />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={metaDescription} />
 		<meta property="og:image" content={ogImage} />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
 		<meta property="og:image:alt" content={pageTitle} />
-		<meta property="og:locale" content={isEs ? "es_ES" : "en_US"} />
-		<meta property="og:locale:alternate" content={isEs ? "en_US" : "es_ES"} />
+		<meta property="og:locale" content={isEs ? "es_ES" : "en_GB"} />
+		{alternates.translated && <meta property="og:locale:alternate" content={isEs ? "en_GB" : "es_ES"} />}
 
 		<!-- Twitter Cards -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:url" content={canonicalUrl} />
 		<meta name="twitter:title" content={pageTitle} />
 		<meta name="twitter:description" content={metaDescription} />
 		<meta name="twitter:image" content={ogImage} />
 
-		<!-- Structured Data (JSON-LD Organization Schema) -->
+		<!-- Structured data -->
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)} />
+		{schema.map((s) => <script type="application/ld+json" is:inline set:html={JSON.stringify(s)} />)}
 
 		<!-- Typography: Golden Hills (Signature Headings), Playfair Display (Serif), Inter (Body Sans) -->
-		<link rel="preload" href="/fonts/GoldenHillsDEMO.ttf" as="font" type="font/ttf" crossorigin />
+		<link rel="preload" href="/fonts/GoldenHillsDEMO.woff2" as="font" type="font/woff2" crossorigin />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 
-		<!-- Matomo Analytics Placeholder -->
-		<script type="text/plain" data-cookiecategory="analytics" is:inline>
-			var _paq = window._paq = window._paq || [];
-			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-			_paq.push(['trackPageView']);
-			_paq.push(['enableLinkTracking']);
-			(function() {
-				var u="https://stats.incoltec.com/";
-				_paq.push(['setTrackerUrl', u+'matomo.php']);
-				_paq.push(['setSiteId', 'PLACEHOLDER_ID']);
-				var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-				g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-			})();
-		</script>
-		<!-- End Matomo Code -->
+		<!-- Matomo: only rendered when PUBLIC_MATOMO_SITE_ID is set; runs only after analytics consent -->
+		{matomoSiteId && (
+			<script type="text/plain" data-category="analytics" is:inline define:vars={{ matomoSiteId, matomoUrl }}>
+				var _paq = window._paq = window._paq || [];
+				_paq.push(['trackPageView']);
+				_paq.push(['enableLinkTracking']);
+				(function() {
+					var u = matomoUrl;
+					_paq.push(['setTrackerUrl', u + 'matomo.php']);
+					_paq.push(['setSiteId', matomoSiteId]);
+					var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+					g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+				})();
+			</script>
+		)}
 	</head>
 	<body class="bg-white text-[#1E1E1E] antialiased selection:bg-[#E30066]/20 selection:text-[#89385C]">
+		<a href="#main" class="skip-link">{isEs ? "Saltar al contenido" : "Skip to content"}</a>
 		<slot />
 		<WhatsAppButton />
 		<CookieConsent />
+
+		<script is:inline>
+			// Skip link: focus the page's <main> (some pages render it inside components).
+			document.querySelector('.skip-link')?.addEventListener('click', function (e) {
+				var m = document.getElementById('main') || document.querySelector('main');
+				if (!m) return;
+				e.preventDefault();
+				m.setAttribute('tabindex', '-1');
+				m.focus();
+			});
+		</script>
 
 		<!-- Scroll-Triggered Micro-Interactions Observer -->
 		<script is:inline>

@@ -26,4 +26,4 @@ El **Carmín de Cochinilla E-120** es reconocido internacionalmente por su incom
 
 1. **Insuperable Resistencia Térmica:** Soporta autoclaves, UHT y cocciones industriales severas.
 2. **Gama de Tonalidades:** Desde rojo carmesí brillante hasta púrpura profundo según el pH y formulación.
-3. **Disponibilidad Global:** Stock constante certificado bajo ISO y normativas internacionales.
+3. **Suministro fiable:** stock constante bajo estándares de calidad internacionales.
