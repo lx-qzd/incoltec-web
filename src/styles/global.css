@@ -1,30 +1,12 @@
 @import "tailwindcss";
 
-/* One variable-range face covers every weight; WOFF2 first, TTF fallback. */
-@font-face {
-  font-family: 'Golden Hills';
-  src: url('/fonts/GoldenHillsDEMO.woff2') format('woff2'),
-       url('/fonts/GoldenHillsDEMO.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Golden Hills DEMO';
-  src: url('/fonts/GoldenHillsDEMO.woff2') format('woff2'),
-       url('/fonts/GoldenHillsDEMO.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@theme {
-  --font-heading: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
-  --font-golden: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
-  --font-script: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
-  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+/* `inline` because the values reference the Fonts API variables. */
+@theme inline {
+  --font-heading: var(--font-golden-hills), var(--font-great-vibes), cursive;
+  --font-golden: var(--font-golden-hills), var(--font-great-vibes), cursive;
+  --font-script: var(--font-golden-hills), var(--font-great-vibes), cursive;
+  --font-serif: var(--font-playfair), Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-verdana: 'Verdana', Geneva, Tahoma, sans-serif;
 }
 
@@ -41,12 +23,12 @@
   --c-white: #FFFFFF;
 
   /* Typography Hierarchy */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, Cambria, 'Times New Roman', serif;
   --font-verdana: 'Verdana', Geneva, Tahoma, sans-serif;
   --font-primary: var(--font-sans);
-  --font-heading: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
-  --font-script: 'Golden Hills', 'Golden Hills DEMO', 'Great Vibes', cursive;
+  --font-heading: var(--font-golden-hills), var(--font-great-vibes), cursive;
+  --font-script: var(--font-golden-hills), var(--font-great-vibes), cursive;
   /* 2026 Fluid Typography & Dynamic Scaling Baseline (WCAG 1.4.4 compliant, max <= 2.5x min) */
   --fluid-hero: clamp(2.75rem, 1.25rem + 5.5vw, 7.5rem);
   --fluid-display: clamp(2.25rem, 1.25rem + 3.8vw, 5.25rem);

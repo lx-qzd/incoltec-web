@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Page not found / Página no encontrada" description="The page you are looking for does not exist." noindex>
+  <Header />
+  <main id="main" class="nf">
+    <div class="nf__inner">
+      <p class="nf__code">404</p>
+      <div class="nf__cols">
+        <section lang="es">
+          <h1>Página no encontrada</h1>
+          <p>Puede que la dirección haya cambiado o ya no exista.</p>
+          <ul>
+            <li><a href="/es">Inicio</a></li>
+            <li><a href="/es/products">Productos</a></li>
+            <li><a href="/es/catalogs">Catálogos</a></li>
+            <li><a href="/es/contact">Contacto</a></li>
+          </ul>
+        </section>
+        <section lang="en">
+          <h2>Page not found</h2>
+          <p>The address may have changed or no longer exists.</p>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/catalogs">Catalogues</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Report broken URLs to analytics (only runs if Matomo is enabled and consented).
+  (window as any)._paq?.push(['trackEvent', 'Error', '404', location.pathname + location.search]);
+</script>
+
+<style>
+  .nf { padding: clamp(4rem, 10vw, 8rem) 1rem; background: #fffdf9; }
+  .nf__inner { max-width: 880px; margin: 0 auto; text-align: center; }
+  .nf__code { font-family: var(--font-heading); font-size: clamp(4rem, 3rem + 6vw, 8rem); color: #89385c; line-height: 1; margin-bottom: 2rem; }
+  .nf__cols { display: grid; gap: 2.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); text-align: left; }
+  .nf h1, .nf h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: #1e1e1e; }
+  .nf p { color: #475569; margin-bottom: 1rem; }
+  .nf ul { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; }
+  .nf a { display: inline-block; padding: 0.5rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.6rem; font-weight: 600; color: #1e1e1e; }
+  .nf a:hover { border-color: #e30066; color: #e30066; }
+</style>

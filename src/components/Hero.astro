@@ -17,36 +17,42 @@ const { title, subtitle, backgroundImage, heading } = Astro.props;
 const pathname = Astro.url.pathname;
 const isEs = pathname.startsWith('/es') || Astro.currentLocale === 'es';
 
+// Responsive WebP variants (srcset) so phones don't download the 1920px file.
+const responsive = async (src: ImageMetadata) => {
+  const img = await getImage({ src, format: 'webp', width: 1920, widths: [640, 960, 1280, 1920] });
+  return { src: img.src, srcset: img.srcSet.attribute };
+};
+
 // Default 3-slide homepage data
 const defaultSlides = isEs ? [
   {
-    image: (await getImage({ src: fondo3, format: 'webp', width: 1920 })).src,
+    image: await responsive(fondo3),
     title: "Sabores Locales",
     subtitle: "Perfeccionando alimentos, protegiendo formulaciones"
   },
   {
-    image: (await getImage({ src: fondo1, format: 'webp', width: 1920 })).src,
+    image: await responsive(fondo1),
     title: "Colores Globales",
     subtitle: "Llevando los colores del mundo a cada sabor"
   },
   {
-    image: (await getImage({ src: fondo2, format: 'webp', width: 1920 })).src,
+    image: await responsive(fondo2),
     title: "Calidad Confiable",
     subtitle: "Transformamos formulación en apetito"
   }
 ] : [
   {
-    image: (await getImage({ src: fondo3, format: 'webp', width: 1920 })).src,
+    image: await responsive(fondo3),
     title: "Local Flavors",
     subtitle: "Perfecting Food, Protecting Formulation"
   },
   {
-    image: (await getImage({ src: fondo1, format: 'webp', width: 1920 })).src,
+    image: await responsive(fondo1),
     title: "Global Colors",
     subtitle: "Bringing the world's colors to every flavor"
   },
   {
-    image: (await getImage({ src: fondo2, format: 'webp', width: 1920 })).src,
+    image: await responsive(fondo2),
     title: "Trusted Quality",
     subtitle: "We turn formulation into appetite"
   }
@@ -54,25 +60,26 @@ const defaultSlides = isEs ? [
 
 const isSingleHero = Boolean(title || backgroundImage);
 
-// Resolve optimized single background if provided
-let singleBgUrl = backgroundImage || (await getImage({ src: fondo1, format: 'webp', width: 1920 })).src;
-if (backgroundImage) {
-  if (backgroundImage.includes("fondo1")) {
-    singleBgUrl = (await getImage({ src: fondo1, format: 'webp', width: 1920 })).src;
-  } else if (backgroundImage.includes("fondo2")) {
-    singleBgUrl = (await getImage({ src: fondo2, format: 'webp', width: 1920 })).src;
-  } else if (backgroundImage.includes("fondo3")) {
-    singleBgUrl = (await getImage({ src: fondo3, format: 'webp', width: 1920 })).src;
-  }
-}
+// Resolve optimized single background
+const bgMap: Record<string, ImageMetadata> = { fondo1, fondo2, fondo3 };
+const bgKey = Object.keys(bgMap).find((k) => backgroundImage?.includes(k)) ?? 'fondo1';
+const singleBg = await responsive(bgMap[bgKey]);
 ---
 
 {isSingleHero ? (
   <section class="relative w-full min-h-[clamp(26rem,55dvh,40rem)] flex items-center justify-center overflow-hidden bg-black py-20 sm:py-24 px-4 @container">
-    <div 
-      class="absolute inset-0 bg-cover bg-center slide-bg transform scale-105 transition-transform duration-[10s] ease-out" 
-      style={`background-image: url('${singleBgUrl}')`}
-    ></div>
+    <img
+      src={singleBg.src}
+      srcset={singleBg.srcset}
+      sizes="100vw"
+      alt=""
+      width="1920"
+      height="1080"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      class="absolute inset-0 w-full h-full object-cover slide-bg transform scale-105 transition-transform duration-[10s] ease-out"
+    />
     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/60 pointer-events-none"></div>
 
     <div class="relative z-20 max-w-3xl mx-auto w-full text-center px-4 reveal-scale delay-100">
@@ -99,7 +106,18 @@ if (backgroundImage) {
     <div class="relative w-full h-full slider-wrapper">
       {defaultSlides.map((slide, index) => (
         <div class={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out slide ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} data-index={index}>
-          <div class="absolute inset-0 bg-cover bg-center slide-bg transform scale-105 transition-transform duration-[10s] ease-out" style={`background-image: url('${slide.image}')`}></div>
+          <img
+            src={slide.image.src}
+            srcset={slide.image.srcset}
+            sizes="100vw"
+            alt=""
+            width="1920"
+            height="1080"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchpriority={index === 0 ? 'high' : 'low'}
+            class="absolute inset-0 w-full h-full object-cover slide-bg transform scale-105 transition-transform duration-[10s] ease-out"
+          />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/50 pointer-events-none"></div>
           <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 z-10">
             <p class="font-heading script-text text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.7)] leading-[1.05] mb-4 sm:mb-6 transform translate-y-8 opacity-0 transition-all duration-1000 delay-300 slide-title max-w-[92vw] text-[clamp(3.25rem,1.5rem+7.5vw,9.5rem)] flowy-text">{slide.title}</p>

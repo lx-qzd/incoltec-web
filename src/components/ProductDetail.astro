@@ -46,7 +46,7 @@ const t = isEs
       <div class="header-layout">
         {product.image && (
           <div class="product-hero-media">
-            <img src={product.image} alt={product.title} width="240" height="240" class="product-hero-img" decoding="async" />
+            <img src={product.image} alt={product.title} width="240" height="240" class="product-hero-img" fetchpriority="high" />
           </div>
         )}
         <div class="header-text">
