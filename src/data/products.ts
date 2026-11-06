@@ -1,4 +1,5 @@
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
 import type { Lang } from '../i18n/routes';
 
 export type FamilyKey = 'natural-colours' | 'colouring-foods' | 'vitamins-premixes';
@@ -31,7 +32,7 @@ export interface LocalizedProduct {
   color?: string;
   solubility?: string;
   phRange?: string;
-  image?: string;
+  image?: ImageMetadata;
   /** The entry whose markdown body should be rendered. */
   entry: CollectionEntry<'products'> | CollectionEntry<'products-en'>;
 }

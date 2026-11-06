@@ -11,7 +11,7 @@ color: "Rojo Rubí / Escarlata"
 solubility: "Hidrosoluble"
 phRange: "2.5 - 4.5"
 pdfLink: "/downloads/rabano-ficha-tecnica.pdf"
-image: "/assets/products/colouring-foods/Alimento_colorante_Rábano-1.webp"
+image: "../../assets/products/colouring-foods/Alimento_colorante_Rábano-1.webp"
 ---
 
 El **Concentrado de Rábano Rojo** es una de las soluciones predilectas de la industria para lograr tonos rojos vibrantes y apetitosos en bebidas y gominolas, sin recurrir a aditivos artificiales ni números E.

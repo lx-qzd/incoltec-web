@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import SectorPage from '../../components/SectorPage.astro';
+import { getSectors } from '../../data/sectors';
+import { localizePath, SITE_URL } from '../../i18n/routes';
+
+const lang = 'en';
+
+export async function getStaticPaths() {
+  const sectors = await getSectors('en');
+  return sectors.map((sector) => ({ params: { slug: sector.slug }, props: { sector, others: sectors.filter((s) => s.slug !== sector.slug) } }));
+}
+
+const { sector, others } = Astro.props;
+const d = sector.entry.data;
+const abs = (p: string) => `${SITE_URL}${p}`;
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: lang === 'es' ? 'Inicio' : 'Home', item: abs(localizePath('/', lang)) },
+    { '@type': 'ListItem', position: 2, name: lang === 'es' ? 'Soluciones por sector' : 'Solutions by sector', item: abs(localizePath('/color-solutions', lang)) },
+    { '@type': 'ListItem', position: 3, name: d.eyebrow, item: abs(localizePath(`/sectors/${sector.slug}`, lang)) },
+  ],
+};
+---
+
+<Layout title={d.metaTitle} description={d.description} schema={[breadcrumb]}>
+  <Header />
+  <SectorPage lang={lang} sector={sector} others={others} />
+  <Footer />
+</Layout>

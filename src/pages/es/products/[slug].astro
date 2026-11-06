@@ -4,6 +4,7 @@ import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import ProductDetail from '../../../components/ProductDetail.astro';
 import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
 import { getLocalizedProducts, localizeProduct } from '../../../data/products';
 import { localizePath, SITE_URL } from '../../../i18n/routes';
 
@@ -16,6 +17,8 @@ export async function getStaticPaths() {
 
 const product = await localizeProduct(Astro.props.product, lang);
 const all = await getLocalizedProducts(lang);
+// Social preview image (Open Graph) generated from the optimised product photo.
+const ogImage = product.image ? (await getImage({ src: product.image, width: 1200, format: 'jpg' })).src : undefined;
 const related = all.filter((p) => p.family === product.family && p.id !== product.id).slice(0, 4);
 
 const abs = (p: string) => `${SITE_URL}${p}`;
@@ -33,7 +36,7 @@ const breadcrumb = {
 <Layout
   title={product.title}
   description={product.description}
-  image={product.image}
+  image={ogImage}
   schema={[breadcrumb]}
 >
   <Header />

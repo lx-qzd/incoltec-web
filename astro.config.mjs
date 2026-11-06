@@ -84,6 +84,8 @@ export default defineConfig({
     '/perfecting-food': '/color-solutions',
     '/es/perfecting-food': '/es/color-solutions',
     '/es/soluciones-de-color': '/es/color-solutions',
+    '/sectors': '/color-solutions',
+    '/es/sectors': '/es/color-solutions',
     // Old incoltec.com URLs
     '/contacto': '/es/contact',
     '/aviso-legal': '/es/legal-notice',
@@ -102,7 +104,7 @@ export default defineConfig({
     sitemap({
       // Only real pages; API routes and redirects are excluded automatically.
       i18n: { defaultLocale: 'en', locales: { en: 'en', es: 'es' } },
-      filter: (page) => !page.includes('/api/') && !/\/404$/.test(page),
+      filter: (page) => !page.includes('/api/') && !/\/(404|newsletter)$/.test(page),
       // Only the namespaces we use (hreflang alternates) to keep the XML small.
       namespaces: { news: false, video: false, image: false },
     }),

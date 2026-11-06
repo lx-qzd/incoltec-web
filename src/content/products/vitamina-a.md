@@ -11,7 +11,7 @@ color: "Amarillo Claro / Neutro"
 solubility: "Liposoluble y Emulsiones hidrosolubles"
 phRange: "3.5 - 7.5"
 pdfLink: "/downloads/vitamina-a-ficha-tecnica.pdf"
-image: "/assets/products/vitamins-premixes/vitaminas-2.webp"
+image: "../../assets/products/vitamins-premixes/vitaminas-2.webp"
 ---
 
 La **Vitamina A** suministrada por INCOLTEC cuenta con formulaciones microencapsuladas protegidas contra la oxidación, garantizando biodisponibilidad y vida útil extendida en alimentos de consumo diario.

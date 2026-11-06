@@ -226,7 +226,7 @@ a:hover {
 }
 
 /* Utilities for text colors */
-.text-cyan { color: var(--c-cyan); }
+.text-cyan { color: #0369a1; } /* darker than --c-cyan for 4.5:1 text contrast */
 .text-magenta { color: var(--c-magenta); }
 .text-yellow { color: var(--c-yellow); }
 .text-gradient {

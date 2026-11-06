@@ -10,7 +10,7 @@ color: "Amarillo/Naranja"
 solubility: "Hidrosoluble y Liposoluble"
 phRange: "2.0 - 8.0"
 pdfLink: "/downloads/betacaroteno-10-ficha-tecnica.pdf"
-image: "/assets/products/natural-colourants/bowl-of-butter-curls-2023-11-27-05-11-43-utc-300x300.webp"
+image: "../../assets/products/natural-colourants/bowl-of-butter-curls-2023-11-27-05-11-43-utc-300x300.webp"
 ---
 
 El **Betacaroteno Natural 10%** es nuestra solución de referencia para sustituir amarillos y naranjas sintéticos. Se extrae cuidadosamente y se estandariza para garantizar un poder tintóreo uniforme lote a lote.

@@ -11,7 +11,7 @@ color: "Blanco Marfil / Neutro"
 solubility: "Liposoluble y Emulsión dispersable"
 phRange: "3.5 - 7.5"
 pdfLink: "/downloads/vitamina-d3-ficha-tecnica.pdf"
-image: "/assets/products/vitamins-premixes/vitaminas-3.webp"
+image: "../../assets/products/vitamins-premixes/vitaminas-3.webp"
 ---
 
 Nuestra **Vitamina D3 (Colecalciferol)** se ofrece en polvo fino de flujo libre y soluciones aceitosas microestabilizadas con tocoferoles naturales para resistir procesos de homogeneización y envasado aséptico.

@@ -11,7 +11,7 @@ color: "Rojo Granate / Púrpura Floral"
 solubility: "Hidrosoluble"
 phRange: "2.5 - 4.5"
 pdfLink: "/downloads/hibisco-ficha-tecnica.pdf"
-image: "/assets/products/colouring-foods/Alimento_colorante_Hibisco-1.webp"
+image: "../../assets/products/colouring-foods/Alimento_colorante_Hibisco-1.webp"
 ---
 
 El **Concentrado de Flor de Hibisco** ofrece una tonalidad roja floral con gran atractivo para el consumidor consciente. Permite declarar simplemente "extracto de flor de hibisco" en la lista de ingredientes.

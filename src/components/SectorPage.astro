@@ -1,0 +1,109 @@
+---
+import { render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Hero from './Hero.astro';
+import LeadMagnet from './LeadMagnet.astro';
+import { getLocalizedProducts, swatch } from '../data/products';
+import { contactUrl, localizePath, type Lang } from '../i18n/routes';
+import type { Sector } from '../data/sectors';
+
+interface Props { lang: Lang; sector: Sector; others: Sector[] }
+const { lang, sector, others } = Astro.props;
+const es = lang === 'es';
+const data = sector.entry.data;
+const { Content } = await render(sector.entry);
+const all = await getLocalizedProducts(lang);
+const products = data.products
+  .map((id) => {
+    const p = all.find((x) => x.id === id);
+    if (!p) throw new Error(`Sector "${sector.slug}" references unknown product "${id}"`);
+    return p;
+  });
+const L = (p: string) => localizePath(p, lang);
+---
+
+<Hero title={data.title} subtitle={data.description} backgroundImage="/assets/fondo3.jpg" />
+
+<main id="main" class="sector">
+  <div class="sector__wrap">
+    <nav aria-label={es ? 'Ruta de navegación' : 'Breadcrumb'} class="sector__crumbs">
+      <ol>
+        <li><a href={L('/')}>{es ? 'Inicio' : 'Home'}</a></li>
+        <li><a href={L('/color-solutions')}>{es ? 'Soluciones por sector' : 'Solutions by sector'}</a></li>
+        <li aria-current="page">{data.eyebrow}</li>
+      </ol>
+    </nav>
+
+    <div class="sector__grid">
+      <article class="sector__body">
+        <Content />
+        <p class="sector__cta">
+          <a href={contactUrl(lang, { reason: 'formulation', product: data.eyebrow })} class="btn-primary">{es ? 'Solicitar asesoramiento técnico' : 'Request technical advice'}</a>
+          <a href={contactUrl(lang, { reason: 'sample', product: data.eyebrow })} class="btn-secondary">{es ? 'Solicitar muestras' : 'Request samples'}</a>
+        </p>
+      </article>
+
+      <aside class="sector__aside" aria-labelledby="rec-title">
+        <h2 id="rec-title">{es ? 'Productos recomendados' : 'Recommended products'}</h2>
+        <ul class="sector__products">
+          {products.map((p) => (
+            <li>
+              <a href={L(`/products/${p.id}`)} class="sector__product">
+                {p.image && <Image src={p.image} alt="" width={112} />}
+                <span>
+                  <strong>{p.title}</strong>
+                  <small><span class="dot" style={`background:${swatch(p.color)}`}></span>{p.familyLabel}</small>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <h2 class="sector__other-title">{es ? 'Otros sectores' : 'Other sectors'}</h2>
+        <ul class="sector__others">
+          {others.map((o) => <li><a href={L(`/sectors/${o.slug}`)}>{o.entry.data.eyebrow}</a></li>)}
+        </ul>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<LeadMagnet
+  title={es ? `Hablemos de tu aplicación` : `Let's talk about your application`}
+  description={es ? 'Cuéntanos tu producto y proceso y te propondremos colorantes, dosis y muestras.' : 'Tell us about your product and process and we will propose colours, dosage and samples.'}
+  reason="formulation"
+/>
+
+<style>
+  .sector { background: #fffdf9; padding: clamp(2rem, 5vw, 4rem) 1rem clamp(3rem, 6vw, 5rem); }
+  .sector__wrap { max-width: 1200px; margin: 0 auto; }
+  .sector__crumbs ol { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; list-style: none; padding: 0; margin: 0 0 2rem; font-size: 0.85rem; color: #475569; }
+  .sector__crumbs li + li::before { content: '›'; margin-right: 0.5rem; opacity: 0.6; }
+  .sector__crumbs a:hover { text-decoration: underline; }
+  .sector__grid { display: grid; gap: clamp(2rem, 4vw, 3rem); }
+  @media (min-width: 1024px) { .sector__grid { grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr); align-items: start; } .sector__aside { position: sticky; top: 7rem; } }
+  .sector__body { color: #334155; line-height: 1.75; font-size: 1.05rem; }
+  .sector__body :global(p) { margin-bottom: 1rem; }
+  .sector__body :global(h2) { font-size: 1.45rem; font-weight: 700; color: #1e1e1e; margin: 2rem 0 0.75rem; }
+  .sector__body :global(ul) { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
+  .sector__body :global(li) { margin-bottom: 0.4rem; }
+  .sector__body :global(strong) { color: #1e1e1e; }
+  .sector__cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+  .btn-primary, .btn-secondary { display: inline-flex; align-items: center; min-height: 46px; padding: 0.7rem 1.4rem; border-radius: 0.75rem; font-weight: 600; font-size: 0.95rem; }
+  .btn-primary { background: #e30066; color: #fff; }
+  .btn-primary:hover { background: #c20055; }
+  .btn-secondary { border: 1px solid #1e1e1e; color: #1e1e1e; }
+  .btn-secondary:hover { background: #1e1e1e; color: #fff; }
+  .sector__aside { background: #fff; border: 1px solid #e2e8f0; border-radius: 1rem; padding: 1.5rem; }
+  .sector__aside h2 { font-size: 1.15rem; font-weight: 700; color: #1e1e1e; margin-bottom: 1rem; }
+  .sector__products, .sector__others { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+  .sector__product { display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; }
+  .sector__product:hover { border-color: #e30066; }
+  .sector__product img { width: 56px; height: 56px; object-fit: cover; border-radius: 0.5rem; flex-shrink: 0; }
+  .sector__product strong { display: block; font-size: 0.9rem; color: #1e1e1e; line-height: 1.3; }
+  .sector__product small { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; color: #64748b; margin-top: 0.15rem; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); }
+  .sector__other-title { margin-top: 1.75rem; }
+  .sector__others { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+  .sector__others a { display: block; padding: 0.5rem 0.75rem; border-radius: 0.6rem; background: #f8fafc; font-size: 0.9rem; font-weight: 600; color: #1e1e1e; }
+  .sector__others a:hover { color: #e30066; }
+</style>

@@ -167,6 +167,10 @@ const singleBg = await responsive(bgMap[bgKey]);
     let currentSlide = 0;
     const totalSlides = slides.length;
     let autoSlideInterval;
+    // Only the home page has the slider; single-image heroes have no slides.
+    if (!totalSlides || !prevBtn || !nextBtn) return;
+    const slider = document.getElementById('hero-slider');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Initialize first slide as active explicitly to trigger CSS transitions
     setTimeout(() => {
@@ -198,9 +202,16 @@ const singleBg = await responsive(bgMap[bgKey]);
       resetInterval();
     });
 
+    // Auto-advance pauses on hover/focus and is off for reduced-motion users (WCAG 2.2.2).
     const startInterval = () => {
-      autoSlideInterval = setInterval(nextSlide, 7000);
+      clearInterval(autoSlideInterval);
+      if (!reduceMotion) autoSlideInterval = setInterval(nextSlide, 7000);
     };
+    const stopInterval = () => clearInterval(autoSlideInterval);
+    slider?.addEventListener('mouseenter', stopInterval);
+    slider?.addEventListener('mouseleave', startInterval);
+    slider?.addEventListener('focusin', stopInterval);
+    slider?.addEventListener('focusout', startInterval);
 
     const resetInterval = () => {
       clearInterval(autoSlideInterval);

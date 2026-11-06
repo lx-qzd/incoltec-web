@@ -1,0 +1,36 @@
+---
+import { getSectors } from '../data/sectors';
+import { getLang, localizePath } from '../i18n/routes';
+const lang = getLang(Astro.url.pathname);
+const es = lang === 'es';
+const sectors = await getSectors(lang);
+---
+
+<section class="sl" aria-labelledby="sl-title">
+  <div class="sl__wrap">
+    <h2 id="sl-title">{es ? 'Guías por sector' : 'Guides by sector'}</h2>
+    <p>{es ? 'Qué colorante elegir según tu producto, su pH y su proceso.' : 'Which colour to choose for your product, its pH and its process.'}</p>
+    <ul>
+      {sectors.map((s) => (
+        <li>
+          <a href={localizePath(`/sectors/${s.slug}`, lang)}>
+            <strong>{s.entry.data.title}</strong>
+            <span>{s.entry.data.description}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .sl { background: #fff; padding: clamp(3rem, 6vw, 5rem) 1rem; border-top: 1px solid #ede8e0; }
+  .sl__wrap { max-width: 1240px; margin: 0 auto; }
+  .sl h2 { font-family: var(--font-heading); font-size: var(--fluid-h2); color: #89385c; text-align: center; margin-bottom: 0.5rem; }
+  .sl > .sl__wrap > p { text-align: center; color: #475569; margin-bottom: 2rem; }
+  .sl ul { list-style: none; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+  .sl a { display: block; height: 100%; padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 1rem; background: #fffdf9; }
+  .sl a:hover { border-color: #e30066; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+  .sl strong { display: block; font-size: 1.05rem; color: #1e1e1e; margin-bottom: 0.4rem; }
+  .sl span { font-size: 0.875rem; color: #475569; line-height: 1.5; }
+</style>

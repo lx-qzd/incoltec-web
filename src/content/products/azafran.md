@@ -11,7 +11,7 @@ color: "Amarillo Dorado Brillante"
 solubility: "Hidrosoluble"
 phRange: "3.0 - 8.0"
 pdfLink: "/downloads/azafran-ficha-tecnica.pdf"
-image: "/assets/products/colouring-foods/Alimento_colorante_AZAFRAN-1.webp"
+image: "../../assets/products/colouring-foods/Alimento_colorante_AZAFRAN-1.webp"
 ---
 
 El **Concentrado de Azafrán** de INCOLTEC es una solución Clean Label de alta gama que confiere un color amarillo solar inconfundible sin añadir números E en el listado de ingredientes. Ideal para formulaciones culinarias de alto valor añadido.
