@@ -101,7 +101,8 @@ export const POST = async ({ request, clientAddress }) => {
     const fields = {
       type,
       lang,
-      name: clean(data.get('name'), 120),
+      // Single line: the name is reused in the Reply-To header.
+      name: clean(data.get('name'), 120).replace(/[\r\n\t]+/g, ' '),
       email,
       company: clean(data.get('company'), 160),
       phone: clean(data.get('phone'), 40),
