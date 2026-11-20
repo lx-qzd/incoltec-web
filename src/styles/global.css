@@ -62,11 +62,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure images and media adapt fluidly without overflow or layout shifts */
-img, picture, svg, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* Ensure images and media adapt fluidly without overflow or layout shifts.
+   Inside `@layer base` so Tailwind utilities (h-full, w-auto, inline-block…) can
+   override it: unlayered CSS beats every layer in Tailwind 4, which made
+   `h-full object-cover` images keep their natural height and left grey/black
+   boxes under heroes and image cards. */
+@layer base {
+  img, picture, svg, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 }
 
 /* Explicit centering guarantees */
