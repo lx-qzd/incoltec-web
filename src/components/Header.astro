@@ -541,13 +541,19 @@ const esTitle = alt.translated ? "Español" : "Español – este contenido solo 
 
   /* ---- RESPONSIVE: MOBILE (< 1024) ---- */
   @media (max-width: 1023px) {
+    /* Anchor the dropdown panel to the full-width header (sticky = containing
+       block) instead of the padded inner nav, so it spans the whole screen. */
+    .incoltec-header__nav {
+      position: static;
+    }
+
     .incoltec-header__links-wrap {
       position: absolute;
       top: 100%;
       left: 0;
       right: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.98);
+      background: #ffffff;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid rgba(0, 0, 0, 0.08);
